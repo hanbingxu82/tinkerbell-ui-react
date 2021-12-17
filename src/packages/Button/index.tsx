@@ -1,18 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:28
- * @LastEditTime: 2021-12-16 09:02:26
+ * @LastEditTime: 2021-12-17 10:56:10
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/src/packages/Button/index.tsx
  */
 import React from 'react'
+import Icon from '../Icon'
+var tinycolor = require('tinycolor2')
 const classnames = require('classnames')
 import './index.scss'
 
 interface Iprops {
   type: string
-  textStyle: any
   disabled: boolean
   loading: boolean
   nativeType: any
@@ -22,12 +23,18 @@ interface Iprops {
   dashed: boolean
   transparent: boolean
   background: boolean
+  loadingIcon: string
+  iconStyle: any
+  icon: string
+  textColor: string
+  animationType: string
 }
 
 const Button = (props: any) => {
   const {
     type = 'default',
-    textStyle,
+    icon = ' ',
+    iconStyle,
     disabled,
     loading,
     nativeType = 'button',
@@ -36,74 +43,96 @@ const Button = (props: any) => {
     round,
     dashed,
     transparent,
-    background
+    background,
+    loadingIcon,
+    textColor
   }: Iprops = props
-  function handleClick() {}
-  // if (type !== 'text' && animationType === 'click') {
-  return (
-    <button
-      onClick={handleClick}
-      disabled={disabled || loading}
-      type={nativeType}
-      className={[
-        'tb-button',
-        'tb-button--' + type,
-        'tb-button--' + size,
-        classnames({
-          'is-disabled': disabled,
-          'is-loading': loading,
-          'is-plain': plain,
-          'is-round': round,
-          'is-dashed': dashed,
-          'is-transparent': transparent,
-          'is-background': background
-        })
-      ].join(' ')}
-      // v-click-animation
-    >
-      {/* <tb-icon class="button-loading icon-is-rotating"
-      :name="loadingIcon?loadingIcon:'loading'" v-if="loading" :style="iconStyles"/> */}
-      {/* {icon && !loading && (
-          <i className={['iconfont', 'icon-' + icon]} style={iconStyles}></i>
-        )} */}
-      {props.children && <span style={textStyle}>{props.children}</span>}
-    </button>
-  )
-  // }
 
-  /* <button v-else-if="type!=='text'&&animationType==='waves'"
-  class="tb-button"
-  @click="handleClick"
-  :disabled="disabled || loading"
-  :type="nativeType"
-  :class="['tb-button--' + type , 'tb-button--' + size,
-    {
-      'is-disabled': disabled,
-      'is-loading': loading,
-      'is-plain': plain,
-      'is-round': round,
-      'is-dashed': dashed,
-      'is-transparent': transparent,
-      'is-background': background,
+  function iconStyles() {
+    return {
+      ...textStyle(),
+      ...iconStyle
     }
-  ]"
-  v-waves="waveColor"
->
-<tb-icon class="button-loading icon-is-rotating"
-    :name="loadingIcon?loadingIcon:'loading'" v-if="loading" :style="iconStyles"/>
-<i :class="['iconfont','icon-'+icon]" v-if="icon && !loading" :style="iconStyles"></i>
-<span v-if="$slots.default" :style="textStyle"><slot></slot></span>
-</button>
-<button v-else
-  @click="handleClick"
-  :disabled="disabled || loading"
-  :type="nativeType"
-  class="tb-button"
-  :class="['tb-button--' + type, { 'is-disabled': disabled, 'is-loading': loading }
-]"
->
-<i :class="['iconfont','icon-'+icon]" v-if="icon && !loading" :style="iconStyles"></i>
-<span v-if="$slots.default" :style="textStyle"><slot></slot></span>
-</button> */
+  }
+  function colorMap() {
+    return {
+      primary: '#1089ff',
+      success: '#52c41a',
+      info: '#35495E',
+      warning: '#fea638',
+      danger: '#ff4d4f'
+    }
+  }
+
+  function handleClick(evt: any) {
+    props.onClick && props.onClick(evt)
+  }
+  function textStyle() {
+    let color = textColor
+      ? colorMap()[textColor]
+        ? colorMap()[textColor]
+        : textColor
+      : null
+      console.log(color)
+    if (color) {
+      return {
+        color: disabled ? tinycolor(color).lighten(15).toString() : color
+      }
+    }
+    return {}
+  }
+  if (type !== 'text') {
+    return (
+      <button
+        onClick={handleClick}
+        disabled={disabled || loading}
+        type={nativeType}
+        className={[
+          'tb-button',
+          'tb-button--' + type,
+          'tb-button--' + size,
+          classnames({
+            'is-disabled': disabled,
+            'is-loading': loading,
+            'is-plain': plain,
+            'is-round': round,
+            'is-dashed': dashed,
+            'is-transparent': transparent,
+            'is-background': background
+          })
+        ].join(' ')}
+      >
+        {loading && (
+          <Icon
+            className='button-loading icon-is-rotating'
+            name={loadingIcon ? loadingIcon : 'loading'}
+            style={iconStyles()}
+          />
+        )}
+        {icon && !loading && (
+          <i className={['iconfont', icon].join(' ')} style={iconStyles()}></i>
+        )}
+        {props.children && <span style={textStyle()}>{props.children}</span>}
+      </button>
+    )
+  } else {
+    return (
+      <button
+        onClick={handleClick}
+        disabled={disabled || loading}
+        type={nativeType}
+        className={[
+          'tb-button',
+          'tb-button--' + type,
+          classnames({ 'is-disabled': disabled, 'is-loading': loading })
+        ].join(' ')}
+      >
+        {icon && !loading && (
+          <i className={['iconfont', icon].join(' ')} style={iconStyles()}></i>
+        )}
+        {props.children && <span style={textStyle()}>{props.children}</span>}
+      </button>
+    )
+  }
 }
 export default Button
