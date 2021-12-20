@@ -766,3 +766,20 @@
 .tb-button+.tb-button {
   margin-left: 8px;
 }
+
+
+
+@keyframes rotating {
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.icon-loading {
+  display: inline-block;
+  animation: rotating 1.2s linear infinite
+}
