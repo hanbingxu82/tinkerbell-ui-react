@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:28
- * @LastEditTime: 2021-12-17 14:11:01
+ * @LastEditTime: 2021-12-20 10:46:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/src/packages/Button/index.tsx
@@ -73,7 +73,7 @@ const Button = (props: any) => {
         ? colorMap()[textColor]
         : textColor
       : null
-      console.log(color)
+    console.log(color)
     if (color) {
       return {
         color: disabled ? tinycolor(color).lighten(15).toString() : color
@@ -103,11 +103,13 @@ const Button = (props: any) => {
         ].join(' ')}
       >
         {loading && (
-          <Icon
-            className='button-loading icon-is-rotating'
-            name={loadingIcon ? loadingIcon : 'icon-loading'}
-            style={iconStyles()}
-          />
+          <span className={'btn-icon-loading'}>
+            <Icon
+              className='button-loading icon-is-rotating'
+              name={loadingIcon ? loadingIcon : 'icon-loading'}
+              style={iconStyles()}
+            />
+          </span>
         )}
         {icon && !loading && (
           <i className={['iconfont', icon].join(' ')} style={iconStyles()}></i>
