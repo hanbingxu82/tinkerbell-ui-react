@@ -46,7 +46,7 @@ class Example extends Component {
 }
 ```
 
-#### 0.1.2 完成 tb-button 按钮、icon 图标组件
+#### 0.1.2 完成 Button 按钮、Icon 图标组件
 
 
 ## License
