@@ -1,0 +1,91 @@
+@import '../../style/variables.scss';
+
+.iconfont {
+  vertical-align: baseline;
+}
+
+/* is_disabled 禁用 */
+.is_disabled {
+  pointer-events: none;
+  /* cursor:not-allowed!important; */
+  opacity: 0.6;
+}
+
+/* is_underline 下划线 */
+.is_underline {
+  text-decoration: none !important;
+}
+
+.tb-link {
+  color: #606266;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  padding: 1px;
+  font-size: 14px;
+  font-weight: 500;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: #606266;
+}
+
+.tb-link:focus,
+.tb-link:hover {
+  color: $color-primary-light1;
+  text-decoration: underline;
+}
+
+/* .tb-link:visited,
+  .tb-link:active {
+    text-decoration: none;
+  } */
+/* type样式 */
+.tb-link.a_primary {
+  color: $color-primary;
+}
+
+.tb-link.a_primary:focus,
+.tb-link.a_primary:hover {
+  color: $color-primary-light1;
+}
+
+.tb-link.a_success {
+  color: $color-success;
+}
+
+.tb-link.a_success:focus,
+.tb-link.a_success:hover {
+  color: $color-success-light1;
+}
+
+.tb-link.a_info {
+  color: $color-info;
+}
+
+.tb-link.a_info:focus,
+.tb-link.a_info:hover {
+  color: $color-info-light1;
+}
+
+.tb-link.a_warning {
+  color: $color-warning;
+}
+
+.tb-link.a_warning:focus,
+.tb-link.a_warning:hover {
+  color: $color-warning-light1;
+}
+
+.tb-link.a_danger {
+  color: $color-danger;
+}
+
+.tb-link.a_danger:focus,
+.tb-link.a_danger:hover {
+  color: $color-danger-light1;
+}
