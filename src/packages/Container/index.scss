@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 1;
+    align-content: flex-start;
+  }
+  .container-col {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
+    align-content: flex-start;
+  }
