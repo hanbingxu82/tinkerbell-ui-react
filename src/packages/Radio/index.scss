@@ -1,0 +1,139 @@
+@import '../../style/variables.scss';
+
+
+$type:('success', 'primary', 'danger', 'warning', 'info', 'default');
+
+@function typeFunction($t) {
+  @if $t==success {
+    @return $color-success
+  }
+
+  @else if $t==primary {
+    @return $color-primary
+  }
+
+  @else if $t==info {
+    @return $color-info
+  }
+
+  @else if $t==danger {
+    @return $color-danger
+  }
+
+  @else if $t==warning {
+    @return $color-warning
+  }
+
+  @return $color-primary
+}
+
+@function typeDisabledFunction($t) {
+  @if $t==success {
+    @return $color-success-light2
+  }
+
+  @else if $t==primary {
+    @return $color-primary-light2
+  }
+
+  @else if $t==info {
+    @return $color-info-light2
+  }
+
+  @else if $t==danger {
+    @return $color-danger-light2
+  }
+
+  @else if $t==warning {
+    @return $color-warning-light2
+  }
+
+  @return $color-primary-light2
+}
+
+.tb-radio {
+  display: inline-block;
+
+}
+
+@each $t in $type {
+  .radio-type_#{$t} {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    position: relative;
+    outline: none;
+    vertical-align: bottom;
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}:before {
+    content: "";
+    width: 75%;
+    height: 75%;
+    border: 1px solid typeFunction($t);
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}.is-disabled:before {
+    border-color: typeDisabledFunction($t);
+    cursor: not-allowed;
+  }
+
+  .radio-type_#{$t}:checked:before {
+    content: "";
+    width: 75%;
+    height: 75%;
+    border: 1px solid typeFunction($t);
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}.is-disabled:checked:before {
+    border-color: typeDisabledFunction($t);
+    cursor: not-allowed;
+  }
+
+  .radio-type_#{$t}:checked:after {
+    content: "";
+    width: 45%;
+    height: 45%;
+    text-align: center;
+    background: typeFunction($t);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}.is-disabled:checked:after {
+    background: typeDisabledFunction($t);
+    cursor: not-allowed;
+  }
+
+  .radio-type_#{$t}+label {
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}:checked+label {
+    color: typeFunction($t);
+    cursor: pointer;
+  }
+
+  .radio-type_#{$t}.is-disabled+label {
+    color: $color-text-disabled;
+    cursor: not-allowed;
+  }
+
+  .radio-type_#{$t}.is-disabled:checked+label {
+    color: typeDisabledFunction($t);
+    cursor: not-allowed;
+  }
+}
