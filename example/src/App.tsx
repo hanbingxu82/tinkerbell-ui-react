@@ -1,20 +1,31 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-08 11:17:05
+ * @LastEditTime: 2022-02-08 16:42:06
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/example/src/App.tsx
  */
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Button, Container, Radio } from 'hxreact'
+import { Button, Container, RadioGroup } from 'hxreact'
 import 'hxreact/dist/index.css'
 
 const App = () => {
-  const [radioValue, setRadioValue] = useState(false)
+  const [radioValue, setRadioValue] = useState('Orange')
   let value = 'demo1'
   let buttonName = 'submit'
+  const [radioOptions, setRadioOptions] = useState<any>([])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRadioOptions([
+        { label: 'Apple', value: 'Apple' },
+        { label: 'Pear', value: 'Pear' },
+        { label: 'Orange', value: 'Orange', disabled: true }
+      ])
+    }, 2000)
+  }, [])
   useLayoutEffect(() => {
     ReactDOM.render(
       <div>
@@ -27,18 +38,25 @@ const App = () => {
 
   return (
     <div>
-      <Radio
-        type='danger'
+      <RadioGroup
+        name='tinkerbell'
+        options={radioOptions}
         value={radioValue}
-        onChange={() => {
-          setRadioValue(() => !radioValue)
+        onChange={(e: any) => {
+          setRadioValue(e.target.value)
         }}
       >
-        小仙男
-      </Radio>
+        {/* <Radio type='danger' value={1}>
+          小仙男
+        </Radio>
+        <Radio type='danger' value={2}>
+          小仙女
+        </Radio> */}
+      </RadioGroup>
+
       <Button
         onClick={() => {
-          setRadioValue(!radioValue)
+          setRadioValue('Orange')
         }}
         icon={'icon-Color-fill'}
       >

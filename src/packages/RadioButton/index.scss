@@ -51,13 +51,13 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
   @return $color-primary-light2
 }
 
-.tb-radio {
+.tb-radio-button {
   display: inline-block;
-
+  
 }
 
 @each $t in $type {
-  .radio-type_#{$t} {
+  .radio-button-type_#{$t} {
     width: 20px;
     height: 20px;
     appearance: none;
@@ -67,7 +67,7 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     cursor: pointer;
   }
 
-  .radio-type_#{$t}:before {
+  .radio-button-type_#{$t}:before {
     content: "";
     width: 75%;
     height: 75%;
@@ -78,12 +78,12 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     cursor: pointer;
   }
 
-  .radio-type_#{$t}.is-disabled:before {
+  .radio-button-type_#{$t}.is-disabled:before {
     border-color: typeDisabledFunction($t);
     cursor: not-allowed;
   }
 
-  .radio-type_#{$t}:checked:before {
+  .radio-button-type_#{$t}:checked:before {
     content: "";
     width: 75%;
     height: 75%;
@@ -94,12 +94,12 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     cursor: pointer;
   }
 
-  .radio-type_#{$t}.is-disabled:checked:before {
+  .radio-button-type_#{$t}.is-disabled:checked:before {
     border-color: typeDisabledFunction($t);
     cursor: not-allowed;
   }
 
-  .radio-type_#{$t}:checked:after {
+  .radio-button-type_#{$t}:checked:after {
     content: "";
     width: 45%;
     height: 45%;
@@ -113,26 +113,26 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     cursor: pointer;
   }
 
-  .radio-type_#{$t}.is-disabled:checked:after {
+  .radio-button-type_#{$t}.is-disabled:checked:after {
     background: typeDisabledFunction($t);
     cursor: not-allowed;
   }
 
-  .radio-type_#{$t}+span {
+  .radio-button-type_#{$t}+span {
     cursor: pointer;
   }
 
-  .radio-type_#{$t}:checked+span {
+  .radio-button-type_#{$t}:checked+span {
     color: typeFunction($t);
     cursor: pointer;
   }
 
-  .radio-type_#{$t}.is-disabled+span {
+  .radio-button-type_#{$t}.is-disabled+span {
     color: $color-text-disabled;
     cursor: not-allowed;
   }
 
-  .radio-type_#{$t}.is-disabled:checked+span {
+  .radio-button-type_#{$t}.is-disabled:checked+span {
     color: typeDisabledFunction($t);
     cursor: not-allowed;
   }

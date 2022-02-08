@@ -1,10 +1,10 @@
 /*
  * @Author: your name
- * @Date: 2022-02-07 10:47:48
- * @LastEditTime: 2022-02-08 15:43:22
+ * @Date: 2022-02-08 17:02:44
+ * @LastEditTime: 2022-02-08 17:22:19
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /tinkerbell-ui-react/src/packages/Radio/index.tsx
+ * @FilePath: /tinkerbell-ui-react/src/packages/RadioButton/index.tsx
  */
 import React from 'react'
 import './index.scss'
@@ -18,7 +18,7 @@ interface Iprops {
   value: any
   name?: string
 }
-function Radio(props: any) {
+function RadioButton(props: any) {
   const {
     type = 'default',
     disabled = false,
@@ -33,7 +33,7 @@ function Radio(props: any) {
   return (
     <div
       className={[
-        'tb-radio',
+        'tb-radio-button',
         classnames({
           'is-disabled': disabled
         })
@@ -48,7 +48,7 @@ function Radio(props: any) {
           onChange={handleChange}
           value={value}
           className={[
-            `radio-type_${type}`,
+            `radio-button-type_${type}`,
             classnames({
               'is-disabled': disabled
             })
@@ -59,4 +59,4 @@ function Radio(props: any) {
     </div>
   )
 }
-export default Radio
+export default RadioButton
