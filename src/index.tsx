@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-08 12:02:29
+ * @LastEditTime: 2022-02-09 09:02:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/src/index.tsx
@@ -17,6 +17,7 @@ import Link from './packages/Link'
 import Container from './packages/Container'
 import Radio from './packages/Radio'
 import RadioGroup from './packages/RadioGroup'
+import RadioButton from './packages/RadioButton'
 interface Props {
   text: string
 }
@@ -34,5 +35,6 @@ export {
   Link,
   Container,
   Radio,
-  RadioGroup
+  RadioGroup,
+  RadioButton
 }

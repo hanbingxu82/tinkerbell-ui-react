@@ -53,76 +53,58 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
 
 .tb-radio-button {
   display: inline-block;
-  
+
 }
 
 @each $t in $type {
   .radio-button-type_#{$t} {
-    width: 20px;
-    height: 20px;
-    appearance: none;
-    position: relative;
-    outline: none;
-    vertical-align: bottom;
-    cursor: pointer;
-  }
-
-  .radio-button-type_#{$t}:before {
-    content: "";
-    width: 75%;
-    height: 75%;
-    border: 1px solid typeFunction($t);
-    display: inline-block;
-    border-radius: 50%;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-
-  .radio-button-type_#{$t}.is-disabled:before {
-    border-color: typeDisabledFunction($t);
-    cursor: not-allowed;
-  }
-
-  .radio-button-type_#{$t}:checked:before {
-    content: "";
-    width: 75%;
-    height: 75%;
-    border: 1px solid typeFunction($t);
-    display: inline-block;
-    border-radius: 50%;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-
-  .radio-button-type_#{$t}.is-disabled:checked:before {
-    border-color: typeDisabledFunction($t);
-    cursor: not-allowed;
-  }
-
-  .radio-button-type_#{$t}:checked:after {
-    content: "";
-    width: 45%;
-    height: 45%;
-    text-align: center;
-    background: typeFunction($t);
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    cursor: pointer;
-  }
-
-  .radio-button-type_#{$t}.is-disabled:checked:after {
-    background: typeDisabledFunction($t);
-    cursor: not-allowed;
+    display: none;
   }
 
   .radio-button-type_#{$t}+span {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: $default-height;
+    line-height: $default-height - 2;
+    white-space: nowrap;
     cursor: pointer;
+    background: $color-white;
+    border: $border-base;
+    color: $color-text-default;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: $animation-duration-base;
+    user-select: none;
+    padding: 0 15px;
+    font-size: $base-font-size;
+    border-radius: $border-base-radius;
+  }
+
+  .radio-button-type_#{$t}+.tb-radio-button--mini {
+    height: $mini-height;
+    line-height: $mini-height - 2;
+    padding: 0 7px;
+  }
+
+  .radio-button-type_#{$t}+.tb-radio-button--small {
+    height: $small-height;
+    line-height: $small-height - 2;
+    padding: 0 7px;
+  }
+
+  .radio-button-type_#{$t}+.tb-radio-button--large {
+    height: $large-height;
+    line-height: $large-height - 2;
+    padding: 0 14px;
+    font-size: $header-font-size;
   }
 
   .radio-button-type_#{$t}:checked+span {
+    border-color: typeFunction($t);
     color: typeFunction($t);
     cursor: pointer;
   }
@@ -134,6 +116,26 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
 
   .radio-button-type_#{$t}.is-disabled:checked+span {
     color: typeDisabledFunction($t);
+    cursor: not-allowed;
+  }
+
+
+  .radio-button-type_#{$t}:checked+.tb-radio-button--#{$t}_solid {
+    background-color: typeFunction($t);
+    color: $color-white;
+    cursor: pointer;
+  }
+
+  .radio-button-type_#{$t}.is-disabled+.tb-radio-button--#{$t}_solid {
+    color: $color-text-disabled;
+    background-color: $btn-disable-color;
+    cursor: not-allowed;
+  }
+
+  .radio-button-type_#{$t}.is-disabled:checked+.tb-radio-button--#{$t}_solid {
+    color: $color-white;
+    background-color: typeDisabledFunction($t);
+    border-color: typeDisabledFunction($t);
     cursor: not-allowed;
   }
 }

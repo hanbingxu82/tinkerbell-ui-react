@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-08 17:02:44
- * @LastEditTime: 2022-02-08 17:22:19
+ * @LastEditTime: 2022-02-09 14:48:07
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/RadioButton/index.tsx
@@ -17,6 +17,8 @@ interface Iprops {
   groupValue: any
   value: any
   name?: string
+  size: string
+  buttonStyle: string
 }
 function RadioButton(props: any) {
   const {
@@ -25,7 +27,9 @@ function RadioButton(props: any) {
     groupValue,
     checked,
     value,
-    name
+    name,
+    size = 'default',
+    buttonStyle = 'outline'
   }: Iprops = props
   function handleChange(evt: any) {
     props.onChange && props.onChange(evt)
@@ -54,7 +58,14 @@ function RadioButton(props: any) {
             })
           ].join(' ')}
         />
-        <span>{props.children ? props.children : null}</span>
+        <span
+          className={[
+            `tb-radio-button--${size}`,
+            `tb-radio-button--${type}_${buttonStyle}`
+          ].join(' ')}
+        >
+          {props.children ? props.children : null}
+        </span>
       </label>
     </div>
   )
