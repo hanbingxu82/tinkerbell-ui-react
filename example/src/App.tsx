@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-10 15:58:15
+ * @LastEditTime: 2022-02-11 10:31:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/example/src/App.tsx
  */
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Button, Container, RadioGroup, RadioButton, CheckBox } from 'hxreact'
+import { Button, Container, RadioGroup, Radio, CheckBox } from 'hxreact'
 import 'hxreact/dist/index.css'
 
 const App = () => {
@@ -39,6 +39,7 @@ const App = () => {
   return (
     <div>
       <CheckBox>123</CheckBox>
+      <CheckBox disabled>123</CheckBox>
       <RadioGroup
         buttonStyle='solid'
         name='tinkerbell'
@@ -47,15 +48,12 @@ const App = () => {
           setRadioValue(e.target.value)
         }}
       >
-        <RadioButton value='Apple'>Apple</RadioButton>
-        <RadioButton value='Pear'>Pear</RadioButton>
-        <RadioButton value='Orange' disabled>
+        <Radio value='Apple'>Apple</Radio>
+        <Radio value='Pear'>Pear</Radio>
+        <Radio value='Orange' disabled>
           Orange
-        </RadioButton>
+        </Radio>
       </RadioGroup>
-      <RadioButton value='Pear' disabled>
-        Pear
-      </RadioButton>
       <Button
         onClick={() => {
           setRadioValue('Orange')

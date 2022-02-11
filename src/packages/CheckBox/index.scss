@@ -51,69 +51,24 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
   @return $color-primary-light2
 }
 
-.tb-radio {
+.tb-checkbox {
   display: inline-block;
 
+  label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
 @each $t in $type {
-/* 自定义复选框样式 */
-.circle-check>input[type="checkbox"] {
-    width: 1.54rem;
-    height: 1.54rem;
+  .checkbox-type_#{$t} {
+    width: 20px;
+    height: 20px;
     display: inline-block;
     text-align: center;
     vertical-align: baseline;
-    line-height: 1.54rem;
-    position: relative;
-    border-radius: 50%;
-    outline: none;
-    -webkit-appearance: none;
-    border: 1px solid #fff;
-    -webkit-tab-highlight-color: rgba(0, 0, 0, 0);
-    color: #fff;
-    background: #fff;
-}
-
-.circle-check>input[type="checkbox"]::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #fff;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #999999;
-    border-radius: 50%;
-    color: #fff;
-}
-
-.circle-check>input[type="checkbox"]:checked::before {
-    content: "\2713";
-    background-color: #657AFE;
-    border: 1px solid #657AFE;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    color: #fff;
-    font-size: 1.1rem;
-    border-radius: 50%;
-}
-
-.circle-check>input[type="checkbox"]:disabled::before {
-    background: #eee;
-    cursor: default;
-}
-
-
-.square-check>input[type="checkbox"] {
-    width: 1.54rem;
-    height: 1.54rem;
-    display: inline-block;
-    text-align: center;
-    vertical-align: baseline;
-    line-height: 1.54rem;
+    // line-height: 1.54rem;
     position: relative;
     outline: none;
     -webkit-appearance: none;
@@ -121,35 +76,61 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     -webkit-tab-highlight-color: rgba(0, 0, 0, 0);
     color: #fff;
     background: #fff;
-}
+    margin-right: 3px;
+  }
 
-.square-check>input[type="checkbox"]::before {
+  .checkbox-type_#{$t}:checked+span {
+    color: typeFunction($t);
+    cursor: pointer;
+  }
+
+  .checkbox-type_#{$t}::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     background: #fff;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #999999;
+    width: 75%;
+    height: 75%;
+    border: 1px solid $color-text-placeholder;
     color: #fff;
-}
+    cursor: pointer;
+  }
 
-.square-check>input[type="checkbox"]:checked::before {
+  .checkbox-type_#{$t}:checked::before {
     content: "\2713";
-    background-color: #657AFE;
-    border: 1px solid #657AFE;
+    background-color: typeFunction($t);
+    border: 1px solid typeFunction($t);
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 75%;
     color: #fff;
-    font-size: 1.1rem;
-}
+    cursor: pointer;
+  }
 
-.square-check>input[type="checkbox"]:disabled::before {
-    background: #eee;
-    cursor: default;
-}
+  .checkbox-type_#{$t}.is-disabled:checked::before {
+    content: "\2713";
+    background-color: $color-disabled-bg;
+    border: 1px solid $color-disabled-border;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75%;
+    color: $color-text-primary;
+    cursor: pointer;
+  }
+
+  .checkbox-type_#{$t}.is-disabled:before {
+    background-color: $color-disabled-bg;
+    border: 1px solid $color-disabled-border;
+    cursor: not-allowed;
+  }
+
+  .checkbox-type_#{$t}.is-disabled+span {
+    color: $color-text-disabled;
+    cursor: not-allowed;
+  }
+
 
 }

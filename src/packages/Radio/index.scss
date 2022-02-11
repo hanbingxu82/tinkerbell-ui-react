@@ -54,6 +54,10 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
 .tb-radio {
   display: inline-block;
 
+  label {
+    display: flex;
+    align-items: center;
+  }
 }
 
 @each $t in $type {
