@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-11 17:27:10
+ * @LastEditTime: 2022-02-17 09:26:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/example/src/App.tsx
  */
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Button, CheckBox, CheckBoxGroup } from 'hxreact'
+import { Button, CheckBox, CheckBoxGroup, Row, Col } from 'hxreact'
 import 'hxreact/dist/index.css'
 
 const plainOptions = [
@@ -57,25 +57,23 @@ const App = () => {
       >
         Check all
       </CheckBox>
-      <CheckBoxGroup
-        options={plainOptions}
-        value={checkedList}
-        onChange={onChange}
-      />
-
-      {/* <CheckBoxGroup
-        value={a}
-        onChange={(data: any) => {
-          setA(data)
-        }}
-      >
-        <CheckBox value='1'>1</CheckBox>
-        <CheckBox value='2'>2</CheckBox>
-        <CheckBox value='3' disabled>
-          3
-        </CheckBox>
-      </CheckBoxGroup> */}
-
+      <CheckBoxGroup value={checkedList} onChange={onChange}>
+        <Row>
+          <Col>
+            <CheckBox value='Apple'>Apple</CheckBox>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CheckBox value='Pear'>Pear</CheckBox>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CheckBox value='Orange'>Orange</CheckBox>
+          </Col>
+        </Row>
+      </CheckBoxGroup>
       <Button icon={'icon-Color-fill'}>default</Button>
 
       <div className='xiaoxiannan'></div>

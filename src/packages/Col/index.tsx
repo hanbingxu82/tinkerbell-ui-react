@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:28
- * @LastEditTime: 2021-12-21 16:59:16
+ * @LastEditTime: 2022-02-17 10:25:20
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Col/index.tsx
  */
-import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Context } from '../Row/index'
 import './index.scss'
 interface Iprops {
@@ -24,6 +24,9 @@ interface Iprops {
 
 function Col(props: any) {
   const RowComponent = useContext(Context)
+  // 删除两个多余的传递属性 放置多个传递替换本身的 props 属性
+  delete RowComponent.children
+  delete RowComponent.item
   const {
     span = 0,
     offset = 0,
@@ -46,15 +49,13 @@ function Col(props: any) {
 
   // 声明一个名为“count”的新状态变量
   useEffect(() => {
+
     setNum(4.1666)
     Pxs()
     Psm()
     Pmd()
     Plg()
     Pxl()
-  }, [])
-  useLayoutEffect(() => {
-    console.log(RowComponent)
   }, [])
   function Pxs() {
     // 如果是数值类型
@@ -151,6 +152,12 @@ function Col(props: any) {
       setTbxl('')
     }
   }
+  const childrenItem = React.Children.map(props.children, (item) => {
+    return React.cloneElement(item, {
+      ...RowComponent,
+      item
+    })
+  })
 
   return (
     <div
@@ -162,7 +169,7 @@ function Col(props: any) {
         marginRight: `${num * Number(push) + '%'}`
       }}
     >
-      {props.children}
+      {childrenItem ? childrenItem : props.children}
     </div>
   )
 }
