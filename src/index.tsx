@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-11 14:46:52
+ * @LastEditTime: 2022-02-24 11:42:30
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/src/index.tsx
@@ -20,6 +20,7 @@ import RadioGroup from './packages/RadioGroup'
 import RadioButton from './packages/RadioButton'
 import CheckBox from './packages/CheckBox'
 import CheckBoxGroup from './packages/CheckBoxGroup'
+import Tag from './packages/Tag'
 interface Props {
   text: string
 }
@@ -40,5 +41,6 @@ export {
   RadioGroup,
   RadioButton,
   CheckBox,
-  CheckBoxGroup
+  CheckBoxGroup,
+  Tag
 }

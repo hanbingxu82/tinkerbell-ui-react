@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-17 09:26:29
+ * @LastEditTime: 2022-02-24 15:25:38
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/example/src/App.tsx
  */
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Button, CheckBox, CheckBoxGroup, Row, Col } from 'hxreact'
+import { Button, CheckBox, CheckBoxGroup, Row, Col ,Tag} from 'hxreact'
 import 'hxreact/dist/index.css'
 
 const plainOptions = [
@@ -50,6 +50,10 @@ const App = () => {
 
   return (
     <div>
+      <Tag>123</Tag>
+
+
+
       <CheckBox
         indeterminate={indeterminate}
         onChange={onCheckAllChange}
