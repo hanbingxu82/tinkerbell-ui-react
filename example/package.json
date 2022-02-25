@@ -1,5 +1,5 @@
 {
-  "name": "hxreact-example",
+  "name": "tinkerbell-ui-react-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -41,7 +41,7 @@
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
-    "hxreact": "link:..",
+    "tinkerbell-ui-react": "link:..",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "1.0.1",

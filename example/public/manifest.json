@@ -1,6 +1,6 @@
 {
-  "short_name": "hxreact",
-  "name": "hxreact",
+  "short_name": "tinkerbell-ui-react",
+  "name": "tinkerbell-ui-react",
   "icons": [
     {
       "src": "favicon.ico",
