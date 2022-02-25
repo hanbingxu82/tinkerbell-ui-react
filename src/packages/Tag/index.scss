@@ -17,12 +17,12 @@
   box-sizing: border-box;
   white-space: nowrap;
 
-  .icon-ios-close {
+  .icon-close {
     position: relative;
     right: -5px;
     top: -1px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     color: $color-text-secondary;
 
     &:hover {

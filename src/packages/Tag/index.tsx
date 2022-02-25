@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:47
- * @LastEditTime: 2022-02-24 15:32:51
+ * @LastEditTime: 2022-02-25 10:27:34
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /hxreact/src/packages/Tag/index.tsx
@@ -12,7 +12,7 @@ import './index.scss'
 const classnames = require('classnames')
 
 interface Iprops {
-  name: ''
+  name: string
   closable: boolean
   type: string
   dot: boolean
@@ -27,7 +27,8 @@ interface Iprops {
 }
 function Tag(props: any) {
   const {
-    value,
+    name = '',
+    value = true,
     type,
     color,
     tagStyle,
@@ -35,7 +36,9 @@ function Tag(props: any) {
     fontSize,
     size,
     noBorder,
-    closable
+    closable,
+    dark,
+    checkable
   }: Iprops = props
   const [checked, setChecked] = useState(true)
   const [dotColor, setDotColor] = useState('')
@@ -50,7 +53,7 @@ function Tag(props: any) {
   // 背景颜色监听器
   useEffect(() => {
     if (type) {
-      setDotColor(typeColor(type))
+      return setDotColor(typeColor(type))
     }
     return setDotColor(color)
   }, [type, color])
@@ -71,8 +74,19 @@ function Tag(props: any) {
           fontSize: fontSize
         })
   }, [tagStyle, dot, fontSize, color])
+  // 图标关闭事件
   function closeHandleClick(e: any) {
-    props.close && props.close(e)
+    
+    props.onClose && props.onClose(e)
+  }
+  // 点击图标事件
+  function handleClick(e: any) {
+    e.stopPropagation()
+    if (checkable) {
+      setChecked(!checked)
+      props.onInput && props.onInput(!checked)
+      props.onChange && props.onChange(!checked, name)
+    }
   }
   return (
     <span
@@ -81,10 +95,13 @@ function Tag(props: any) {
         'is-' + size,
         'is-' + type,
         classnames({
-          'is-checked': checked,
-          'no-border': noBorder
+          'no-border': noBorder,
+          'is-dark': dark,
+          'is-checkable': checkable,
+          'is-checked': checkable && checked
         })
       ].join(' ')}
+      onClick={handleClick}
       style={tagStyle ? tagStyle : tagStyleBind}
       data-value={checked}
     >
@@ -99,16 +116,10 @@ function Tag(props: any) {
       {closable && (
         <i
           className={['iconfont', 'icon-close'].join(' ')}
+          style={dot ? { backgroundColor: '#fff', color: color } : {}}
           onClick={closeHandleClick}
         ></i>
       )}
-      {/* const closeEl = h('i', {
-      class: ['iconfont', 'icon-ios-close'],
-      style: this.dot ? { backgroundColor: '#fff', color: this.color } : {},
-      on: {
-        click: this.handleClose
-      }
-    }) */}
     </span>
   )
 }

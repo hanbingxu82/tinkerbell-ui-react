@@ -1,8 +1,5 @@
 @import '../../style/variables.scss';
 
-.iconfont {
-  vertical-align: baseline;
-}
 
 /* is_disabled 禁用 */
 .is_disabled {
@@ -14,6 +11,10 @@
 /* is_underline 下划线 */
 .is_underline {
   text-decoration: none !important;
+}
+
+.tb-link.iconfont {
+  vertical-align: baseline;
 }
 
 .tb-link {
