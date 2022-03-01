@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-16 08:41:37
- * @LastEditTime: 2021-12-20 10:43:27
+ * @LastEditTime: 2022-03-01 15:07:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Icon/index.tsx
@@ -20,22 +20,32 @@ function Icon(props: any) {
     fontSize: 16,
     color: ''
   })
+  function handleClick(e: any) {
+    props.onClick && props.onClick(e)
+  }
   useEffect(() => {
     if (size) {
       setStyleObj({
-        // fontSize: `${size}px`,
+        fontSize: `${size}px`,
         width: '18px',
-        height: '18px'
+        height: '18px',
+        color: color
       })
     }
     if (color) {
       setStyleObj({
+        fontSize: `${size}px`,
         color: color
       })
     }
   }, [size, color])
   return (
-    <i {...props} className={['iconfont', name].join(' ')} style={styleObj}></i>
+    <i
+      {...props}
+      onClick={handleClick}
+      className={['tb-icon', 'iconfont', name].join(' ')}
+      style={styleObj}
+    ></i>
   )
 }
 export default Icon

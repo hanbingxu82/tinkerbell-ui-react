@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-01 09:41:13
+ * @LastEditTime: 2022-03-01 17:19:09
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -15,7 +15,7 @@ import {
   Row,
   Col,
   Tag,
-  InputColor
+  Calendar
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 
@@ -26,9 +26,6 @@ const plainOptions = [
 ]
 
 const App = () => {
-  // const [radioValue, setRadioValue] = useState('Orange')
-  const [initial, setInitial] = useState('#5e72e4')
-  const [color, setColor] = useState<any>({})
   let value = 'demo1'
   let buttonName = 'submit'
   const [checkedList, setCheckedList] = useState<any>([])
@@ -67,36 +64,53 @@ const App = () => {
       document.querySelector('.xiaoxiannan')
     )
   })
+  function getListData(value: any) {
+    let listData
+    console.log(value.d)
+    switch (value.d) {
+      case 8:
+        listData = [
+          { type: 'warning', content: 'This is warning event.' },
+          { type: 'success', content: 'This is usual event.' }
+        ]
+        break
+      case 10:
+        listData = [
+          { type: 'warning', content: 'This is warning event.' },
+          { type: 'success', content: 'This is usual event.' },
+          { type: 'error', content: 'This is error event.' }
+        ]
+        break
+      case 15:
+        listData = [
+          { type: 'warning', content: 'This is warning event' },
+          { type: 'success', content: 'This is very long usual event。。....' },
+          { type: 'error', content: 'This is error event 1.' },
+          { type: 'error', content: 'This is error event 2.' },
+          { type: 'error', content: 'This is error event 3.' },
+          { type: 'error', content: 'This is error event 4.' }
+        ]
+        break
+      default:
+    }
+    return listData || []
+  }
 
+  function dateCellRender(value: any) {
+    const listData = getListData(value)
+    return (
+      <ul className='events'>
+        {listData.map((item) => (
+          <li key={item.content}>
+            <Button type={item.type}>{item.content}</Button>
+          </li>
+        ))}
+      </ul>
+    )
+  }
   return (
     <div>
-      <div>
-        <div
-          style={{
-            width: 50,
-            height: 50,
-            marginBottom: 20,
-            backgroundColor: color.rgba
-          }}
-        >
-          {color.rgba}
-        </div>
-        <input
-          type='color'
-          value={initial}
-          onChange={(e) => {
-            setColor({ ...color, hex: e.target.value })
-            setInitial(e.target.value)
-          }}
-        />
-        <br />
-        <InputColor
-          initialValue={initial}
-          onChange={(e: any) => {
-            setColor(e)
-          }}
-        />
-      </div>
+      <Calendar dateCellRender={dateCellRender}></Calendar>
       <Button className='button-new-tag' size='small' onClick={addOne}>
         + New Tag
       </Button>
