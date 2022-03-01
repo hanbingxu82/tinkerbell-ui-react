@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-25 16:33:02
+ * @LastEditTime: 2022-03-01 10:09:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -57,6 +57,8 @@ class Example extends Component {
 #### 0.1.5 完成 Checkbox CheckboxGroup多选组件、完善Row、Col布局组件
 
 #### 0.1.6 完成 Tag 标签组件
+
+#### 0.1.7 完成 InputColor、ColorPicker 颜色选择器组件
 
 ## License
 
