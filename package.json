@@ -26,6 +26,8 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@emotion/core": "^10.0.14",
+    "@swiftcarrot/color-fns": "^3.0.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -35,6 +37,7 @@
     "@types/react-dom": "^16.9.7",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
+    "@xkit/popover": "^0.1.20",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -53,7 +56,10 @@
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-input-number": "^5.0.18",
+    "react-input-slider": "^5.1.7",
     "react-scripts": "^3.4.1",
+    "react-test-renderer": "^16.8.6",
     "tinycolor2": "^1.4.2",
     "typescript": "^3.7.5"
   },

@@ -1,14 +1,22 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-02-25 10:29:25
+ * @LastEditTime: 2022-03-01 09:41:13
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
  */
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Button, CheckBox, CheckBoxGroup, Row, Col, Tag } from 'tinkerbell-ui-react'
+import {
+  Button,
+  CheckBox,
+  CheckBoxGroup,
+  Row,
+  Col,
+  Tag,
+  InputColor
+} from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 
 const plainOptions = [
@@ -19,6 +27,8 @@ const plainOptions = [
 
 const App = () => {
   // const [radioValue, setRadioValue] = useState('Orange')
+  const [initial, setInitial] = useState('#5e72e4')
+  const [color, setColor] = useState<any>({})
   let value = 'demo1'
   let buttonName = 'submit'
   const [checkedList, setCheckedList] = useState<any>([])
@@ -60,6 +70,33 @@ const App = () => {
 
   return (
     <div>
+      <div>
+        <div
+          style={{
+            width: 50,
+            height: 50,
+            marginBottom: 20,
+            backgroundColor: color.rgba
+          }}
+        >
+          {color.rgba}
+        </div>
+        <input
+          type='color'
+          value={initial}
+          onChange={(e) => {
+            setColor({ ...color, hex: e.target.value })
+            setInitial(e.target.value)
+          }}
+        />
+        <br />
+        <InputColor
+          initialValue={initial}
+          onChange={(e: any) => {
+            setColor(e)
+          }}
+        />
+      </div>
       <Button className='button-new-tag' size='small' onClick={addOne}>
         + New Tag
       </Button>
