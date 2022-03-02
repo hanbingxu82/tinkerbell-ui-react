@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-01 17:19:09
+ * @LastEditTime: 2022-03-01 17:24:23
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -66,7 +66,6 @@ const App = () => {
   })
   function getListData(value: any) {
     let listData
-    console.log(value.d)
     switch (value.d) {
       case 8:
         listData = [
@@ -110,7 +109,12 @@ const App = () => {
   }
   return (
     <div>
-      <Calendar dateCellRender={dateCellRender}></Calendar>
+      <Calendar
+        onClick={(val: any) => {
+          console.log(val)
+        }}
+        dateCellRender={dateCellRender}
+      ></Calendar>
       <Button className='button-new-tag' size='small' onClick={addOne}>
         + New Tag
       </Button>
