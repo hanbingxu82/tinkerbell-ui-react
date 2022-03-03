@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-02 11:05:02
+ * @LastEditTime: 2022-03-03 10:57:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -21,12 +21,14 @@ import RadioButton from './packages/RadioButton'
 import CheckBox from './packages/CheckBox'
 import CheckBoxGroup from './packages/CheckBoxGroup'
 import Tag from './packages/Tag'
-import Calendar from './packages/Calendar'
+import Showmore from './packages/Showmore'
+
 // start 2022-03-01 暂时屏蔽 因打包体积过大
+// import Calendar from './packages/Calendar'
 // import InputColor, { ColorPicker } from './packages/ColorPicker'
+// import Tooltip from './packages/Tooltip'
 // end 2022-03-01 暂时屏蔽 因打包体积过大
 
-import Tooltip from './packages/Tooltip'
 interface Props {
   text: string
 }
@@ -49,10 +51,12 @@ export {
   CheckBox,
   CheckBoxGroup,
   Tag,
-  Calendar,
+  Showmore
+
   // start 2022-03-01 暂时屏蔽 因打包体积过大
+  // Calendar,
   // InputColor,
   // ColorPicker,
+  // Tooltip
   // end 2022-03-01 暂时屏蔽 因打包体积过大
-  Tooltip
 }
