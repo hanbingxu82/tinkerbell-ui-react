@@ -1,165 +1,132 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-01 17:24:23
+ * @LastEditTime: 2022-03-03 09:09:38
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
  */
-import React, { useState, useEffect, useLayoutEffect } from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
+
 import {
+  // Calendar,
   Button,
-  CheckBox,
-  CheckBoxGroup,
-  Row,
-  Col,
-  Tag,
-  Calendar
+  Tooltip
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
+const text = <span>prompt text</span>
 
-const plainOptions = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Pear', value: 'Pear' },
-  { label: 'Orange', value: 'Orange' }
-]
-
+const buttonWidth = 70
 const App = () => {
-  let value = 'demo1'
-  let buttonName = 'submit'
-  const [checkedList, setCheckedList] = useState<any>([])
-  const [indeterminate, setIndeterminate] = useState(false)
-  const [checkAll, setCheckAll] = useState(false)
-  // const [a, setA] = useState<any>([])
-  const [count, setCount] = useState(0)
-  const [dynamicTags, setDynamicTags] = useState(['标签一', '标签二', '标签三'])
+  // function getListData(value: any) {
+  //   let listData
+  //   switch (value.d) {
+  //     case 8:
+  //       listData = [
+  //         { type: 'warning', content: 'This is warning event.' },
+  //         { type: 'success', content: 'This is usual event.' }
+  //       ]
+  //       break
+  //     case 10:
+  //       listData = [
+  //         { type: 'warning', content: 'This is warning event.' },
+  //         { type: 'success', content: 'This is usual event.' },
+  //         { type: 'error', content: 'This is error event.' }
+  //       ]
+  //       break
+  //     case 15:
+  //       listData = [
+  //         { type: 'warning', content: 'This is warning event' },
+  //         { type: 'success', content: 'This is very long usual event。。....' },
+  //         { type: 'error', content: 'This is error event 1.' },
+  //         { type: 'error', content: 'This is error event 2.' },
+  //         { type: 'error', content: 'This is error event 3.' },
+  //         { type: 'error', content: 'This is error event 4.' }
+  //       ]
+  //       break
+  //     default:
+  //   }
+  //   return listData || []
+  // }
 
-  function handleCloseTag(tag: any) {
-    dynamicTags.splice(dynamicTags.indexOf(tag), 1)
-    setDynamicTags([...dynamicTags])
-  }
-  function addOne() {
-    setCount(count + 1)
-    dynamicTags.push('new tag' + (count + 1))
-  }
-  const onChange = (list: any) => {
-    setCheckedList([...list])
-    setIndeterminate(!!list.length && list.length < plainOptions.length)
-    setCheckAll(list.length === plainOptions.length)
-  }
-  const onCheckAllChange = (e: any) => {
-    setCheckedList(e.target.checked ? ['Apple', 'Pear', 'Orange'] : [])
-    setIndeterminate(false)
-    setCheckAll(e.target.checked)
-  }
-  useEffect(() => {}, [])
-
-  useLayoutEffect(() => {
-    ReactDOM.render(
-      <div>
-        <span>{value}</span>
-        <button>{buttonName}</button>
-      </div>,
-      document.querySelector('.xiaoxiannan')
-    )
-  })
-  function getListData(value: any) {
-    let listData
-    switch (value.d) {
-      case 8:
-        listData = [
-          { type: 'warning', content: 'This is warning event.' },
-          { type: 'success', content: 'This is usual event.' }
-        ]
-        break
-      case 10:
-        listData = [
-          { type: 'warning', content: 'This is warning event.' },
-          { type: 'success', content: 'This is usual event.' },
-          { type: 'error', content: 'This is error event.' }
-        ]
-        break
-      case 15:
-        listData = [
-          { type: 'warning', content: 'This is warning event' },
-          { type: 'success', content: 'This is very long usual event。。....' },
-          { type: 'error', content: 'This is error event 1.' },
-          { type: 'error', content: 'This is error event 2.' },
-          { type: 'error', content: 'This is error event 3.' },
-          { type: 'error', content: 'This is error event 4.' }
-        ]
-        break
-      default:
-    }
-    return listData || []
-  }
-
-  function dateCellRender(value: any) {
-    const listData = getListData(value)
-    return (
-      <ul className='events'>
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Button type={item.type}>{item.content}</Button>
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  // function dateCellRender(value: any) {
+  //   const listData = getListData(value)
+  //   return (
+  //     <ul className='events'>
+  //       {listData.map((item) => (
+  //         <li key={item.content}>
+  //           <Button type={item.type}>{item.content}</Button>
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   )
+  // }
   return (
     <div>
-      <Calendar
-        onClick={(val: any) => {
-          console.log(val)
-        }}
-        dateCellRender={dateCellRender}
-      ></Calendar>
-      <Button className='button-new-tag' size='small' onClick={addOne}>
-        + New Tag
-      </Button>
-      <p>
-        {dynamicTags.map((item: any) => {
-          return (
-            <Tag
-              key={item}
-              closable
-              onClose={() => {
-                handleCloseTag(item)
-              }}
-            >
-              {item}
-            </Tag>
-          )
-        })}
-      </p>
+      <Tooltip  placement='topLeft' title='Prompt Text'>
+        <Button>Align edge / 边缘对齐</Button>
+      </Tooltip>
+      <Tooltip placement='topLeft' title='Prompt Text' arrowPointAtCenter>
+        <Button>Arrow points to center / 箭头指向中心</Button>
+      </Tooltip>
 
+      <Tooltip title='prompt text'>
+        <span>Tooltip will show on mouse enter.</span>
+      </Tooltip>
+
+      <div className='demo'>
+        <div style={{ marginLeft: buttonWidth, whiteSpace: 'nowrap' }}>
+          <Tooltip type="success"  placement='topLeft' title={text}>
+            <Button>TL</Button>
+          </Tooltip>
+          <Tooltip type="success"  placement='top' title={text}>
+            <Button>Top</Button>
+          </Tooltip>
+          <Tooltip type="success"  placement='topRight' title={text}>
+            <Button>TR</Button>
+          </Tooltip>
+        </div>
+        <div style={{ width: buttonWidth, float: 'left' }}>
+          <Tooltip type="danger"  placement='leftTop' title={text}>
+            <Button>LT</Button>
+          </Tooltip>
+          <Tooltip type="info"  placement='left' title={text}>
+            <Button>Left</Button>
+          </Tooltip>
+          <Tooltip type="warning"  placement='leftBottom' title={text}>
+            <Button>LB</Button>
+          </Tooltip>
+        </div>
+        <div style={{ width: buttonWidth, marginLeft: buttonWidth * 4 + 24 }}>
+          <Tooltip type="primary"  placement='rightTop' title={text}>
+            <Button>RT</Button>
+          </Tooltip>
+          <Tooltip type="success"  placement='right' title={text}>
+            <Button>Right</Button>
+          </Tooltip>
+          <Tooltip type="success"  placement='rightBottom' title={text}>
+            <Button>RB</Button>
+          </Tooltip>
+        </div>
+        <div
+          style={{
+            marginLeft: buttonWidth,
+            clear: 'both',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          <Tooltip placement='bottomLeft' title={text}>
+            <Button>BL</Button>
+          </Tooltip>
+          <Tooltip placement='bottom' title={text}>
+            <Button>Bottom</Button>
+          </Tooltip>
+          <Tooltip placement='bottomRight' title={text}>
+            <Button>BR</Button>
+          </Tooltip>
+        </div>
+      </div>
       <br></br>
-      <CheckBox
-        indeterminate={indeterminate}
-        onChange={onCheckAllChange}
-        checked={checkAll}
-      >
-        Check all
-      </CheckBox>
-      <CheckBoxGroup value={checkedList} onChange={onChange}>
-        <Row>
-          <Col>
-            <CheckBox value='Apple'>Apple</CheckBox>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <CheckBox value='Pear'>Pear</CheckBox>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <CheckBox value='Orange'>Orange</CheckBox>
-          </Col>
-        </Row>
-      </CheckBoxGroup>
-      <Button icon={'icon-Color-fill'}>default</Button>
 
       <div className='xiaoxiannan'></div>
     </div>

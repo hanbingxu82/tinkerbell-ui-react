@@ -1,0 +1,290 @@
+@import '../../style/variables.scss';
+$type:('success', 'primary', 'danger', 'warning', 'info');
+
+@function typeFunction($t) {
+  @if $t==success {
+    @return $color-success
+  }
+
+  @else if $t==primary {
+    @return $color-primary
+  }
+
+  @else if $t==info {
+    @return $color-info
+  }
+
+  @else if $t==danger {
+    @return $color-danger
+  }
+
+  @else if $t==warning {
+    @return $color-warning
+  }
+
+  @return $color-primary
+}
+
+.tb-tooltip.tb-tooltip-zoom-appear,
+.tb-tooltip.tb-tooltip-zoom-enter {
+  opacity: 0;
+}
+
+.tb-tooltip.tb-tooltip-zoom-enter,
+.tb-tooltip.tb-tooltip-zoom-leave {
+  display: block;
+}
+
+.tb-tooltip-zoom-enter,
+.tb-tooltip-zoom-appear {
+  opacity: 0;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  animation-play-state: paused;
+}
+
+.tb-tooltip-zoom-leave {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
+  animation-play-state: paused;
+}
+
+.tb-tooltip-zoom-enter.tb-tooltip-zoom-enter-active,
+.tb-tooltip-zoom-appear.tb-tooltip-zoom-appear-active {
+  animation-name: rcToolTipZoomIn;
+  animation-play-state: running;
+}
+
+.tb-tooltip-zoom-leave.tb-tooltip-zoom-leave-active {
+  animation-name: rcToolTipZoomOut;
+  animation-play-state: running;
+}
+
+@keyframes rcToolTipZoomIn {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes rcToolTipZoomOut {
+  0% {
+    opacity: 1;
+    transform-origin: 50% 50%;
+    transform: scale(1, 1);
+  }
+
+  100% {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform: scale(0, 0);
+  }
+}
+
+.tb-tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  visibility: visible;
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.tb-tooltip-hidden {
+  display: none;
+}
+
+.tb-tooltip-placement-top,
+.tb-tooltip-placement-topLeft,
+.tb-tooltip-placement-topRight {
+  padding: 5px 0 9px 0;
+}
+
+.tb-tooltip-placement-right,
+.tb-tooltip-placement-rightTop,
+.tb-tooltip-placement-rightBottom {
+  padding: 0 5px 0 9px;
+}
+
+.tb-tooltip-placement-bottom,
+.tb-tooltip-placement-bottomLeft,
+.tb-tooltip-placement-bottomRight {
+  padding: 9px 0 5px 0;
+}
+
+.tb-tooltip-placement-left,
+.tb-tooltip-placement-leftTop,
+.tb-tooltip-placement-leftBottom {
+  padding: 0 9px 0 5px;
+}
+
+.tb-tooltip-inner {
+  padding: 8px 10px;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  background-color: #373737;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.17);
+  // min-height: 34px;
+}
+
+.tb-tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tb-tooltip-placement-top .tb-tooltip-arrow,
+.tb-tooltip-placement-topLeft .tb-tooltip-arrow,
+.tb-tooltip-placement-topRight .tb-tooltip-arrow {
+  bottom: 4px;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #373737;
+}
+
+.tb-tooltip-placement-top .tb-tooltip-arrow {
+  left: 50%;
+}
+
+.tb-tooltip-placement-topLeft .tb-tooltip-arrow {
+  left: 15%;
+}
+
+.tb-tooltip-placement-topRight .tb-tooltip-arrow {
+  right: 15%;
+}
+
+.tb-tooltip-placement-right .tb-tooltip-arrow,
+.tb-tooltip-placement-rightTop .tb-tooltip-arrow,
+.tb-tooltip-placement-rightBottom .tb-tooltip-arrow {
+  left: 4px;
+  margin-top: -5px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #373737;
+}
+
+.tb-tooltip-placement-right .tb-tooltip-arrow {
+  top: 50%;
+}
+
+.tb-tooltip-placement-rightTop .tb-tooltip-arrow {
+  top: 15%;
+  margin-top: 0;
+}
+
+.tb-tooltip-placement-rightBottom .tb-tooltip-arrow {
+  bottom: 15%;
+}
+
+.tb-tooltip-placement-left .tb-tooltip-arrow,
+.tb-tooltip-placement-leftTop .tb-tooltip-arrow,
+.tb-tooltip-placement-leftBottom .tb-tooltip-arrow {
+  right: 4px;
+  margin-top: -5px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #373737;
+}
+
+.tb-tooltip-placement-left .tb-tooltip-arrow {
+  top: 50%;
+}
+
+.tb-tooltip-placement-leftTop .tb-tooltip-arrow {
+  top: 15%;
+  margin-top: 0;
+}
+
+.tb-tooltip-placement-leftBottom .tb-tooltip-arrow {
+  bottom: 15%;
+}
+
+.tb-tooltip-placement-bottom .tb-tooltip-arrow,
+.tb-tooltip-placement-bottomLeft .tb-tooltip-arrow,
+.tb-tooltip-placement-bottomRight .tb-tooltip-arrow {
+  top: 4px;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #373737;
+}
+
+.tb-tooltip-placement-bottom .tb-tooltip-arrow {
+  left: 50%;
+}
+
+.tb-tooltip-placement-bottomLeft .tb-tooltip-arrow {
+  left: 15%;
+}
+
+.tb-tooltip-placement-bottomRight .tb-tooltip-arrow {
+  right: 15%;
+}
+
+
+
+@each $t in $type {
+
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-right,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-rightTop,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-rightBottom {
+    .tb-tooltip-arrow {
+      border-right-color: typeFunction($t);
+    }
+
+    .tb-tooltip-inner {
+      background-color: typeFunction($t);
+    }
+  }
+
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-bottom,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-bottomLeft,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-bottomRight {
+    .tb-tooltip-arrow {
+      border-bottom-color: typeFunction($t);
+    }
+
+    .tb-tooltip-inner {
+      background-color: typeFunction($t);
+    }
+  }
+
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-right,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-rightTop,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-rightBottom {
+    .tb-tooltip-arrow {
+      border-left-color: typeFunction($t);
+    }
+
+    .tb-tooltip-inner {
+      background-color: typeFunction($t);
+    }
+  }
+
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-top,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-topLeft,
+  .tb-tooltip-color_#{$t}.tb-tooltip-placement-topRight {
+    .tb-tooltip-arrow {
+      border-top-color: typeFunction($t);
+    }
+
+    .tb-tooltip-inner {
+      background-color: typeFunction($t);
+    }
+  }
+
+
+
+}

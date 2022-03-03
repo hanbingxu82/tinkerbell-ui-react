@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:28
- * @LastEditTime: 2022-02-11 16:22:40
+ * @LastEditTime: 2022-03-02 16:57:34
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Button/index.tsx
@@ -67,6 +67,15 @@ const Button = (props: any) => {
   function handleClick(evt: any) {
     props.onClick && props.onClick(evt)
   }
+  function handMouseEnter(evt: any) {
+    props.onMouseEnter && props.onMouseEnter(evt)
+  }
+  function handMouseLeave(evt: any) {
+    props.onMouseLeave && props.onMouseLeave(evt)
+  }
+  function handFocus(evt: any) {
+    props.onFocus && props.onFocus(evt)
+  }
   function textStyle() {
     let color = textColor
       ? colorMap()[textColor]
@@ -84,6 +93,9 @@ const Button = (props: any) => {
     return (
       <button
         onClick={handleClick}
+        onMouseEnter={handMouseEnter}
+        onMouseLeave={handMouseLeave}
+        onFocus={handFocus}
         disabled={disabled || loading}
         type={nativeType}
         className={[
@@ -120,6 +132,9 @@ const Button = (props: any) => {
     return (
       <button
         onClick={handleClick}
+        onMouseEnter={handMouseEnter}
+        onMouseLeave={handMouseLeave}
+        onFocus={handFocus}
         disabled={disabled || loading}
         type={nativeType}
         className={[
