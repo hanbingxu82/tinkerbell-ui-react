@@ -1,0 +1,103 @@
+@import '../../style/variables.scss';
+$prefixCls:'tb-divider';
+
+.#{$prefixCls} {
+  background: $border-color-base;
+}
+
+.#{$prefixCls},
+// for compatiable
+.#{$prefixCls}-vertical {
+  margin: 0 8px;
+  display: inline-block;
+  height: 0.9em;
+  width: 1px;
+  vertical-align: middle;
+  position: relative;
+  top: -0.06em;
+}
+
+.#{$prefixCls}-horizontal {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 24px 0;
+  clear: both;
+}
+
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text,
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-left,
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-right {
+  display: table;
+  white-space: nowrap;
+  text-align: center;
+  background: transparent;
+  font-weight: 500;
+  color: $color-text-primary;
+  font-size: 16px;
+  margin: 16px 0;
+
+  &:before,
+  &:after {
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 50%;
+    width: 50%;
+    border-top: 1px solid $border-color-base;
+    transform: translateY(50%);
+  }
+}
+
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-left,
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-right {
+  .tb-divider-inner-text {
+    display: inline-block;
+    padding: 0 10px;
+  }
+}
+
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-left {
+  &:before {
+    top: 50%;
+    width: 5%;
+  }
+
+  &:after {
+    top: 50%;
+    width: 95%;
+  }
+}
+
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-right {
+  &:before {
+    top: 50%;
+    width: 95%;
+  }
+
+  &:after {
+    top: 50%;
+    width: 5%;
+  }
+}
+
+.#{$prefixCls}-inner-text {
+  display: inline-block;
+  padding: 0 24px;
+}
+
+.#{$prefixCls}-dashed {
+  background: none;
+  border-top: 1px dashed $border-color-base;
+}
+
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text.#{$prefixCls}-dashed,
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-left.#{$prefixCls}-dashed,
+.#{$prefixCls}-horizontal.#{$prefixCls}-with-text-right.#{$prefixCls}-dashed {
+  border-top: 0;
+
+  &:before,
+  &:after {
+    border-style: dashed none none;
+  }
+}
