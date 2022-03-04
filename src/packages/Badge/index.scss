@@ -1,0 +1,94 @@
+@import '../../style/variables.scss';
+
+.tb-badge {
+  position: relative;
+  display: inline-block;
+}
+
+.tb-badge__content {
+  background-color: $color-danger;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid #fff;
+  line-height: $base-line-height;
+
+  &.is-dot {
+    height: 8px;
+    width: 8px;
+    min-width: 8px;
+    padding: 0;
+    right: 0;
+    border-radius: 50%;
+  }
+
+  &.is-fixed {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    transform: translateY(-50%) translateX(100%);
+
+    &.is-dot {
+      right: 5px;
+    }
+  }
+}
+
+.tb-badge-is-primary {
+  background-color: $color-primary;
+}
+
+.tb-badge-is-warning {
+  background-color: $color-warning;
+}
+
+.tb-badge-is-danger {
+  background-color: $color-danger;
+}
+
+.tb-badge-is-success {
+  background-color: $color-success;
+}
+
+
+.tb-badge-is-info {
+  background-color: $color-info;
+}
+
+
+.zoom-in-center-active {
+  animation: hide-item 1s ease-in forwards;
+}
+
+.zoom-in-center-enter-from {
+  animation: show-item 1s ease-in forwards;
+}
+
+@keyframes hide-item {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+
+  100% {
+    opacity: 1s cubic-bezier(.55, 0, .1, 1), transform 1s cubic-bezier(.55, 0, .1, 1)
+  }
+}
+
+@keyframes show-item {
+  0% {
+    opacity: 1s cubic-bezier(.55, 0, .1, 1), transform 1s cubic-bezier(.55, 0, .1, 1)
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}

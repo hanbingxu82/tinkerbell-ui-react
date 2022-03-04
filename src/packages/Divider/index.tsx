@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-04 09:18:59
- * @LastEditTime: 2022-03-04 10:34:27
+ * @LastEditTime: 2022-03-04 15:12:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Divider/index.tsx
