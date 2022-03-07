@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:28
- * @LastEditTime: 2022-03-02 16:57:34
+ * @LastEditTime: 2022-03-07 15:51:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Button/index.tsx
@@ -45,7 +45,8 @@ const Button = (props: any) => {
     transparent,
     background,
     loadingIcon,
-    textColor
+    textColor,
+    ...restprop
   }: Iprops = props
 
   function iconStyles() {
@@ -90,28 +91,34 @@ const Button = (props: any) => {
     return {}
   }
   if (type !== 'text') {
+    console.log(restprop)
     return (
       <button
+        {...restprop}
         onClick={handleClick}
         onMouseEnter={handMouseEnter}
         onMouseLeave={handMouseLeave}
         onFocus={handFocus}
         disabled={disabled || loading}
         type={nativeType}
-        className={[
-          'tb-button',
-          'tb-button--' + type,
-          'tb-button--' + size,
-          classnames({
-            'is-disabled': disabled,
-            'is-loading': loading,
-            'is-plain': plain,
-            'is-round': round,
-            'is-dashed': dashed,
-            'is-transparent': transparent,
-            'is-background': background
-          })
-        ].join(' ')}
+        className={
+          [
+            'tb-button',
+            'tb-button--' + type,
+            'tb-button--' + size,
+            classnames({
+              'is-disabled': disabled,
+              'is-loading': loading,
+              'is-plain': plain,
+              'is-round': round,
+              'is-dashed': dashed,
+              'is-transparent': transparent,
+              'is-background': background
+            })
+          ].join(' ') +
+          ' ' +
+          props.className
+        }
       >
         {loading && (
           <span className={'btn-icon-loading'}>
@@ -131,17 +138,22 @@ const Button = (props: any) => {
   } else {
     return (
       <button
+        {...restprop}
         onClick={handleClick}
         onMouseEnter={handMouseEnter}
         onMouseLeave={handMouseLeave}
         onFocus={handFocus}
         disabled={disabled || loading}
         type={nativeType}
-        className={[
-          'tb-button',
-          'tb-button--' + type,
-          classnames({ 'is-disabled': disabled, 'is-loading': loading })
-        ].join(' ')}
+        className={
+          [
+            'tb-button',
+            'tb-button--' + type,
+            classnames({ 'is-disabled': disabled, 'is-loading': loading })
+          ].join(' ') +
+          ' ' +
+          props.className
+        }
       >
         {icon && !loading && (
           <i className={['iconfont', icon].join(' ')} style={iconStyles()}></i>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-07 13:55:21
+ * @LastEditTime: 2022-03-07 16:28:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -12,7 +12,8 @@ import {
   // Calendar,
   Button,
   Badge,
-  Avatar
+  Avatar,
+  Backtop
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 
@@ -32,10 +33,8 @@ const App = () => {
           </div>
         )
       })}
-      {/* <div class="block" v-for="fit in fits" :key="fit">
-        <span class="title">{ fit }</span>
-        <Avatar shape="square" size="100" fit={fit} src={url}></Avatar>
-    </div> */}
+      <Backtop bottom='100' right='30'></Backtop>
+      <Backtop bottom='60' right='30' text="你好"></Backtop>
       <Badge value={12} style={{ margin: 30 }}>
         <Button>普通按钮</Button>
       </Badge>
@@ -62,7 +61,7 @@ const App = () => {
       <Badge isDot style={{ margin: 30 }}>
         红点模式
       </Badge>
-      <div className='xiaoxiannan'></div>
+      <div className='xiaoxiannan' style={{ height: 3000 }}></div>
     </div>
   )
 }
