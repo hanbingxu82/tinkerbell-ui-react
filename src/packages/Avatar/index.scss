@@ -1,0 +1,48 @@
+.tb-avatar--circle {
+  border-radius: 50%;
+}
+
+.tb-avatar--square {
+  border-radius: 4px;
+}
+
+.tb-avatar {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+  background: #c0c4cc;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+}
+
+.tb-avatar--large {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.tb-avatar--medium {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.tb-avatar--small {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+}
+
+.tb-avatar>img {
+  display: block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.tb-avatar--icon {
+  font-size: 18px;
+}
