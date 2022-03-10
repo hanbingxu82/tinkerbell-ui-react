@@ -74,7 +74,8 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "@types/lodash": "^4.14.179"
   },
   "eslintConfig": {
     "extends": "react-app"
