@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-10 14:20:19
+ * @LastEditTime: 2022-03-15 14:31:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -32,7 +32,7 @@ import Backtop from './packages/Backtop'
 // import Carousel from './packages/Carousel'
 // import Calendar from './packages/Calendar'
 // import InputColor, { ColorPicker } from './packages/ColorPicker'
-// import Tooltip from './packages/Tooltip'
+import Tooltip from './packages/Tooltip'
 // end 2022-03-01 暂时屏蔽 因打包体积过大
 
 interface Props {
@@ -64,7 +64,7 @@ export {
   // Calendar,
   // InputColor,
   // ColorPicker,
-  // Tooltip,
+  Tooltip,
   // Carousel,
   // end 2022-03-01 暂时屏蔽 因打包体积过大,
   Avatar,

@@ -1,6 +1,10 @@
 @import '../../style/variables.scss';
 $type:('success', 'primary', 'danger', 'warning', 'info');
 
+.tb-tooltip {
+  --activeColor: #373737;
+}
+
 @function typeFunction($t) {
   @if $t==success {
     @return $color-success
@@ -284,7 +288,55 @@ $type:('success', 'primary', 'danger', 'warning', 'info');
       background-color: typeFunction($t);
     }
   }
+}
 
 
 
+
+.tb-tooltip-color_rgb.tb-tooltip-placement-right,
+.tb-tooltip-color_rgb.tb-tooltip-placement-rightTop,
+.tb-tooltip-color_rgb.tb-tooltip-placement-rightBottom {
+  .tb-tooltip-arrow {
+    border-right-color: var(--activeColor);
+  }
+
+  .tb-tooltip-inner {
+    background-color: var(--activeColor);
+  }
+}
+
+.tb-tooltip-color_rgb.tb-tooltip-placement-bottom,
+.tb-tooltip-color_rgb.tb-tooltip-placement-bottomLeft,
+.tb-tooltip-color_rgb.tb-tooltip-placement-bottomRight {
+  .tb-tooltip-arrow {
+    border-bottom-color: var(--activeColor);
+  }
+
+  .tb-tooltip-inner {
+    background-color: var(--activeColor);
+  }
+}
+
+.tb-tooltip-color_rgb.tb-tooltip-placement-right,
+.tb-tooltip-color_rgb.tb-tooltip-placement-rightTop,
+.tb-tooltip-color_rgb.tb-tooltip-placement-rightBottom {
+  .tb-tooltip-arrow {
+    border-left-color: var(--activeColor);
+  }
+
+  .tb-tooltip-inner {
+    background-color: var(--activeColor);
+  }
+}
+
+.tb-tooltip-color_rgb.tb-tooltip-placement-top,
+.tb-tooltip-color_rgb.tb-tooltip-placement-topLeft,
+.tb-tooltip-color_rgb.tb-tooltip-placement-topRight {
+  .tb-tooltip-arrow {
+    border-top-color: var(--activeColor);
+  }
+
+  .tb-tooltip-inner {
+    background-color: var(--activeColor);
+  }
 }

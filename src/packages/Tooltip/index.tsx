@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-02 10:21:44
- * @LastEditTime: 2022-03-03 09:11:01
+ * @LastEditTime: 2022-03-15 16:06:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tooltip/index.tsx
@@ -12,17 +12,19 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState'
 import './index.scss'
 interface Iprops {
   type: string
-
+  color: string
   title: any
   overlay: any
 }
-function Tooltip(props: any) {
-  const { type, title, overlay }: Iprops = props
+const Tooltip = React.forwardRef((props: any) => {
+  const { type, title, overlay, color }: Iprops = props
   const [tColor, setTColor] = useState<any>('default')
   const [visible, setVisible] = useMergedState(false, {
     value: props.visible,
     defaultValue: props.defaultVisible
   })
+  const tooltipRef = React.useRef<any>()
+
   const isNoTitle = () => {
     return !title && !overlay && title !== 0 // overlay for old version compatibility
   }
@@ -32,6 +34,9 @@ function Tooltip(props: any) {
 
     if (!isNoTitle()) {
       props.onVisibleChange?.(vis)
+    }
+    if (color) {
+      setTColor('rgb')
     }
   }
   let tempVisible = visible
@@ -43,8 +48,21 @@ function Tooltip(props: any) {
   useEffect(() => {
     return setTColor(type)
   }, [type])
+  useEffect(() => {
+    if (color) {
+      tooltipRef.current.getComponent().ref.current &&
+        tooltipRef.current
+          .getComponent()
+          .ref.current.getElement()
+          .style.setProperty('--activeColor', color)
+    }
+  }, [tColor])
+
+  // 如果是传递的16进制格式
+  useEffect(() => {}, [color])
   return (
     <Tool
+      ref={tooltipRef}
       placement={props.placement}
       prefixCls={'tb-tooltip'}
       overlay={props.title}
@@ -58,7 +76,7 @@ function Tooltip(props: any) {
       {props.children}
     </Tool>
   )
-}
+})
 Tooltip.defaultProps = {
   placement: 'top',
   mouseEnterDelay: 0.1,
