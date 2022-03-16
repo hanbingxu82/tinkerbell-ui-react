@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-16 10:39:58
+ * @LastEditTime: 2022-03-16 15:10:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -19,7 +19,8 @@ import {
   Tooltip,
   Card,
   RadioGroup,
-  RadioButton
+  RadioButton,
+  PageHeader
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 
@@ -37,6 +38,12 @@ const App = () => {
   const buttonWidth = 70
   return (
     <div>
+      <PageHeader
+        back={() => {
+          console.log('返回')
+        }}
+        content='详情页面'
+      ></PageHeader>
       <div style={{ padding: 30 }}>
         <Row>
           <Col span={8} offset={2}>

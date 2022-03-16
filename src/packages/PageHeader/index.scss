@@ -1,0 +1,40 @@
+@import '../../style/variables.scss';
+
+.tb-page-header {
+  display: flex;
+  line-height: 24px;
+}
+
+.tb-page-header__left {
+  display: flex;
+  cursor: pointer;
+  margin-right: 40px;
+  position: relative;
+}
+
+.tb-page-header__left:after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 16px;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color:$border-table-color;
+}
+
+.tb-page-header__left .icon-leftarrow {
+  font-size: 18px;
+  margin-right: 6px;
+  align-self: center;
+}
+
+.tb-page-header__title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tb-page-header__content {
+  font-size: 18px;
+  color: $color-text-primary ;
+}
