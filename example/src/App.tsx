@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-15 14:58:21
+ * @LastEditTime: 2022-03-16 10:39:58
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -14,7 +14,10 @@ import {
   Badge,
   Backtop,
   // Carousel,
+  Row,
+  Col,
   Tooltip,
+  Card,
   RadioGroup,
   RadioButton
 } from 'tinkerbell-ui-react'
@@ -34,6 +37,43 @@ const App = () => {
   const buttonWidth = 70
   return (
     <div>
+      <div style={{ padding: 30 }}>
+        <Row>
+          <Col span={8} offset={2}>
+            <Card bodyStyle={{ padding: '0px' }}>
+              <img
+                alt='123'
+                src='https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'
+                className='image'
+              />
+              <div style={{ padding: 14 }}>
+                <span>好吃的汉堡</span>
+                <div className='bottom clearfix'>
+                  <time className='time'>
+                    {[new Date().getTime()].toString()}
+                  </time>
+                  <Button type='text' className='button'>
+                    操作按钮
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+      <br />
+      <Row gutter='12'>
+        <Col span='8'>
+          <Card shadow='always'>总是显示</Card>
+        </Col>
+        <Col span='8'>
+          <Card shadow='hover'>鼠标悬浮时显示</Card>
+        </Col>
+        <Col span='8'>
+          <Card shadow='never'>从不显示</Card>
+        </Col>
+      </Row>
+      <br />
       <div style={{ marginLeft: buttonWidth, whiteSpace: 'nowrap' }}>
         <Tooltip placement='topLeft' color={'#f50'} title={text}>
           <Button>TL</Button>

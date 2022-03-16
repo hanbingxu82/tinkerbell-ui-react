@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-15 14:31:14
+ * @LastEditTime: 2022-03-15 17:13:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -26,7 +26,7 @@ import Divider from './packages/Divider'
 import Badge from './packages/Badge'
 import Avatar from './packages/Avatar'
 import Backtop from './packages/Backtop'
-
+import Card from './packages/Card'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 // import Carousel from './packages/Carousel'
@@ -69,4 +69,5 @@ export {
   // end 2022-03-01 暂时屏蔽 因打包体积过大,
   Avatar,
   Backtop,
+  Card
 }
