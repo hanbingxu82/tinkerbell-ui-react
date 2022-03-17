@@ -1,0 +1,82 @@
+@import '../../style/variables.scss';
+
+.tb_rate {
+  --activeColor: #efc20f;
+  cursor: default;
+}
+
+.tb_rate__star.hover {
+  color: var(--activeColor);
+}
+
+.tb_rate .icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  vertical-align: middle;
+  top: -2px;
+  position: relative;
+  margin: 0 5px;
+}
+
+.tb_rate__star {
+  color: #dedbdb;
+  display: inline-block;
+  padding: 7px;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent none;
+  border: 0;
+}
+
+.tb_rate__star .icon {
+  top: 0;
+  vertical-align: middle;
+}
+
+.tb_rate__star.hover {
+  color: var(--activeColor);
+}
+
+.tb_rate__star.filled {
+  color: var(--activeColor);
+}
+
+.tb_rate__star:hover,
+.tb_rate__star:focus {
+  text-decoration: none;
+}
+
+.tb_rate__view .count,
+.tb_rate__view .desc {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 7px;
+}
+
+/* .tb_rate.has-error .tb_rate__star {
+    color: #f37a77;
+  }
+  .tb_rate.has-error .tb_rate__star.hover {
+    color: #efc20f;
+  }
+  .tb_rate.has-error .tb_rate__star.filled {
+    color: #efc20f;
+  } */
+.tb_rate__star[disabled] {
+  opacity: 0.8;
+}
+
+.tb_rate__star.hover[disabled],
+.tb_rate__star.filled[disabled] {
+  color: var(--activeColor);
+  opacity: 0.6;
+}
+
+.Rate__view.disabled .count,
+.Rate__view.disabled .desc {
+  color: #ccc;
+}

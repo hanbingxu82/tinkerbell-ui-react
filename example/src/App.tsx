@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-16 15:10:03
+ * @LastEditTime: 2022-03-17 10:15:56
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -20,7 +20,8 @@ import {
   Card,
   RadioGroup,
   RadioButton,
-  PageHeader
+  PageHeader,
+  Rate
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 
@@ -33,11 +34,22 @@ const App = () => {
   const handlePositionChange = ({ target: { value } }: any) => {
     setDotPosition(value)
   }
+  const [myCurrentRate, setMyCurrentRate] = React.useState(3)
+
+  const desc = ['非常糟糕', '糟糕', '正常', '良好', '非常良好']
   const text = <span>prompt text</span>
 
   const buttonWidth = 70
   return (
     <div>
+      <Rate
+        value={myCurrentRate}
+        onChange={(value: number) => {
+          setMyCurrentRate(value)
+        }}
+        length='5'
+        ratedesc={desc}
+      />
       <PageHeader
         back={() => {
           console.log('返回')
