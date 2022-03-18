@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-16 16:47:04
- * @LastEditTime: 2022-03-17 10:42:42
+ * @LastEditTime: 2022-03-18 15:06:11
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Rate/index.tsx
@@ -23,16 +23,16 @@ interface Iprops {
 }
 function Rate(props: any) {
   const {
-    value,
+    value = 0,
     name,
     length,
     showcount,
     required,
-    ratedesc,
+    ratedesc = [],
     activecolor,
     disabled,
     readonly,
-    iconref = 'icon-collection'
+    iconref = 'icon-collection-fill'
   }: Iprops = props
   /**
    * @description: 是否第一次加载组件
@@ -53,13 +53,21 @@ function Rate(props: any) {
     }
   }
   function onOver(index: any) {
-    if (!readonly) setOver(index)
+    console.log(readonly)
+    if (readonly || disabled) {
+    } else {
+      setOver(index)
+    }
   }
   function onOut() {
-    if (!readonly) setOver(rate)
+    if (readonly || disabled) {
+      return
+    } else {
+      setOver(rate)
+    }
   }
   function setRateFn(index: any): void | boolean {
-    if (readonly) return false
+    if (readonly || disabled) return false
     props.beforeRate && props.beforeRate(rate)
     setRate(index)
     props.onChange && props.onChange(index)
@@ -77,8 +85,8 @@ function Rate(props: any) {
     setOver(convertValue(value))
   }, [value])
   useEffect(() => {
-    if (initComponent.current) return
-    tb_rate.current.style.setProperty('--activeColor', activecolor)
+    activecolor &&
+      tb_rate.current.style.setProperty('--activeColor', activecolor)
   }, [activecolor])
 
   useEffect(() => {
@@ -120,7 +128,7 @@ function Rate(props: any) {
               classnames({
                 tb_rate__star: true,
                 hover: n <= over,
-                filled: n <= rate || isFilled(n)
+                filled: isFilled(n) // n <= rate || isFilled(n)
               })
             ].join(' ')}
             onMouseOver={() => {
@@ -135,7 +143,6 @@ function Rate(props: any) {
             onKeyUp={() => {
               onOver(n)
             }}
-            disabled={disabled}
           >
             <i className={`icon iconfont ${iconref}`}></i>
           </button>
