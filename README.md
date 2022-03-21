@@ -82,7 +82,7 @@ class Example extends Component {
 
 #### 0.2.8 完成 Rate 评分组件
 
-#### 0.2.9 新增路由 及完成面包屑Breadcrumb、BreadcrumbItem功能
+#### 0.2.9 新增路由功能 及完成面包屑Breadcrumb、BreadcrumbItem组件
 
 ## License
 
