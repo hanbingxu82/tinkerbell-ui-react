@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-17 09:45:45
+ * @LastEditTime: 2022-03-21 11:22:40
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -29,6 +29,8 @@ import Backtop from './packages/Backtop'
 import Card from './packages/Card'
 import PageHeader from './packages/PageHeader'
 import Rate from './packages/Rate'
+import Breadcrumb from './packages/Breadcrumb'
+import BreadcrumbItem from './packages/BreadcrumbItem'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 // import Carousel from './packages/Carousel'
@@ -73,5 +75,7 @@ export {
   Backtop,
   Card,
   PageHeader,
-  Rate
+  Rate,
+  Breadcrumb,
+  BreadcrumbItem
 }

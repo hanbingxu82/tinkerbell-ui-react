@@ -1,0 +1,34 @@
+@import '../../style/variables.scss';
+
+.tb-breadcrumb {
+  font-size: $header-font-size;
+  line-height: 1;
+
+  .iconfont {
+    vertical-align: baseline;
+  }
+}
+
+.tb-breadcrumb__inner.is-link,
+.tb-breadcrumb__inner a {
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: $color-text-primary;
+  cursor: pointer;
+}
+
+.tb-breadcrumb__inner {
+  color: $color-text-default;
+}
+
+.tb-breadcrumb__separator[class*="icon"] {
+  margin: 0 6px;
+  font-weight: 400;
+}
+
+.tb-breadcrumb__separator {
+  margin: 0 9px;
+  font-weight: 700;
+  color: $color-text-secondary;
+}
