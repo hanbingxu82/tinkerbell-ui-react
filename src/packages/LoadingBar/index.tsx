@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-22 11:07:33
- * @LastEditTime: 2022-03-22 17:23:23
+ * @LastEditTime: 2022-03-23 13:45:51
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/LoadingBar/index.tsx
@@ -74,16 +74,17 @@ const LoadingBar: any = React.forwardRef((props: any, ref: any) => {
 })
 
 /**
- * @description: 此步用于获取实例   Vue.extend(LoadingBar) 用于构建模板：但注意此时对应的数据还并没有实例化就相当于  是Vue 还没有new
+ * @description: 此步用于获取实例     ReactDOM.render(<LoadingBar ref={componentInstance} />, div) 用于构建模板：但注意此时对应的数据还并没有实例化就相当于  是node节点 还没有插入到dom当中
  * @param {*}
  * @return {*}
  */
 const div = document.createElement('div')
-// document.body.appendChild(div)
 // 创建一个Ref对象
 const componentInstance: any = React.createRef()
 function LoadingBarConstructor() {
   ReactDOM.render(<LoadingBar ref={componentInstance} />, div)
+  console.log(componentInstance)
+// 暴露出 LoadingBar 的对应方法诸如 start、end等，连带 componentInstance ref节点也暴露出去
   return { ...LoadingBar, componentInstance }
 }
 
@@ -92,11 +93,10 @@ let removeTimer: any = null
 
 /**
  * @description:
- * @param {*} options 参数为一个对象，注意 prototype中的this指向的便是实例化后 的this 所以我们就可以在这里使用this 进行变更组件中data的值
+ * @param {*} options 参数为一个对象，对象用于指定对应的useState参数值
  * @return {*}
  */
 LoadingBar.config = function (options: { [x: string]: any }) {
-  console.log(componentInstance.current.methods)
   // 便利对应的
   Object.keys(options).forEach((key) => {
     // 在这里我们不能让其传入对应的isError  和  totalProgress  因为这两个参数分别代表了错误状态以及对应的加载进度条行走进度
@@ -113,14 +113,14 @@ LoadingBar.config = function (options: { [x: string]: any }) {
     key == 'showSpinner' &&
       componentInstance.current.methods.setShowSpinner(options[key])
     // 对应data中的配置值  也就等于我们自己定义的key值
-    this[key] = options[key]
+    // this[key] = options[key]
   })
   // 完成之后调用一次this.start()
   LoadingBar.start()
 }
 
 /**
- * @description: 此处用于初始化对应的vue模板 将对应的挂载的模板真正的追加到document.body文档当中，因为样式我们已经写好所以 不用考虑冲突的问题
+ * @description: 此处用于初始化对应的 react 模板数据 将对应的挂载的模板真正的追加到document.body文档当中，因为样式我们已经写好所以 不用考虑冲突的问题
  * @param {*}
  * @return {*}
  */
