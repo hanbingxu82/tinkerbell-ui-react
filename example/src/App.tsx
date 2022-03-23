@@ -1,15 +1,20 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-21 14:28:17
+ * @LastEditTime: 2022-03-22 17:20:39
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './index.css'
-import { Breadcrumb, BreadcrumbItem } from 'tinkerbell-ui-react'
+import {
+  Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  LoadingBar
+} from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
 const App = (props: any) => {
@@ -18,8 +23,31 @@ const App = (props: any) => {
   const to = (path: string) => {
     navigate(path, { replace: true })
   }
+  useEffect(() => {}, [])
   return (
     <div>
+      <Button
+        onClick={() => {
+          LoadingBar.config({ showSpinner: false })
+        }}
+      >
+        开始
+      </Button>
+      <Button
+        onClick={() => {
+          LoadingBar.end()
+        }}
+      >
+        结束
+      </Button>
+      <Button
+        type='danger'
+        onClick={() => {
+          LoadingBar.error()
+        }}
+      >
+        错误
+      </Button>
       <Breadcrumb separator='/' separatorClass='icon-arrow-right'>
         <BreadcrumbItem
           to={() => {
