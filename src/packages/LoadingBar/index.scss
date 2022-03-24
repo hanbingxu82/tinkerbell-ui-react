@@ -1,3 +1,4 @@
+@import '../../style/variables.scss';
 .tb__loading-bar {
   &--bar {
     position: fixed;
@@ -8,11 +9,11 @@
     z-index: 9999;
     transition: all 200ms ease;
     transform: translate3d(-100%, 0, 0);
-    background: #1089ff;
+    background: $color-primary;
   }
 
   &--error {
-    background: #ff4d4f;
+    background:$color-danger;
   }
 
   &--peg {
@@ -21,7 +22,7 @@
     right: 0;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px #fea638, 0 0 5px #fea638;
+    box-shadow: 0 0 10px $color-warning, 0 0 5px $color-warning;
     opacity: 1;
     transform: rotate(3deg) translate(0px, -4px);
   }
@@ -38,14 +39,14 @@
       height: 18px;
       box-sizing: border-box;
       border: solid 2px transparent;
-      border-top-color: #1089ff;
-      border-left-color: #1089ff;
+      border-top-color: $color-primary;
+      border-left-color: $color-primary;
       border-radius: 50%;
     }
 
     .spinner-icon--error {
-      border-top-color: #ff4d4f;
-      border-left-color: #ff4d4f;
+      border-top-color:$color-danger;
+      border-left-color:$color-danger;
     }
   }
 }
