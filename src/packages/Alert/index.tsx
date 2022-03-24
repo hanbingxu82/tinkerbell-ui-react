@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-24 14:24:29
- * @LastEditTime: 2022-03-24 15:54:49
+ * @LastEditTime: 2022-03-24 17:03:43
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Alert/index.tsx
@@ -23,6 +23,7 @@ interface Iprops {
   icon: string
 }
 function Alert(props: any) {
+  console.log(Animate)
   const {
     title = props.children || '',
     type = 'success',
@@ -69,7 +70,7 @@ function Alert(props: any) {
   }, [description])
   return (
     <Animate component='' transitionName='tb-alert-fade'>
-      {visible && (
+      {visible ? (
         <div
           className={[
             'tb-alert',
@@ -103,7 +104,7 @@ function Alert(props: any) {
             )}
           </div>
         </div>
-      )}
+      ) : null}
     </Animate>
   )
 }
