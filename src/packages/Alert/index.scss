@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-alert {
   padding: 8px 16px;
   border-radius: 4px;
@@ -33,28 +35,31 @@
 }
 
 .tb-alert--primary {
-  color: #1089ff;
-  background-color: #ecf5ff;
+  color: $color-primary;
+  background-color: $color-primary-light5;
 }
 
 .tb-alert--success {
-  color: #52c41a;
-  background-color: #f0f9eb;
+  color: $color-success;
+  background-color: $color-success-light5;
 }
 
 .tb-alert--info {
-  color: #35495e;
-  background-color: #eaecee;
+  color: $color-info;
+  background-color: $color-info-light5;
+
 }
 
 .tb-alert--warning {
-  color: #fea638;
-  background-color: #fdf6ec;
+  color: $color-warning;
+  background-color: $color-warning-light5;
+
 }
 
 .tb-alert--danger {
-  color: #ff4d4f;
-  background-color: #fef0f0;
+  color: $color-danger;
+  background-color: $color-danger-light5;
+
 }
 
 .tb-alert__icon {

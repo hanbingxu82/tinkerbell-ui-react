@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-scroll-button {
   cursor: pointer;
   position: fixed;
@@ -9,7 +11,7 @@
   border: none;
   /* padding: 8px; */
   /* background-color: black; */
-  color: #409eff;
+  color: $color-primary;
   outline: none;
 }
 
