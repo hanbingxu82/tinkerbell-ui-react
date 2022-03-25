@@ -1,0 +1,100 @@
+@import '../../style/variables.scss';
+
+.tb-progress {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #606266;
+  font-size: 14px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+  &-outer {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    margin-right: -55px;
+    padding-right: 50px;
+
+    &-bg {
+      width: 100%;
+      position: relative;
+
+      &-border {
+        border-radius: 100px;
+      }
+    }
+
+    &-line {
+      position: relative;
+      background: $color-primary;
+      border-radius: 100px;
+      transition: all 0.4s cubic-bezier(0.08, 0.82, 0.17, 1) 0s;
+
+      &-success {
+        background: $color-success;
+      }
+
+      &-warning {
+        background: $color-warning;
+      }
+
+      &-error {
+        background: $color-danger;
+      }
+
+      &-active {
+        background: #fff;
+        height: inherit;
+        border-radius: 10px;
+        opacity: 0;
+        animation: tb-active 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+        content: "";
+      }
+    }
+
+    &-cut {
+      position: relative;
+      display: flex;
+    }
+  }
+
+  &-text {
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    word-break: keep-all;
+  }
+}
+
+@keyframes tb-active {
+  0% {
+    width: 0;
+    opacity: 0.2;
+  }
+
+  30% {
+    width: 0;
+    opacity: 0.6;
+  }
+
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+// 360度色调转换
+@keyframes tb-flow {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}

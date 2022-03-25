@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-24 16:17:33
+ * @LastEditTime: 2022-03-25 14:48:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -14,7 +14,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   LoadingBar,
-  Alert
+  Progress
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -25,36 +25,47 @@ const App = (props: any) => {
     navigate(path, { replace: true })
   }
   useEffect(() => {}, [])
+  function format(percent: number) {
+    if (percent === 100) {
+      return '^_^'
+    }
+    return 'QAQ'
+  }
   return (
     <div>
-      <Alert type='success' closable={false}>
-        不可关闭的 alert
-      </Alert>
-      <Alert type='info' closeText='知道了'>
-        自定义关闭的 alert
-      </Alert>
-      <Alert
-        type='warning'
-        close={() => {
-          console.log(123)
-        }}
-      >
-        设置了回调的 alert
-      </Alert>
-      <Alert
-        type='success'
-        description='这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰……'
-      >
-        带辅助性文字介绍
-      </Alert>
-      <Alert
-        type='info'
-        showIcon
-        description='这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰……'
-      >
-        带有 icon 和辅助性文字介绍
-      </Alert>
+      <div>
+        <Progress percent='20'></Progress>
+        <Progress percent='40' status='success' type='lump'></Progress>
+        <Progress
+          percent='60'
+          status='warning'
+          type='lump'
+          active
+          border='false'
+        ></Progress>
+        <Progress
+          percent='80'
+          color={['#40a9ff', '#5cdbd3']}
+          type='lump'
+          cutWidth={2}
+          cutColor='#389e0d'
+        ></Progress>
+        <Progress percent={10}></Progress>
+        <Progress percent={20} status='success' lineHeight={8}></Progress>
+        <Progress percent={30} status='warning' lineHeight={10}></Progress>
+        <Progress percent={40} status='error' lineHeight={12}></Progress>
 
+        <Progress percent={50}></Progress>
+        <Progress percent={60} status='success' showText={false}></Progress>
+        <Progress percent={70} status='warning' format={format}></Progress>
+        <Progress percent={100} status='error' format={format}></Progress>
+
+        <Progress percent={40} active></Progress>
+            <Progress percent={60} active activeColor="#f12711"></Progress>
+            <Progress percent={80} active color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']}></Progress>
+            <Progress percent={100} color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']} colorFlow={true}></Progress>
+ 
+      </div>
       <Button
         onClick={() => {
           LoadingBar.start()
