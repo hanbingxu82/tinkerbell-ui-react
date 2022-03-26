@@ -92,6 +92,8 @@ class Example extends Component {
 
 #### 0.3.3 完成 Switch 开关组件
 
+#### 0.4.4
+
 ## License
 
 MIT © [hanbingxu82](https://github.com/hanbingxu82)
