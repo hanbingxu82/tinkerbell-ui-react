@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2022-03-25 10:04:19
- * @LastEditTime: 2022-03-25 14:49:21
+ * @LastEditTime: 2022-03-26 17:20:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Progress/index.tsx
  */
 import React, { useState, useEffect } from 'react'
 import './index.scss'
+const PropTypes = require('prop-types')
 
 interface Iprops {
   percent: number
@@ -103,7 +104,7 @@ function Progress(props: any) {
       //   如果对应的dom节点有数据的话就说明有这个dom节点
       if (tbl) {
         clearInterval(tblSet)
-        console.log(tbl.offsetWidth/(lineHeight + cutWidth))
+        console.log(tbl.offsetWidth / (lineHeight + cutWidth))
         // 获取一个指定的偏移量
         let lno = parseInt(
           (tbl.offsetWidth / (lineHeight + cutWidth)) as unknown as string
@@ -154,7 +155,7 @@ function Progress(props: any) {
     if (type === 'lump') {
       countCut()
     }
-  }, [idNow,lineHeight,cutWidth])
+  }, [idNow, lineHeight, cutWidth])
   useEffect(() => {
     // 获取随机码  确保id是唯一的不重复的
     setIdNow(getUUID())
@@ -200,11 +201,22 @@ function Progress(props: any) {
  * @return {*}
  */
 Progress.propTypes = {
-  percent(
-    props: { [x: string]: number },
-    propName: string | number,
-    _componentName: any
-  ) {
+  showText: PropTypes.bool,
+  active: PropTypes.bool,
+  activeColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  cutWidth: PropTypes.number,
+  cutColor: PropTypes.string,
+  border: PropTypes.bool,
+  lineHeight: PropTypes.number,
+  color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.func
+  ]),
+  colorFlow: PropTypes.bool,
+  format: PropTypes.func,
+  percent(props: any, propName: string | number, _componentName: any) {
     if ((props[propName] && props[propName] < 0) || props[propName] > 100) {
       return new Error('percent 传值范围<0||>100!')
     }

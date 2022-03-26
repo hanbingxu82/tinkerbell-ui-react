@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-26 16:33:26
+ * @LastEditTime: 2022-03-26 17:24:04
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
@@ -108,8 +108,8 @@ const App = (props: any) => {
           percent='60'
           status='warning'
           type='lump'
-          active
-          border='false'
+          active={true}
+          border={false}
         ></Progress>
         <Progress
           percent='80'
@@ -128,11 +128,11 @@ const App = (props: any) => {
         <Progress percent={70} status='warning' format={format}></Progress>
         <Progress percent={100} status='error' format={format}></Progress>
 
-        <Progress percent={40} active></Progress>
-        <Progress percent={60} active activeColor='#f12711'></Progress>
+        <Progress percent={40} active={true}></Progress>
+        <Progress percent={60} active={true} activeColor='#f12711'></Progress>
         <Progress
           percent={80}
-          active
+          active={true}
           color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']}
         ></Progress>
         <Progress
