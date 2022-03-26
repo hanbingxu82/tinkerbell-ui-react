@@ -17,7 +17,7 @@
       left: 7px;
       top: 3px;
       height: 100%;
-      border-left: 1px solid #e8eaec;
+      border-left: 1px solid $border-table-color;
     }
 
     &-pending &-tail {
@@ -29,33 +29,33 @@
       top: 1px;
       width: 13px;
       height: 13px;
-      background-color: #fff;
+      background-color: $color-white;
       border-radius: 50%;
       border: 1px solid transparent;
 
       &-primary {
-        border-color: #1089ff;
-        color: #1089ff;
+        border-color: $color-primary;
+        color: $color-primary;
       }
 
       &-success {
-        border-color: #52c41a;
-        color: #52c41a;
+        border-color: $color-success;
+        color: $color-success;
       }
 
       &-info {
-        border-color: #35495e;
-        color: #35495e;
+        border-color: $color-info;
+        color: $color-info;
       }
 
       &-warning {
-        border-color: #fea638;
-        color: #fea638;
+        border-color: $color-warning;
+        color: $color-warning;
       }
 
       &-danger {
-        border-color: #ff4d4f;
-        color: #ff4d4f;
+        border-color: $color-danger;
+        color: $color-danger;
       }
     }
 
@@ -95,7 +95,7 @@
 
   &-pending &-item:nth-last-of-type(2) {
     .tb-timeline-item-tail {
-      border-left: 1px dotted #e8eaec;
+      border-left: 1px dotted $border-table-color;
     }
 
     .tb-timeline-item-content {
