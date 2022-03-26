@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-25 10:12:51
+ * @LastEditTime: 2022-03-26 10:59:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -87,6 +87,8 @@ class Example extends Component {
 #### 0.3.0 使用 ref 暴露 useState 方法完成 LodingBar 加载进度条组件
 
 #### 0.3.1 完成 Alert 警告展示条组件
+
+#### 0.3.2 完成 Progress 进度条组件
 
 ## License
 
