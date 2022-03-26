@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-25 11:39:18
+ * @LastEditTime: 2022-03-26 13:18:48
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -34,6 +34,7 @@ import BreadcrumbItem from './packages/BreadcrumbItem'
 import LoadingBar from './packages/LoadingBar'
 import Alert from './packages/Alert'
 import Progress from './packages/Progress'
+import Switch from './packages/Switch'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 // import Carousel from './packages/Carousel'
@@ -83,5 +84,6 @@ export {
   BreadcrumbItem,
   LoadingBar,
   Alert,
-  Progress
+  Progress,
+  Switch
 }

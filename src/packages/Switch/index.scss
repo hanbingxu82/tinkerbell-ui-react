@@ -1,0 +1,39 @@
+
+.tb-switch {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    overflow: hidden;
+    transition: background-color ease 0.2s, width ease 0.2s, height ease 0.2s;
+  }
+  .tb-switch .dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    transition: margin ease 0.2s;
+  }
+  .tb-switch .text {
+    position: absolute;
+    font-family: inherit;
+    user-select: none;
+    white-space: nowrap;
+  }
+  @media all and (-ms-high-contrast: none) {
+    .tb-switch .text {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  @media (prefers-reduced-motion) {
+    .tb-switch,
+    .tb-switch *,
+    .tb-switch *::before,
+    .tb-switch *::after {
+      animation: none !important;
+      transition: none !important;
+      transition-duration: none !important;
+    }
+  }

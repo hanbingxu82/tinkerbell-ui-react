@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-25 14:48:50
+ * @LastEditTime: 2022-03-26 13:37:22
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/example/src/App.tsx
  */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './index.css'
 import {
@@ -14,7 +14,8 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   LoadingBar,
-  Progress
+  Progress,
+  Switch
 } from 'tinkerbell-ui-react'
 import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -24,6 +25,7 @@ const App = (props: any) => {
   const to = (path: string) => {
     navigate(path, { replace: true })
   }
+  const [value, setValue] = useState(false)
   useEffect(() => {}, [])
   function format(percent: number) {
     if (percent === 100) {
@@ -34,6 +36,26 @@ const App = (props: any) => {
   return (
     <div>
       <div>
+        <Switch
+          value={value}
+          onChange={(val: boolean) => {
+            console.log(val)
+            setValue(val)
+          }}
+          checkedText='开'
+          uncheckedText='关'
+        ></Switch>
+        <Switch value={value} disabled />
+
+        <Switch
+          value={value}
+          onChange={(val: boolean) => {
+            console.log(val)
+            setValue(val)
+          }}
+          checkedText='😁'
+          uncheckedText='😞'
+        ></Switch>
         <Progress percent='20'></Progress>
         <Progress percent='40' status='success' type='lump'></Progress>
         <Progress
@@ -61,10 +83,17 @@ const App = (props: any) => {
         <Progress percent={100} status='error' format={format}></Progress>
 
         <Progress percent={40} active></Progress>
-            <Progress percent={60} active activeColor="#f12711"></Progress>
-            <Progress percent={80} active color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']}></Progress>
-            <Progress percent={100} color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']} colorFlow={true}></Progress>
- 
+        <Progress percent={60} active activeColor='#f12711'></Progress>
+        <Progress
+          percent={80}
+          active
+          color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']}
+        ></Progress>
+        <Progress
+          percent={100}
+          color={['#f5af19', '#f12711', '#9254de', '#40a9ff', '#5cdbd3']}
+          colorFlow={true}
+        ></Progress>
       </div>
       <Button
         onClick={() => {
