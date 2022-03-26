@@ -73,6 +73,7 @@
     "build": "^0.1.4",
     "classnames": "^2.3.1",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.8.1",
     "rc-animate": "^3.1.1",
     "rc-notification": "^4.5.7",
     "rc-tooltip": "^5.1.1",
