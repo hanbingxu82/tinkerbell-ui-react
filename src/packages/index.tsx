@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2022-03-28 14:09:21
+ * @LastEditTime: 2022-03-28 17:03:23
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
@@ -41,10 +41,10 @@ import TimeLineItem from './TimeLineItem'
 import Message from './Message'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
-// import Carousel from './Carousel'
-// import Calendar from './Calendar'
-// import InputColor, { ColorPicker } from './ColorPicker'
-// import Tooltip from './Tooltip'
+import Carousel from './Carousel'
+import Calendar from './Calendar'
+import InputColor, { ColorPicker } from './ColorPicker'
+import Tooltip from './Tooltip'
 // end 2022-03-01 暂时屏蔽 因打包体积过大
 
 interface Props {
@@ -73,11 +73,11 @@ export  {
   Divider,
   Badge,
   // start 2022-03-01 暂时屏蔽 因打包体积过大
-  // Calendar,
-  // InputColor,
-  // ColorPicker,
-  // Tooltip,
-  // Carousel,
+  Calendar,
+  InputColor,
+  ColorPicker,
+  Tooltip,
+  Carousel,
   // end 2022-03-01 暂时屏蔽 因打包体积过大,
   Avatar,
   Backtop,
