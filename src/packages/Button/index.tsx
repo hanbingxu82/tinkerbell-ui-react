@@ -1,17 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:28
- * @LastEditTime: 2022-03-18 14:54:07
+ * @LastEditTime: 2022-03-28 11:27:43
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Button/index.tsx
  */
 import React from 'react'
 import Icon from '../Icon'
+import './index.scss'
 var tinycolor = require('tinycolor2')
 const classnames = require('classnames')
-import './index.scss'
-
 interface Iprops {
   type: string
   disabled: boolean

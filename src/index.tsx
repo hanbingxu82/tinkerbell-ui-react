@@ -1,12 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-26 15:34:24
+ * @LastEditTime: 2022-03-28 12:50:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
  */
 import * as React from 'react'
+
+
+import './index.css'
 import './styles.css'
 import './style/global.scss'
 import Button from './packages/Button'
@@ -37,6 +40,7 @@ import Progress from './packages/Progress'
 import Switch from './packages/Switch'
 import TimeLine from './packages/TimeLine'
 import TimeLineItem from './packages/TimeLineItem'
+import Message from './packages/Message'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 // import Carousel from './packages/Carousel'
@@ -89,5 +93,7 @@ export {
   Progress,
   Switch,
   TimeLine,
-  TimeLineItem
+  TimeLineItem,
+  Message
 }
+

@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-03-26 11:14:09
- * @LastEditTime: 2022-03-26 13:37:56
+ * @LastEditTime: 2022-03-28 12:42:57
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Switch/index.tsx
  */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import './index.scss'
 
@@ -50,12 +51,12 @@ function Switch(props: any) {
   const [textStyle, setTextStyle] = useState({})
 
   function switchClick() {
-    !disabled ? props.onChange && props.onChange(!value) : null
+    return !disabled ? props.onChange && props.onChange(!value) : null
   }
   function switchKeyUp(ev: any) {
     var event = ev || window.event
     if (event.keyCode == 13 || event.keyCode == 32) {
-      !disabled ? props.onChange && props.onChange(!value) : null
+      return !disabled ? props.onChange && props.onChange(!value) : null
     }
   }
 

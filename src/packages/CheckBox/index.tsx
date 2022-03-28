@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-02-17 10:17:53
+ * @LastEditTime: 2022-03-28 12:12:18
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
@@ -43,13 +43,13 @@ function CheckBox(props: any) {
     ) {
       setCheckBoxChecked(false)
     }
-  }, [checkGroupValue])
+  }, [checkGroupValue])// eslint-disable-line
   useEffect(() => {
     setCheckBoxChecked(checked)
-  }, [checked])
+  }, [checked])// eslint-disable-line
   useEffect(() => {
     setIsIndeterminate(!!indeterminate ? indeterminate : false)
-  }, [indeterminate])
+  }, [indeterminate])// eslint-disable-line
   function handleChange(evt: any) {
     setCheckBoxChecked(evt.target.checked)
     props.onChange && props.onChange(evt)

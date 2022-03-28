@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 16:17:47
- * @LastEditTime: 2022-02-25 10:27:34
+ * @LastEditTime: 2022-03-28 11:44:38
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tag/index.tsx
@@ -59,6 +59,7 @@ function Tag(props: any) {
   }, [type, color])
 
   // 自定义class样式监听器
+  /* eslint-disable */
   useEffect(() => {
     tagStyle
       ? tagStyle
@@ -73,10 +74,10 @@ function Tag(props: any) {
           color: color ? '#fff' : '',
           fontSize: fontSize
         })
-  }, [tagStyle, dot, fontSize, color])
+  }, [tagStyle, dot, fontSize, color]) 
+  /* eslint-disable */
   // 图标关闭事件
   function closeHandleClick(e: any) {
-    
     props.onClose && props.onClose(e)
   }
   // 点击图标事件

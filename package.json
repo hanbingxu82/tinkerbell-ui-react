@@ -12,6 +12,8 @@
   "scripts": {
     "build": "microbundle-crl --css-modules false --no-compress --format modern,cjs && cp -r src/packages/Icon/fontcss/* ./dist ",
     "start": "microbundle-crl --css-modules false watch --no-compress --format modern,cjs & cp -r src/packages/Icon/fontcss/* ./dist",
+    "dev": "react-scripts start",
+    "eject":"react-scripts eject",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -83,5 +85,17 @@
     "react-slick": "^0.28.1",
     "react-test-renderer": "^16.8.6",
     "run": "^1.4.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:28
- * @LastEditTime: 2022-02-17 10:25:20
+ * @LastEditTime: 2022-03-28 12:10:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Col/index.tsx
@@ -49,14 +49,13 @@ function Col(props: any) {
 
   // 声明一个名为“count”的新状态变量
   useEffect(() => {
-
     setNum(4.1666)
     Pxs()
     Psm()
     Pmd()
     Plg()
     Pxl()
-  }, [])
+  }, [])// eslint-disable-line
   function Pxs() {
     // 如果是数值类型
     if (
