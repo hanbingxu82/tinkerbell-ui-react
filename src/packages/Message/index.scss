@@ -1,7 +1,7 @@
 @import '../../style/var.css';
 @import '../../style/variables.scss';
 
-.el {
+.tb {
   &-message {
     box-shadow: var(--message-shadow);
     min-width: 200px;
@@ -90,19 +90,19 @@
       }
     }
 
-    & .el-icon-circle-check {
+    & .tb-icon-circle-check {
       color: var(--message-success-color);
     }
 
-    & .el-icon-circle-cross {
+    & .tb-icon-circle-cross {
       color: var(--message-danger-color);
     }
 
-    & .el-icon-information {
+    & .tb-icon-information {
       color: var(--message-info-color);
     }
 
-    & .el-icon-warning {
+    & .tb-icon-warning {
       color: var(--message-warning-color);
     }
   }
@@ -110,7 +110,7 @@
 
 }
 
-.el-message-content {
+.tb-message-content {
   position: fixed;
   top: 24px;
   width: 100%;
@@ -118,20 +118,20 @@
   >div {
     text-align: center;
 
-    .el-message {
+    .tb-message {
       margin-bottom: 10px;
     }
   }
 }
 
-.el-message-fade-leave,
-.el-message-fade-leave-active {
+.tb-message-fade-leave,
+.tb-message-fade-leave-active {
   opacity: 0;
   transform: translate(0%, -100%);
 }
 
-.el-message-fade-enter,
-.el-message-fade-enter-active {
+.tb-message-fade-enter,
+.tb-message-fade-enter-active {
   opacity: 0;
   transform: translate(0%, -100%);
 }

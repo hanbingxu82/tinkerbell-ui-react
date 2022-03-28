@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-03-28 16:42:27
+ * @LastEditTime: 2022-03-28 16:52:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
@@ -27,7 +27,7 @@ function Toast(props: any) {
   let timeout: NodeJS.Timeout
 
   useEffect(() => {
-    props.type && setTypeClass(`el-message__${props.type}`)
+    props.type && setTypeClass(`tb-message__${props.type}`)
   }, [props.type]) // eslint-disable-line
 
   useEffect(() => {
@@ -57,38 +57,38 @@ function Toast(props: any) {
   return (
     <Animate
       component=''
-      transitionName='el-message-fade'
+      transitionName='tb-message-fade'
       onLeave={() => {
         props.willUnmount()
       }}
     >
       {visible ? (
         <div
-          className={classnames('el-message', customClass, typeClass)}
+          className={classnames('tb-message', customClass, typeClass)}
           onMouseEnter={stopTimer}
           onMouseLeave={startTimer}
         >
           {!iconClass && (
             <Icon
-              name={`${classnames('el-message__img')} ${icons[props.type]}`}
+              name={`${classnames('tb-message__img')} ${icons[props.type]}`}
             ></Icon>
           )}
           <div
-            className={classnames('el-message__group', {
+            className={classnames('tb-message__group', {
               'is-with-icon': iconClass
             })}
           >
             {iconClass && (
-              <i className={classnames('el-message__icon', iconClass)}></i>
+              <i className={classnames('tb-message__icon', iconClass)}></i>
             )}
             <p>{props.message}</p>
             {props.showClose && (
               // <div
-              //   className='el-message__closeBtn el-icon-close'
+              //   className='tb-message__closeBtn tb-icon-close'
               //   onClick={onClose}
               // ></div>
               <i
-                className={['el-message__closeBtn', `iconfont icon-close`].join(
+                className={['tb-message__closeBtn', `iconfont icon-close`].join(
                   ' '
                 )}
                 onClick={onClose}

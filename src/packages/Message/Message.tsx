@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:28
- * @LastEditTime: 2022-03-28 16:35:12
+ * @LastEditTime: 2022-03-28 16:52:24
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Message.tsx
@@ -15,13 +15,13 @@ import './index.scss'
 
 const Message: any = (props: any = {}, type?: string) => {
   const div = document.createElement('div')
-  const messageBox = document.getElementsByClassName('el-message-content')[0]
+  const messageBox = document.getElementsByClassName('tb-message-content')[0]
   if (messageBox) {
     messageBox.appendChild(div)
     document.body.appendChild(messageBox)
   } else {
     const messageBox = document.createElement('div')
-    messageBox.className = 'el-message-content'
+    messageBox.className = 'tb-message-content'
     messageBox.appendChild(div)
     document.body.appendChild(messageBox)
   }
@@ -41,7 +41,7 @@ const Message: any = (props: any = {}, type?: string) => {
     Object.assign(props, {
       willUnmount: () => {
         const messageBox =
-          document.getElementsByClassName('el-message-content')[0]
+          document.getElementsByClassName('tb-message-content')[0]
         ReactDOM.unmountComponentAtNode(div)
         messageBox.removeChild(div)
 
