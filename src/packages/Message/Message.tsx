@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:28
- * @LastEditTime: 2022-03-28 10:52:27
+ * @LastEditTime: 2022-03-28 16:35:12
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Message.tsx
@@ -10,9 +10,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import Toast from './Toast'
-import './index.css'
 
-export default function Message(props: any = {}, type: string) {
+import './index.scss'
+
+const Message: any = (props: any = {}, type?: string) => {
   const div = document.createElement('div')
   const messageBox = document.getElementsByClassName('el-message-content')[0]
   if (messageBox) {
@@ -55,9 +56,11 @@ export default function Message(props: any = {}, type: string) {
 }
 
 /* eslint-disable */
-;['success', 'warning', 'info', 'error'].forEach((type) => {
+;['success', 'warning', 'info', 'error', 'primary'].forEach((type) => {
   Message[type] = (options = {}) => {
     return Message(options, type)
   }
 })
 /* eslint-enable */
+
+export default Message

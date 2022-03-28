@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-21 10:35:31
- * @LastEditTime: 2022-03-28 12:45:52
+ * @LastEditTime: 2022-03-28 14:16:49
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/BreadcrumbItem/index.tsx
@@ -23,11 +23,11 @@ function BreadcrumbItem(props: any) {
   useEffect(() => {
     setSeparatorClass(props.breadcrumbProps.separatorClass)
     setSeparator(props.breadcrumbProps.separator)
-    link.current.addEventListener('click', () => {
+    link&&link.current.addEventListener('click', () => {
       if (!to) return
       to()
     })
-  }, []) // eslint-disable-line
+  }, [link]) // eslint-disable-line
   return (
     <span className='tb-breadcrumb__item'>
       <span

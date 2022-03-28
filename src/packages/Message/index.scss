@@ -1,0 +1,137 @@
+@import '../../style/var.css';
+@import '../../style/variables.scss';
+
+.el {
+  &-message {
+    box-shadow: var(--message-shadow);
+    min-width: 200px;
+    padding: var(--message-padding);
+    box-sizing: border-box;
+    border-radius: var(--border-radius-small);
+    position: relative;
+    // left: 50%;
+    // top: 20px;
+    // transform: translateX(-50%);
+    display: inline-block;
+    background-color: var(--color-white);
+    transition: opacity 0.3s, transform .4s;
+    overflow: hidden;
+
+    &__primary {
+      color: $color-primary;
+      background-color: $color-primary-light5;
+    }
+
+    &__success {
+      color: $color-success;
+      background-color: $color-success-light5;
+    }
+
+    &__info {
+      color: $color-info;
+      background-color: $color-info-light5;
+
+    }
+
+    &__warning {
+      color: $color-warning;
+      background-color: $color-warning-light5;
+
+    }
+
+    &__error {
+      color: $color-danger;
+      background-color: $color-danger-light5;
+
+    }
+
+    .is-with-icon {
+      margin-left: 0;
+    }
+
+    &__group {
+      margin-left: 38px;
+      position: relative;
+      height: 20px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+
+
+      & p {
+        font-size: var(--font-size-base);
+        margin: 0 34px 0 0;
+        white-space: nowrap;
+        color: var(--message-content-color);
+        text-align: justify;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      left: 25px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &__icon {
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    &__closeBtn {
+      position: absolute 3px 0 0 0;
+      cursor: pointer;
+      color: #b4bccc;
+      font-size: var(--font-size-base);
+
+      &:hover {
+        color: var(--message-close-hover-color);
+      }
+    }
+
+    & .el-icon-circle-check {
+      color: var(--message-success-color);
+    }
+
+    & .el-icon-circle-cross {
+      color: var(--message-danger-color);
+    }
+
+    & .el-icon-information {
+      color: var(--message-info-color);
+    }
+
+    & .el-icon-warning {
+      color: var(--message-warning-color);
+    }
+  }
+
+
+}
+
+.el-message-content {
+  position: fixed;
+  top: 24px;
+  width: 100%;
+
+  >div {
+    text-align: center;
+
+    .el-message {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.el-message-fade-leave,
+.el-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(0%, -100%);
+}
+
+.el-message-fade-enter,
+.el-message-fade-enter-active {
+  opacity: 0;
+  transform: translate(0%, -100%);
+}

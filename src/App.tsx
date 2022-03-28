@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-28 12:49:41
+ * @LastEditTime: 2022-03-28 16:41:02
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
+
 import React, { useEffect, useState } from 'react'
 
 import './index.css'
@@ -16,18 +17,17 @@ import {
   LoadingBar,
   Progress,
   Switch,
-  TimeLine,
-  TimeLineItem,
-  Icon
-} from './index'
-// import ''
-// import {  } from 'react-router-dom'
+  Alert,
+  Message
+} from './packages'
+// import 'tinkerbell-ui-react/dist/index.css'
+import { useNavigate } from 'react-router-dom'
 const App = (props: any) => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const c = React.useRef<any>(null)
-  // const to = (path: string) => {
-  //   navigate(path, { replace: true })
-  // }
+  const to = (path: string) => {
+    navigate(path, { replace: true })
+  }
   const [value, setValue] = useState(false)
   useEffect(() => {}, [])
   function format(percent: number) {
@@ -36,51 +36,47 @@ const App = (props: any) => {
     }
     return 'QAQ'
   }
+  function open() {
+    Message({
+      message: '恭喜你，这是一条成功消息',
+      type: 'success',
+      showClose: true,
+    })
+  }
+
+  function open2() {
+    Message({
+      message: '警告哦，这是一条警告消息',
+      type: 'warning',
+      showClose: true,
+    })
+  }
+
+  function open3() {
+    Message('这是一条消息提示')
+  }
+
+  function open4() {
+    Message.error('错了哦，这是一条错误消息')
+  }
   return (
     <div>
-      <TimeLine>
-        <TimeLineItem>
-          <p className='time'>2020年10月12日</p>
-          <p className='content'>项目构思，初始化项目</p>
-        </TimeLineItem>
-        <TimeLineItem>
-          <p className='time'>2021年4月21日</p>
-          <p className='content'>发布xxx，新增row、col组件</p>
-        </TimeLineItem>
-        <TimeLineItem>
-          <p className='time'>2021年7月24日</p>
-          <p className='content'>新增组件 radio、checkbox等</p>
-        </TimeLineItem>
-        <TimeLineItem>
-          <p className='time'>2021年8月23日</p>
-          <p className='content'>上线发布，tinkerbell-ui-react</p>
-        </TimeLineItem>
-      </TimeLine>
-      <br />
-      <TimeLine pending={true}>
-        <TimeLineItem color='primary'>版本1.0发布</TimeLineItem>
-        <TimeLineItem color='info'>版本1.1发布</TimeLineItem>
-        <TimeLineItem color='warning'>版本1.2发布</TimeLineItem>
-        <TimeLineItem color='danger'>版本1.3发布</TimeLineItem>
-        <TimeLineItem color='success'>版本1.5发布</TimeLineItem>
-        <TimeLineItem color='#ff30b5'>正式发布上线</TimeLineItem>
-      </TimeLine>
-      <br />
-      <TimeLine>
-        <TimeLineItem
-          color='success'
-          dot={<Icon name='icon-Daytimemode-fill' size='20'></Icon>}
-          dotTop='10px'
-        >
-          <span>正式版上线</span>
-        </TimeLineItem>
-        <TimeLineItem>发布2.0版本</TimeLineItem>
-        <TimeLineItem>发布1.5版本</TimeLineItem>
-        <TimeLineItem>发布1.0版本</TimeLineItem>
-      </TimeLine>
-      <br />
-      <br />
+      <Button plain={true} onClick={open}>
+        成功
+      </Button>
+      <Button plain={true} onClick={open2}>
+        警告
+      </Button>
+      <Button plain={true} onClick={open3}>
+        消息
+      </Button>
+      <Button plain={true} onClick={open4}>
+        错误
+      </Button>
 
+      <Alert type='success' showIcon>
+        123
+      </Alert>
       <div>
         <Switch
           value={value}
@@ -143,7 +139,7 @@ const App = (props: any) => {
       </div>
       <Button
         onClick={() => {
-          LoadingBar.start()
+          Message('这是一条消息提示')
         }}
       >
         开始
@@ -166,7 +162,7 @@ const App = (props: any) => {
       <Breadcrumb separator='/' separatorClass='icon-arrow-right'>
         <BreadcrumbItem
           to={() => {
-            // to('/about')
+            to('/about')
           }}
         >
           首页

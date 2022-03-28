@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-03-28 12:44:52
+ * @LastEditTime: 2022-03-28 16:42:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
  */
-/* @flow */
-
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import Animate from 'rc-animate'
 import Icon from '../Icon'
@@ -23,20 +22,27 @@ interface Iprops {
 
 function Toast(props: any) {
   const { iconClass, customClass }: Iprops = props
+  const [typeClass, setTypeClass] = useState('')
   const [visible, setVisible] = useState(false)
   let timeout: NodeJS.Timeout
+
+  useEffect(() => {
+    props.type && setTypeClass(`el-message__${props.type}`)
+  }, [props.type]) // eslint-disable-line
+
   useEffect(() => {
     setVisible(true)
     startTimer()
     return () => {
       stopTimer()
     }
-  },[]) // eslint-disable-line
+  }, []) // eslint-disable-line
+
   function onClose() {
     stopTimer()
-
     setVisible(false)
   }
+
   function startTimer() {
     if (props.duration > 0) {
       timeout = setTimeout(() => {
@@ -52,13 +58,13 @@ function Toast(props: any) {
     <Animate
       component=''
       transitionName='el-message-fade'
-      onAfterLeave={() => {
+      onLeave={() => {
         props.willUnmount()
       }}
     >
       {visible ? (
         <div
-          className={classnames('el-message', customClass)}
+          className={classnames('el-message', customClass, typeClass)}
           onMouseEnter={stopTimer}
           onMouseLeave={startTimer}
         >
@@ -77,10 +83,16 @@ function Toast(props: any) {
             )}
             <p>{props.message}</p>
             {props.showClose && (
-              <div
-                className='el-message__closeBtn el-icon-close'
+              // <div
+              //   className='el-message__closeBtn el-icon-close'
+              //   onClick={onClose}
+              // ></div>
+              <i
+                className={['el-message__closeBtn', `iconfont icon-close`].join(
+                  ' '
+                )}
                 onClick={onClose}
-              ></div>
+              ></i>
             )}
           </div>
         </div>
@@ -90,7 +102,7 @@ function Toast(props: any) {
 }
 
 Toast.propTypes = {
-  type: PropTypes.oneOf(['success', 'warning', 'info', 'error']),
+  type: PropTypes.oneOf(['success', 'warning', 'info', 'error', 'primary']),
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
     .isRequired,
   duration: PropTypes.number,
