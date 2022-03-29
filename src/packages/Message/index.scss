@@ -112,8 +112,9 @@
 
 .tb-message-content {
   position: fixed;
+  left: 50%;
   top: 24px;
-  width: 100%;
+  transform: translate(-50%);
 
   >div {
     text-align: center;
