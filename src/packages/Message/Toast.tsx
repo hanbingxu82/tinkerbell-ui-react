@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-03-29 14:17:42
+ * @LastEditTime: 2022-03-30 11:45:19
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
  */
 /* eslint-disable */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Animate from 'rc-animate'
 import Icon from '../Icon'
 import icons from './Assets'
@@ -24,8 +24,7 @@ function Toast(props: any) {
   const { iconClass, customClass }: Iprops = props
   const [typeClass, setTypeClass] = useState('')
   const [visible, setVisible] = useState(false)
-  let timeout: NodeJS.Timeout
-
+  const timeout: any = useRef(null)
   useEffect(() => {
     props.type && setTypeClass(`tb-message__${props.type}`)
   }, [props.type]) // eslint-disable-line
@@ -45,14 +44,14 @@ function Toast(props: any) {
 
   function startTimer() {
     if (props.duration > 0) {
-      timeout = setTimeout(() => {
+      timeout.current = setTimeout(() => {
         onClose()
       }, props.duration)
     }
   }
 
   function stopTimer() {
-    clearTimeout(timeout)
+    clearTimeout(timeout.current)
   }
   return (
     <Animate
