@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-29 09:52:58
- * @LastEditTime: 2022-03-30 10:09:03
+ * @LastEditTime: 2022-03-30 13:51:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Notification/NotificationCenter.tsx
@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom'
 
 import Notification from './Notification'
 
-const className = '.el-notification'
+// const className = '.el-notification'
 
 export default function NotificationCenter(props: any, type?: string) {
   const div = document.createElement('div')
@@ -42,15 +42,6 @@ export default function NotificationCenter(props: any, type?: string) {
     props.offset = 0
   }
 
-  const instances = document.querySelectorAll(className)
-
-  const lastInstance: any = instances[instances.length - 1]
-
-  props.top =
-    (lastInstance
-      ? parseInt(lastInstance.style.top) + lastInstance.offsetHeight
-      : props.offset) + 16
-
   const element = React.createElement(
     Notification,
     Object.assign({}, props, {
@@ -75,7 +66,7 @@ export default function NotificationCenter(props: any, type?: string) {
 }
 
 /* eslint-disable */
-;['success', 'warning', 'info', 'error'].forEach((type) => {
+;['success', 'warning', 'info', 'error', 'primary'].forEach((type) => {
   NotificationCenter[type] = (options = {}) => NotificationCenter(options, type)
 })
 /* eslint-enable */

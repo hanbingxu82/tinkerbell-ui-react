@@ -60,20 +60,24 @@
       }
     }
 
-    & .el-icon-circle-check {
-      color: var(--notification-success-color);
+    .is-success {
+      color: $color-success;
     }
 
-    & .el-icon-circle-cross {
-      color: var(--notification-danger-color);
+    .is-info {
+      color: $color-info;
     }
 
-    & .el-icon-information {
-      color: var(--notification-info-color);
+    .is-warning {
+      color: $color-warning;
     }
 
-    & .el-icon-warning {
-      color: var(--notification-warning-color);
+    .is-primary {
+      color: $color-primary;
+    }
+
+    .is-error {
+      color: $color-danger;
     }
   }
 }
