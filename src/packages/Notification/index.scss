@@ -1,7 +1,7 @@
 @import '../../style/var.css';
 @import '../../style/variables.scss';
 
-.el {
+.tb {
 
   &-notification {
     width: var(--notification-width);
@@ -82,17 +82,17 @@
   }
 }
 
-.el-notification-fade-enter {
+.tb-notification-fade-enter {
   transform: translateX(100%);
   right: 0;
 }
 
-.el-notification-fade-leave {
+.tb-notification-fade-leave {
   opacity: 0;
 }
 
 
-.el-notification-content {
+.tb-notification-content {
   position: fixed;
   top: 16px;
   right: 0;
@@ -104,7 +104,7 @@
     display: flex;
     justify-content: flex-end;
 
-    .el-notification {
+    .tb-notification {
       margin-bottom: 10px;
     }
   }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-29 09:53:41
- * @LastEditTime: 2022-03-30 13:51:46
+ * @LastEditTime: 2022-03-30 14:07:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Notification/Notification.tsx
@@ -80,14 +80,14 @@ const Notification: any = (props: any) => {
     <Animate
       unmountOnExit
       component=''
-      transitionName='el-notification-fade'
+      transitionName='tb-notification-fade'
       onLeave={() => {
         willUnmount()
       }}
     >
       {visible ? (
         <div
-          className='el-notification'
+          className='tb-notification'
           style={{
             marginTop: offset,
             zIndex: 9999
@@ -99,21 +99,21 @@ const Notification: any = (props: any) => {
           {type && (
             <i
               className={classnames(
-                'el-notification__icon',
+                'tb-notification__icon',
                 typeClass(),
                 iconClass
               )}
             />
           )}
           <div
-            className={classnames('el-notification__group', {
+            className={classnames('tb-notification__group', {
               'is-with-icon': typeClass() || iconClass
             })}
           >
-            <h2 className='el-notification__title'>{title}</h2>
-            <div className='el-notification__content'>{message}</div>
+            <h2 className='tb-notification__title'>{title}</h2>
+            <div className='tb-notification__content'>{message}</div>
             <div
-              className='el-notification__closeBtn iconfont icon-close'
+              className='tb-notification__closeBtn iconfont icon-close'
               onClick={onClose}
             />
           </div>

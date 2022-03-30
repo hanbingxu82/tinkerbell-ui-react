@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-30 13:49:45
+ * @LastEditTime: 2022-03-30 14:11:45
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -38,21 +38,17 @@ const App = (props: any) => {
     return 'QAQ'
   }
   function open() {
-    // Notification({
-    //   title: '标题名称',
-    //   message:
-    //     '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
-    // })
+    Notification({
+      title: '标题名称',
+      message:
+        '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+    })
     // Notification({
     //   title: '提示',
     //   message: '这是一条不会自动关闭的消息',
     //   duration: 0
     // })
-    Notification({
-      title: '成功',
-      message: '这是一条成功的提示消息',
-      offset: 100
-    })
+
   }
 
   function open2() {
