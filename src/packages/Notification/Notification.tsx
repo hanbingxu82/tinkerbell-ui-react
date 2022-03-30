@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-29 09:53:41
- * @LastEditTime: 2022-03-29 18:39:27
+ * @LastEditTime: 2022-03-30 10:20:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Notification/Notification.tsx
@@ -22,11 +22,28 @@ const typeMap = {
 }
 
 const Notification: any = (props: any) => {
+  const isOne = useRef(true)
+  const {
+    // onClose = () => false,
+    willUnmount,
+    // duration,
+    // top,
+    type,
+    iconClass,
+    title,
+    message
+  } = props
+  const timeout: any = useRef(null)
   const [visible, setVisible] = useState(false)
-  const ref = useRef<any>({})
-  let timeout: NodeJS.Timeout
+  // 判断触发父元素删除行为
+  //   useEffect(() => {
+  //     if (!isOne.current) {
+  //       !visible && willUnmount()
+  //     }
+  //   }, [visible]) // eslint-disable-line
 
   useEffect(() => {
+    isOne.current = false
     setVisible(true)
     startTimer()
     return () => {
@@ -45,36 +62,26 @@ const Notification: any = (props: any) => {
   function startTimer() {
     const { duration } = props
     if (duration) {
-      timeout = setTimeout(() => onClose(), duration)
+      timeout.current = setTimeout(() => onClose(), duration)
     }
   }
 
   function stopTimer() {
-    clearTimeout(timeout)
+    clearTimeout(timeout.current)
   }
 
   function typeClass(): string {
     const { type } = props
     return type && typeMap[type] ? `el-icon-${typeMap[type]}` : ''
   }
-  const {
-    // onClose = () => false,
-    willUnmount,
-    // duration,
-    // top,
-    type,
-    iconClass,
-    title,
-    message
-  } = props
+
   return (
     <Animate
       unmountOnExit
       component=''
       transitionName='el-notification-fade'
       onLeave={() => {
-        willUnmount(ref.current.clientHeight, parseInt(ref.current.top))
-        onClose()
+        willUnmount()
       }}
     >
       {visible ? (
@@ -105,7 +112,7 @@ const Notification: any = (props: any) => {
             <h2 className='el-notification__title'>{title}</h2>
             <div className='el-notification__content'>{message}</div>
             <div
-              className='el-notification__closeBtn el-icon-close'
+              className='el-notification__closeBtn iconfont icon-close'
               onClick={onClose}
             />
           </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-29 09:52:58
- * @LastEditTime: 2022-03-29 18:25:30
+ * @LastEditTime: 2022-03-30 10:09:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Notification/NotificationCenter.tsx
@@ -57,9 +57,11 @@ export default function NotificationCenter(props: any, type?: string) {
       willUnmount() {
         // setTimeout(() => document.body.removeChild(div))
         requestAnimationFrame(() => {
-          const notification =
-            document.getElementsByClassName('el-notification-content')[0]
+          const notification = document.getElementsByClassName(
+            'el-notification-content'
+          )[0]
           ReactDOM.unmountComponentAtNode(div)
+          console.log(div)
           notification.removeChild(div)
           if (props.onClose instanceof Function) {
             props.onClose()
