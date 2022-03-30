@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-28 16:41:02
+ * @LastEditTime: 2022-03-29 11:32:19
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -18,7 +18,8 @@ import {
   Progress,
   Switch,
   Alert,
-  Message
+  Message,
+  Notification
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -37,10 +38,10 @@ const App = (props: any) => {
     return 'QAQ'
   }
   function open() {
-    Message({
-      message: '恭喜你，这是一条成功消息',
-      type: 'success',
-      showClose: true,
+    Notification({
+      title: '标题名称',
+      message:
+        '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
     })
   }
 
@@ -48,7 +49,7 @@ const App = (props: any) => {
     Message({
       message: '警告哦，这是一条警告消息',
       type: 'warning',
-      showClose: true,
+      showClose: true
     })
   }
 

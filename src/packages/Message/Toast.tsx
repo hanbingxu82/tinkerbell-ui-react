@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-03-28 17:02:30
+ * @LastEditTime: 2022-03-29 14:17:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
@@ -31,7 +31,6 @@ function Toast(props: any) {
   }, [props.type]) // eslint-disable-line
 
   useEffect(() => {
-    console.log(Animate)
     setVisible(true)
     startTimer()
     return () => {
