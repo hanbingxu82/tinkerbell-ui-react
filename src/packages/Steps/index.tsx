@@ -63,7 +63,7 @@ const Steps = (props: {
     return status
   }
   return (
-    <div className='el-steps'>
+    <div className='tb-steps'>
       {React.Children.map(children, (child, index) => {
         const computedSpace = space ? `${space}px` : `${100 / children.length}%`
         const style =

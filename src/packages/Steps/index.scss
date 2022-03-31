@@ -1,11 +1,11 @@
 @import '../../style/var.css';
 @import '../../style/variables.scss';
 
-.el {
+.tb {
   &-steps {
     font-size: 0;
 
-    > :last-child .el-step__line {
+    > :last-child .tb-step__line {
       display: none;
     }
     .is-horizontal {

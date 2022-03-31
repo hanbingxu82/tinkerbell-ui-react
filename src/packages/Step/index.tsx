@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-30 15:00:38
- * @LastEditTime: 2022-03-30 17:07:00
+ * @LastEditTime: 2022-03-31 09:06:15
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Step/index.tsx
@@ -34,20 +34,20 @@ const Step = (props: any) => {
   )
 
   return (
-    <div style={style} className={classnames('el-step', directionClass)}>
+    <div style={style} className={classnames('tb-step', directionClass)}>
       <div
-        className={classnames('el-step__head', statusClass, {
+        className={classnames('tb-step__head', statusClass, {
           'is-text': !icon
         })}
       >
         <div
-          className={classnames('el-step__line', directionClass, {
+          className={classnames('tb-step__line', directionClass, {
             'is-icon': icon
           })}
         >
-          <i className='el-step__line-inner' style={lineStyle} />
+          <i className='tb-step__line-inner' style={lineStyle} />
         </div>
-        <span className='el-step__icon'>
+        <span className='tb-step__icon'>
           {status !== 'success' && status !== 'error' ? (
             iconNode
           ) : (
@@ -60,9 +60,9 @@ const Step = (props: any) => {
           )}
         </span>
       </div>
-      <div className='el-step__main'>
-        <div className={classnames('el-step__title', statusClass)}>{title}</div>
-        <div className={classnames('el-step__description', statusClass)}>
+      <div className='tb-step__main'>
+        <div className={classnames('tb-step__title', statusClass)}>{title}</div>
+        <div className={classnames('tb-step__description', statusClass)}>
           {description}
         </div>
       </div>
