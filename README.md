@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-30 14:19:02
+ * @LastEditTime: 2022-03-31 09:15:04
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -98,7 +98,9 @@ class Example extends Component {
 
 #### 0.3.6 修复完善 Message 弹出框组件、及对应 eslint 文本格式化等
 
-#### 0.3.7 完成 Notification 通知弹出框组件
+#### 0.3.7 完成 Notification 通知弹窗组件
+
+#### 0.3.8 完成 Steps、Step 步骤条组件
 
 ## License
 
