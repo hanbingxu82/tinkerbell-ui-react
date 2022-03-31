@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-30 14:11:45
+ * @LastEditTime: 2022-03-30 17:21:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -19,7 +19,9 @@ import {
   Switch,
   Alert,
   Message,
-  Notification
+  Notification,
+  Steps,
+  Step
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -30,6 +32,7 @@ const App = (props: any) => {
     navigate(path, { replace: true })
   }
   const [value, setValue] = useState(false)
+  const [active, setActive] = useState(0)
   useEffect(() => {}, [])
   function format(percent: number) {
     if (percent === 100) {
@@ -48,9 +51,14 @@ const App = (props: any) => {
     //   message: '这是一条不会自动关闭的消息',
     //   duration: 0
     // })
-
   }
-
+  function next() {
+    let activeNum = active + 1
+    if (activeNum > 3) {
+      activeNum = 0
+    }
+    setActive(activeNum)
+  }
   function open2() {
     Message({
       message: '警告哦，这是一条警告消息',
@@ -68,6 +76,36 @@ const App = (props: any) => {
   }
   return (
     <div>
+      <Steps space={200} active={active} finishStatus='success'>
+        <Step title='步骤 1'></Step>
+        <Step title='步骤 2'></Step>
+        <Step title='步骤 3'></Step>
+      </Steps>
+
+      <Button onClick={() => next()}>下一步</Button>
+      <br />
+      <Steps space={100} active={1} finishStatus="success">
+      <Steps.Step title="已完成"></Steps.Step>
+      <Steps.Step title="进行中"></Steps.Step>
+      <Steps.Step title="步骤 3"></Steps.Step>
+    </Steps>
+    <Steps space={200} active={1}>
+      <Steps.Step title="步骤 1" description="这是一段很长很长很长的描述性文字"></Steps.Step>
+      <Steps.Step title="步骤 2" description="这是一段很长很长很长的描述性文字"></Steps.Step>
+      <Steps.Step title="步骤 3" description="这是一段很长很长很长的描述性文字"></Steps.Step>
+    </Steps>
+
+    <Steps space={100} active={1}>
+      <Steps.Step title="步骤 1" icon="icon-rmb1"></Steps.Step>
+      <Steps.Step title="步骤 2" icon="icon-feed-logo-fill"></Steps.Step>
+      <Steps.Step title="步骤 3" icon="icon-home-fill"></Steps.Step>
+    </Steps>
+
+    <Steps space={100} direction="vertical" active={1}>
+      <Steps.Step title="步骤 1"></Steps.Step>
+      <Steps.Step title="步骤 2"></Steps.Step>
+      <Steps.Step title="步骤 3"></Steps.Step>
+    </Steps>
       <Button plain={true} onClick={open}>
         成功
       </Button>

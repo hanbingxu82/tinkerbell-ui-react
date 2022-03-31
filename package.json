@@ -74,6 +74,7 @@
   "dependencies": {
     "build": "^0.1.4",
     "classnames": "^2.3.1",
+    "element-theme-default": "^1.4.13",
     "node-sass": "^4.14.1",
     "prop-types": "^15.8.1",
     "rc-animate": "^3.1.1",

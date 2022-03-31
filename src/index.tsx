@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-29 18:18:34
+ * @LastEditTime: 2022-03-30 15:57:33
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -10,7 +10,6 @@
 import ReactDOM from 'react-dom'
 import App from './App'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
-
 
 import * as React from 'react'
 import './index.css'
@@ -46,6 +45,8 @@ import TimeLine from './packages/TimeLine'
 import TimeLineItem from './packages/TimeLineItem'
 import Message from './packages/Message'
 import Notification from './packages/Notification'
+import Step from './packages/Step'
+import Steps from './packages/Steps'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './packages/Carousel'
@@ -100,15 +101,10 @@ export {
   TimeLine,
   TimeLineItem,
   Message,
-  Notification
+  Notification,
+  Steps,
+  Step
 }
-
-
-
-
-
-
-
 
 const About: React.FC<any> = () => {
   let navigate = useNavigate()
@@ -139,8 +135,7 @@ ReactDOM.render(
       <Route path='about' element={<About />} />
       <Route path='inbox' element={<Inbox />}></Route>
     </Routes>
-  </BrowserRouter>
+  </BrowserRouter>,
   // </React.StrictMode>
-  ,
   document.getElementById('root')
 )

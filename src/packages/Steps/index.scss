@@ -1,0 +1,19 @@
+@import '../../style/var.css';
+@import '../../style/variables.scss';
+
+.el {
+  &-steps {
+    font-size: 0;
+
+    > :last-child .el-step__line {
+      display: none;
+    }
+    .is-horizontal {
+      white-space: nowrap;
+
+      .is-center {
+        text-align: center;
+      }
+    }
+  }
+}
