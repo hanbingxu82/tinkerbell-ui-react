@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-31 09:44:49
- * @LastEditTime: 2022-03-31 15:16:09
+ * @LastEditTime: 2022-04-01 10:11:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Upload/Upload.tsx
@@ -87,7 +87,7 @@ const Upload = (props: any) => {
       fileListRef.current = fileListArr
       //   setFileList(fileListArr)
     }
-  }, [])
+  }, [])// eslint-disable-line
 
   // 点击上传部分触发上传勾选文件事件
   function handleClick() {

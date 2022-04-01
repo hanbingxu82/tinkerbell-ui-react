@@ -87,7 +87,7 @@ export default function upload(option: {
   if (option.data) {
     // 如果有额外属性  遍历 填充进去formData中 key与值
     Object.keys(option.data).map((key) => {
-      formData.append(key, option.data[key])
+      return formData.append(key, option.data[key])
     })
   }
   // 然后将对应的自定义name值  与文件流传递进去
