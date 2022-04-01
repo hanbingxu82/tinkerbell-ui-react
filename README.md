@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-31 09:15:04
+ * @LastEditTime: 2022-04-01 10:00:48
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -101,6 +101,8 @@ class Example extends Component {
 #### 0.3.7 完成 Notification 通知弹窗组件
 
 #### 0.3.8 完成 Steps、Step 步骤条组件
+
+#### 0.3.9 新增完成 Upload 上传组件（内附带拖拽功能）
 
 ## License
 
