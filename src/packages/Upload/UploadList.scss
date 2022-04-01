@@ -1,0 +1,9 @@
+.fade-progress-leave,
+.fade-progress-leave-active {
+  opacity: 0;
+}
+
+.fade-progress-enter,
+.fade-progress-enter-active {
+  transition: all 0.2s cubic-bezier(0.55, 0, 0.1, 1);
+}

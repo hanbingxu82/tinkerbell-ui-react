@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-30 17:21:42
+ * @LastEditTime: 2022-03-31 15:06:07
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -21,7 +21,8 @@ import {
   Message,
   Notification,
   Steps,
-  Step
+  Step,
+  Upload
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -31,6 +32,8 @@ const App = (props: any) => {
   const to = (path: string) => {
     navigate(path, { replace: true })
   }
+  const [file, setFile] = useState<any>(null)
+  const [loadingStatus, setLoadingStatus] = useState(false)
   const [value, setValue] = useState(false)
   const [active, setActive] = useState(0)
   useEffect(() => {}, [])
@@ -39,6 +42,18 @@ const App = (props: any) => {
       return '^_^'
     }
     return 'QAQ'
+  }
+  function handleUpload(file: any) {
+    setFile(file)
+    return false
+  }
+  function upload() {
+    setLoadingStatus(true)
+    setTimeout(() => {
+      setFile(null)
+      setLoadingStatus(false)
+      Message.success('上传成功！')
+    }, 1500)
   }
   function open() {
     Notification({
@@ -76,6 +91,55 @@ const App = (props: any) => {
   }
   return (
     <div>
+      <div style={{ width: 400 }}>
+        <Upload
+          action='//jsonplaceholder.typicode.com/posts/'
+          multiple
+          type='drag'
+        >
+          <div
+            style={{
+              padding: '20px 0',
+              border: '1px dashed #eee',
+              cursor: 'pointer'
+            }}
+          >
+            <p>
+              <i
+                className='iconfont icon-upload'
+                style={{ color: '#3399ff', fontSize: '52' }}
+              ></i>
+            </p>
+            <p>Click or drag files here to upload</p>
+          </div>
+        </Upload>
+      </div>
+      <br />
+      <div style={{ width: 400 }}>
+        <Upload action='//jsonplaceholder.typicode.com/posts/' multiple>
+          <Button icon='icon-upload' plain type='primary'>
+            点击上传
+          </Button>
+        </Upload>
+      </div>
+      <br />
+      <div style={{ width: 400 }}>
+        <Upload
+          action='//jsonplaceholder.typicode.com/posts/'
+          beforeUpload={handleUpload}
+        ></Upload>
+        {file !== null ? (
+          <div>
+            Upload file: {file.name}
+            <Button type='text' onClick={upload} loading={loadingStatus}>
+              {loadingStatus ? 'Uploading' : 'Click to upload'}
+            </Button>
+          </div>
+        ) : null}
+      </div>
+      <br />
+
+      <br />
       <Steps space={200} active={active} finishStatus='success'>
         <Step title='步骤 1'></Step>
         <Step title='步骤 2'></Step>
@@ -84,28 +148,37 @@ const App = (props: any) => {
 
       <Button onClick={() => next()}>下一步</Button>
       <br />
-      <Steps space={100} active={1} finishStatus="success">
-      <Steps.Step title="已完成"></Steps.Step>
-      <Steps.Step title="进行中"></Steps.Step>
-      <Steps.Step title="步骤 3"></Steps.Step>
-    </Steps>
-    <Steps space={200} active={1}>
-      <Steps.Step title="步骤 1" description="这是一段很长很长很长的描述性文字"></Steps.Step>
-      <Steps.Step title="步骤 2" description="这是一段很长很长很长的描述性文字"></Steps.Step>
-      <Steps.Step title="步骤 3" description="这是一段很长很长很长的描述性文字"></Steps.Step>
-    </Steps>
+      <Steps space={100} active={1} finishStatus='success'>
+        <Steps.Step title='已完成'></Steps.Step>
+        <Steps.Step title='进行中'></Steps.Step>
+        <Steps.Step title='步骤 3'></Steps.Step>
+      </Steps>
+      <Steps space={200} active={1}>
+        <Steps.Step
+          title='步骤 1'
+          description='这是一段很长很长很长的描述性文字'
+        ></Steps.Step>
+        <Steps.Step
+          title='步骤 2'
+          description='这是一段很长很长很长的描述性文字'
+        ></Steps.Step>
+        <Steps.Step
+          title='步骤 3'
+          description='这是一段很长很长很长的描述性文字'
+        ></Steps.Step>
+      </Steps>
 
-    <Steps space={100} active={1}>
-      <Steps.Step title="步骤 1" icon="icon-rmb1"></Steps.Step>
-      <Steps.Step title="步骤 2" icon="icon-feed-logo-fill"></Steps.Step>
-      <Steps.Step title="步骤 3" icon="icon-home-fill"></Steps.Step>
-    </Steps>
+      <Steps space={100} active={1}>
+        <Steps.Step title='步骤 1' icon='icon-rmb1'></Steps.Step>
+        <Steps.Step title='步骤 2' icon='icon-feed-logo-fill'></Steps.Step>
+        <Steps.Step title='步骤 3' icon='icon-home-fill'></Steps.Step>
+      </Steps>
 
-    <Steps space={100} direction="vertical" active={1}>
-      <Steps.Step title="步骤 1"></Steps.Step>
-      <Steps.Step title="步骤 2"></Steps.Step>
-      <Steps.Step title="步骤 3"></Steps.Step>
-    </Steps>
+      <Steps space={100} direction='vertical' active={1}>
+        <Steps.Step title='步骤 1'></Steps.Step>
+        <Steps.Step title='步骤 2'></Steps.Step>
+        <Steps.Step title='步骤 3'></Steps.Step>
+      </Steps>
       <Button plain={true} onClick={open}>
         成功
       </Button>

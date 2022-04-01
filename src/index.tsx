@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-03-30 15:57:33
+ * @LastEditTime: 2022-03-31 11:12:37
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -47,6 +47,7 @@ import Message from './packages/Message'
 import Notification from './packages/Notification'
 import Step from './packages/Step'
 import Steps from './packages/Steps'
+import Upload from './packages/Upload/Upload'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './packages/Carousel'
@@ -103,7 +104,8 @@ export {
   Message,
   Notification,
   Steps,
-  Step
+  Step,
+  Upload
 }
 
 const About: React.FC<any> = () => {
