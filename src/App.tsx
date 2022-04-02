@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-03-31 15:06:07
+ * @LastEditTime: 2022-04-02 13:58:22
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -22,7 +22,8 @@ import {
   Notification,
   Steps,
   Step,
-  Upload
+  Upload,
+  Tabs
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -91,6 +92,46 @@ const App = (props: any) => {
   }
   return (
     <div>
+      <Tabs
+        activeName='2'
+        onTabClick={(tab: any) => console.log(tab.props.name)}
+      >
+        <Tabs.Pane label='用户管理' name='1'>
+          用户管理
+        </Tabs.Pane>
+        <Tabs.Pane label='配置管理' name='2'>
+          配置管理
+        </Tabs.Pane>
+        <Tabs.Pane label='角色管理' name='3'>
+          角色管理
+        </Tabs.Pane>
+        <Tabs.Pane label='定时补偿任务' name='4'>
+          定时补偿任务
+        </Tabs.Pane>
+      </Tabs>
+      <br />
+
+      <Tabs type='card' value='1'>
+        <Tabs.Pane label='用户管理' name='1'>
+          用户管理
+        </Tabs.Pane>
+        <Tabs.Pane label='配置管理' name='2'>
+          配置管理
+        </Tabs.Pane>
+        <Tabs.Pane label='角色管理' name='3'>
+          角色管理
+        </Tabs.Pane>
+        <Tabs.Pane label='定时补偿任务' name='4'>
+          定时补偿任务
+        </Tabs.Pane>
+      </Tabs>
+      <br/>
+      <Tabs type="card" closable activeName="1" onTabRemove={ (tab:any) => console.log(tab.props.name) }>
+      <Tabs.Pane label="用户管理" name="1">用户管理</Tabs.Pane>
+      <Tabs.Pane label="配置管理" name="2">配置管理</Tabs.Pane>
+      <Tabs.Pane label="角色管理" name="3">角色管理</Tabs.Pane>
+      <Tabs.Pane label="定时补偿任务" name="4">定时补偿任务</Tabs.Pane>
+    </Tabs>
       <div style={{ width: 400 }}>
         <Upload
           action='//jsonplaceholder.typicode.com/posts/'
