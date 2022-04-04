@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-02 13:58:22
+ * @LastEditTime: 2022-04-04 10:48:43
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -23,7 +23,8 @@ import {
   Steps,
   Step,
   Upload,
-  Tabs
+  Tabs,
+  Icon
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -37,7 +38,59 @@ const App = (props: any) => {
   const [loadingStatus, setLoadingStatus] = useState(false)
   const [value, setValue] = useState(false)
   const [active, setActive] = useState(0)
+  const [tabs, setTabs] = useState([
+    {
+      title: 'Tab 1',
+      name: 'Tab 1',
+      content: 'Tab 1 content'
+    },
+    {
+      title: 'Tab 2',
+      name: 'Tab 2',
+      content: 'Tab 2 content'
+    }
+  ])
+  const [tabIndex, setTabIndex] = useState(2)
+
   useEffect(() => {}, [])
+
+  function addTab() {
+    const index = tabIndex + 1
+
+    tabs.push({
+      title: 'new Tab',
+      name: 'Tab ' + index,
+      content: 'new Tab content'
+    })
+    setTabs(tabs)
+    setTabIndex(index)
+  }
+
+  function removeTab(tab: any) {
+    tabs.splice(tab.key.replace(/^\.\$/, ''), 1)
+    setTabs(tabs)
+  }
+  function editTab(
+    action: string,
+    tab: { key: { replace: (arg0: RegExp, arg1: string) => number } }
+  ) {
+    if (action === 'add') {
+      const index = tabIndex + 1
+
+      tabs.push({
+        title: 'new Tab',
+        name: 'Tab ' + index,
+        content: 'new Tab content'
+      })
+      setTabs(tabs)
+      setTabIndex(index)
+    }
+
+    if (action === 'remove') {
+      tabs.splice(tab.key.replace(/^\.\$/, ''), 1)
+      setTabs(tabs)
+    }
+  }
   function format(percent: number) {
     if (percent === 100) {
       return '^_^'
@@ -92,6 +145,60 @@ const App = (props: any) => {
   }
   return (
     <div>
+      <div>
+        <Tabs
+          type='card'
+          value='Tab 2'
+          editable
+          onTabEdit={(action: any, tab: any) => editTab(action, tab)}
+        >
+          {tabs.map((item, index) => {
+            return (
+              <Tabs.Pane
+                key={index}
+                closable
+                label={item.title}
+                name={item.name}
+              >
+                {item.content}
+              </Tabs.Pane>
+            )
+          })}
+        </Tabs>
+        <br />
+
+        <div style={{ marginBottom: '20px' }}>
+          <Button size='small' onClick={() => addTab()}>
+            add tab
+          </Button>
+        </div>
+        <Tabs
+          type='card'
+          value='Tab 2'
+          onTabRemove={(tab: any) => removeTab(tab)}
+        >
+          {tabs.map((item, index) => {
+            return (
+              <Tabs.Pane
+                key={index}
+                closable
+                label={item.title}
+                name={item.name}
+              >
+                {item.content}
+              </Tabs.Pane>
+            )
+          })}
+        </Tabs>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       <Tabs
         activeName='2'
         onTabClick={(tab: any) => console.log(tab.props.name)}
@@ -125,13 +232,64 @@ const App = (props: any) => {
           定时补偿任务
         </Tabs.Pane>
       </Tabs>
-      <br/>
-      <Tabs type="card" closable activeName="1" onTabRemove={ (tab:any) => console.log(tab.props.name) }>
-      <Tabs.Pane label="用户管理" name="1">用户管理</Tabs.Pane>
-      <Tabs.Pane label="配置管理" name="2">配置管理</Tabs.Pane>
-      <Tabs.Pane label="角色管理" name="3">角色管理</Tabs.Pane>
-      <Tabs.Pane label="定时补偿任务" name="4">定时补偿任务</Tabs.Pane>
-    </Tabs>
+      <br />
+
+      <Tabs
+        type='card'
+        closable
+        activeName='1'
+        onTabRemove={(tab: any) => console.log(tab.props.name)}
+      >
+        <Tabs.Pane label='用户管理' name='1'>
+          用户管理
+        </Tabs.Pane>
+        <Tabs.Pane label='配置管理' name='2'>
+          配置管理
+        </Tabs.Pane>
+        <Tabs.Pane label='角色管理' name='3'>
+          角色管理
+        </Tabs.Pane>
+        <Tabs.Pane label='定时补偿任务' name='4'>
+          定时补偿任务
+        </Tabs.Pane>
+      </Tabs>
+      <br />
+      <Tabs type='border-card' activeName='1'>
+        <Tabs.Pane label='用户管理' name='1'>
+          用户管理
+        </Tabs.Pane>
+        <Tabs.Pane label='配置管理' name='2'>
+          配置管理
+        </Tabs.Pane>
+        <Tabs.Pane label='角色管理' name='3'>
+          角色管理
+        </Tabs.Pane>
+        <Tabs.Pane label='定时补偿任务' name='4'>
+          定时补偿任务
+        </Tabs.Pane>
+      </Tabs>
+      <br />
+      <Tabs type='border-card' activeName='1'>
+        <Tabs.Pane
+          label={
+            <span>
+              <Icon name='icon-credit-level-fill' /> 用户管理
+            </span>
+          }
+          name='1'
+        >
+          用户管理
+        </Tabs.Pane>
+        <Tabs.Pane label='配置管理' name='2'>
+          配置管理
+        </Tabs.Pane>
+        <Tabs.Pane label='角色管理' name='3'>
+          角色管理
+        </Tabs.Pane>
+        <Tabs.Pane label='定时补偿任务' name='4'>
+          定时补偿任务
+        </Tabs.Pane>
+      </Tabs>
       <div style={{ width: 400 }}>
         <Upload
           action='//jsonplaceholder.typicode.com/posts/'

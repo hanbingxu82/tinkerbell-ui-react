@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 10:38:23
- * @LastEditTime: 2022-04-01 15:02:15
+ * @LastEditTime: 2022-04-04 10:58:25
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tabs/index.tsx
@@ -48,10 +48,8 @@ const Tabs: any = (props: Props) => {
   let tabs: any = useRef([])
   let navScrollRef = useRef<any>(null)
   let navRef = useRef<any>(null)
-  children = React.Children.toArray(children)
-
   const [state, setState] = useState<State>({
-    children: children,
+    children: React.Children.toArray(children),
     currentName: value || activeName || children[0].props.name,
     barStyle: {},
     navStyle: {
@@ -131,30 +129,30 @@ const Tabs: any = (props: Props) => {
     index: number,
     e: SyntheticEvent<any>
   ): void {
-    const { children, currentName } = state
     const { onTabRemove, onTabEdit } = props
 
     e.stopPropagation()
+    let newCurrentName = null
+    if (state.children[index].props.name === state.currentName) {
+      const nextChild = state.children[index + 1]
+      const prevChild = state.children[index - 1]
+      newCurrentName = nextChild
+        ? nextChild.props.name
+        : prevChild
+        ? prevChild.props.name
+        : '-1'
 
-    if (children[index].props.name === currentName) {
-      const nextChild = children[index + 1]
-      const prevChild = children[index - 1]
-
-      setState({
-        ...state,
-        currentName: nextChild
-          ? nextChild.props.name
-          : prevChild
-          ? prevChild.props.name
-          : '-1'
-      })
+      // setState({
+      //   ...state,
+      //   currentName: newCurrentName
+      // })
     }
 
-    children.splice(index, 1)
-
+    state.children.splice(index, 1)
     setState({
       ...state,
-      children
+      children: state.children,
+      currentName: newCurrentName ? newCurrentName : state.currentName
     })
     setTimeout(() => {
       onTabEdit && onTabEdit('remove', tab)
@@ -306,69 +304,69 @@ const Tabs: any = (props: Props) => {
       }
     }
   }
-  const { currentName, barStyle, navStyle, scrollable } = state
+  const { barStyle, navStyle, scrollable } = state
   const tabsCls = classnames({
-    'el-tabs': true,
-    'el-tabs--card': type === 'card',
-    'el-tabs--border-card': type === 'border-card'
+    'tb-tabs': true,
+    'tb-tabs--card': type === 'card',
+    'tb-tabs--border-card': type === 'border-card'
   })
   const addButton =
     editable || addable ? (
-      <span className='el-tabs__new-tab' onClick={() => handleTabAdd()}>
-        <i className='el-icon-plus' />
+      <span className='tb-tabs__new-tab' onClick={() => handleTabAdd()}>
+        <i className='iconfont icon-add-select' />
       </span>
     ) : null
   const scrollBtn = scrollable
     ? [
         <span
-          key='el-tabs__nav-prev'
+          key='tb-tabs__nav-prev'
           className={
             state.scrollPrev
-              ? 'el-tabs__nav-prev'
-              : 'el-tabs__nav-prev is-disabled'
+              ? 'tb-tabs__nav-prev'
+              : 'tb-tabs__nav-prev is-disabled'
           }
           onClick={() => scrollPrev()}
         >
-          <i className='el-icon-arrow-left' />
+          <i className='tb-icon-arrow-left' />
         </span>,
         <span
-          key='el-tabs__nav-next'
+          key='tb-tabs__nav-next'
           className={
             state.scrollNext
-              ? 'el-tabs__nav-next'
-              : 'el-tabs__nav-next is-disabled'
+              ? 'tb-tabs__nav-next'
+              : 'tb-tabs__nav-next is-disabled'
           }
           onClick={() => scrollNext()}
         >
-          <i className='el-icon-arrow-right' />
+          <i className='tb-icon-arrow-right' />
         </span>
       ]
     : null
 
   return (
     <div className={tabsCls}>
-      <div className='el-tabs__header'>
+      <div className='tb-tabs__header'>
         {addButton}
         <div
           className={
-            scrollable ? 'el-tabs__nav-wrap is-scrollable' : 'el-tabs__nav-wrap'
+            scrollable ? 'tb-tabs__nav-wrap is-scrollable' : 'tb-tabs__nav-wrap'
           }
         >
           {scrollBtn}
-          <div className='el-tabs__nav-scroll' ref={navScrollRef}>
-            <div className='el-tabs__nav' ref={navRef} style={navStyle}>
-              {React.Children.map(children, (item, index) => {
+          <div className='tb-tabs__nav-scroll' ref={navScrollRef}>
+            <div className='tb-tabs__nav' ref={navRef} style={navStyle}>
+              {React.Children.map(state.children, (item, index) => {
                 const { name, label, disabled } = item.props
                 const tabCls = classnames({
-                  'el-tabs__item': true,
-                  'is-active': name === currentName,
+                  'tb-tabs__item': true,
+                  'is-active': name === state.currentName,
                   'is-disabled': disabled,
                   'is-closable': closable || item.props.closable
                 })
 
                 return (
                   <div
-                    key={`el-tabs__item-${index}`}
+                    key={`tb-tabs__item-${index}`}
                     ref={(tab) => tab && tabs.current.push(tab)}
                     // name={name}
                     className={tabCls}
@@ -377,8 +375,8 @@ const Tabs: any = (props: Props) => {
                     {label}
 
                     {editable || closable || item.props.closable ? (
-                      <span
-                        className='el-icon-close'
+                      <i
+                        className='iconfont icon-close'
                         onClick={(e) => handleTabRemove(item, index, e)}
                       />
                     ) : null}
@@ -387,14 +385,14 @@ const Tabs: any = (props: Props) => {
               })}
 
               {!type ? (
-                <div className='el-tabs__active-bar' style={barStyle} />
+                <div className='tb-tabs__active-bar' style={barStyle} />
               ) : null}
             </div>
           </div>
         </div>
       </div>
-      <div className='el-tabs__content'>
-        {React.Children.map(children, (item) => {
+      <div className='tb-tabs__content'>
+        {React.Children.map(state.children, (item) => {
           const { name } = item.props
 
           // let transitionName = '';
@@ -403,7 +401,7 @@ const Tabs: any = (props: Props) => {
           //   transitionName = 'slideInRight';
           // }
 
-          return name === currentName ? item : null
+          return name === state.currentName ? item : null
         })}
       </div>
     </div>
