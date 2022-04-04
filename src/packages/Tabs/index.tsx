@@ -64,7 +64,7 @@ const Tabs: any = (props: Props) => {
   useEffect(() => {
     calcBarStyle(true)
     update()
-  }, [])
+  }, [])//eslint-disable-line
 
   /**
    * @description: 组件将要更新数据时触发的函数
@@ -110,12 +110,12 @@ const Tabs: any = (props: Props) => {
   useEffect(() => {
     calcBarStyle()
     scrollToActiveTab()
-  }, [state.currentName])
+  }, [state.currentName])// eslint-disable-line
 
   useEffect(() => {
     update()
     calcBarStyle()
-  }, [state.children])
+  }, [state.children])// eslint-disable-line
 
   function handleTabAdd(): void {
     const { onTabAdd, onTabEdit } = props
