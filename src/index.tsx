@@ -1,15 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-04-06 15:50:18
+ * @LastEditTime: 2022-04-06 16:14:24
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
 //  */
 
-// import ReactDOM from 'react-dom'
-// import App from './App'
-// import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import ReactDOM from 'react-dom'
+import App from './App'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 
 import * as React from 'react'
 import './index.css'
@@ -117,36 +117,36 @@ export {
 
 
 
-// const About: React.FC<any> = () => {
-//   let navigate = useNavigate()
-//   return (
-//     <h3
-//       onClick={() => {
-//         navigate('/Inbox')
-//       }}
-//     >
-//       About
-//     </h3>
-//   )
-// }
+const About: React.FC<any> = () => {
+  let navigate = useNavigate()
+  return (
+    <h3
+      onClick={() => {
+        navigate('/Inbox')
+      }}
+    >
+      About
+    </h3>
+  )
+}
 
-// const Inbox: React.FC<any> = () => {
-//   return (
-//     <div>
-//       <h2>Inbox</h2>
-//       {'Welcome to your Inbox'}
-//     </div>
-//   )
-// }
-// ReactDOM.render(
-//   // <React.StrictMode>
-//   <BrowserRouter>
-//     <Routes>
-//       <Route path='/' element={<App />}></Route>
-//       <Route path='about' element={<About />} />
-//       <Route path='inbox' element={<Inbox />}></Route>
-//     </Routes>
-//   </BrowserRouter>,
-//   // </React.StrictMode>
-//   document.getElementById('root')
-// )
+const Inbox: React.FC<any> = () => {
+  return (
+    <div>
+      <h2>Inbox</h2>
+      {'Welcome to your Inbox'}
+    </div>
+  )
+}
+ReactDOM.render(
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />}></Route>
+      <Route path='about' element={<About />} />
+      <Route path='inbox' element={<Inbox />}></Route>
+    </Routes>
+  </BrowserRouter>,
+  // </React.StrictMode>
+  document.getElementById('root')
+)
