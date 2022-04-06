@@ -1,7 +1,5 @@
-// @import '../../style/themes/index';
-// @import '../../style/mixins/index';
+@import '../../style/variables.scss';
 
-// @popover-prefix-cls: ~'@{ant-prefix}-popover';
 @function sqrt($num) {
   $temp: 1;
 
@@ -59,9 +57,9 @@
   }
 
   &-inner {
-      position: relative;
-      z-index: 2;
-    background-color: #fff;
+    position: relative;
+    z-index: 2;
+    background-color:$color-white;
     background-clip: padding-box;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba($color: #000000, $alpha: 0.15);
@@ -127,7 +125,7 @@
     display: block;
     width: sqrt(6 * 6 * 2)+px;
     height: sqrt(6 * 6 * 2)+px;
-    background: #fff;
+    background:$color-white;
     border-style: solid;
     border-width: sqrt(6 * 6 * 2) / 2+px;
     transform: rotate(45deg);
@@ -138,8 +136,8 @@
   &-placement-topRight>&-content>&-arrow {
     bottom: 10px - 6px + 2.2px;
     border-top-color: transparent;
-    border-right-color: #fff;
-    border-bottom-color: #fff;
+    border-right-color:$color-white;
+    border-bottom-color:$color-white;
     border-left-color: transparent;
     box-shadow: 3px 3px 7px rgba($color: #000000, $alpha: 0.07);
   }
@@ -163,8 +161,8 @@
     left: 10px - 6px + 2px;
     border-top-color: transparent;
     border-right-color: transparent;
-    border-bottom-color: #fff;
-    border-left-color: #fff;
+    border-bottom-color:$color-white;
+    border-left-color:$color-white;
     box-shadow: -3px 3px 7px rgba($color: #000000, $alpha: 0.07);
   }
 
@@ -185,10 +183,10 @@
   &-placement-bottomLeft>&-content>&-arrow,
   &-placement-bottomRight>&-content>&-arrow {
     top: 10px - 6px + 2px;
-    border-top-color: #fff;
+    border-top-color:$color-white;
     border-right-color: transparent;
     border-bottom-color: transparent;
-    border-left-color: #fff;
+    border-left-color:$color-white;
     box-shadow: -2px -2px 5px rgba($color: #000000, $alpha: 0.06);
   }
 
@@ -209,8 +207,8 @@
   &-placement-leftTop>&-content>&-arrow,
   &-placement-leftBottom>&-content>&-arrow {
     right: 10px - 6px + 2px;
-    border-top-color: #fff;
-    border-right-color: #fff;
+    border-top-color:$color-white;
+    border-right-color:$color-white;
     border-bottom-color: transparent;
     border-left-color: transparent;
     box-shadow: 3px -3px 7px rgba($color: #000000, $alpha: 0.07);
