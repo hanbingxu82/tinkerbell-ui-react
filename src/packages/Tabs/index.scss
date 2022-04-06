@@ -1,11 +1,11 @@
-@charset "UTF-8";
+@import '../../style/variables.scss';
 
 .tb-tabs {
   clear: both
 }
 
 .tb-tabs__header {
-  border-bottom: 1px solid #d1dbe5;
+  border-bottom: 1px solid $border-color-base;
   padding: 0;
   position: relative;
   margin: 0 0 15px
@@ -16,7 +16,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background-color: #20a0ff;
+  background-color: $color-primary;
   z-index: 1;
   transition: transform .3s cubic-bezier(.645, .045, .355, 1);
   list-style: none
@@ -43,7 +43,7 @@
 }
 
 .tb-tabs__new-tab:hover {
-  color: #20a0ff
+  color: $color-primary
 }
 
 .tb-tabs__nav-wrap {
@@ -111,7 +111,7 @@
 
 .tb-tabs__item .icon-close:hover {
   background-color: #97a8be;
-  color: #fff
+  color: $color-white
 }
 
 .tb-tabs__item:hover {
@@ -125,7 +125,7 @@
 }
 
 .tb-tabs__item.is-active {
-  color: #20a0ff
+  color: $color-primary
 }
 
 .tb-tabs__content {
@@ -167,8 +167,8 @@
 }
 
 .tb-tabs--card>.tb-tabs__header .tb-tabs__item.is-active {
-  border: 1px solid #d1dbe5;
-  border-bottom-color: #fff;
+  border: 1px solid $border-color-base;
+  border-bottom-color: $color-white;
   border-radius: 4px 4px 0 0
 }
 
@@ -178,8 +178,8 @@
 }
 
 .tb-tabs--border-card {
-  background: #fff;
-  border: 1px solid #d1dbe5;
+  background: $color-white;
+  border: 1px solid $border-color-base;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04)
 }
 
@@ -201,17 +201,17 @@
 }
 
 .tb-tabs--border-card>.tb-tabs__header .tb-tabs__item.is-active {
-  background-color: #fff;
-  border-right-color: #d1dbe5;
-  border-left-color: #d1dbe5
+  background-color: $color-white;
+  border-right-color: $border-color-base;
+  border-left-color: $border-color-base
 }
 
 .tb-tabs--border-card>.tb-tabs__header .tb-tabs__item.is-active:first-child {
-  border-left-color: #d1dbe5
+  border-left-color: $border-color-base
 }
 
 .tb-tabs--border-card>.tb-tabs__header .tb-tabs__item.is-active:last-child {
-  border-right-color: #d1dbe5
+  border-right-color: $border-color-base
 }
 
 .slideInLeft-transition,
