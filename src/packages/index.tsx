@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2022-04-01 14:43:05
+ * @LastEditTime: 2022-04-06 11:28:13
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
@@ -45,6 +45,7 @@ import Steps from './Steps'
 import Upload from './Upload/Upload'
 import TabPane from './TabPane'
 import Tabs from './Tabs'
+import Popover from './Popover'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './Carousel'
@@ -104,5 +105,6 @@ export {
   Step,
   Upload,
   TabPane,
-  Tabs
+  Tabs,
+  Popover
 }
