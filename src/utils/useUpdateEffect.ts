@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 11:26:55
- * @LastEditTime: 2022-04-04 11:31:41
+ * @LastEditTime: 2022-04-07 09:50:06
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/utils/useUpdateEffect.ts
@@ -11,8 +11,8 @@ import { useEffect, useRef } from 'react'
 
 const useUpdateEffect = (
   effect: (arg0: any, arg1: any) => any,
-  oldProps: any,
-  oldState: any
+  oldProps: any = {},
+  oldState: any = {}
 ) => {
   const flag = useRef(true)
   let oldP = { ...oldProps }

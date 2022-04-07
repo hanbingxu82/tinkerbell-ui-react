@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-06 14:58:29
+ * @LastEditTime: 2022-04-07 10:42:44
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -26,7 +26,8 @@ import {
   Tabs,
   Icon,
   Popover,
-  Tooltip
+  Tooltip,
+  Dialog
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -153,28 +154,43 @@ const App = (props: any) => {
   }
   const text = <span>Title</span>
   const buttonWidth = 70
-  const hide = () => {
-    setValue(false)
-  }
-
-  const handleVisibleChange = (visible: any) => {
-    setValue(visible)
-  }
   return (
     <div>
-      <Popover
-        content={
-          <a href='#/' onClick={hide}>
-            Close
-          </a>
-        }
-        title='Title'
-        trigger='click'
-        visible={value}
-        onVisibleChange={handleVisibleChange}
-      >
-        <Button type='primary'>Click me</Button>
-      </Popover>
+      <div>
+        <Button type='text' onClick={() => setValue(true)}>
+          点击打开 Dialog
+        </Button>
+        <Dialog
+          title='提示'
+          size='tiny'
+          visible={value}
+          onCancel={() => setValue(false)}
+          lockScroll={false}
+        >
+          <Dialog.Body>
+            <span>这是一段信息</span>
+          </Dialog.Body>
+          <Dialog.Footer className='dialog-footer'>
+            <Button onClick={() => setValue(false)}>取消</Button>
+            <Button type='primary' onClick={() => setValue(false)}>
+              确定
+            </Button>
+          </Dialog.Footer>
+        </Dialog>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       <br />
       <Tooltip title='prompt text'>
         <span>Tooltip will show on mouse enter.</span>
