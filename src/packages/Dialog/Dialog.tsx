@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-06 16:48:09
- * @LastEditTime: 2022-04-07 11:14:22
+ * @LastEditTime: 2022-04-07 14:38:30
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Dialog/dialog.tsx
@@ -10,7 +10,8 @@
 
 import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { cleanScrollBar } from '../../utils/utils'
-import Animate from 'rc-animate'
+// import Animate from 'rc-animate'
+import CSSMotion from 'rc-motion'
 import {
   useWillReceiveProps,
   useUpdateEffect
@@ -105,11 +106,20 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
   ): boolean {
     return prevProps.visible && !nextProps.visible
   }
-  const { visible, title, size, top, modal, customClass, showClose, children } =
-    props
+  const {
+    visible,
+    title,
+    size,
+    top,
+    modal,
+    customClass,
+    showClose,
+    children,
+    destroyOnClose
+  } = props
   return (
     <div>
-      <Animate component='' transitionName='dialog-fade'>
+      {/* <Animate component='' transitionName='dialog-fade'>
         {visible ? (
           <div
             ref={wrap}
@@ -143,7 +153,52 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
             </div>
           </div>
         ) : null}
-      </Animate>
+      </Animate> */}
+      <CSSMotion
+        visible={visible}
+        onEnterActive={(HTMLElement) => {
+          HTMLElement.style.display = 'block'
+        }}
+        onLeaveEnd={(HTMLElement) => {
+          HTMLElement.style.display = 'none'
+        }}
+        removeOnLeave={destroyOnClose}
+        motionName='dialog-fade'
+      >
+        {({ className, style }) => (
+          <div
+            ref={wrap}
+            style={{ zIndex: 1013, ...style }}
+            className={classnames('el-dialog__wrapper', className)}
+            onClick={(e) => handleWrapperClick(e)}
+            onKeyDown={(e) => onKeyDown(e)}
+          >
+            <div
+              // ref='dialog'
+              style={size === 'full' ? {} : { top: top }}
+              className={classnames(
+                'el-dialog',
+                `el-dialog--${size}`,
+                customClass
+              )}
+            >
+              <div className='el-dialog__header'>
+                <span className='el-dialog__title'>{title}</span>
+                {showClose && (
+                  <button
+                    type='button'
+                    className='el-dialog__headerbtn'
+                    onClick={(e) => close(e)}
+                  >
+                    <i className='el-dialog__close el-icon el-icon-close' />
+                  </button>
+                )}
+              </div>
+              {children}
+            </div>
+          </div>
+        )}
+      </CSSMotion>
       {modal && visible ? (
         <div className='v-modal' style={{ zIndex: 1012 }} />
       ) : null}
@@ -165,7 +220,8 @@ Dialog.defaultProps = {
   lockScroll: true,
   closeOnClickModal: true,
   closeOnPressEscape: true,
-  showClose: true
+  showClose: true,
+  destroyOnClose: false
 }
 
 Dialog.propTypes = {
@@ -189,7 +245,8 @@ Dialog.propTypes = {
   closeOnPressEscape: PropTypes.bool,
   // 点击遮罩层或右上角叉或取消按钮的回调
   onCancel: PropTypes.func.isRequired,
-  showClose: PropTypes.bool
+  showClose: PropTypes.bool,
+  destroyOnClose: PropTypes.bool
 }
 Dialog.Body = DialogBody
 Dialog.Footer = DialogFooter

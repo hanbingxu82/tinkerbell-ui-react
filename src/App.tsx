@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-07 10:42:44
+ * @LastEditTime: 2022-04-07 13:49:10
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -169,6 +169,7 @@ const App = (props: any) => {
         >
           <Dialog.Body>
             <span>这是一段信息</span>
+            <input type="text"/>
           </Dialog.Body>
           <Dialog.Footer className='dialog-footer'>
             <Button onClick={() => setValue(false)}>取消</Button>
