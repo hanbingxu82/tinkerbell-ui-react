@@ -78,6 +78,7 @@
     "node-sass": "^4.14.1",
     "prop-types": "^15.8.1",
     "rc-animate": "^3.1.1",
+    "rc-motion": "^2.4.7",
     "rc-notification": "^4.5.7",
     "rc-tooltip": "^5.1.1",
     "rc-util": "^5.18.1",
