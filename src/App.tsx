@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-08 14:02:29
+ * @LastEditTime: 2022-04-08 15:52:30
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import './index.css'
 import {
@@ -61,8 +61,11 @@ const App = (props: any) => {
       <p>Content</p>
     </div>
   )
+const inputref = useRef(null)
+  useEffect(() => {
+console.log(inputref)
 
-  useEffect(() => {}, [])
+  }, [])
 
   function addTab() {
     const index = tabIndex + 1
@@ -189,7 +192,7 @@ const App = (props: any) => {
 
           <Input style={{ width: 200 }} placeholder='请输入内容' size='large' />
           <Input style={{ width: 200 }} placeholder='请输入内容' />
-          <Input style={{ width: 200 }} placeholder='请输入内容' size='small' />
+          <Input ref={inputref} style={{ width: 200 }} placeholder='请输入内容' size='small' />
           <Input style={{ width: 200 }} placeholder='请输入内容' size='mini' />
         </div>
         <div>

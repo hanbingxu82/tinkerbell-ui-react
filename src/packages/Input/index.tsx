@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-08 09:00:21
- * @LastEditTime: 2022-04-08 14:39:51
+ * @LastEditTime: 2022-04-08 16:01:18
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Input/index.tsx
@@ -32,12 +32,12 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
   useEffect(() => {
     resizeTextarea()
     // 合并判断
-    if (inputRef) {
-      ref = { ...ref, ...inputRef }
-    } else if (textareaRef) {
-      ref = { ...ref, ...textareaRef }
+    if (inputRef && inputRef.current) {
+      ref && (ref.current.Element = inputRef.current)
+    } else if (textareaRef && textareaRef.current) {
+      ref && (ref.current.Element = textareaRef.current)
     }
-  }, [])
+  }, [])// eslint-disable-line
   // 父->子实例
   function focus(): void {
     setTimeout(() => {
@@ -58,7 +58,7 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
   }
   // 向外暴露两个实例方法
   useImperativeHandle(ref, () => {
-    return { focus, blur }
+    return { methods: { focus, blur } }
   })
   function fixControlledValue(value: any): any {
     if (typeof value === 'undefined' || value === null) {
@@ -183,10 +183,7 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
       >
         {prepend && <div className='tb-input-group__prepend'>{prepend}</div>}
         {typeof icon === 'string' ? (
-          <i
-            className={`iconfont ${icon}`}
-            onClick={handleIconClick}
-          >
+          <i className={`iconfont ${icon}`} onClick={handleIconClick}>
             {prepend}
           </i>
         ) : (
