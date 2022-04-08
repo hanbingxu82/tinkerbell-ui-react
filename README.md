@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-04-07 14:55:26
+ * @LastEditTime: 2022-04-08 16:22:20
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -111,6 +111,8 @@ class Example extends Component {
 #### 0.4.2 完成 Popover 弹出提示框组件
 
 #### 0.4.3 完成 Dialog 弹出框组件
+
+#### 0.4.4 完成 Input 输入框组件
 
 ## License
 
