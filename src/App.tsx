@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-07 13:49:10
+ * @LastEditTime: 2022-04-08 14:02:29
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -27,7 +27,8 @@ import {
   Icon,
   Popover,
   Tooltip,
-  Dialog
+  Dialog,
+  Input
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -157,10 +158,55 @@ const App = (props: any) => {
   return (
     <div>
       <div>
-        <Button type='text' onClick={() => setValue(true)}>
+        <div>
+          <Input style={{ width: 200 }} placeholder='请输入内容' />
+          <Input style={{ width: 200 }} disabled placeholder='请输入内容' />
+          <Input
+            style={{ width: 200 }}
+            icon='icon-credit-level-fill'
+            placeholder='请选择日期'
+          />
+          <Input
+            style={{ width: 200 }}
+            type='textarea'
+            autosize={{ minRows: 2, maxRows: 4 }}
+            placeholder='请输入内容'
+          />
+          <Input
+            style={{ width: 200 }}
+            type='textarea'
+            autosize={true}
+            placeholder='请输入内容'
+          />
+          <Input
+            style={{ width: 200 }}
+            type='textarea'
+            autosize={{ minRows: 2, maxRows: 4 }}
+            placeholder='请输入内容'
+          />
+          <Input placeholder='请输入内容' prepend='Http://' />
+          <Input placeholder='请输入内容' append='.com' />
+
+          <Input style={{ width: 200 }} placeholder='请输入内容' size='large' />
+          <Input style={{ width: 200 }} placeholder='请输入内容' />
+          <Input style={{ width: 200 }} placeholder='请输入内容' size='small' />
+          <Input style={{ width: 200 }} placeholder='请输入内容' size='mini' />
+        </div>
+        <div>
+          <Button size='large'>点击打开 Dialog</Button>
+          <Button>点击打开 Dialog</Button>
+          <Button size='small'>点击打开 Dialog</Button>
+          <Button size='mini'>点击打开 Dialog</Button>
+        </div>
+        <Button
+          style={{ marginLeft: 20 }}
+          // type='text'
+          onClick={() => setValue(true)}
+        >
           点击打开 Dialog
         </Button>
         <Dialog
+          destroyOnClose
           title='提示'
           size='tiny'
           visible={value}
@@ -169,7 +215,7 @@ const App = (props: any) => {
         >
           <Dialog.Body>
             <span>这是一段信息</span>
-            <input type="text"/>
+            <input type='text' />
           </Dialog.Body>
           <Dialog.Footer className='dialog-footer'>
             <Button onClick={() => setValue(false)}>取消</Button>

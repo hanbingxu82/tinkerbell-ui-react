@@ -1,0 +1,289 @@
+@import '../../style/variables.scss';
+
+.tb-input,
+.tb-input__inner {
+  width: 100%;
+  display: inline-block
+}
+
+.tb-input {
+  .iconfont {
+    position: absolute;
+    width: 35px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    text-align: center;
+    color:$border-color-base;
+    transition: all .3s
+  }
+
+  .iconfont:after {
+    content: '';
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle
+  }
+
+  .iconfont+.tb-input__inner {
+    padding-right: 35px
+  }
+
+  .iconfont.is-clickable:hover {
+    cursor: pointer;
+    color: #8391a5
+  }
+
+  .iconfont.is-clickable:hover+.tb-input__inner {
+    border-color: #8391a5
+  }
+}
+
+.tb-input__inner,
+.tb-textarea__inner {
+  box-sizing: border-box;
+  background-image: none
+}
+
+.tb-input {
+  position: relative;
+  font-size: 14px
+}
+
+.tb-input.is-disabled .tb-input__inner {
+  background-color: #eef1f6;
+  border-color: #d1dbe5;
+  color: #bbb;
+  cursor: not-allowed
+}
+
+.tb-input.is-disabled .tb-input__inner::-webkit-input-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-input.is-disabled .tb-input__inner::-moz-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-input.is-disabled .tb-input__inner:-ms-input-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-input.is-disabled .tb-input__inner::placeholder {
+  color:$btn-disable-color
+}
+
+.tb-input.is-active .tb-input__inner {
+  outline: 0;
+  border-color: $color-primary
+}
+
+.tb-input__inner {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border-radius: $border-base-radius;
+  border: 1px solid$border-color-base;
+  color: #1f2d3d;
+  font-size: inherit;
+  height: $default-height;
+  line-height: 1;
+  outline: 0;
+  padding: 3px 10px;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1)
+}
+
+.tb-input__inner::-webkit-input-placeholder {
+  color: $placeholder-color
+}
+
+.tb-input__inner::-moz-placeholder {
+  color: $placeholder-color
+}
+
+.tb-input__inner:-ms-input-placeholder {
+  color: $placeholder-color
+}
+
+.tb-input__inner::placeholder {
+  color: $placeholder-color
+}
+
+.tb-input__inner:hover {
+  border-color: #8391a5
+}
+
+.tb-input__inner:focus {
+  outline: 0;
+  border-color: $color-primary
+}
+
+
+
+.tb-input--large {
+  font-size: 16px
+}
+
+.tb-input--large .tb-input__inner {
+  height: $large-height
+}
+
+.tb-input--small {
+  font-size: 13px
+}
+
+.tb-input--small .tb-input__inner {
+  height: $small-height
+}
+
+.tb-input--mini {
+  font-size: 12px
+}
+
+.tb-input--mini .tb-input__inner {
+  height: $mini-height
+}
+
+.tb-input-group {
+  line-height: normal;
+  display: inline-table;
+  width: 100%;
+  border-collapse: separate
+}
+
+.tb-input-group>.tb-input__inner {
+  vertical-align: middle;
+  display: table-cell
+}
+
+.tb-input-group__append,
+.tb-input-group__prepend {
+  background-color: #f5f7fa;
+  color: #909399;
+  vertical-align: middle;
+  display: table-cell;
+  position: relative;
+  border: 1px solid $border-color-base;
+  border-radius: $border-base-radius;
+  padding: 0 10px;
+  width: 1px;
+  white-space: nowrap
+}
+
+.tb-input-group--prepend .tb-input__inner,
+.tb-input-group__append {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0
+}
+
+.tb-input-group--append .tb-input__inner,
+.tb-input-group__prepend {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0
+}
+
+.tb-input-group__append .tb-button,
+.tb-input-group__append .tb-select,
+.tb-input-group__prepend .tb-button,
+.tb-input-group__prepend .tb-select {
+  display: block;
+  margin: -10px
+}
+
+.tb-input-group__append button.tb-button,
+.tb-input-group__append div.tb-select .tb-input__inner,
+.tb-input-group__append div.tb-select:hover .tb-input__inner,
+.tb-input-group__prepend button.tb-button,
+.tb-input-group__prepend div.tb-select .tb-input__inner,
+.tb-input-group__prepend div.tb-select:hover .tb-input__inner {
+  border-color: transparent;
+  background-color: transparent;
+  color: inherit;
+  border-top: 0;
+  border-bottom: 0
+}
+
+.tb-input-group__append .tb-button,
+.tb-input-group__append .tb-input,
+.tb-input-group__prepend .tb-button,
+.tb-input-group__prepend .tb-input {
+  font-size: inherit
+}
+
+.tb-input-group__prepend {
+  border-right: 0
+}
+
+.tb-input-group__append {
+  border-left: 0
+}
+
+.tb-textarea {
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom
+}
+
+.tb-textarea.is-disabled .tb-textarea__inner {
+  background-color: #eef1f6;
+  border-color: #d1dbe5;
+  color: #bbb;
+  cursor: not-allowed
+}
+
+.tb-textarea.is-disabled .tb-textarea__inner::-webkit-input-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-textarea.is-disabled .tb-textarea__inner::-moz-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-textarea.is-disabled .tb-textarea__inner:-ms-input-placeholder {
+  color:$btn-disable-color
+}
+
+.tb-textarea.is-disabled .tb-textarea__inner::placeholder {
+  color:$btn-disable-color
+}
+
+.tb-textarea__inner {
+  display: block;
+  resize: vertical;
+  padding: 5px 7px;
+  line-height: 1.5;
+  width: 100%;
+  font-size: 14px;
+  color: #1f2d3d;
+  background-color: #fff;
+  border: 1px solid $border-color-base;
+  border-radius: $border-base-radius;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1)
+}
+
+.tb-textarea__inner::-webkit-input-placeholder {
+  color: $placeholder-color
+}
+
+.tb-textarea__inner::-moz-placeholder {
+  color: $placeholder-color
+}
+
+.tb-textarea__inner:-ms-input-placeholder {
+  color: $placeholder-color
+}
+
+.tb-textarea__inner::placeholder {
+  color: $placeholder-color
+}
+
+.tb-textarea__inner:hover {
+  border-color: #8391a5
+}
+
+.tb-textarea__inner:focus {
+  outline: 0;
+  border-color: $color-primary
+}
