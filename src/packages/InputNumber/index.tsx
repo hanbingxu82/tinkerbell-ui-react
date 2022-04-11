@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 09:23:23
- * @LastEditTime: 2022-04-11 11:48:55
+ * @LastEditTime: 2022-04-11 14:07:51
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/InputNumber/index.tsx
@@ -165,8 +165,8 @@ const InputNumber: any = React.forwardRef((props: any, ref: any) => {
     <div
       style={props.style}
       className={classnames(
-        'el-input-number',
-        size && `el-input-number--${size}`,
+        'tb-input-number',
+        size && `tb-input-number--${size}`,
         {
           'is-disabled': disabled,
           'is-without-controls': !controls
@@ -175,7 +175,7 @@ const InputNumber: any = React.forwardRef((props: any, ref: any) => {
     >
       {controls && (
         <span
-          className={classnames('el-input-number__decrease', {
+          className={classnames('tb-input-number__decrease', {
             'is-disabled': minDisabled()
           })}
           onClick={decrease}
@@ -185,7 +185,7 @@ const InputNumber: any = React.forwardRef((props: any, ref: any) => {
       )}
       {controls && (
         <span
-          className={classnames('el-input-number__increase', {
+          className={classnames('tb-input-number__increase', {
             'is-disabled': maxDisabled()
           })}
           onClick={increase}
@@ -210,7 +210,7 @@ const InputNumber: any = React.forwardRef((props: any, ref: any) => {
 })
 
 InputNumber.propTypes = {
-  defaultValue: PropTypes.number,
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   value: PropTypes.number,
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-11 11:48:31
+ * @LastEditTime: 2022-04-11 13:49:51
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -62,10 +62,9 @@ const App = (props: any) => {
       <p>Content</p>
     </div>
   )
-const inputref = useRef(null)
+  const inputref = useRef(null)
   useEffect(() => {
-console.log(inputref)
-
+    console.log(inputref)
   }, [])
 
   function addTab() {
@@ -161,9 +160,20 @@ console.log(inputref)
   const buttonWidth = 70
   return (
     <div>
-          <InputNumber  step="2" defaultValue={tabIndex} onChange={(val:number)=>{
-            setTabIndex(val)
-          }} min="1" max="10"></InputNumber>
+      <InputNumber
+        step='2'
+        defaultValue={tabIndex}
+        onChange={(val: number) => {
+          setTabIndex(val)
+        }}
+        min='1'
+        max='10'
+      ></InputNumber>
+
+      <InputNumber size='large' defaultValue={10}></InputNumber>
+      <InputNumber defaultValue={20}></InputNumber>
+      <InputNumber size='small' defaultValue={30}></InputNumber>
+      <InputNumber size='mini' defaultValue={30}></InputNumber>
       <div>
         <div>
           <Input style={{ width: 200 }} placeholder='请输入内容' />
@@ -196,7 +206,12 @@ console.log(inputref)
 
           <Input style={{ width: 200 }} placeholder='请输入内容' size='large' />
           <Input style={{ width: 200 }} placeholder='请输入内容' />
-          <Input ref={inputref} style={{ width: 200 }} placeholder='请输入内容' size='small' />
+          <Input
+            ref={inputref}
+            style={{ width: 200 }}
+            placeholder='请输入内容'
+            size='small'
+          />
           <Input style={{ width: 200 }} placeholder='请输入内容' size='mini' />
         </div>
         <div>
