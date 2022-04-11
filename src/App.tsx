@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-08 15:52:30
+ * @LastEditTime: 2022-04-11 11:48:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -28,7 +28,8 @@ import {
   Popover,
   Tooltip,
   Dialog,
-  Input
+  Input,
+  InputNumber
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -160,6 +161,9 @@ console.log(inputref)
   const buttonWidth = 70
   return (
     <div>
+          <InputNumber  step="2" defaultValue={tabIndex} onChange={(val:number)=>{
+            setTabIndex(val)
+          }} min="1" max="10"></InputNumber>
       <div>
         <div>
           <Input style={{ width: 200 }} placeholder='请输入内容' />
