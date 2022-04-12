@@ -105,11 +105,11 @@
 
 .tb-message-box__input input.invalid,
 .tb-message-box__input input.invalid:focus {
-  border-color: #ff4949
+  border-color: $color-danger;
 }
 
 .tb-message-box__errormsg {
-  color: #ff4949;
+  color: $color-danger;
   font-size: 12px;
   min-height: 18px;
   margin-top: 2px

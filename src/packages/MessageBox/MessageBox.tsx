@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:42
- * @LastEditTime: 2022-04-12 11:41:48
+ * @LastEditTime: 2022-04-12 13:38:28
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/MessageBox.tsx
@@ -160,7 +160,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                           handleAction('cancel')
                         }}
                       >
-                        <i className='tb-message-box__close tb-icon-close' />
+                        <i className='tb-message-box__close iconfont icon-close' />
                       </button>
                     )}
                   </div>
