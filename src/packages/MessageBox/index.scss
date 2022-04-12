@@ -1,5 +1,6 @@
-@charset "UTF-8";
 
+@charset "UTF-8";
+@import '../../style/variables.scss';
 
 .v-modal-leave,
 .v-modal-leave-active {
@@ -36,7 +37,7 @@
 }
 
 
-.el-message-box {
+.tb-message-box {
   text-align: left;
   display: inline-block;
   vertical-align: middle;
@@ -49,7 +50,7 @@
   backface-visibility: hidden
 }
 
-.el-message-box__wrapper {
+.tb-message-box__wrapper {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -58,7 +59,7 @@
   text-align: center
 }
 
-.el-message-box__wrapper::after {
+.tb-message-box__wrapper::after {
   content: "";
   display: inline-block;
   height: 100%;
@@ -66,12 +67,12 @@
   vertical-align: middle
 }
 
-.el-message-box__header {
+.tb-message-box__header {
   position: relative;
   padding: 20px 20px 0
 }
 
-.el-message-box__headerbtn {
+.tb-message-box__headerbtn {
   position: absolute;
   top: 19px;
   right: 20px;
@@ -82,39 +83,39 @@
   cursor: pointer
 }
 
-.el-message-box__headerbtn .el-message-box__close {
+.tb-message-box__headerbtn .tb-message-box__close {
   color: #999
 }
 
-.el-message-box__headerbtn:focus .el-message-box__close,
-.el-message-box__headerbtn:hover .el-message-box__close {
+.tb-message-box__headerbtn:focus .tb-message-box__close,
+.tb-message-box__headerbtn:hover .tb-message-box__close {
   color: #20a0ff
 }
 
-.el-message-box__content {
+.tb-message-box__content {
   padding: 30px 20px;
   color: #48576a;
   font-size: 14px;
   position: relative
 }
 
-.el-message-box__input {
+.tb-message-box__input {
   padding-top: 15px
 }
 
-.el-message-box__input input.invalid,
-.el-message-box__input input.invalid:focus {
+.tb-message-box__input input.invalid,
+.tb-message-box__input input.invalid:focus {
   border-color: #ff4949
 }
 
-.el-message-box__errormsg {
+.tb-message-box__errormsg {
   color: #ff4949;
   font-size: 12px;
   min-height: 18px;
   margin-top: 2px
 }
 
-.el-message-box__title {
+.tb-message-box__title {
   padding-left: 0;
   margin-bottom: 0;
   font-size: 16px;
@@ -123,30 +124,30 @@
   color: #333
 }
 
-.el-message-box__message {
+.tb-message-box__message {
   margin: 0
 }
 
-.el-message-box__message p {
+.tb-message-box__message p {
   margin: 0;
   line-height: 1.4
 }
 
-.el-message-box__btns {
+.tb-message-box__btns {
   padding: 10px 20px 15px;
   text-align: right
 }
 
-.el-message-box__btns button:nth-child(2) {
+.tb-message-box__btns button:nth-child(2) {
   margin-left: 10px
 }
 
-.el-message-box__btns-reverse {
+.tb-message-box__btns-reverse {
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse
 }
 
-.el-message-box__status {
+.tb-message-box__status {
   position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
@@ -154,20 +155,21 @@
   font-size: 36px !important
 }
 
-.el-message-box__status.el-icon-circle-check {
-  color: #13ce66
+.tb-message-box__status.icon-success-fill {
+  color: $color-success
+}
+.tb-message-box__status.icon-prompt-fill1 {
+  color: $color-info
+}
+.tb-message-box__status.icon-prompt-fill {
+    color: $color-primary
+  }
+.tb-message-box__status.icon-help1 {
+  color: $color-warning
 }
 
-.el-message-box__status.el-icon-information {
-  color: #50bfff
-}
-
-.el-message-box__status.el-icon-warning {
-  color: #f7ba2a
-}
-
-.el-message-box__status.el-icon-circle-cross {
-  color: #ff4949
+.tb-message-box__status.icon-reeor-fill {
+  color: $color-danger
 }
 
 .msgbox-fade-leave,

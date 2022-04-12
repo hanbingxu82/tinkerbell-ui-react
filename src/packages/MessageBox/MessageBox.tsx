@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:42
- * @LastEditTime: 2022-04-12 10:52:20
+ * @LastEditTime: 2022-04-12 11:41:48
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/MessageBox.tsx
@@ -20,10 +20,11 @@ const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
 const typeMap = {
-  success: 'circle-check',
-  info: 'information',
-  warning: 'warning',
-  error: 'circle-cross'
+  success: 'icon-success-fill',
+  info: 'icon-prompt-fill1',
+  warning: 'icon-help1',
+  error: 'icon-reeor-fill',
+  primary: 'icon-prompt-fill'
 }
 
 const MessageBox: any = React.forwardRef((props: any, ref: any) => {
@@ -49,7 +50,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function typeClass(): string {
-    return props.type && typeMap[props.type] && `el-icon-${typeMap[props.type]}`
+    return props.type && typeMap[props.type] ? `iconfont is-${props.type} ${typeMap[props.type]}` : ''
   }
 
   function validate(value: string): boolean {
@@ -141,45 +142,45 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
             <div
               style={style}
               className={classnames(
-                'el-message-box__wrapper',
+                'tb-message-box__wrapper',
                 customClass,
                 className
               )}
             >
-              <div className='el-message-box' ref={ref}>
+              <div className='tb-message-box' ref={ref}>
                 {title && (
-                  <div className='el-message-box__header'>
-                    <div className='el-message-box__title'>{title}</div>
+                  <div className='tb-message-box__header'>
+                    <div className='tb-message-box__title'>{title}</div>
                     {showClose && (
                       <button
                         type='button'
-                        className='el-message-box__headerbtn'
+                        className='tb-message-box__headerbtn'
                         aria-label='Close'
                         onClick={() => {
                           handleAction('cancel')
                         }}
                       >
-                        <i className='el-message-box__close el-icon-close' />
+                        <i className='tb-message-box__close tb-icon-close' />
                       </button>
                     )}
                   </div>
                 )}
                 {message && (
-                  <div className='el-message-box__content'>
+                  <div className='tb-message-box__content'>
                     <div
                       className={classnames(
-                        'el-message-box__status',
+                        'tb-message-box__status',
                         typeClass()
                       )}
                     />
                     <div
-                      className='el-message-box__message'
+                      className='tb-message-box__message'
                       style={{ marginLeft: typeClass() ? '50px' : '0' }}
                     >
                       <div>{message}</div>
                     </div>
                     {showInput ? (
-                      <div className='el-message-box__input'>
+                      <div className='tb-message-box__input'>
                         <Input
                           className={classnames({
                             invalid: editorErrorMessage
@@ -190,7 +191,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                           onChange={onChange}
                         />
                         <div
-                          className='el-message-box__errormsg'
+                          className='tb-message-box__errormsg'
                           style={{
                             visibility: editorErrorMessage
                               ? 'visible'
@@ -203,7 +204,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                     ) : null}
                   </div>
                 )}
-                <div className='el-message-box__btns'>
+                <div className='tb-message-box__btns'>
                   {showCancelButton ? (
                     <Button
                       className={cancelButtonClass}
@@ -217,7 +218,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                   {showConfirmButton ? (
                     <Button
                       className={classnames(
-                        'el-button--primary',
+                        'tb-button--primary',
                         confirmButtonClass
                       )}
                       onClick={() => {
@@ -255,7 +256,7 @@ MessageBox.propTypes = {
   confirmButtonClass: PropTypes.string,
   customClass: PropTypes.string,
   inputPlaceholder: PropTypes.string,
-  inputPattern: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  inputPattern: PropTypes.any,
   inputValidator: PropTypes.func,
   inputErrorMessage: PropTypes.string,
   inputValue: PropTypes.any,

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-12 10:37:17
+ * @LastEditTime: 2022-04-12 11:43:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -164,7 +164,20 @@ const App = (props: any) => {
       <Button
         type='text'
         onClick={() => {
-          MessageBox.alert('这是一段内容', '标题名称')
+          MessageBox.prompt('请输入邮箱', '提示', {
+            inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+            inputErrorMessage: '邮箱格式不正确'
+          }).then(({ value }:any) => {
+            Message({
+              type: 'success',
+              message: '你的邮箱是: ' + value
+            });
+          }).catch(() => {
+            Message({
+              type: 'info',
+              message: '取消输入'
+            });
+          });
         }}
       >
         点击打开 Message Box
