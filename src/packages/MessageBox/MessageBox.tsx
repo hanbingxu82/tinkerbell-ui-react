@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:42
- * @LastEditTime: 2022-04-12 10:05:29
+ * @LastEditTime: 2022-04-12 10:52:20
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/MessageBox.tsx
@@ -14,6 +14,7 @@ import Animate from 'rc-animate'
 // import { cleanScrollBar } from '../table/utils'
 import Button from '../Button'
 import Input from '../Input'
+import './index.scss'
 
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
@@ -127,7 +128,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
   } = props
 
   return (
-    <div ref={ref}>
+    <div>
       <div style={{ position: 'absolute', zIndex: 2001 }}>
         <CSSMotion
           visible={visible}
@@ -145,7 +146,7 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                 className
               )}
             >
-              <div className='el-message-box'>
+              <div className='el-message-box' ref={ref}>
                 {title && (
                   <div className='el-message-box__header'>
                     <div className='el-message-box__title'>{title}</div>
@@ -219,7 +220,9 @@ const MessageBox: any = React.forwardRef((props: any, ref: any) => {
                         'el-button--primary',
                         confirmButtonClass
                       )}
-                      onClick={handleAction('confirm')}
+                      onClick={() => {
+                        handleAction('confirm')
+                      }}
                     >
                       {confirmButtonText()}
                     </Button>
@@ -252,7 +255,7 @@ MessageBox.propTypes = {
   confirmButtonClass: PropTypes.string,
   customClass: PropTypes.string,
   inputPlaceholder: PropTypes.string,
-  inputPattern: PropTypes.regex,
+  inputPattern: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   inputValidator: PropTypes.func,
   inputErrorMessage: PropTypes.string,
   inputValue: PropTypes.any,

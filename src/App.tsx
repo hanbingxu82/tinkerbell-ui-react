@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-11 13:49:51
+ * @LastEditTime: 2022-04-12 10:37:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -29,7 +29,8 @@ import {
   Tooltip,
   Dialog,
   Input,
-  InputNumber
+  InputNumber,
+  MessageBox
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -160,6 +161,15 @@ const App = (props: any) => {
   const buttonWidth = 70
   return (
     <div>
+      <Button
+        type='text'
+        onClick={() => {
+          MessageBox.alert('这是一段内容', '标题名称')
+        }}
+      >
+        点击打开 Message Box
+      </Button>
+
       <InputNumber
         step='2'
         defaultValue={tabIndex}

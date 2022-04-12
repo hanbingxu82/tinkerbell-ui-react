@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:32
- * @LastEditTime: 2022-04-12 10:25:33
+ * @LastEditTime: 2022-04-12 10:36:23
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/index.tsx
@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 
 import MessageBox from './MessageBox';
 
-function alert(message: any, title: any, props: any) {
+function alert(message: any, title: any, props?: any) {
   if (typeof title === 'object') {
     props = title;
   }
@@ -25,7 +25,7 @@ function alert(message: any, title: any, props: any) {
   return next(props);
 }
 
-function confirm(message: any, title: any, props: any) {
+function confirm(message: any, title: any, props?: any) {
   if (typeof title === 'object') {
     props = title;
   }
@@ -38,7 +38,7 @@ function confirm(message: any, title: any, props: any) {
   return next(props);
 }
 
-function prompt(message: any, title: any, props: any) {
+function prompt(message: any, title: any, props?: any) {
   if (typeof title === 'object') {
     props = title;
   }
