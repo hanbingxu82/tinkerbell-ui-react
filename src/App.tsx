@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-12 11:43:14
+ * @LastEditTime: 2022-04-13 16:52:45
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -30,7 +30,8 @@ import {
   Dialog,
   Input,
   InputNumber,
-  MessageBox
+  MessageBox,
+  Select
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -159,25 +160,60 @@ const App = (props: any) => {
   }
   const text = <span>Title</span>
   const buttonWidth = 70
+  const [options] = useState([
+    {
+      value: '选项1',
+      label: '黄金糕'
+    },
+    {
+      value: '选项2',
+      label: '双皮奶'
+    },
+    {
+      value: '选项3',
+      label: '蚵仔煎'
+    },
+    {
+      value: '选项4',
+      label: '龙须面'
+    },
+    {
+      value: '选项5',
+      label: '北京烤鸭'
+    }
+  ])
+  const [value1] = useState('')
   return (
     <div>
+      <Select value={value1} placeholder='请选择'>
+        {options.map((el: any) => {
+          return (
+            <Select.Option key={el.value} label={el.label} value={el.value} />
+          )
+        })}
+      </Select>
+
+      <br />
       <Button
         type='text'
         onClick={() => {
           MessageBox.prompt('请输入邮箱', '提示', {
-            inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+            inputPattern:
+              /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
             inputErrorMessage: '邮箱格式不正确'
-          }).then(({ value }:any) => {
-            Message({
-              type: 'success',
-              message: '你的邮箱是: ' + value
-            });
-          }).catch(() => {
-            Message({
-              type: 'info',
-              message: '取消输入'
-            });
-          });
+          })
+            .then(({ value }: any) => {
+              Message({
+                type: 'success',
+                message: '你的邮箱是: ' + value
+              })
+            })
+            .catch(() => {
+              Message({
+                type: 'info',
+                message: '取消输入'
+              })
+            })
         }}
       >
         点击打开 Message Box
