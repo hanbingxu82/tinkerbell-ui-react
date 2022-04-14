@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-13 17:24:25
+ * @LastEditTime: 2022-04-14 09:48:48
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -185,7 +185,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     // 更新 state
     setState({ ...state })
   }, props)
-
 
   function _debounce(): number {
     return props.remote ? 300 : 0
@@ -640,7 +639,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function _resetInputWidth() {
-    console.log(reference, 1111)
     setState({
       ...state,
       inputWidth: reference.getBoundingClientRect().width
@@ -703,7 +701,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function navigateOptions(direction: string) {
     let { visible, hoverIndex, options } = state
-debugger
+    debugger
     if (!visible) {
       return setState({
         ...state,
@@ -762,7 +760,7 @@ debugger
     const element: any = ReactDOM.findDOMNode(
       state.options[state.hoverIndex] as any
     )
-    console.log(state.options,state.hoverIndex)
+    console.log(state.options, state.hoverIndex)
     debugger
     const bottomOverflowDistance =
       element.getBoundingClientRect().bottom -
@@ -948,12 +946,11 @@ debugger
     popper = ReactDOM.findDOMNode(popperRef.current as any)
 
     handleValueChange()
-    addResizeListener(rootRef.current, resetInputWidth)
     debouncedOnInputChange = debounce(_debounce(), () => {
       onInputChange()
     })
-
-    resetInputWidth = _resetInputWidth()
+    resetInputWidth = _resetInputWidth
+    addResizeListener(rootRef.current, resetInputWidth)
     return () => {
       removeResizeListener(rootRef.current, resetInputWidth)
     }
