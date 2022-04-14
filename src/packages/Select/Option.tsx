@@ -10,26 +10,32 @@ type State = {
   visible: boolean
   hitState: boolean
 }
-const Option = function (props: any) {
+const Option: any = function (props: any) {
   const [state, setState] = useState<State>({
     index: -1,
     visible: true,
     hitState: false
   })
-
+  const OptionChildObj = {
+    state,
+    setState,
+    props,
+    currentLabel,
+    queryChange,
+    resetIndex
+  }
   useEffect(() => {
-    props.onOptionCreate(Option)
-
+    props.onOptionCreate(OptionChildObj)
     setState({
       ...state,
-      index: props.state.options.indexOf(Option)
+      index: props.state.options.indexOf(OptionChildObj)
     })
 
     if (currentSelected() === true) {
-      props.addOptionToValue(Option, true)
+      props.addOptionToValue(OptionChildObj, true)
     }
     return () => {
-      props.onOptionDestroy(Option)
+      props.onOptionDestroy(OptionChildObj)
     }
   }, [])
   function currentSelected(): boolean {
@@ -68,41 +74,42 @@ const Option = function (props: any) {
     if (!props.disabled && !props.props.disabled) {
       props.setState({
         ...props.state,
-        hoverIndex: props.state.options.indexOf(Option)
+        hoverIndex: props.state.options.indexOf(OptionChildObj)
       })
     }
   }
 
   function selectOptionClick() {
     if (props.disabled !== true && props.props.disabled !== true) {
-      props.onOptionClick(Option)
+      props.onOptionClick(OptionChildObj)
     }
   }
+  // @ts-ignore 实例
+  function queryChange(query: string) {
+    console.log(query)
+    // query 里如果有正则中的特殊字符，需要先将这些字符转义
+    const parsedQuery = query.replace(
+      /(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g,
+      '\\$1'
+    )
+    const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
 
-  // function queryChange(query: string) {
-  //   // query 里如果有正则中的特殊字符，需要先将这些字符转义
-  //   const parsedQuery = query.replace(
-  //     /(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g,
-  //     '\\$1'
-  //   )
-  //   const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
+    if (!visible) {
+      props.setState({
+        ...props.state,
+        filteredOptionsCount: props.state.filteredOptionsCount - 1
+      })
+    }
 
-  //   if (!visible) {
-  //     props.setState({
-  //       ...props.state,
-  //       filteredOptionsCount: props.state.filteredOptionsCount - 1
-  //     })
-  //   }
-
-  //   setState({ ...state, visible })
-  // }
-
-  // function resetIndex() {
-  //   setState({
-  //     ...state,
-  //     index: props.state.options.indexOf(Option)
-  //   })
-  // }
+    setState({ ...state, visible })
+  }
+  // @ts-ignore 实例
+  function resetIndex() {
+    setState({
+      ...state,
+      index: props.state.options.indexOf(OptionChildObj)
+    })
+  }
 
   const { visible, index } = state
   return (

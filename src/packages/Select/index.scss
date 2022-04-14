@@ -125,70 +125,6 @@
   line-height: 30px
 }
 
-.tb-scrollbar {
-  overflow: hidden;
-  position: relative
-}
-
-.tb-scrollbar:active .tb-scrollbar__bar,
-.tb-scrollbar:focus .tb-scrollbar__bar,
-.tb-scrollbar:hover .tb-scrollbar__bar {
-  opacity: 1;
-  transition: opacity 340ms ease-out
-}
-
-.tb-scrollbar__wrap {
-  overflow: scroll
-}
-
-.tb-scrollbar__wrap--hidden-default::-webkit-scrollbar {
-  width: 0;
-  height: 0
-}
-
-.tb-scrollbar__thumb {
-  position: relative;
-  display: block;
-  width: 0;
-  height: 0;
-  cursor: pointer;
-  border-radius: inherit;
-  background-color: rgba(151, 168, 190, .3);
-  transition: .3s background-color
-}
-
-.tb-scrollbar__thumb:hover {
-  background-color: rgba(151, 168, 190, .5)
-}
-
-.tb-scrollbar__bar {
-  position: absolute;
-  right: 2px;
-  bottom: 2px;
-  z-index: 1;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 120ms ease-out
-}
-
-.tb-scrollbar__bar.is-horizontal {
-  height: 6px;
-  left: 2px
-}
-
-.tb-scrollbar__bar.is-horizontal>div {
-  height: 100%
-}
-
-.tb-scrollbar__bar.is-vertical {
-  width: 6px;
-  top: 2px
-}
-
-.tb-scrollbar__bar.is-vertical>div {
-  width: 100%
-}
-
 .tb-select {
   display: inline-block;
   position: relative
@@ -318,4 +254,45 @@
 
 .tb-select__tag .tb-icon-close {
   font-size: 12px
+}
+
+.tb-zoom-in-top-enter,
+.tb-zoom-in-top-enter-active {
+  animation: tb-zoom-in-top-in .3s;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center top;
+  transform: scaleY(0);
+}
+
+
+.tb-zoom-in-top-leave,
+.tb-zoom-in-top-leave-active {
+  animation: tb-zoom-in-top-out .3s;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center top;
+}
+
+@keyframes tb-zoom-in-top-in {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+
+  }
+}
+
+@keyframes tb-zoom-in-top-out {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
 }

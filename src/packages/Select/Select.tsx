@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-14 09:48:48
+ * @LastEditTime: 2022-04-14 16:41:51
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -67,17 +67,17 @@ const sizeMap: { [size: string]: number } = {
   small: 30,
   mini: 22
 }
+let popperJS: any
+let timeout: any
+let debouncedOnInputChange: any
+let resetInputWidth: any
+let reference: any
+let popper: any
+// let selectedInit1: any
+let skip: any
+let deleteTagTag: any
 
 const Select: any = React.forwardRef((props: any, _ref: any) => {
-  let popperJS: any
-  let timeout: any
-  let debouncedOnInputChange: any
-  let resetInputWidth: any
-  let reference: any
-  let popper: any
-  // let selectedInit1: any
-  let skip: any
-  let deleteTagTag: any
   const onQueryChangeQuery = useRef('')
   const rootRef: any = useRef(null)
   const referenceRef: any = useRef(null)
@@ -189,13 +189,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-
+  // @ts-ignore
   function handleClickOutside() {
     if (state.visible) {
       setState({ ...state, visible: false })
     }
   }
-  console.log(handleClickOutside)
   function handleValueChange() {
     const { multiple } = props
     const { value, options } = state
@@ -492,22 +491,45 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   useEffect(() => {
     if (initComponent.current) return
     state.options.forEach((option: any) => {
-      option.queryChange(onQueryChangeQuery)
+      option.queryChange(onQueryChangeQuery.current)
     })
   }, [state.filteredOptionsCount])
 
   function onEnter(): void {
+    popper = ReactDOM.findDOMNode(popperRef.current as any)
     popperJS = new Popper(reference, popper, {
       modifiers: {
         computeStyle: {
           gpuAcceleration: false
-        }
-      }
+        },
+        preventOverflow: {
+          boundariesElement: "window",
+        },
+      },
+      
+      onCreate: () => {
+        console.log('create')
+        resetTransformOrigin();
+        // onEnter()
+      },
+      onUpdate: () => {
+        console.log('onUpdate')
+        resetTransformOrigin();
+      },
     })
   }
-
+  function resetTransformOrigin() {
+    if (!popperJS) return;
+    let xPlacement = popperJS.popper.getAttribute("x-placement");
+    let placementStart = xPlacement.split("-")[0];
+    let placementEnd = xPlacement.split("-")[1];
+    const leftOrRight = xPlacement === "left" || xPlacement === "right";
+    if (!leftOrRight) {
+      popperJS.popper.style.transformOrigin = placementStart === "bottom" || (placementStart !== "top" && placementEnd === "start") ? "center top" : "center bottom";
+    }
+  }
   function onAfterLeave(): void {
-    popperJS.destroy()
+    // popperJS.destroy()
   }
 
   function iconClass(): string {
@@ -563,11 +585,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
     return null
   }
-
+  // @ts-ignore
   function handleClose() {
     setState({ ...state, visible: false })
   }
-  console.log(handleClose)
   function toggleLastOptionHitState(hit?: boolean): any {
     const { selected } = state
 
@@ -701,7 +722,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function navigateOptions(direction: string) {
     let { visible, hoverIndex, options } = state
-    debugger
     if (!visible) {
       return setState({
         ...state,
@@ -760,8 +780,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     const element: any = ReactDOM.findDOMNode(
       state.options[state.hoverIndex] as any
     )
-    console.log(state.options, state.hoverIndex)
-    debugger
     const bottomOverflowDistance =
       element.getBoundingClientRect().bottom -
       popper.getBoundingClientRect().bottom
@@ -903,7 +921,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         selected.push(option)
       }
     }
-    setState({ ...state, selected, selectedLabel })
+    setState(() => ({ ...state, selected, selectedLabel }))
   }
   /**
    * @description: 上方 onOptionClick 处理监听 selected、selectedLabel
@@ -915,7 +933,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (!props.multiple) {
       onSelectedChange(state.selected)
     }
-  }, [state.selected, state.selectedLabel])
+  }, [state.selected, state.selectedLabel, state.visible])
 
   function onMouseDown(event: any) {
     event.preventDefault()
@@ -944,7 +962,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     initComponent.current = false
     reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
     popper = ReactDOM.findDOMNode(popperRef.current as any)
-
+    console.log(reference, popper)
     handleValueChange()
     debouncedOnInputChange = debounce(_debounce(), () => {
       onInputChange()
@@ -956,19 +974,24 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
   }, [])
 
-  const { multiple, size, disabled, filterable, loading } = props
   const {
-    selected,
-    inputWidth,
-    inputLength,
-    query,
-    selectedLabel,
-    visible,
-    options,
-    filteredOptionsCount,
-    currentPlaceholder
+    multiple,
+    size,
+    disabled,
+    filterable
+    // loading
+  } = props
+  const {
+    // selected,
+    // inputWidth,
+    // inputLength,
+    // query,
+    // selectedLabel,
+    // visible,
+    // options,
+    // filteredOptionsCount,
+    // currentPlaceholder
   } = state
-  console.log(loading, options, filteredOptionsCount)
   return (
     <div ref={rootRef} style={props.style} className={classnames('tb-select')}>
       {multiple && (
@@ -977,10 +1000,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           className='tb-select__tags'
           onClick={toggleMenu}
           style={{
-            maxWidth: inputWidth - 32
+            maxWidth: state.inputWidth - 32
           }}
         >
-          {selected.map((el: any) => {
+          {state.selected.map((el: any) => {
             return (
               <Tag
                 type='primary'
@@ -1003,9 +1026,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
               ref={inputRef}
               type='text'
               className={classnames('tb-select__input', size && `is-${size}`)}
-              style={{ width: inputLength, maxWidth: inputWidth - 42 }}
+              style={{
+                width: state.inputLength,
+                maxWidth: state.inputWidth - 42
+              }}
               disabled={disabled}
-              defaultValue={query}
+              defaultValue={state.query}
               onKeyUp={managePlaceholder}
               onKeyDown={(e) => {
                 resetInputState(e)
@@ -1051,9 +1077,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       )}
       <Input
         ref={referenceRef}
-        value={selectedLabel}
+        value={state.selectedLabel}
         type='text'
-        placeholder={currentPlaceholder}
+        placeholder={state.currentPlaceholder}
         name='name'
         size={size}
         disabled={disabled}
@@ -1090,11 +1116,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         }}
       />
       <CSSMotion
-        visible={visible && emptyText() !== false}
+        visible={state.visible && emptyText() !== false}
         onEnterActive={() => {
           onEnter()
         }}
         onLeaveEnd={() => {
+          console.log(123123123)
           onAfterLeave()
         }}
         motionName='tb-zoom-in-top'
@@ -1109,7 +1136,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
               },
               className
             )}
-            style={{ minWidth: inputWidth, ...style }}
+            style={{ minWidth: state.inputWidth, ...style }}
           >
             {/* {options.length > 0 && filteredOptionsCount > 0 && !loading ? (
               <Scrollbar
@@ -1123,12 +1150,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
                 onOptionCreate,
                 onOptionDestroy,
                 addOptionToValue,
+                onOptionClick,
                 props,
                 state,
                 setState
               })
             })}
-            {props.children}
             {/* </Scrollbar>
             ) : null} */}
 
