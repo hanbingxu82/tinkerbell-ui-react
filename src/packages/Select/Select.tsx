@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-14 16:41:51
+ * @LastEditTime: 2022-04-15 09:32:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -275,7 +275,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     } else {
       let icon = rootRef.current.querySelector('.tb-input__icon')
 
-      if (icon && !icon.classList.contains('tb-icon-circle-close')) {
+      if (icon && !icon.classList.contains('icon-reeor-fill')) {
         const elements = rootRef.current.querySelector('.tb-input__icon')
 
         for (let i = 0; i < elements.length; i++) {
@@ -534,10 +534,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function iconClass(): string {
     return showCloseIcon()
-      ? 'circle-close'
+      ? 'icon-close'
       : props.remote && props.filterable
       ? ''
-      : `caret-top ${state.visible ? 'is-reverse' : ''}`
+      : `icon-arrow-down ${state.visible ? 'is-reverse' : ''}`
   }
 
   function showCloseIcon(): boolean {

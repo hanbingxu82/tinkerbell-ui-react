@@ -16,6 +16,12 @@ const Option: any = function (props: any) {
     visible: true,
     hitState: false
   })
+  /**
+   * @description: 是否第一次加载组件
+   * @param {*}
+   * @return {*}
+   */
+  // const initComponent = useRef(true)
   const OptionChildObj = {
     state,
     setState,
@@ -24,20 +30,25 @@ const Option: any = function (props: any) {
     queryChange,
     resetIndex
   }
+
   useEffect(() => {
     props.onOptionCreate(OptionChildObj)
-    setState({
-      ...state,
-      index: props.state.options.indexOf(OptionChildObj)
-    })
 
+    const index = props.state.options.indexOf(OptionChildObj)
+    state.index = index
+    setState(state)
     if (currentSelected() === true) {
       props.addOptionToValue(OptionChildObj, true)
     }
+
     return () => {
       props.onOptionDestroy(OptionChildObj)
     }
   }, [])
+  // useEffect(() => {
+  //   console.log(state.index)
+  // }, [state.index])
+
   function currentSelected(): boolean {
     return (
       props.selected ||
@@ -58,7 +69,7 @@ const Option: any = function (props: any) {
     if (
       Object.prototype.toString.call(props.state.selected) === '[object Object]'
     ) {
-      return Option === props.state.selected
+      return OptionChildObj.props.value === props.state.selected.props.value
     } else if (Array.isArray(props.state.selected)) {
       return (
         props.state.selected
@@ -72,10 +83,9 @@ const Option: any = function (props: any) {
 
   function hoverItem() {
     if (!props.disabled && !props.props.disabled) {
-      props.setState({
-        ...props.state,
-        hoverIndex: props.state.options.indexOf(OptionChildObj)
-      })
+      props.state.hoverIndex = props.state.options.indexOf(OptionChildObj)
+      console.log(props.state)
+      props.setState(props.state)
     }
   }
 
@@ -111,16 +121,15 @@ const Option: any = function (props: any) {
     })
   }
 
-  const { visible, index } = state
   return (
     <div>
-      {visible ? (
+      {state.visible ? (
         <li
           style={props.style}
           className={classnames('tb-select-dropdown__item', {
             selected: itemSelected(),
             'is-disabled': props.disabled || props.props.disabled,
-            hover: props.state.hoverIndex === index
+            hover: props.state.hoverIndex === state.index
           })}
           onMouseEnter={hoverItem}
           onClick={selectOptionClick}

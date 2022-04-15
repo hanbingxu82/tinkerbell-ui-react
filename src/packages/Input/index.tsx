@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-08 09:00:21
- * @LastEditTime: 2022-04-08 16:01:18
+ * @LastEditTime: 2022-04-14 17:15:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Input/index.tsx
@@ -183,7 +183,7 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
       >
         {prepend && <div className='tb-input-group__prepend'>{prepend}</div>}
         {typeof icon === 'string' ? (
-          <i className={`iconfont ${icon}`} onClick={handleIconClick}>
+          <i className={`tb-input__icon iconfont ${icon}`} onClick={handleIconClick}>
             {prepend}
           </i>
         ) : (
