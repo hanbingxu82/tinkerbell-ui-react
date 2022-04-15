@@ -67,6 +67,8 @@ const Option: any = function (props: any) {
   }
   function itemSelected(): boolean {
     if (
+      props.state.selected &&
+      props.state.selected.props &&
       Object.prototype.toString.call(props.state.selected) === '[object Object]'
     ) {
       return OptionChildObj.props.value === props.state.selected.props.value
@@ -84,7 +86,6 @@ const Option: any = function (props: any) {
   function hoverItem() {
     if (!props.disabled && !props.props.disabled) {
       props.state.hoverIndex = props.state.options.indexOf(OptionChildObj)
-      console.log(props.state)
       props.setState(props.state)
     }
   }

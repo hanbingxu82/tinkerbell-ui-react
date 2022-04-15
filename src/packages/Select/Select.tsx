@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-15 13:51:20
+ * @LastEditTime: 2022-04-15 16:53:55
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -11,7 +11,7 @@
 
 import React, { useEffect, useRef, useCallback, useState } from 'react'
 import ReactDOM from 'react-dom'
-import ClickOutside from 'react-click-outside'
+import { listenForOutsideClicks } from './somewhere'
 import { debounce } from 'throttle-debounce'
 import Popper from 'popper.js'
 import CSSMotion from 'rc-motion'
@@ -20,14 +20,10 @@ import {
   useUpdateEffect
 } from '../../utils/useUpdateEffect'
 import reset from './style'
-// import { Component, PropTypes, Transition, View } from '../../libs'
 import { addResizeListener, removeResizeListener } from './resize-event'
-
-// import { Scrollbar } from '../scrollbar'
 
 import Tag from '../Tag'
 import Input from '../Input'
-// import i18n from '../locale'
 import './index.scss'
 
 const classnames = require('classnames')
@@ -53,7 +49,7 @@ type State = {
   currentPlaceholder: string
   selectedLabel: string
   value: any
-  visible: boolean
+  // visible: boolean
   query: string
   selected: any
   voidRemoteQuery: boolean
@@ -84,6 +80,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   const popperRef: any = useRef(null)
   const inputRef: any = useRef(null)
   const tagsRef: any = useRef(null)
+  const [listening, setListening] = useState(false)
 
   // 强制更新视图方法 start
   const [, updateState] = useState<any>()
@@ -95,6 +92,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @return {*}
    */
   const initComponent = useRef(true)
+  const [visible, setVisible] = useState(false)
   const [state, setState] = useState<State>({
     options: [],
     isSelect: true,
@@ -109,7 +107,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     currentPlaceholder: props.placeholder || '请选择',
     selectedLabel: '',
     selectedInit: false,
-    visible: false,
     selected: null,
     value: props.value,
     valueChangeBySelected: false,
@@ -124,7 +121,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   if (props.remote) {
     state.voidRemoteQuery = true
   }
-
+  useEffect(
+    listenForOutsideClicks(listening, setListening, rootRef, setVisible)
+  )
   // function getChildContext(): Object {
   //   return {
   //     component: ref
@@ -159,17 +158,17 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @param {_oldProps，oldState}:旧props， 旧state
    * @return {*}
    */
-  useUpdateEffect((_oldProps, oldState) => {
+  useUpdateEffect((_oldProps, oldState, oldVisible) => {
     if (state.value != oldState.value) {
       onValueChange(state.value)
     }
 
-    if (state.visible != oldState.visible) {
+    if (visible != oldVisible) {
       if (props.onVisibleChange) {
-        props.onVisibleChange(state.visible)
+        props.onVisibleChange(visible)
       }
 
-      onVisibleChange(state.visible)
+      onVisibleChange(visible)
     }
 
     if (state.query != state.query) {
@@ -189,12 +188,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-  // @ts-ignore
-  function handleClickOutside() {
-    if (state.visible) {
-      setState({ ...state, visible: false })
-    }
-  }
+  // // @ts-ignore
+  // function handleClickOutside() {
+  //   if (state.visible) {
+  //     setState({ ...state, visible: false })
+  //   }
+  // }
   function handleValueChange() {
     const { multiple } = props
     const { value, options } = state
@@ -218,6 +217,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
     }
   }
+
   /**
    * @description: 监听上方函数 selected 数据变化
    * @param {*}
@@ -503,33 +503,37 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           gpuAcceleration: false
         },
         preventOverflow: {
-          boundariesElement: "window",
-        },
+          boundariesElement: 'window'
+        }
       },
-      
+
       onCreate: () => {
         console.log('create')
-        resetTransformOrigin();
+        resetTransformOrigin()
         // onEnter()
       },
       onUpdate: () => {
         console.log('onUpdate')
-        resetTransformOrigin();
-      },
+        resetTransformOrigin()
+      }
     })
   }
   function resetTransformOrigin() {
-    if (!popperJS) return;
-    let xPlacement = popperJS.popper.getAttribute("x-placement");
-    let placementStart = xPlacement.split("-")[0];
-    let placementEnd = xPlacement.split("-")[1];
-    const leftOrRight = xPlacement === "left" || xPlacement === "right";
+    if (!popperJS) return
+    let xPlacement = popperJS.popper.getAttribute('x-placement')
+    let placementStart = xPlacement.split('-')[0]
+    let placementEnd = xPlacement.split('-')[1]
+    const leftOrRight = xPlacement === 'left' || xPlacement === 'right'
     if (!leftOrRight) {
-      popperJS.popper.style.transformOrigin = placementStart === "bottom" || (placementStart !== "top" && placementEnd === "start") ? "center top" : "center bottom";
+      popperJS.popper.style.transformOrigin =
+        placementStart === 'bottom' ||
+        (placementStart !== 'top' && placementEnd === 'start')
+          ? 'center top'
+          : 'center bottom'
     }
   }
   function onAfterLeave(): void {
-    // popperJS.destroy()
+    popperJS.destroy()
   }
 
   function iconClass(): string {
@@ -537,7 +541,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       ? 'icon-close'
       : props.remote && props.filterable
       ? ''
-      : `icon-arrow-up ${state.visible ? 'is-reverse' : ''}`
+      : `icon-arrow-up ${visible ? 'is-reverse' : ''}`
   }
 
   function showCloseIcon(): boolean {
@@ -545,20 +549,24 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       props.clearable &&
       state.inputHovering &&
       !props.multiple &&
-      state.options.indexOf(state.selected) > -1
+      state.options.some((item: any) => {
+        if (item && state.selected && state.selected.props) {
+          return item.props.value == state.selected.props.value
+        }
+        return false
+      })
 
     if (!rootRef.current) return false
-    let icon = rootRef.current.querySelector('.tb-input__icon')
-
-    if (icon) {
-      if (criteria) {
-        icon.addEventListener('click', deleteSelected)
-        icon.classList.add('is-show-close')
-      } else {
-        icon.removeEventListener('click', deleteSelected)
-        icon.classList.remove('is-show-close')
-      }
-    }
+    // let icon = rootRef.current.querySelector('.tb-input__icon')
+    // if (icon) {
+    //   if (criteria) {
+    //     icon.addEventListener('click', deleteSelected)
+    //     icon.classList.add('is-show-close')
+    //   } else {
+    //     icon.removeEventListener('click', deleteSelected)
+    //     icon.classList.remove('is-show-close')
+    //   }
+    // }
     return criteria
   }
 
@@ -587,7 +595,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
   // @ts-ignore
   function handleClose() {
-    setState({ ...state, visible: false })
+    setVisible(false)
   }
   function toggleLastOptionHitState(hit?: boolean): any {
     const { selected } = state
@@ -706,27 +714,21 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function toggleMenu() {
     const { filterable, disabled } = props
-    const { query, visible } = state
+    const { query } = state
 
     if (filterable && query === '' && visible) {
       return
     }
 
     if (!disabled) {
-      setState({
-        ...state,
-        visible: !visible
-      })
+      setVisible(!visible)
     }
   }
 
   function navigateOptions(direction: string) {
-    let { visible, hoverIndex, options } = state
+    let { hoverIndex, options } = state
     if (!visible) {
-      return setState({
-        ...state,
-        visible: true
-      })
+      return setVisible(true)
     }
 
     if (
@@ -810,12 +812,11 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (state.selectedLabel != '') {
       setState({
         ...state,
-        selected: {},
-        selectedLabel: '',
-        visible: false
+        selected: null,
+        selectedLabel: ''
       })
-
-      props.context.form && props.context.form.onFieldChange()
+      setVisible(false)
+      props.context && props.context.form && props.context.form.onFieldChange()
 
       if (props.onChange) {
         props.onChange('')
@@ -851,7 +852,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }, [state.selected])
 
   function handleIconClick(event: any) {
-    if (iconClass().indexOf('circle-close') > -1) {
+    if (iconClass().indexOf('icon-close') > -1) {
       deleteSelected(event)
     } else {
       toggleMenu()
@@ -903,7 +904,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (!multiple) {
       selected = option
       selectedLabel = option.currentLabel()
-      state.visible = false
+      // state.visible = false
+      setVisible(false)
     } else {
       let optionIndex = -1
 
@@ -933,7 +935,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (!props.multiple) {
       onSelectedChange(state.selected)
     }
-  }, [state.selected, state.selectedLabel, state.visible])
+  }, [state.selected, state.selectedLabel, visible])
 
   function onMouseDown(event: any) {
     event.preventDefault()
@@ -958,11 +960,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       inputHovering: false
     })
   }
+
   useEffect(() => {
     initComponent.current = false
+
     reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
     popper = ReactDOM.findDOMNode(popperRef.current as any)
-    console.log(reference, popper)
+
     handleValueChange()
     debouncedOnInputChange = debounce(_debounce(), () => {
       onInputChange()
@@ -1037,7 +1041,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
                 resetInputState(e)
                 switch (e.keyCode) {
                   case 27:
-                    setState({ ...state, visible: false })
+                    setVisible(false)
                     e.preventDefault()
                     break
                   case 8:
@@ -1095,7 +1099,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           switch (e.keyCode) {
             case 9:
             case 27:
-              setState({ ...state, visible: false })
+              setVisible(false)
               e.preventDefault()
               break
             case 13:
@@ -1116,12 +1120,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         }}
       />
       <CSSMotion
-        visible={state.visible && emptyText() !== false}
-        onEnterActive={() => {
+        visible={visible && emptyText() !== false}
+        onEnterActive={(HTMLElement) => {
+          HTMLElement.style.display = 'block'
           onEnter()
         }}
-        onLeaveEnd={() => {
-          console.log(123123123)
+        removeOnLeave={false}
+        onLeaveEnd={(HTMLElement) => {
+          HTMLElement.style.display = 'none'
           onAfterLeave()
         }}
         motionName='tb-zoom-in-top'
@@ -1195,4 +1201,4 @@ Select.propTypes = {
   onClear: PropTypes.func
 }
 
-export default ClickOutside(Select)
+export default Select

@@ -36,7 +36,6 @@
 .tb-select-dropdown.is-multiple .tb-select-dropdown__item.selected::after {
   position: absolute;
   right: 10px;
-  font-family: element-icons;
   content: "\E608";
   font-size: 11px;
   -webkit-font-smoothing: antialiased;
@@ -135,6 +134,10 @@
   border-color: #8391a5
 }
 
+.tb-select:hover .tb-input.is-disabled .tb-input__inner {
+  border-color: #d1dbe5;
+}
+
 .tb-select .tb-input__inner {
   cursor: pointer;
   padding-right: 35px
@@ -180,6 +183,11 @@
 .tb-select .tb-input.is-disabled .tb-input__inner {
   cursor: not-allowed
 }
+
+.tb-select .tb-input.is-disabled .iconfont {
+  cursor: not-allowed
+}
+
 
 .tb-select .tb-input.is-disabled .tb-input__inner:hover {
   border-color: #d1dbe5
