@@ -10,44 +10,45 @@ type State = {
   visible: boolean
   hitState: boolean
 }
-const Option: any = function (props: any) {
+const Option: any = React.forwardRef((props: any, _ref: any) => {
+  const optionRef: any = React.createRef()
   const [state, setState] = useState<State>({
     index: -1,
     visible: true,
     hitState: false
   })
-  /**
-   * @description: 是否第一次加载组件
-   * @param {*}
-   * @return {*}
-   */
-  // const initComponent = useRef(true)
-  const OptionChildObj = {
-    state,
-    setState,
-    props,
-    currentLabel,
-    queryChange,
-    resetIndex
-  }
+
+  // React.useImperativeHandle(
+  //   optionRef,
+  //   () => ({
+  //     currentLabel,
+  //     queryChange,
+  //     resetIndex
+  //   }),
+  //   [state]
+  // )
+  useEffect(() => {
+    optionRef.current = optionRef.current ? optionRef.current : {}
+    optionRef.current.currentLabel = currentLabel
+    optionRef.current.queryChange = queryChange
+    optionRef.current.resetIndex = resetIndex
+    optionRef.current.props = {}
+    optionRef.current.props.value = props.value
+  }, [state])
 
   useEffect(() => {
-    props.onOptionCreate(OptionChildObj)
-
-    const index = props.state.options.indexOf(OptionChildObj)
-    state.index = index
-    setState(state)
+    // console.log(optionRef.current.currentLabel)
+    props.onOptionCreate(optionRef.current)
+    const index = props.state.options.indexOf(optionRef.current)
+    setState({ ...state, index })
     if (currentSelected() === true) {
-      props.addOptionToValue(OptionChildObj, true)
+      props.addOptionToValue(optionRef.current, true)
     }
 
     return () => {
-      props.onOptionDestroy(OptionChildObj)
+      props.onOptionDestroy(optionRef.current)
     }
   }, [])
-  // useEffect(() => {
-  //   console.log(state.index)
-  // }, [state.index])
 
   function currentSelected(): boolean {
     return (
@@ -66,12 +67,15 @@ const Option: any = function (props: any) {
     )
   }
   function itemSelected(): boolean {
+    console.log(Object.prototype.toString.call(props.state.selected))
     if (
-      props.state.selected &&
-      props.state.selected.props &&
-      Object.prototype.toString.call(props.state.selected) === '[object Object]'
+      Object.prototype.toString.call(props.state.selected) ===
+        '[object Object]' ||
+      Object.prototype.toString.call(props.state.selected) ===
+        '[object HTMLDivElement]'
     ) {
-      return OptionChildObj.props.value === props.state.selected.props.value
+      // console.log(props.state.selected.props.value)
+      return props.value === props.state.selected.props.value
     } else if (Array.isArray(props.state.selected)) {
       return (
         props.state.selected
@@ -85,19 +89,17 @@ const Option: any = function (props: any) {
 
   function hoverItem() {
     if (!props.disabled && !props.props.disabled) {
-      props.state.hoverIndex = props.state.options.indexOf(OptionChildObj)
-      props.setState(props.state)
+      props.hoverItem(props.state.options.indexOf(optionRef.current))
     }
   }
 
   function selectOptionClick() {
     if (props.disabled !== true && props.props.disabled !== true) {
-      props.onOptionClick(OptionChildObj)
+      props.onOptionClick(optionRef.current)
     }
   }
   // @ts-ignore 实例
   function queryChange(query: string) {
-    console.log(query)
     // query 里如果有正则中的特殊字符，需要先将这些字符转义
     const parsedQuery = query.replace(
       /(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g,
@@ -106,24 +108,20 @@ const Option: any = function (props: any) {
     const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
 
     if (!visible) {
-      props.setState({
-        ...props.state,
-        filteredOptionsCount: props.state.filteredOptionsCount - 1
-      })
+      props.queryChange()
     }
-
     setState({ ...state, visible })
   }
   // @ts-ignore 实例
   function resetIndex() {
     setState({
       ...state,
-      index: props.state.options.indexOf(OptionChildObj)
+      index: props.state.options.indexOf(optionRef.current)
     })
   }
 
   return (
-    <div>
+    <div ref={optionRef}>
       {state.visible ? (
         <li
           style={props.style}
@@ -140,7 +138,7 @@ const Option: any = function (props: any) {
       ) : null}
     </div>
   )
-}
+})
 
 Option.contextTypes = {
   component: PropTypes.any

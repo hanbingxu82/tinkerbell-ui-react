@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-15 16:53:55
+ * @LastEditTime: 2022-04-19 13:58:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -34,29 +34,6 @@ reset(`
     position: absolute !important;
   }
 `)
-
-type State = {
-  options: any
-  isSelect: boolean
-  inputLength: number
-  inputWidth: number
-  inputHovering: boolean
-  filteredOptionsCount: number
-  optionsCount: number
-  hoverIndex: number
-  bottomOverflowBeforeHidden: number
-  cachedPlaceHolder: string
-  currentPlaceholder: string
-  selectedLabel: string
-  value: any
-  // visible: boolean
-  query: string
-  selected: any
-  voidRemoteQuery: boolean
-  valueChangeBySelected: boolean
-  selectedInit: boolean
-  dropdownUl?: HTMLElement
-}
 
 const sizeMap: { [size: string]: number } = {
   large: 42,
@@ -93,53 +70,63 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   const initComponent = useRef(true)
   const [visible, setVisible] = useState(false)
-  const [state, setState] = useState<State>({
-    options: [],
-    isSelect: true,
-    inputLength: 20,
-    inputWidth: 0,
-    inputHovering: false,
-    filteredOptionsCount: 0,
-    optionsCount: 0,
-    hoverIndex: -1,
-    bottomOverflowBeforeHidden: 0,
-    cachedPlaceHolder: props.placeholder || '请选择',
-    currentPlaceholder: props.placeholder || '请选择',
-    selectedLabel: '',
-    selectedInit: false,
-    selected: null,
-    value: props.value,
-    valueChangeBySelected: false,
-    voidRemoteQuery: false,
-    query: ''
-  })
+  let [options, setOptions] = useState<any>([])
+  let [isSelect] = useState<boolean>(true)
+  let [inputLength, setInputLength] = useState<number>(20)
+  let [inputWidth, setInputWidth] = useState<number>(0)
+  let [inputHovering, setInputHovering] = useState<boolean>(false)
+  let [filteredOptionsCount, setFilteredOptionsCount] = useState<number>(0)
+  let [optionsCount] = useState<number>(0)
+  let [hoverIndex, setHoverIndex] = useState<number>(-1)
+  let [bottomOverflowBeforeHidden, setBottomOverflowBeforeHidden] = useState<
+    number | string
+  >(0)
+  let [cachedPlaceHolder] = useState<string>(props.placeholder || '请选择')
+  let [currentPlaceholder, setCurrentPlaceholder] = useState<string>(
+    props.placeholder || '请选择'
+  )
+  let [selectedLabel, setSelectedLabel] = useState<string>('')
+  let [selectedInit, setSelectedInit] = useState<boolean>(false)
+  let [selected, setSelected] = useState<any>(null)
+  let [value, setValue] = useState<any>(props.value)
+  let [valueChangeBySelected, setValueChangeBySelected] =
+    useState<boolean>(false)
+  let [voidRemoteQuery, setVoidRemoteQuery] = useState<boolean>(false)
+  let [query, setQuery] = useState<string>('')
+  let [dropdownUl, setDropdownUl] = useState<any>(null)
+
+  /** 监听 变化current Start*/
+  let watchStateValue = useRef('')
+  let watchSelected = useRef('')
+  let watchAllSSCS = useRef('')
+  let watchCurrentPlaceholder = useRef('')
+  let watchVQHI = useRef('')
+  let watchFilteredOptionsCount = useRef('')
+  let watchHO = useRef('')
+  let watchSS = useRef('')
+  /** 监听 变化current End */
   if (props.multiple) {
-    state.selectedInit = true
-    state.selected = []
+    setSelectedInit(true)
+    setSelected([])
   }
 
   if (props.remote) {
-    state.voidRemoteQuery = true
+    setVoidRemoteQuery(true)
   }
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible)
   )
-  // function getChildContext(): Object {
-  //   return {
-  //     component: ref
-  //   }
-  // }
-  // console.log(getChildContext)
   useWillReceiveProps(
     (oldProps) => {
       if (props.placeholder != oldProps.placeholder) {
-        state.currentPlaceholder = props.placeholder
+        setCurrentPlaceholder(props.placeholder)
       }
 
       if (props.value != oldProps.value) {
-        state.value = props.value
+        watchStateValue.current = 'useWillReceiveProps'
+        setValue(props.value)
       }
-      state.inputWidth = reference.getBoundingClientRect().width
+      setInputWidth(reference.getBoundingClientRect().width)
     },
     [props]
   )
@@ -150,70 +137,85 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    handleValueChange()
-  }, [props.value])
+    if (watchStateValue.current === 'useWillReceiveProps') {
+      handleValueChange()
+    }
+    // 重置
+    watchStateValue.current = ''
+  }, [value])
 
   /**
    * @description: 组件将要更新数据时触发的函数
    * @param {_oldProps，oldState}:旧props， 旧state
    * @return {*}
    */
-  useUpdateEffect((_oldProps, oldState, oldVisible) => {
-    if (state.value != oldState.value) {
-      onValueChange(state.value)
-    }
-
-    if (visible != oldVisible) {
-      if (props.onVisibleChange) {
-        props.onVisibleChange(visible)
+  useUpdateEffect(
+    (_oldProps, oldState, oldVisible) => {
+      if (value != oldState.value) {
+        onValueChange(value)
       }
 
-      onVisibleChange(visible)
-    }
+      if (visible != oldVisible) {
+        if (props.onVisibleChange) {
+          props.onVisibleChange(visible)
+        }
 
-    if (state.query != state.query) {
-      onQueryChange(state.query)
-    }
-
-    if (Array.isArray(state.selected)) {
-      if (state.selected.length != state.selected.length) {
-        onSelectedChange(state.selected)
+        onVisibleChange(visible)
       }
+
+      if (query != oldState.query) {
+        onQueryChange(query as string)
+      }
+
+      if (Array.isArray(selected)) {
+        if (selected.length != oldState.selected.length) {
+          onSelectedChange(selected)
+        }
+      }
+      setInputWidth(reference.getBoundingClientRect().width)
+    },
+    props,
+    {
+      options,
+      isSelect,
+      inputLength,
+      inputWidth,
+      inputHovering,
+      filteredOptionsCount,
+      optionsCount,
+      hoverIndex,
+      bottomOverflowBeforeHidden,
+      cachedPlaceHolder,
+      currentPlaceholder,
+      selectedLabel,
+      selectedInit,
+      selected,
+      value,
+      valueChangeBySelected,
+      voidRemoteQuery,
+      query
     }
-    state.inputWidth = reference.getBoundingClientRect().width
-    // 更新 state
-    setState({ ...state })
-  }, props)
+  )
 
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-  // // @ts-ignore
-  // function handleClickOutside() {
-  //   if (state.visible) {
-  //     setState({ ...state, visible: false })
-  //   }
-  // }
   function handleValueChange() {
     const { multiple } = props
-    const { value, options } = state
 
     if (multiple && Array.isArray(value)) {
-      setState({
-        ...state,
-        selected: options.reduce((prev: any, curr: any) => {
+      setSelected(
+        options.reduce((prev: any, curr: any) => {
           return value.indexOf(curr.props.value) > -1 ? prev.concat(curr) : prev
         }, [])
-      })
+      )
+      watchSelected.current = 'handleValueChangeSelected'
     } else {
       const selected: any = options.filter((option: any) => {
         return option.props.value === value
       })[0]
       if (selected) {
-        setState({
-          ...state,
-          selectedLabel: selected.props.label || selected.props.value
-        })
+        setSelected(selected.props.label || selected.props.value)
       }
     }
   }
@@ -225,18 +227,21 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    onSelectedChange(state.selected, false)
-  }, [state.selected])
+    if (watchSelected.current === 'handleValueChangeSelected') {
+      onSelectedChange(selected, false)
+    }
+    watchSelected.current = ''
+  }, [selected])
 
   function onVisibleChange(visible: boolean) {
     const { multiple, filterable } = props
-    let {
-      query,
-      dropdownUl,
-      selected,
-      selectedLabel,
-      bottomOverflowBeforeHidden
-    } = state
+    // let {
+    //   query,
+    //   dropdownUl,
+    //   selected,
+    //   selectedLabel,
+    //   bottomOverflowBeforeHidden
+    // } = state
 
     if (!visible) {
       reference.querySelector('input').blur()
@@ -257,20 +262,19 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       if (!multiple) {
         if (dropdownUl && selected) {
           const element: any = ReactDOM.findDOMNode(selected)
-          bottomOverflowBeforeHidden =
+          setBottomOverflowBeforeHidden(
             element.getBoundingClientRect().bottom -
-            popper.getBoundingClientRect().bottom
+              popper.getBoundingClientRect().bottom
+          )
         }
 
         if (selected && selected.props) {
           if (selected.props.value) {
-            selectedLabel = selected.currentLabel()
+            setSelectedLabel(selected.currentLabel())
           }
         } else if (filterable) {
-          selectedLabel = ''
+          setSelectedLabel('')
         }
-
-        setState({ ...state, bottomOverflowBeforeHidden, selectedLabel })
       }
     } else {
       let icon = rootRef.current.querySelector('.tb-input__icon')
@@ -288,8 +292,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
 
       if (filterable) {
-        query = selectedLabel
-
+        setQuery(selectedLabel || '')
         if (multiple) {
           inputRef.current.Element.focus()
         } else {
@@ -299,10 +302,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
       if (!dropdownUl) {
         let dropdownChildNodes = popper.childNodes
-        dropdownUl = [].filter.call(
-          dropdownChildNodes,
-          (item: any) => item.tagName === 'UL'
-        )[0]
+        setDropdownUl(
+          [].filter.call(
+            dropdownChildNodes,
+            (item: any) => item.tagName === 'UL'
+          )[0]
+        )
       }
 
       if (!multiple && dropdownUl) {
@@ -310,35 +315,29 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           dropdownUl.scrollTop += bottomOverflowBeforeHidden
         }
       }
-
-      setState({ ...state, query: query || '', dropdownUl })
     }
   }
   function onValueChange(val: any) {
     const { multiple } = props
 
-    let {
-      options,
-      valueChangeBySelected,
-      selectedInit,
-      selected,
-      selectedLabel,
-      currentPlaceholder,
-      cachedPlaceHolder
-    } = state
+    // let {
+    //   options,
+    //   valueChangeBySelected,
+    //   selectedInit,
+    //   selected,
+    //   selectedLabel,
+    //   currentPlaceholder,
+    //   cachedPlaceHolder
+    // } = state
 
     if (valueChangeBySelected) {
-      return setState({
-        ...state,
-        valueChangeBySelected: false
-      })
+      return setValueChangeBySelected(false)
     }
 
     if (multiple && Array.isArray(val)) {
       resetInputHeight()
-
       selectedInit = true
-      selected = []
+      selected = true
       currentPlaceholder = cachedPlaceHolder
 
       val.forEach((item) => {
@@ -359,42 +358,30 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
       if (option) {
         addOptionToValue(option)
-        setState({ ...state, selectedInit, currentPlaceholder })
+        setSelectedInit(selectedInit)
+        setCurrentPlaceholder(currentPlaceholder)
       } else {
         selected = {}
         selectedLabel = ''
-        setState({
-          ...state,
-          selectedInit,
-          selected,
-          currentPlaceholder,
-          selectedLabel
-        })
+        setSelectedInit(selectedInit)
+        setSelected(selected)
+        setCurrentPlaceholder(currentPlaceholder)
+        setSelectedLabel(selectedLabel)
+        watchAllSSCS.current = 'onValueChangeSSCS'
       }
     }
   }
   useEffect(() => {
     if (initComponent.current) return
-    resetHoverIndex()
-  }, [
-    state.selectedInit,
-    state.selected,
-    state.currentPlaceholder,
-    state.selectedLabel
-  ])
+    if (watchAllSSCS.current === 'onValueChangeSSCS') {
+      resetHoverIndex()
+    }
+    watchAllSSCS.current === ''
+  }, [selectedInit, selected, currentPlaceholder, selectedLabel])
 
   function onSelectedChange(val: any, bubble: boolean = true) {
     // 判断父组件是不是有 form context
     const { multiple, filterable, onChange } = props
-    let {
-      query,
-      hoverIndex,
-      inputLength,
-      selectedInit,
-      currentPlaceholder,
-      cachedPlaceHolder,
-      valueChangeBySelected
-    } = state
 
     if (multiple) {
       if (val.length > 0) {
@@ -402,7 +389,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       } else {
         currentPlaceholder = cachedPlaceHolder
       }
-      state.currentPlaceholder = currentPlaceholder
+      setCurrentPlaceholder(currentPlaceholder)
+      watchCurrentPlaceholder.current = 'onSelectedChangeCurrentPlaceholder'
+
       valueChangeBySelected = true
 
       if (bubble) {
@@ -421,19 +410,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
         inputRef.current.Element.focus()
       }
-      state.valueChangeBySelected = valueChangeBySelected
-      state.query = query
-      state.hoverIndex = hoverIndex
-      state.inputLength = inputLength
-      setState({
-        ...state
-      })
+      setValueChangeBySelected(valueChangeBySelected)
+      setQuery(query)
+      setHoverIndex(hoverIndex)
+      setInputLength(inputLength)
+      watchVQHI.current = 'onSelectedChangeVQHI'
     } else {
       if (selectedInit) {
-        return setState({
-          ...state,
-          selectedInit: false
-        })
+        return setSelectedInit(false)
       }
 
       if (bubble) {
@@ -449,20 +433,27 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    if (inputRef && inputRef.current) {
-      inputRef.current.Element.value = ''
+    if (
+      watchCurrentPlaceholder.current === 'onSelectedChangeCurrentPlaceholder'
+    ) {
+      resetInputHeight()
     }
-  }, [
-    state.valueChangeBySelected,
-    state.query,
-    state.hoverIndex,
-    state.inputLength
-  ])
+    watchCurrentPlaceholder.current = ''
+  }, [currentPlaceholder])
+  useEffect(() => {
+    if (initComponent.current) return
+    if (watchVQHI.current === 'onSelectedChangeVQHI') {
+      if (inputRef && inputRef.current) {
+        inputRef.current.Element.value = ''
+      }
+    }
+    watchVQHI.current = ''
+  }, [valueChangeBySelected, query, hoverIndex, inputLength])
 
   function onQueryChange(query: string) {
     onQueryChangeQuery.current = query
     const { multiple, filterable, remote, remoteMethod, filterMethod } = props
-    let { voidRemoteQuery, hoverIndex, options, optionsCount } = state
+    // let { voidRemoteQuery, hoverIndex, options, optionsCount } = state
 
     if (popperJS) {
       popperJS.update()
@@ -484,16 +475,28 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     } else if (typeof filterMethod === 'function') {
       filterMethod(query)
     } else {
-      state.filteredOptionsCount = optionsCount
+      setFilteredOptionsCount(optionsCount)
+      watchFilteredOptionsCount.current = 'onQueryChangeFilteredOptionsCount'
     }
-    setState({ ...state, hoverIndex, voidRemoteQuery })
+    setHoverIndex(hoverIndex)
+    setVoidRemoteQuery(voidRemoteQuery)
   }
+  /**
+   * @description: 监听 onQueryChange watchFilteredOptionsCount
+   * @param {*}
+   * @return {*}
+   */
   useEffect(() => {
     if (initComponent.current) return
-    state.options.forEach((option: any) => {
-      option.queryChange(onQueryChangeQuery.current)
-    })
-  }, [state.filteredOptionsCount])
+    if (
+      watchFilteredOptionsCount.current === 'onQueryChangeFilteredOptionsCount'
+    ) {
+      options.forEach((option: any) => {
+        option.queryChange(onQueryChangeQuery.current)
+      })
+    }
+    watchFilteredOptionsCount.current = ''
+  }, [filteredOptionsCount])
 
   function onEnter(): void {
     popper = ReactDOM.findDOMNode(popperRef.current as any)
@@ -547,11 +550,11 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function showCloseIcon(): boolean {
     let criteria =
       props.clearable &&
-      state.inputHovering &&
+      inputHovering &&
       !props.multiple &&
-      state.options.some((item: any) => {
-        if (item && state.selected && state.selected.props) {
-          return item.props.value == state.selected.props.value
+      options.some((item: any) => {
+        if (item && selected && selected.props) {
+          return item.props.value == selected.props.value
         }
         return false
       })
@@ -572,13 +575,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function emptyText() {
     const { loading, filterable } = props
-    const { voidRemoteQuery, options, filteredOptionsCount } = state
+    // const { voidRemoteQuery, options, filteredOptionsCount } = state
 
     if (loading) {
       return '加载中'
     } else {
       if (voidRemoteQuery) {
-        state.voidRemoteQuery = false
+        voidRemoteQuery = false
         return false
       }
 
@@ -598,7 +601,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     setVisible(false)
   }
   function toggleLastOptionHitState(hit?: boolean): any {
-    const { selected } = state
+    // const { selected } = state
 
     if (!Array.isArray(selected)) return
 
@@ -617,61 +620,64 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function deletePrevTag(e: any) {
     if (e.target.value.length <= 0 && !toggleLastOptionHitState()) {
-      state.selected.pop()
-      setState({ ...state })
+      selected.pop()
+      setSelected([...selected])
     }
   }
 
-  function addOptionToValue(option: any, init?: boolean) {
+  function addOptionToValue(option: any, _init?: boolean) {
     const { multiple, remote } = props
-    let { selected, selectedLabel, hoverIndex, value } = state
+    // let { selected, selectedLabel, hoverIndex, value } = state
 
     if (multiple) {
       if (
         selected.indexOf(option) === -1 &&
         (remote ? value.indexOf(option.props.value) === -1 : true)
       ) {
-        state.selectedInit = !!init
+        // selectedInit = !!init
         selected.push(option)
         resetHoverIndex()
       }
     } else {
-      state.selectedInit = !!init
+      // selectedInit = !!init
       selected = option
       selectedLabel = option.currentLabel()
       hoverIndex = option.index
-      setState({ ...state, selected, selectedLabel, hoverIndex })
+      setSelected(selected)
+      setSelectedLabel(selectedLabel)
+      setHoverIndex(hoverIndex)
+      // setState({ ...state, selected, selectedLabel, hoverIndex })
     }
   }
 
   function managePlaceholder() {
-    let { currentPlaceholder, cachedPlaceHolder } = state
+    // let { currentPlaceholder, cachedPlaceHolder } = state
 
     if (currentPlaceholder !== '') {
       currentPlaceholder = inputRef.current.Element.value
         ? ''
         : cachedPlaceHolder
     }
-
-    setState({ ...state, currentPlaceholder })
+    setCurrentPlaceholder(currentPlaceholder)
   }
 
   function resetInputState(e: any) {
     if (e.keyCode !== 8) {
       toggleLastOptionHitState(false)
     }
-
-    setState({
-      ...state,
-      inputLength: inputRef.current.Element.value.length * 15 + 20
-    })
+    setInputLength(inputRef.current.Element.value.length * 15 + 20)
+    // setState({
+    //   ...state,
+    //   inputLength: inputRef.current.Element.value.length * 15 + 20
+    // })
   }
 
   function _resetInputWidth() {
-    setState({
-      ...state,
-      inputWidth: reference.getBoundingClientRect().width
-    })
+    setInputWidth(reference.getBoundingClientRect().width)
+    // setState({
+    //   ...state,
+    //   inputWidth: reference.getBoundingClientRect().width
+    // })
   }
 
   function resetInputHeight() {
@@ -692,7 +698,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function resetHoverIndex() {
     const { multiple } = props
-    let { hoverIndex, options, selected } = state
+    // let { hoverIndex, options, selected } = state
 
     setTimeout(() => {
       if (!multiple) {
@@ -707,14 +713,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           hoverIndex = -1
         }
       }
-
-      setState({ ...state, hoverIndex })
+      setHoverIndex(hoverIndex)
+      // setState({ ...state, hoverIndex })
     }, 300)
   }
 
   function toggleMenu() {
     const { filterable, disabled } = props
-    const { query } = state
+    // const { query } = state
 
     if (filterable && query === '' && visible) {
       return
@@ -726,7 +732,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function navigateOptions(direction: string) {
-    let { hoverIndex, options } = state
+    // let { hoverIndex, options } = state
     if (!visible) {
       return setVisible(true)
     }
@@ -767,39 +773,42 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         }
       }
     }
-
-    setState({ ...state, hoverIndex, options })
+    watchHO.current = 'navigateOptionsHO'
+    setHoverIndex(hoverIndex)
+    setOptions(options)
+    // setState({ ...state, hoverIndex, options })
   }
   useEffect(() => {
     if (initComponent.current) return
-    if (skip) {
-      navigateOptions(skip)
+    if (watchHO.current === 'navigateOptionsHO') {
+      if (skip) {
+        navigateOptions(skip)
+      }
+      resetScrollTop()
     }
-    resetScrollTop()
-  }, [state.hoverIndex, state.options])
+    watchHO.current = ''
+  }, [hoverIndex, options])
 
   function resetScrollTop() {
-    const element: any = ReactDOM.findDOMNode(
-      state.options[state.hoverIndex] as any
-    )
+    const element: any = ReactDOM.findDOMNode(options[hoverIndex] as any)
     const bottomOverflowDistance =
       element.getBoundingClientRect().bottom -
       popper.getBoundingClientRect().bottom
     const topOverflowDistance =
       element.getBoundingClientRect().top - popper.getBoundingClientRect().top
 
-    if (state.dropdownUl) {
+    if (dropdownUl) {
       if (bottomOverflowDistance > 0) {
-        state.dropdownUl.scrollTop += bottomOverflowDistance
+        dropdownUl.scrollTop += bottomOverflowDistance
       }
       if (topOverflowDistance < 0) {
-        state.dropdownUl.scrollTop += topOverflowDistance
+        dropdownUl.scrollTop += topOverflowDistance
       }
     }
   }
 
   function selectOption() {
-    let { hoverIndex, options } = state
+    // let { hoverIndex, options } = state
 
     if (options[hoverIndex]) {
       onOptionClick(options[hoverIndex])
@@ -809,12 +818,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function deleteSelected(e: any) {
     e.stopPropagation()
 
-    if (state.selectedLabel != '') {
-      setState({
-        ...state,
-        selected: null,
-        selectedLabel: ''
-      })
+    if (selectedLabel != '') {
+      setSelected(null)
+      setSelectedLabel('')
       setVisible(false)
       props.context && props.context.form && props.context.form.onFieldChange()
 
@@ -829,14 +835,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function deleteTag(tag: any) {
-    const index = state.selected.indexOf(tag)
+    const index = selected.indexOf(tag)
     deleteTagTag = tag
     if (index > -1 && !props.disabled) {
-      const selected = state.selected.slice(0)
-
+      selected.slice(0)
       selected.splice(index, 1)
-
-      setState({ ...state, selected })
+      setSelected(selected)
+      watchSelected.current = 'deleteTagSelected'
     }
   }
   /**
@@ -846,10 +851,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    if (props.onRemoveTag) {
-      props.onRemoveTag(deleteTagTag.props.value)
+    if (watchSelected.current === 'deleteTagSelected') {
+      if (props.onRemoveTag) {
+        props.onRemoveTag(deleteTagTag.props.value)
+      }
     }
-  }, [state.selected])
+    watchSelected.current = ''
+  }, [selected])
 
   function handleIconClick(event: any) {
     if (iconClass().indexOf('icon-close') > -1) {
@@ -860,34 +868,31 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onInputChange() {
-    if (props.filterable && state.selectedLabel !== state.value) {
-      setState({
-        ...state,
-        query: state.selectedLabel
-      })
+    if (props.filterable && selectedLabel !== value) {
+      setQuery(selectedLabel)
     }
   }
 
   function onOptionCreate(option: any) {
-    state.options.push(option)
-    state.optionsCount++
-    state.filteredOptionsCount++
+    options.push(option)
+    optionsCount++
+    filteredOptionsCount++
 
     forceUpdate()
     handleValueChange()
   }
 
   function onOptionDestroy(option: any) {
-    state.optionsCount--
-    state.filteredOptionsCount--
+    optionsCount--
+    filteredOptionsCount--
 
-    const index = state.options.indexOf(option)
+    const index = options.indexOf(option)
 
     if (index > -1) {
-      state.options.splice(index, 1)
+      options.splice(index, 1)
     }
 
-    state.options.forEach((el: any) => {
+    options.forEach((el: any) => {
       if (el != option) {
         el.resetIndex()
       }
@@ -896,21 +901,23 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     forceUpdate()
     handleValueChange()
   }
-
+  function hoverItem(iHover: number) {
+    setHoverIndex(iHover)
+  }
+  function queryChange() {
+    setFilteredOptionsCount(filteredOptionsCount - 1)
+  }
   function onOptionClick(option: any) {
     const { multiple } = props
-    let { selected, selectedLabel } = state
+    // let { selected, selectedLabel } = state
 
     if (!multiple) {
       selected = option
       selectedLabel = option.currentLabel()
-      // state.visible = false
       setVisible(false)
     } else {
       let optionIndex = -1
-
       selected = selected.slice(0)
-
       selected.forEach((item: any, index: any) => {
         if (item === option || item.props.value === option.props.value) {
           optionIndex = index
@@ -923,7 +930,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         selected.push(option)
       }
     }
-    setState(() => ({ ...state, selected, selectedLabel }))
+    setSelected(selected)
+    setSelectedLabel(selectedLabel)
+    watchSS.current = 'onOptionClickSS'
   }
   /**
    * @description: 上方 onOptionClick 处理监听 selected、selectedLabel
@@ -932,10 +941,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    if (!props.multiple) {
-      onSelectedChange(state.selected)
+    if (watchSS.current === 'onOptionClickSS') {
+      if (!props.multiple) {
+        onSelectedChange(selected)
+      }
+      setVisible(visible)
     }
-  }, [state.selected, state.selectedLabel, visible])
+  }, [selected, selectedLabel])
 
   function onMouseDown(event: any) {
     event.preventDefault()
@@ -948,17 +960,11 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onMouseEnter() {
-    setState({
-      ...state,
-      inputHovering: true
-    })
+    setInputHovering(true)
   }
 
   function onMouseLeave() {
-    setState({
-      ...state,
-      inputHovering: false
-    })
+    setInputHovering(false)
   }
 
   useEffect(() => {
@@ -985,17 +991,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     filterable
     // loading
   } = props
-  const {
-    // selected,
-    // inputWidth,
-    // inputLength,
-    // query,
-    // selectedLabel,
-    // visible,
-    // options,
-    // filteredOptionsCount,
-    // currentPlaceholder
-  } = state
   return (
     <div ref={rootRef} style={props.style} className={classnames('tb-select')}>
       {multiple && (
@@ -1004,10 +999,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           className='tb-select__tags'
           onClick={toggleMenu}
           style={{
-            maxWidth: state.inputWidth - 32
+            maxWidth: inputWidth - 32
           }}
         >
-          {state.selected.map((el: any) => {
+          {selected.map((el: any) => {
             return (
               <Tag
                 type='primary'
@@ -1031,11 +1026,11 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
               type='text'
               className={classnames('tb-select__input', size && `is-${size}`)}
               style={{
-                width: state.inputLength,
-                maxWidth: state.inputWidth - 42
+                width: inputLength,
+                maxWidth: inputWidth - 42
               }}
               disabled={disabled}
-              defaultValue={state.query}
+              defaultValue={query}
               onKeyUp={managePlaceholder}
               onKeyDown={(e) => {
                 resetInputState(e)
@@ -1067,13 +1062,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
                 clearTimeout(timeout)
 
                 timeout = setTimeout(() => {
-                  setState({
-                    ...state,
-                    query: state.value
-                  })
+                  // setState({
+                  //   ...state,
+                  //   query: state.value
+                  // })
+                  setQuery(value)
                 }, _debounce())
-
-                state.value = e.target.value
+                value = e.target.value
+                // state.value = e.target.value
               }}
             />
           )}
@@ -1081,15 +1077,15 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       )}
       <Input
         ref={referenceRef}
-        value={state.selectedLabel}
+        value={selectedLabel}
         type='text'
-        placeholder={state.currentPlaceholder}
+        placeholder={currentPlaceholder}
         name='name'
         size={size}
         disabled={disabled}
         readOnly={!filterable || multiple}
         icon={iconClass() || undefined}
-        onChange={(value: any) => setState({ ...state, selectedLabel: value })}
+        onChange={(value: any) => setSelectedLabel(value)}
         onIconClick={handleIconClick}
         onMouseDown={onMouseDown}
         onMouseEnter={onMouseEnter}
@@ -1142,14 +1138,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
               },
               className
             )}
-            style={{ minWidth: state.inputWidth, ...style }}
+            style={{ minWidth: inputWidth, ...style }}
           >
-            {/* {options.length > 0 && filteredOptionsCount > 0 && !loading ? (
-              <Scrollbar
-                viewComponent='ul'
-                wrapClass='tb-select-dropdown__wrap'
-                viewClass='tb-select-dropdown__list'
-              > */}
             {React.Children.map(props.children, (child) => {
               // to do sth
               return React.cloneElement(child, {
@@ -1157,14 +1147,31 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
                 onOptionDestroy,
                 addOptionToValue,
                 onOptionClick,
+                hoverItem,
+                queryChange,
                 props,
-                state,
-                setState
+                state: {
+                  options,
+                  isSelect,
+                  inputLength,
+                  inputWidth,
+                  inputHovering,
+                  filteredOptionsCount,
+                  optionsCount,
+                  hoverIndex,
+                  bottomOverflowBeforeHidden,
+                  cachedPlaceHolder,
+                  currentPlaceholder,
+                  selectedLabel,
+                  selectedInit,
+                  selected,
+                  value,
+                  valueChangeBySelected,
+                  voidRemoteQuery,
+                  query
+                }
               })
             })}
-            {/* </Scrollbar>
-            ) : null} */}
-
             {emptyText() && (
               <p className='tb-select-dropdown__empty'>{emptyText()}</p>
             )}
