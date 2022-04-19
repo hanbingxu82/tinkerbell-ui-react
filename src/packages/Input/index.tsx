@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-08 09:00:21
- * @LastEditTime: 2022-04-15 15:49:33
+ * @LastEditTime: 2022-04-19 15:45:10
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Input/index.tsx
@@ -174,7 +174,6 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
       </div>
     )
   } else {
-    console.log(icon)
     return (
       <div
         style={props.style}

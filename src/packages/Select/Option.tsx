@@ -52,7 +52,7 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
 
   function currentSelected(): boolean {
     return (
-      props.selected ||
+      props.state.selected ||
       (props.props.multiple
         ? props.state.value.indexOf(props.value) > -1
         : props.state.value === props.value)
@@ -67,7 +67,6 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
     )
   }
   function itemSelected(): boolean {
-    console.log(Object.prototype.toString.call(props.state.selected))
     if (
       Object.prototype.toString.call(props.state.selected) ===
         '[object Object]' ||

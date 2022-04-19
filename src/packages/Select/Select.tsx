@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-19 13:58:50
+ * @LastEditTime: 2022-04-19 16:41:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -86,8 +86,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     props.placeholder || '请选择'
   )
   let [selectedLabel, setSelectedLabel] = useState<string>('')
-  let [selectedInit, setSelectedInit] = useState<boolean>(false)
-  let [selected, setSelected] = useState<any>(null)
+  let [selectedInit, setSelectedInit] = useState<boolean>(
+    props.multiple ? true : false
+  )
+  let [selected, setSelected] = useState<any>(props.multiple ? [] : null)
   let [value, setValue] = useState<any>(props.value)
   let [valueChangeBySelected, setValueChangeBySelected] =
     useState<boolean>(false)
@@ -105,10 +107,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   let watchHO = useRef('')
   let watchSS = useRef('')
   /** 监听 变化current End */
-  if (props.multiple) {
-    setSelectedInit(true)
-    setSelected([])
-  }
 
   if (props.remote) {
     setVoidRemoteQuery(true)
@@ -129,72 +127,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       setInputWidth(reference.getBoundingClientRect().width)
     },
     [props]
-  )
-  /**
-   * @description: 监听 useWillReceiveProps value值变化
-   * @param {*}
-   * @return {*}
-   */
-  useEffect(() => {
-    if (initComponent.current) return
-    if (watchStateValue.current === 'useWillReceiveProps') {
-      handleValueChange()
-    }
-    // 重置
-    watchStateValue.current = ''
-  }, [value])
-
-  /**
-   * @description: 组件将要更新数据时触发的函数
-   * @param {_oldProps，oldState}:旧props， 旧state
-   * @return {*}
-   */
-  useUpdateEffect(
-    (_oldProps, oldState, oldVisible) => {
-      if (value != oldState.value) {
-        onValueChange(value)
-      }
-
-      if (visible != oldVisible) {
-        if (props.onVisibleChange) {
-          props.onVisibleChange(visible)
-        }
-
-        onVisibleChange(visible)
-      }
-
-      if (query != oldState.query) {
-        onQueryChange(query as string)
-      }
-
-      if (Array.isArray(selected)) {
-        if (selected.length != oldState.selected.length) {
-          onSelectedChange(selected)
-        }
-      }
-      setInputWidth(reference.getBoundingClientRect().width)
-    },
-    props,
-    {
-      options,
-      isSelect,
-      inputLength,
-      inputWidth,
-      inputHovering,
-      filteredOptionsCount,
-      optionsCount,
-      hoverIndex,
-      bottomOverflowBeforeHidden,
-      cachedPlaceHolder,
-      currentPlaceholder,
-      selectedLabel,
-      selectedInit,
-      selected,
-      value,
-      valueChangeBySelected,
-      voidRemoteQuery,
-      query
-    }
   )
 
   function _debounce(): number {
@@ -235,16 +167,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function onVisibleChange(visible: boolean) {
     const { multiple, filterable } = props
-    // let {
-    //   query,
-    //   dropdownUl,
-    //   selected,
-    //   selectedLabel,
-    //   bottomOverflowBeforeHidden
-    // } = state
 
     if (!visible) {
-      reference.querySelector('input').blur()
+      reference.blur()
       if (rootRef.current.querySelector('.tb-input__icon')) {
         const elements = rootRef.current.querySelector('.tb-input__icon')
 
@@ -301,6 +226,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
 
       if (!dropdownUl) {
+        console.log(popper)
         let dropdownChildNodes = popper.childNodes
         setDropdownUl(
           [].filter.call(
@@ -318,18 +244,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
   }
   function onValueChange(val: any) {
+    debugger
     const { multiple } = props
-
-    // let {
-    //   options,
-    //   valueChangeBySelected,
-    //   selectedInit,
-    //   selected,
-    //   selectedLabel,
-    //   currentPlaceholder,
-    //   cachedPlaceHolder
-    // } = state
-
     if (valueChangeBySelected) {
       return setValueChangeBySelected(false)
     }
@@ -627,8 +543,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function addOptionToValue(option: any, _init?: boolean) {
     const { multiple, remote } = props
-    // let { selected, selectedLabel, hoverIndex, value } = state
-
     if (multiple) {
       if (
         selected.indexOf(option) === -1 &&
@@ -636,6 +550,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       ) {
         // selectedInit = !!init
         selected.push(option)
+        console.log(selected)
         resetHoverIndex()
       }
     } else {
@@ -909,11 +824,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
   function onOptionClick(option: any) {
     const { multiple } = props
-    // let { selected, selectedLabel } = state
-
     if (!multiple) {
       selected = option
       selectedLabel = option.currentLabel()
+      setSelected(selected)
       setVisible(false)
     } else {
       let optionIndex = -1
@@ -923,14 +837,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           optionIndex = index
         }
       })
-
       if (optionIndex > -1) {
         selected.splice(optionIndex, 1)
       } else {
         selected.push(option)
       }
+      setSelected(selected)
     }
-    setSelected(selected)
     setSelectedLabel(selectedLabel)
     watchSS.current = 'onOptionClickSS'
   }
@@ -940,6 +853,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @return {*}
    */
   useEffect(() => {
+    console.log(selected, 111111)
     if (initComponent.current) return
     if (watchSS.current === 'onOptionClickSS') {
       if (!props.multiple) {
@@ -972,7 +886,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
     reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
     popper = ReactDOM.findDOMNode(popperRef.current as any)
-
     handleValueChange()
     debouncedOnInputChange = debounce(_debounce(), () => {
       onInputChange()
@@ -983,7 +896,128 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       removeResizeListener(rootRef.current, resetInputWidth)
     }
   }, [])
+  /**
+   * @description: 监听 useWillReceiveProps value值变化
+   * @param {*}
+   * @return {*}
+   */
+  useEffect(() => {
+    if (initComponent.current) return
+    if (watchStateValue.current === 'useWillReceiveProps') {
+      handleValueChange()
+    }
+    // 重置
+    watchStateValue.current = ''
+  }, [value])
 
+  /**
+   * @description: 组件将要更新数据时触发的函数
+   * @param {_oldProps，oldState}:旧props， 旧state
+   * @return {*}
+   */
+  useUpdateEffect(
+    (_oldProps, oldState) => {
+      if (value != oldState.value) {
+        onValueChange(value)
+      }
+
+      if (visible != oldState.visible) {
+        if (props.onVisibleChange) {
+          props.onVisibleChange(visible)
+        }
+        onVisibleChange(visible)
+      }
+
+      if (query != oldState.query) {
+        onQueryChange(query as string)
+      }
+
+      if (Array.isArray(selected)) {
+        if (selected.length != oldState.selected.length) {
+          onSelectedChange(selected)
+        }
+      }
+      setInputWidth(reference.getBoundingClientRect().width)
+    },
+    props,
+    {
+      options,
+      isSelect,
+      inputLength,
+      inputWidth,
+      inputHovering,
+      filteredOptionsCount,
+      optionsCount,
+      hoverIndex,
+      bottomOverflowBeforeHidden,
+      cachedPlaceHolder,
+      currentPlaceholder,
+      selectedLabel,
+      selectedInit,
+      selected,
+      value,
+      valueChangeBySelected,
+      voidRemoteQuery,
+      query,
+      visible
+    },
+    [
+      ...Object.keys(props),
+      options,
+      isSelect,
+      inputLength,
+      inputWidth,
+      inputHovering,
+      filteredOptionsCount,
+      optionsCount,
+      hoverIndex,
+      bottomOverflowBeforeHidden,
+      cachedPlaceHolder,
+      currentPlaceholder,
+      selectedLabel,
+      selectedInit,
+      selected,
+      value,
+      valueChangeBySelected,
+      voidRemoteQuery,
+      query,
+      visible
+    ]
+  )
+
+  //  遍历dom子节点方式
+  const SelectChildren = React.Children.map(props.children, (child) => {
+    // to do sth
+    return React.cloneElement(child, {
+      onOptionCreate,
+      onOptionDestroy,
+      addOptionToValue,
+      onOptionClick,
+      hoverItem,
+      queryChange,
+      props,
+      state: {
+        options,
+        isSelect,
+        inputLength,
+        inputWidth,
+        inputHovering,
+        filteredOptionsCount,
+        optionsCount,
+        hoverIndex,
+        bottomOverflowBeforeHidden,
+        cachedPlaceHolder,
+        currentPlaceholder,
+        selectedLabel,
+        selectedInit,
+        selected,
+        value,
+        valueChangeBySelected,
+        voidRemoteQuery,
+        query
+      }
+    })
+  })
   const {
     multiple,
     size,
@@ -1062,14 +1096,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
                 clearTimeout(timeout)
 
                 timeout = setTimeout(() => {
-                  // setState({
-                  //   ...state,
-                  //   query: state.value
-                  // })
                   setQuery(value)
                 }, _debounce())
                 value = e.target.value
-                // state.value = e.target.value
               }}
             />
           )}
@@ -1140,38 +1169,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
             )}
             style={{ minWidth: inputWidth, ...style }}
           >
-            {React.Children.map(props.children, (child) => {
-              // to do sth
-              return React.cloneElement(child, {
-                onOptionCreate,
-                onOptionDestroy,
-                addOptionToValue,
-                onOptionClick,
-                hoverItem,
-                queryChange,
-                props,
-                state: {
-                  options,
-                  isSelect,
-                  inputLength,
-                  inputWidth,
-                  inputHovering,
-                  filteredOptionsCount,
-                  optionsCount,
-                  hoverIndex,
-                  bottomOverflowBeforeHidden,
-                  cachedPlaceHolder,
-                  currentPlaceholder,
-                  selectedLabel,
-                  selectedInit,
-                  selected,
-                  value,
-                  valueChangeBySelected,
-                  voidRemoteQuery,
-                  query
-                }
-              })
-            })}
+            {SelectChildren ? SelectChildren : null}
             {emptyText() && (
               <p className='tb-select-dropdown__empty'>{emptyText()}</p>
             )}
