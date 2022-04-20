@@ -14,10 +14,29 @@
   z-index: 1001;
   border: 1px solid #d1dbe5;
   border-radius: 2px;
+  padding: 5px 0;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   margin: 5px 0;
-  left:0!important;
+  left: 0 !important;
+  max-height: 274px;
+  overflow-y: auto;
+}
+
+.tb-select-dropdown::-webkit-scrollbar {
+  width: 6px;
+  height: 16px;
+  background-color: transparent;
+}
+
+.tb-select-dropdown::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.tb-select-dropdown::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(151, 168, 190, .3);
 }
 
 .tb-select-dropdown .tb-scrollbar.is-empty .tb-select-dropdown__list {

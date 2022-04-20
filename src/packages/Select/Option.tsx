@@ -37,7 +37,6 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
   }, [state])
 
   useEffect(() => {
-    // console.log(optionRef.current.currentLabel)
     props.onOptionCreate(optionRef.current)
     const index = props.state.options.indexOf(optionRef.current)
     setState({ ...state, index })
@@ -73,7 +72,6 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
       Object.prototype.toString.call(props.state.selected) ===
         '[object HTMLDivElement]'
     ) {
-      // console.log(props.state.selected.props.value)
       return props.value === props.state.selected.props.value
     } else if (Array.isArray(props.state.selected)) {
       return (

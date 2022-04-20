@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-19 16:41:50
+ * @LastEditTime: 2022-04-20 11:23:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -76,7 +76,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   let [inputWidth, setInputWidth] = useState<number>(0)
   let [inputHovering, setInputHovering] = useState<boolean>(false)
   let [filteredOptionsCount, setFilteredOptionsCount] = useState<number>(0)
-  let [optionsCount] = useState<number>(0)
+  let [optionsCount, setOptionsCount] = useState<number>(0)
   let [hoverIndex, setHoverIndex] = useState<number>(-1)
   let [bottomOverflowBeforeHidden, setBottomOverflowBeforeHidden] = useState<
     number | string
@@ -100,6 +100,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   /** 监听 变化current Start*/
   let watchStateValue = useRef('')
   let watchSelected = useRef('')
+  let watchSelectedDel = useRef('')
   let watchAllSSCS = useRef('')
   let watchCurrentPlaceholder = useRef('')
   let watchVQHI = useRef('')
@@ -179,7 +180,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
 
       if (inputRef && inputRef.current) {
-        inputRef.current.Element.blur()
+        console.log(inputRef.current)
+        inputRef.current.blur()
       }
 
       resetHoverIndex()
@@ -219,7 +221,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       if (filterable) {
         setQuery(selectedLabel || '')
         if (multiple) {
-          inputRef.current.Element.focus()
+          inputRef.current.focus()
         } else {
           referenceRef.current.Element.focus()
         }
@@ -244,7 +246,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
   }
   function onValueChange(val: any) {
-    debugger
     const { multiple } = props
     if (valueChangeBySelected) {
       return setValueChangeBySelected(false)
@@ -253,7 +254,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (multiple && Array.isArray(val)) {
       resetInputHeight()
       selectedInit = true
-      selected = true
+      selected = []
       currentPlaceholder = cachedPlaceHolder
 
       val.forEach((item) => {
@@ -264,6 +265,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           addOptionToValue(option)
         }
       })
+      console.log(val)
       forceUpdate()
     }
 
@@ -298,16 +300,20 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function onSelectedChange(val: any, bubble: boolean = true) {
     // 判断父组件是不是有 form context
     const { multiple, filterable, onChange } = props
-
     if (multiple) {
       if (val.length > 0) {
-        currentPlaceholder = ''
+        // currentPlaceholder = ''
+        setCurrentPlaceholder('')
+        // 新增一个判断 如果 currentPlaceholder = '' 也同样会判断高度
+        if (currentPlaceholder === '') {
+          resetInputHeight()
+        }
       } else {
-        currentPlaceholder = cachedPlaceHolder
+        // currentPlaceholder = cachedPlaceHolder
+        setCurrentPlaceholder(cachedPlaceHolder)
       }
-      setCurrentPlaceholder(currentPlaceholder)
-      watchCurrentPlaceholder.current = 'onSelectedChangeCurrentPlaceholder'
 
+      watchCurrentPlaceholder.current = 'onSelectedChangeCurrentPlaceholder'
       valueChangeBySelected = true
 
       if (bubble) {
@@ -323,8 +329,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         query = ''
         hoverIndex = -1
         inputLength = 20
-
-        inputRef.current.Element.focus()
+        inputRef.current.focus()
       }
       setValueChangeBySelected(valueChangeBySelected)
       setQuery(query)
@@ -360,7 +365,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (initComponent.current) return
     if (watchVQHI.current === 'onSelectedChangeVQHI') {
       if (inputRef && inputRef.current) {
-        inputRef.current.Element.value = ''
+        inputRef.current.value = ''
       }
     }
     watchVQHI.current = ''
@@ -492,7 +497,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function emptyText() {
     const { loading, filterable } = props
     // const { voidRemoteQuery, options, filteredOptionsCount } = state
-
     if (loading) {
       return '加载中'
     } else {
@@ -537,6 +541,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function deletePrevTag(e: any) {
     if (e.target.value.length <= 0 && !toggleLastOptionHitState()) {
       selected.pop()
+      onSelectedChange(selected)
       setSelected([...selected])
     }
   }
@@ -548,30 +553,23 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         selected.indexOf(option) === -1 &&
         (remote ? value.indexOf(option.props.value) === -1 : true)
       ) {
-        // selectedInit = !!init
         selected.push(option)
-        console.log(selected)
+
         resetHoverIndex()
       }
     } else {
-      // selectedInit = !!init
       selected = option
       selectedLabel = option.currentLabel()
       hoverIndex = option.index
       setSelected(selected)
       setSelectedLabel(selectedLabel)
       setHoverIndex(hoverIndex)
-      // setState({ ...state, selected, selectedLabel, hoverIndex })
     }
   }
 
   function managePlaceholder() {
-    // let { currentPlaceholder, cachedPlaceHolder } = state
-
     if (currentPlaceholder !== '') {
-      currentPlaceholder = inputRef.current.Element.value
-        ? ''
-        : cachedPlaceHolder
+      currentPlaceholder = inputRef.current.value ? '' : cachedPlaceHolder
     }
     setCurrentPlaceholder(currentPlaceholder)
   }
@@ -580,29 +578,22 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (e.keyCode !== 8) {
       toggleLastOptionHitState(false)
     }
-    setInputLength(inputRef.current.Element.value.length * 15 + 20)
-    // setState({
-    //   ...state,
-    //   inputLength: inputRef.current.Element.value.length * 15 + 20
-    // })
+    setInputLength(inputRef.current.value.length * 15 + 20)
   }
 
   function _resetInputWidth() {
     setInputWidth(reference.getBoundingClientRect().width)
-    // setState({
-    //   ...state,
-    //   inputWidth: reference.getBoundingClientRect().width
-    // })
   }
 
   function resetInputHeight() {
-    let inputChildNodes = reference.childNodes
-    let input: any = [].filter.call(
-      inputChildNodes,
-      (item: any) => item.tagName === 'INPUT'
-    )[0]
-
-    input.style.height =
+    let inputChildNodes = reference
+    // console.log(inputChildNodes)
+    // let input: any = [].filter.call(
+    //   inputChildNodes,
+    //   (item: any) => item.tagName === 'INPUT'
+    // )[0]
+    // console.log(inputChildNodes.style.height)
+    inputChildNodes.style.height =
       Math.max(tagsRef.current.clientHeight + 6, sizeMap[props.size] || 36) +
       'px'
 
@@ -734,11 +725,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     e.stopPropagation()
 
     if (selectedLabel != '') {
+      selected = null
       setSelected(null)
       setSelectedLabel('')
       setVisible(false)
       props.context && props.context.form && props.context.form.onFieldChange()
-
+      watchSelectedDel.current = 'deleteTagSelected'
       if (props.onChange) {
         props.onChange('')
       }
@@ -755,8 +747,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (index > -1 && !props.disabled) {
       selected.slice(0)
       selected.splice(index, 1)
-      setSelected(selected)
-      watchSelected.current = 'deleteTagSelected'
+      // forceUpdate()
+      watchSelectedDel.current = 'deleteTagSelected'
+      setSelected([...selected])
+      // setSelected(selected)
     }
   }
   /**
@@ -766,12 +760,17 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useEffect(() => {
     if (initComponent.current) return
-    if (watchSelected.current === 'deleteTagSelected') {
+    if (watchSelectedDel.current === 'deleteTagSelected') {
       if (props.onRemoveTag) {
         props.onRemoveTag(deleteTagTag.props.value)
       }
+      // 判断是否为多选，如果多选也要新增一下判断
+      if (multiple) {
+        onSelectedChange(selected)
+        // onValueChange(value)
+      }
     }
-    watchSelected.current = ''
+    watchSelectedDel.current = ''
   }, [selected])
 
   function handleIconClick(event: any) {
@@ -783,6 +782,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onInputChange() {
+    console.log(123)
     if (props.filterable && selectedLabel !== value) {
       setQuery(selectedLabel)
     }
@@ -790,17 +790,19 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function onOptionCreate(option: any) {
     options.push(option)
-    optionsCount++
-    filteredOptionsCount++
-
+    // optionsCount++
+    // filteredOptionsCount++
+    setOptionsCount(++optionsCount)
+    setFilteredOptionsCount(++filteredOptionsCount)
     forceUpdate()
     handleValueChange()
   }
 
   function onOptionDestroy(option: any) {
-    optionsCount--
-    filteredOptionsCount--
-
+    // optionsCount--
+    // filteredOptionsCount--
+    setOptionsCount(--optionsCount)
+    setFilteredOptionsCount(--filteredOptionsCount)
     const index = options.indexOf(option)
 
     if (index > -1) {
@@ -842,6 +844,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       } else {
         selected.push(option)
       }
+
       setSelected(selected)
     }
     setSelectedLabel(selectedLabel)
@@ -853,21 +856,24 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @return {*}
    */
   useEffect(() => {
-    console.log(selected, 111111)
     if (initComponent.current) return
     if (watchSS.current === 'onOptionClickSS') {
       if (!props.multiple) {
         onSelectedChange(selected)
+        // onValueChange(value)
+      } else {
+        onSelectedChange(selected)
       }
       setVisible(visible)
     }
+    watchSS.current = ''
   }, [selected, selectedLabel])
 
   function onMouseDown(event: any) {
     event.preventDefault()
 
     if (inputRef && inputRef.current) {
-      inputRef.current.Element.focus()
+      inputRef.current.focus()
     }
 
     toggleMenu()
@@ -883,7 +889,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     initComponent.current = false
-
     reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
     popper = ReactDOM.findDOMNode(popperRef.current as any)
     handleValueChange()
@@ -917,10 +922,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useUpdateEffect(
     (_oldProps, oldState) => {
-      if (value != oldState.value) {
-        onValueChange(value)
-      }
-
+      // if (value != oldState.value) {
+      //   onValueChange(value)
+      // }
       if (visible != oldState.visible) {
         if (props.onVisibleChange) {
           props.onVisibleChange(visible)
@@ -932,11 +936,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         onQueryChange(query as string)
       }
 
-      if (Array.isArray(selected)) {
-        if (selected.length != oldState.selected.length) {
-          onSelectedChange(selected)
-        }
-      }
       setInputWidth(reference.getBoundingClientRect().width)
     },
     props,
@@ -954,7 +953,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       currentPlaceholder,
       selectedLabel,
       selectedInit,
-      selected,
+      selected: Array.isArray(selected) ? [...selected] : selected,
       value,
       valueChangeBySelected,
       voidRemoteQuery,
@@ -984,7 +983,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       visible
     ]
   )
-
   //  遍历dom子节点方式
   const SelectChildren = React.Children.map(props.children, (child) => {
     // to do sth
@@ -1094,11 +1092,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
               }}
               onChange={(e) => {
                 clearTimeout(timeout)
-
                 timeout = setTimeout(() => {
-                  setQuery(value)
+                  setQuery(e.target.value)
+                  onQueryChange(e.target.value)
+                  // onValueChange(value)
                 }, _debounce())
-                value = e.target.value
+
+                // value = e.target.value
               }}
             />
           )}
