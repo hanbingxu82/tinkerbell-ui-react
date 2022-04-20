@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-20 11:23:16
+ * @LastEditTime: 2022-04-20 15:32:59
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -95,7 +95,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     useState<boolean>(false)
   let [voidRemoteQuery, setVoidRemoteQuery] = useState<boolean>(false)
   let [query, setQuery] = useState<string>('')
-  let [dropdownUl, setDropdownUl] = useState<any>(null)
+  let [dropdownUl] = useState<any>(null)
 
   /** 监听 变化current Start*/
   let watchStateValue = useRef('')
@@ -149,6 +149,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       })[0]
       if (selected) {
         setSelected(selected.props.label || selected.props.value)
+      } else {
+        onSelectedChange(selected)
       }
     }
   }
@@ -180,7 +182,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
 
       if (inputRef && inputRef.current) {
-        console.log(inputRef.current)
         inputRef.current.blur()
       }
 
@@ -223,26 +224,26 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         if (multiple) {
           inputRef.current.focus()
         } else {
-          referenceRef.current.Element.focus()
+          reference.focus()
         }
       }
 
-      if (!dropdownUl) {
-        console.log(popper)
-        let dropdownChildNodes = popper.childNodes
-        setDropdownUl(
-          [].filter.call(
-            dropdownChildNodes,
-            (item: any) => item.tagName === 'UL'
-          )[0]
-        )
-      }
+      // if (!dropdownUl) {
+      //   popper = ReactDOM.findDOMNode(popperRef.current as any)
+      //   let dropdownChildNodes = popper.childNodes
+      //   setDropdownUl(
+      //     [].filter.call(
+      //       dropdownChildNodes,
+      //       (item: any) => item.tagName === 'UL'
+      //     )[0]
+      //   )
+      // }
 
-      if (!multiple && dropdownUl) {
-        if (bottomOverflowBeforeHidden > 0) {
-          dropdownUl.scrollTop += bottomOverflowBeforeHidden
-        }
-      }
+      // if (!multiple && dropdownUl) {
+      //   if (bottomOverflowBeforeHidden > 0) {
+      //     dropdownUl.scrollTop += bottomOverflowBeforeHidden
+      //   }
+      // }
     }
   }
   function onValueChange(val: any) {
@@ -265,7 +266,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           addOptionToValue(option)
         }
       })
-      console.log(val)
       forceUpdate()
     }
 
@@ -298,21 +298,19 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }, [selectedInit, selected, currentPlaceholder, selectedLabel])
 
   function onSelectedChange(val: any, bubble: boolean = true) {
+    console.log(reference, 98888)
     // 判断父组件是不是有 form context
     const { multiple, filterable, onChange } = props
     if (multiple) {
       if (val.length > 0) {
-        // currentPlaceholder = ''
         setCurrentPlaceholder('')
         // 新增一个判断 如果 currentPlaceholder = '' 也同样会判断高度
         if (currentPlaceholder === '') {
           resetInputHeight()
         }
       } else {
-        // currentPlaceholder = cachedPlaceHolder
         setCurrentPlaceholder(cachedPlaceHolder)
       }
-
       watchCurrentPlaceholder.current = 'onSelectedChangeCurrentPlaceholder'
       valueChangeBySelected = true
 
@@ -372,6 +370,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }, [valueChangeBySelected, query, hoverIndex, inputLength])
 
   function onQueryChange(query: string) {
+    console.log(query)
     onQueryChangeQuery.current = query
     const { multiple, filterable, remote, remoteMethod, filterMethod } = props
     // let { voidRemoteQuery, hoverIndex, options, optionsCount } = state
@@ -383,7 +382,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (multiple && filterable) {
       resetInputHeight()
     }
-
     if (remote && typeof remoteMethod === 'function') {
       hoverIndex = -1
       voidRemoteQuery = query === ''
@@ -397,6 +395,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       filterMethod(query)
     } else {
       setFilteredOptionsCount(optionsCount)
+      options.forEach((option: any) => {
+        option.queryChange(onQueryChangeQuery.current)
+      })
       watchFilteredOptionsCount.current = 'onQueryChangeFilteredOptionsCount'
     }
     setHoverIndex(hoverIndex)
@@ -634,12 +635,20 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
     if (!disabled) {
       setVisible(!visible)
+      // if (props.onVisibleChange) {
+      //   props.onVisibleChange(!visible)
+      // }
+      // onVisibleChange(!visible)
     }
   }
 
   function navigateOptions(direction: string) {
     // let { hoverIndex, options } = state
     if (!visible) {
+      // if (props.onVisibleChange) {
+      //   props.onVisibleChange(true)
+      // }
+      // onVisibleChange(true)
       return setVisible(true)
     }
 
@@ -729,6 +738,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       setSelected(null)
       setSelectedLabel('')
       setVisible(false)
+      onQueryChange('')
       props.context && props.context.form && props.context.form.onFieldChange()
       watchSelectedDel.current = 'deleteTagSelected'
       if (props.onChange) {
@@ -747,10 +757,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (index > -1 && !props.disabled) {
       selected.slice(0)
       selected.splice(index, 1)
-      // forceUpdate()
       watchSelectedDel.current = 'deleteTagSelected'
       setSelected([...selected])
-      // setSelected(selected)
     }
   }
   /**
@@ -767,7 +775,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       // 判断是否为多选，如果多选也要新增一下判断
       if (multiple) {
         onSelectedChange(selected)
-        // onValueChange(value)
       }
     }
     watchSelectedDel.current = ''
@@ -781,17 +788,15 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
   }
 
-  function onInputChange() {
-    console.log(123)
+  function onInputChange(e: any) {
     if (props.filterable && selectedLabel !== value) {
-      setQuery(selectedLabel)
+      setQuery(e.target.value)
+      onQueryChange(e.target.value)
     }
   }
 
   function onOptionCreate(option: any) {
     options.push(option)
-    // optionsCount++
-    // filteredOptionsCount++
     setOptionsCount(++optionsCount)
     setFilteredOptionsCount(++filteredOptionsCount)
     forceUpdate()
@@ -799,8 +804,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onOptionDestroy(option: any) {
-    // optionsCount--
-    // filteredOptionsCount--
     setOptionsCount(--optionsCount)
     setFilteredOptionsCount(--filteredOptionsCount)
     const index = options.indexOf(option)
@@ -890,10 +893,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   useEffect(() => {
     initComponent.current = false
     reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
-    popper = ReactDOM.findDOMNode(popperRef.current as any)
     handleValueChange()
-    debouncedOnInputChange = debounce(_debounce(), () => {
-      onInputChange()
+    debouncedOnInputChange = debounce(_debounce(), (e: any) => {
+      onInputChange(e)
     })
     resetInputWidth = _resetInputWidth
     addResizeListener(rootRef.current, resetInputWidth)
@@ -922,9 +924,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    */
   useUpdateEffect(
     (_oldProps, oldState) => {
-      // if (value != oldState.value) {
-      //   onValueChange(value)
-      // }
+      if (value != oldState.value) {
+        onValueChange(value)
+      }
       if (visible != oldState.visible) {
         if (props.onVisibleChange) {
           props.onVisibleChange(visible)
@@ -983,6 +985,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       visible
     ]
   )
+  useEffect(() => {
+    if (initComponent.current) return
+    console.log(popperRef)
+    if (props.onVisibleChange) {
+      props.onVisibleChange(visible)
+    }
+    onVisibleChange(visible)
+  }, [visible])
   //  遍历dom子节点方式
   const SelectChildren = React.Children.map(props.children, (child) => {
     // to do sth
@@ -1023,6 +1033,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     filterable
     // loading
   } = props
+
   return (
     <div ref={rootRef} style={props.style} className={classnames('tb-select')}>
       {multiple && (
@@ -1125,6 +1136,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
             case 9:
             case 27:
               setVisible(false)
+              // if (props.onVisibleChange) {
+              //   props.onVisibleChange(false)
+              // }
+              // onVisibleChange(false)
               e.preventDefault()
               break
             case 13:

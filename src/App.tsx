@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-20 10:40:37
+ * @LastEditTime: 2022-04-20 14:09:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -162,38 +162,25 @@ const App = (props: any) => {
   const buttonWidth = 70
   const [options] = useState([
     {
-      label: '热门城市',
-      options: [
-        {
-          value: 'Shanghai',
-          label: '上海'
-        },
-        {
-          value: 'Beijing',
-          label: '北京'
-        }
-      ]
+      value: '选项1',
+      label: '黄金糕'
     },
     {
-      label: '城市名',
-      options: [
-        {
-          value: 'Chengdu',
-          label: '成都'
-        },
-        {
-          value: 'Shenzhen',
-          label: '深圳'
-        },
-        {
-          value: 'Guangzhou',
-          label: '广州'
-        },
-        {
-          value: 'Dalian',
-          label: '大连'
-        }
-      ]
+      value: '选项2',
+      label: '双皮奶',
+      disabled: true
+    },
+    {
+      value: '选项3',
+      label: '蚵仔煎'
+    },
+    {
+      value: '选项4',
+      label: '龙须面'
+    },
+    {
+      value: '选项5',
+      label: '北京烤鸭'
     }
   ])
   const [value1] = useState([])
@@ -518,30 +505,18 @@ const App = (props: any) => {
       <Select
         filterable
         clearable={true}
-        multiple
+        // multiple
         value={value1}
         placeholder='请选择'
       >
-        {options.map((group: any) => {
+        {options.map((el: any) => {
           return (
-            <Select.OptionGroup key={group.label} label={group.label}>
-              {group.options.map((el: any) => {
-                return (
-                  <Select.Option
-                    key={el.value}
-                    label={el.label}
-                    value={el.value}
-                  >
-                    <span style={{ float: 'left' }}>{el.label}</span>
-                    <span
-                      style={{ float: 'right', color: '#8492a6', fontSize: 13 }}
-                    >
-                      {el.value}
-                    </span>
-                  </Select.Option>
-                )
-              })}
-            </Select.OptionGroup>
+            <Select.Option
+              disabled={el.disabled}
+              key={el.value}
+              label={el.label}
+              value={el.value}
+            />
           )
         })}
       </Select>

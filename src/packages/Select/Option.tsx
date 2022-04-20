@@ -103,10 +103,11 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
       '\\$1'
     )
     const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
-
+      console.log(visible)
     if (!visible) {
       props.queryChange()
     }
+    console.log(visible)
     setState({ ...state, visible })
   }
   // @ts-ignore 实例
