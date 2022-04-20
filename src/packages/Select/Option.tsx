@@ -18,15 +18,6 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
     hitState: false
   })
 
-  // React.useImperativeHandle(
-  //   optionRef,
-  //   () => ({
-  //     currentLabel,
-  //     queryChange,
-  //     resetIndex
-  //   }),
-  //   [state]
-  // )
   useEffect(() => {
     optionRef.current = optionRef.current ? optionRef.current : {}
     optionRef.current.currentLabel = currentLabel
@@ -34,7 +25,7 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
     optionRef.current.resetIndex = resetIndex
     optionRef.current.props = {}
     optionRef.current.props.value = props.value
-  }, [state])
+  }, [state]) // eslint-disable-line
 
   useEffect(() => {
     props.onOptionCreate(optionRef.current)
@@ -47,7 +38,7 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
     return () => {
       props.onOptionDestroy(optionRef.current)
     }
-  }, [])
+  }, []) // eslint-disable-line
 
   function currentSelected(): boolean {
     return (
@@ -103,7 +94,7 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
       '\\$1'
     )
     const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
-      console.log(visible)
+    console.log(visible)
     if (!visible) {
       props.queryChange()
     }
