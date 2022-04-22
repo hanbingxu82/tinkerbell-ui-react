@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-20 15:45:07
+ * @LastEditTime: 2022-04-22 16:45:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -31,7 +31,8 @@ import {
   Input,
   InputNumber,
   MessageBox,
-  Select
+  Select,
+  DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -184,8 +185,18 @@ const App = (props: any) => {
     }
   ])
   const [value1] = useState([])
+  const [value22] = useState(null)
   return (
     <div>
+      <DatePicker
+        value={value22}
+        placeholder='选择日期'
+        onChange={(date: any) => {
+          console.debug('DatePicker1 changed: ', date)
+          // this.setState({value1: date})
+        }}
+        disabledDate={(time: any) => time.getTime() < Date.now() - 8.64e7}
+      />
       <br />
       <Button
         type='text'
@@ -508,7 +519,7 @@ const App = (props: any) => {
         // multiple
         value={value1}
         placeholder='请选择'
-        size="mini"
+        size='mini'
       >
         {options.map((el: any) => {
           return (

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 16:52:02
- * @LastEditTime: 2022-04-22 11:59:57
+ * @LastEditTime: 2022-04-22 16:05:22
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Scrollbar/Bar.tsx
@@ -9,6 +9,7 @@
 import React from 'react'
 import { BAR_MAP, renderThumbStyle } from './util'
 import { on, off } from '../../utils/utils'
+
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
@@ -55,7 +56,7 @@ export default class Bar extends React.Component {
   }
 
   startDrag(e: any) {
-    e.nativeEvent.stopImmediatePropagation
+    e.nativeEvent.stopImmediatePropagation()
     this.cursorDown = true
 
     on(document, 'mousemove', this.mouseMoveDocumentHandler)

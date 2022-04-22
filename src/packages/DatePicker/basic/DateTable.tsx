@@ -1,16 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:34:56
- * @LastEditTime: 2022-04-22 11:56:40
+ * @LastEditTime: 2022-04-22 16:07:15
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/basic/DateTable.tsx
  */
 //@flow
 import React, { useState } from 'react'
-
-const classnames = require('classnames')
-const PropTypes = require('prop-types')
 import {
   toDate,
   getFirstDayOfMonth,
@@ -23,6 +20,9 @@ import {
   hasClass,
   getOffsetToWeekOrigin
 } from '../utils'
+
+const classnames = require('classnames')
+const PropTypes = require('prop-types')
 // import Locale from '../../locale'
 
 // import type { DateTableProps } from '../Types'
@@ -493,7 +493,7 @@ DateTable.propTypes = {
     endDate: PropTypes.date,
     selecting: PropTypes.bool
   }),
-  firstDayOfWeek: PropTypes.range(0, 6)
+  // firstDayOfWeek: PropTypes.range(0, 6)
 }
 
 DateTable.defaultProps = {

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-08 09:00:21
- * @LastEditTime: 2022-04-19 17:34:49
+ * @LastEditTime: 2022-04-22 16:48:03
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Input/index.tsx
@@ -33,9 +33,9 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
     resizeTextarea()
     // 合并判断
     if (inputRef && inputRef.current) {
-      ref && (ref.current.Element = inputRef.current)
+      ref &&ref.current&& (ref.current.Element = inputRef.current)
     } else if (textareaRef && textareaRef.current) {
-      ref && (ref.current.Element = textareaRef.current)
+      ref &&ref.current&& (ref.current.Element = textareaRef.current)
     }
   }, [])// eslint-disable-line
   // 父->子实例
