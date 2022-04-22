@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:35:04
- * @LastEditTime: 2022-04-21 15:09:56
+ * @LastEditTime: 2022-04-22 11:55:52
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/basic/MonthTable.tsx
@@ -13,7 +13,7 @@ import { hasClass, deconstructDate, SELECTION_MODES } from '../utils'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
-const MonthTable = (props: any) => {
+export const MonthTable = (props: any) => {
   const months = [
     'jan',
     'feb',
@@ -91,3 +91,5 @@ MonthTable.propTypes = {
   // (Date)=>boolean
   disabledDate: PropTypes.func
 }
+
+ 

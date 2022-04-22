@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:33:23
- * @LastEditTime: 2022-04-21 10:44:11
+ * @LastEditTime: 2022-04-22 15:40:00
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/panel/TimeRangePanel.tsx
@@ -9,17 +9,17 @@
 //@flow
 import React from 'react';
 
-import { PropTypes } from '../../../libs';
-import { limitRange, parseDate } from '../utils';
+import {  parseDate } from '../utils';
 import TimeSpinner from '../basic/TimeSpinner';
-import Locale from '../../locale';
-import type { TimeRangePanelProps } from '../Types';
+import {  ValidDateType } from '../Types';
 import { PopperBase } from './PopperBase'
+const PropTypes = require('prop-types')
+const classnames = require('classnames')
 
 const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
 const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
 
-const isDisabled = function (minTime, maxTime) {
+const isDisabled = function (minTime: { getHours: () => number; getMinutes: () => number; getSeconds: () => number; }, maxTime: { getHours: () => number; getMinutes: () => number; getSeconds: () => number; }) {
   const minValue = minTime.getHours() * 3600 +
     minTime.getMinutes() * 60 +
     minTime.getSeconds();
@@ -30,7 +30,8 @@ const isDisabled = function (minTime, maxTime) {
   return minValue > maxValue;
 };
 
-const calcTime = function (time) {
+const calcTime:any = function (time: any[] | undefined) {
+  
   time = Array.isArray(time) ? time : [time];
   const minTime = time[0] || new Date();
   const date = new Date();
@@ -41,7 +42,7 @@ const calcTime = function (time) {
   return { minTime, maxTime };
 };
 
-const mapPropsToState = props => {
+const mapPropsToState = (props: { pickerWidth?: number | null; currentDates: any; onPicked?: ValidDateType; onCancel?: () => void; format: any; onSelectRangeChange?: ((range: [number, Date]) => void) | null; getPopperRefElement?: (() => HTMLElement) | null; popperMixinOption?: any; }) => {
   const { currentDates, format } = props;
   const { minTime, maxTime } = calcTime(currentDates);
 
@@ -60,7 +61,7 @@ const mapPropsToState = props => {
 
 export default class TimeRangePanel extends PopperBase {
   state: any;
-
+  props: any
   static get propTypes() {
     return Object.assign(
       {
@@ -87,7 +88,7 @@ export default class TimeRangePanel extends PopperBase {
     };
   }
 
-  constructor(props: TimeRangePanelProps) {
+  constructor(props: any) {
     super(props);
 
     this.state = Object.assign(
@@ -141,12 +142,11 @@ export default class TimeRangePanel extends PopperBase {
       isShowSeconds,
       minTime,
       maxTime,
-      btnDisabled,
+      // btnDisabled,
       minSelectableRange,
       maxSelectableRange
     } = this.state;
     const { onSelectRangeChange } = this.props;
-    const $t = Locale.t;
 
     const maxHours = maxTime.getHours();
     const maxMinutes = maxTime.getMinutes();
@@ -163,17 +163,17 @@ export default class TimeRangePanel extends PopperBase {
         <div className="el-time-range-picker__content">
           <div className="el-time-range-picker__cell">
             <div className="el-time-range-picker__header">
-              {$t('el.datepicker.startTime')}
+              {'开始时间'}
             </div>
             <div
-              className={this.classNames(
+              className={classnames(
                 'el-time-range-picker__body el-time-panel__content',
                 { 'has-seconds': isShowSeconds }
               )}
             >
               <TimeSpinner
                 ref="minSpinner"
-                onChange={date => this.handleChange(date, 'minTime')}
+                onChange={(date: { hours?: number | undefined; minutes?: number | undefined; seconds?: number | undefined; }) => this.handleChange(date, 'minTime')}
                 isShowSeconds={isShowSeconds}
                 hours={minHours}
                 minutes={minMinutes}
@@ -185,44 +185,44 @@ export default class TimeRangePanel extends PopperBase {
           </div>
           <div className="el-time-range-picker__cell">
             <div className="el-time-range-picker__header">
-              {$t('el.datepicker.endTime')}
+              {'结束时间'}
             </div>
             <div
-              className={this.classNames(
+              className={classnames(
                 'el-time-range-picker__body el-time-panel__content',
                 { 'has-seconds': isShowSeconds }
               )}
             >
               <TimeSpinner
                 ref="maxSpinner"
-                onChange={date => this.handleChange(date, 'maxTime')}
+                onChange={(date: { hours?: number | undefined; minutes?: number | undefined; seconds?: number | undefined; }) => this.handleChange(date, 'maxTime')}
                 isShowSeconds={isShowSeconds}
                 hours={maxHours}
                 minutes={maxMinutes}
                 seconds={maxSeconds}
                 selectableRange={maxSelectableRange}
-                onSelectRangeChange={(start, end) =>
+                onSelectRangeChange={(start: number, end: number) =>
                   onSelectRangeChange(start + 11, end + 11)}
               />
             </div>
           </div>
         </div>
         <div className="el-time-panel__footer">
-          <button
-            type="button"
+          <div
+            // type="button"
             className="el-time-panel__btn cancel"
             onClick={() => this.props.onCancel()}
           >
-            {$t('el.datepicker.cancel')}
-          </button>
-          <button
-            type="button"
+            {'取消'}
+          </div>
+          <div
+            // type="button"
             className="el-time-panel__btn confirm"
             onClick={() => this.handleConfirm()}
-            disabled={btnDisabled}
+            // disabled={btnDisabled}
           >
-            {$t('el.datepicker.confirm')}
-          </button>
+            {'确认'}
+          </div>
         </div>
       </div>
     );

@@ -1,54 +1,70 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:35:15
- * @LastEditTime: 2022-04-21 10:41:29
+ * @LastEditTime: 2022-04-22 15:27:18
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/basic/TimeSpinner.tsx
  */
-//@flow
-import React from 'react';
-import { debounce } from 'throttle-debounce';
+import React from 'react'
+import { debounce } from 'throttle-debounce'
 
-import { PropTypes, Component } from '../../../libs';
-import { getRangeHours } from '../utils';
-import { Scrollbar } from '../../scrollbar';
-import type {TimeSpinnerProps, TimeTypes } from '../Types';
+import { getRangeHours } from '../utils'
+import Scrollbar from '../../Scrollbar/Sc'
+import type { TimeSpinnerProps, TimeTypes } from '../Types'
+const classnames = require('classnames')
+const PropTypes = require('prop-types')
 
-function range(end) {
-  let r = [];
+function range(end: number) {
+  let r = []
   for (let i = 0; i < end; i++) {
-    r.push(i);
+    r.push(i)
   }
-  return r;
+  return r
 }
 
-const isNumber = (value: any) => typeof value === 'number';
-const validateHour = (value: any) => isNumber(value) && value >= 0 && value <= 23;
-const validateMinOrSec = (value: any) => isNumber(value) && value >= 0 && value <= 59;
+const isNumber = (value: any) => typeof value === 'number'
+const validateHour = (value: any) =>
+  isNumber(value) && value >= 0 && value <= 23
+const validateMinOrSec = (value: any) =>
+  isNumber(value) && value >= 0 && value <= 59
 
 function propsToState(props: TimeSpinnerProps) {
-  const { hours, minutes, seconds, selectableRange } = props;
-  const state: any = {};
-  const setOnValid = (isValid, cb) => isValid && cb(state);
-  setOnValid(validateHour(hours), state => state.hours = hours);
-  setOnValid(validateMinOrSec(minutes), state => state.minutes = minutes);
-  setOnValid(validateMinOrSec(seconds), state => state.seconds = seconds);
-  state.hoursList = getRangeHours(selectableRange);
+  const { hours, minutes, seconds, selectableRange } = props
+  const state: any = {}
+  const setOnValid = (isValid: boolean, cb: any) => isValid && cb(state)
+  setOnValid(validateHour(hours), (state: any) => (state.hours = hours))
+  setOnValid(
+    validateMinOrSec(minutes),
+    (state: any) => (state.minutes = minutes)
+  )
+  setOnValid(
+    validateMinOrSec(seconds),
+    (state: any) => (state.seconds = seconds)
+  )
+  state.hoursList = getRangeHours(selectableRange)
   state.minutesLisit = range(60)
   state.secondsList = range(60)
-  return state;
+  return state
 }
 
-const SCROLL_AJUST_VALUE = 85;
-const calcScrollTop = value => Math.max(
-  0,
-  (value - 2.5) * 32 + SCROLL_AJUST_VALUE
-)
+const SCROLL_AJUST_VALUE = 85
+const calcScrollTop = (value: number) =>
+  Math.max(0, (value - 2.5) * 32 + SCROLL_AJUST_VALUE)
 
-export default class TimeSpinner extends Component {
-  state: any;
-
+export default class TimeSpinner extends React.Component {
+  state: any
+  ajustScrollTop: ({
+    hours,
+    minutes,
+    seconds
+  }: {
+    hours: number | null
+    minutes: number | null
+    seconds: number | null
+  }) => void
+  handleScroll: any
+  props: any
 
   static get propTypes() {
     return {
@@ -67,7 +83,7 @@ export default class TimeSpinner extends Component {
       */
       onChange: PropTypes.func.isRequired,
       onSelectRangeChange: PropTypes.func
-    };
+    }
   }
 
   static get defaultProps() {
@@ -76,170 +92,179 @@ export default class TimeSpinner extends Component {
       minutes: 0,
       seconds: 0,
       isShowSeconds: true,
-      onSelectRangeChange: ()=>{}
-    };
+      onSelectRangeChange: () => {}
+    }
   }
 
   constructor(props: TimeSpinnerProps) {
-    super(props);
+    super(props)
 
     this.state = {
       hours: 0,
       minutes: 0,
       seconds: 0
-    };
+    }
 
-    Object.assign(this.state, propsToState(props));
-    this.ajustScrollTop = this._ajustScrollTop.bind(this);
-    this.handleScroll = debounce(20, this._handleScroll.bind(this));
+    Object.assign(this.state, propsToState(props))
+    this.ajustScrollTop = this._ajustScrollTop.bind(this)
+    this.handleScroll = debounce(20, this._handleScroll.bind(this))
   }
 
   componentDidMount() {
-    this.ajustScrollTop(this.state);
+    this.ajustScrollTop(this.state)
   }
 
   componentWillReceiveProps(nextProps: any) {
     this.setState(propsToState(nextProps), () => {
-      this.ajustScrollTop(this.state);
-    });
+      this.ajustScrollTop(this.state)
+    })
   }
 
   emitSelectRange(type: TimeTypes) {
-    const { onSelectRangeChange } = this.props;
+    const { onSelectRangeChange }: any = this.props
     if (type === 'hours') {
-      onSelectRangeChange(0, 3);
+      onSelectRangeChange(0, 3)
     } else if (type === 'minutes') {
-      onSelectRangeChange(3, 5);
+      onSelectRangeChange(3, 5)
     } else if (type === 'seconds') {
-      onSelectRangeChange(6, 9);
+      onSelectRangeChange(6, 9)
     }
   }
 
   _handleScroll(_type: TimeTypes) {
     const value = Math.min(
       Math.floor(
-        (this.refs[_type].refs.wrap.scrollTop - SCROLL_AJUST_VALUE) / 32 + 3
+        ((this.refs[_type] as any).refs.wrap.scrollTop - SCROLL_AJUST_VALUE) /
+          32 +
+          3
       ),
       59
-    );
-    this.handleChange(_type, value);
+    )
+    this.handleChange(_type, value)
   }
 
   // type: hours, minutes, seconds
-  handleChange(type: TimeTypes, value: number, disabled: ?boolean) {
-    if (disabled) return;
-    this.state[type] = value;
-    const changed = {};
-    changed[type] = value;
+  handleChange(type: any, value: any, disabled?: any) {
+    if (disabled) return
+    this.state[type] = value
+    const changed = {}
+    changed[type] = value
     this.setState({}, () => {
-      this.ajustScrollTop(this.state);
-    });
-    this.props.onChange(changed);
+      this.ajustScrollTop(this.state)
+    })
+    this.props.onChange(changed)
   }
 
-  _ajustScrollTop({ hours, minutes, seconds }: { hours: ?number, minutes: ?number, seconds: ?number }) {
+  _ajustScrollTop({ hours, minutes, seconds }: any) {
     if (hours != null) {
-      this.refs.hours.refs.wrap.scrollTop = calcScrollTop(hours)
+      ;(this.refs.hours as any).refs.wrap.scrollTop = calcScrollTop(hours)
     }
     if (minutes != null) {
-      this.refs.minutes.refs.wrap.scrollTop = calcScrollTop(minutes)
+      ;(this.refs.minutes as any).refs.wrap.scrollTop = calcScrollTop(minutes)
     }
     if (this.refs.seconds && seconds != null) {
-      this.refs.seconds.refs.wrap.scrollTop = calcScrollTop(seconds)
+      ;(this.refs.seconds as any).refs.wrap.scrollTop = calcScrollTop(seconds)
     }
   }
 
   render() {
-    const {
-      hoursList,
-      minutesLisit,
-      secondsList,
-      hours,
-      minutes,
-      seconds
-    } = this.state;
-    const { isShowSeconds } = this.props;
+    const { hoursList, minutesLisit, secondsList, hours, minutes, seconds } =
+      this.state
+    const { isShowSeconds }: any = this.props
 
     return (
       <div
-        className={this.classNames('el-time-spinner', {
+        className={classnames('el-time-spinner', {
           'has-seconds': isShowSeconds
         })}
       >
         <Scrollbar
           onMouseEnter={() => this.emitSelectRange('hours')}
           onWheel={() => {
-            this.handleScroll('hours');
+            this.handleScroll('hours')
           }}
-          ref="hours"
-          className="el-time-spinner__wrapper"
+          ref='hours'
+          className='el-time-spinner__wrapper'
           wrapStyle={{ maxHeight: 'inherit' }}
-          viewClass="el-time-spinner__list"
-          viewComponent="ul"
+          viewClass='el-time-spinner__list'
+          viewComponent='ul'
         >
-          {hoursList.map((disabled, idx) => {
+          {hoursList.map((disabled: boolean | null, idx: any) => {
             return (
-              <li
+              <span
                 key={idx}
                 onClick={() => this.handleChange('hours', idx, disabled)}
-                className={this.classNames('el-time-spinner__item', {
+                className={classnames('el-time-spinner__item', {
                   active: idx === hours,
                   disabled: disabled
                 })}
               >
                 {idx}
-              </li>
-            );
+              </span>
+            )
           })}
         </Scrollbar>
         <Scrollbar
           onMouseEnter={() => this.emitSelectRange('minutes')}
           onWheel={() => this.handleScroll('minutes')}
-          ref="minutes"
-          className="el-time-spinner__wrapper"
+          ref='minutes'
+          className='el-time-spinner__wrapper'
           wrapStyle={{ maxHeight: 'inherit' }}
-          viewClass="el-time-spinner__list"
-          viewComponent="ul"
+          viewClass='el-time-spinner__list'
+          viewComponent='ul'
         >
-          {minutesLisit.map((minute) => {
+          {minutesLisit.map((minute: any) => {
             return (
-              <li
+              <span
                 key={minute}
                 onClick={() => this.handleChange('minutes', minute)}
-                className={this.classNames('el-time-spinner__item', {
+                className={classnames('el-time-spinner__item', {
                   active: minute === minutes
                 })}
               >
                 {minute}
-              </li>
-            );
+              </span>
+            )
           })}
         </Scrollbar>
-        {isShowSeconds &&
+        {isShowSeconds && (
           <Scrollbar
             onMouseEnter={() => this.emitSelectRange('seconds')}
             onWheel={() => this.handleScroll('seconds')}
-            ref="seconds"
-            className="el-time-spinner__wrapper"
+            ref='seconds'
+            className='el-time-spinner__wrapper'
             wrapStyle={{ maxHeight: 'inherit' }}
-            viewClass="el-time-spinner__list"
-            viewComponent="ul"
+            viewClass='el-time-spinner__list'
+            viewComponent='ul'
           >
-            {secondsList.map((sec) => {
+            {secondsList.map((sec: any) => {
               return (
-                <li
+                // <li
+                // key={sec}
+                // onClick={() => this.handleChange('seconds', sec)}
+                // className={classnames('el-time-spinner__item', {
+                //   active: sec === seconds
+                // })}
+                // >
+
+                // </li>
+                <span
                   key={sec}
                   onClick={() => this.handleChange('seconds', sec)}
-                  className={this.classNames('el-time-spinner__item', {
+                  className={classnames('el-time-spinner__item', {
                     active: sec === seconds
                   })}
                 >
                   {sec}
-                </li>
-              );
+                </span>
+              )
             })}
-          </Scrollbar>}
+          </Scrollbar>
+        )}
       </div>
-    );
+    )
+  }
+  classNames(_arg0: string, _arg1: { 'has-seconds': any }): string | undefined {
+    throw new Error('Method not implemented.')
   }
 }

@@ -1,35 +1,41 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:27:01
- * @LastEditTime: 2022-04-21 10:44:42
+ * @LastEditTime: 2022-04-22 11:53:44
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/BasePicker.tsx
  */
 //@flow
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import EventRegister from '../../utils/EventRegister'
 
-import { PropTypes, Component } from '../../libs';
-import { EventRegister } from '../../libs/internal'
-
-import Input from '../input'
-import { PLACEMENT_MAP, HAVE_TRIGGER_TYPES, TYPE_VALUE_RESOLVER_MAP, DEFAULT_FORMATS } from './constants'
-import { Errors, require_condition, IDGenerator } from '../../libs/utils';
+import Input from '../Input'
+import {
+  PLACEMENT_MAP,
+  HAVE_TRIGGER_TYPES,
+  TYPE_VALUE_RESOLVER_MAP,
+  DEFAULT_FORMATS
+} from './constants'
+import { Errors, require_condition, IDGenerator } from '../../utils'
 import { MountBody } from './MountBody'
-import type { BasePickerProps, ValidDateType } from './Types';
+import type { BasePickerProps, ValidDateType } from './Types'
+const PropTypes = require('prop-types')
+const classnames = require('classnames')
 
 type NullableDate = Date | null
 
 const idGen = new IDGenerator()
-const haveTriggerType = (type) => {
+const haveTriggerType = (type: string) => {
   return HAVE_TRIGGER_TYPES.indexOf(type) !== -1
 }
 
-const isValidValue = (value) => {
+const isValidValue = (value: string | any[] | Date | null) => {
   if (value instanceof Date) return true
-  if (Array.isArray(value) && value.length !== 0 && value[0] instanceof Date) return true
+  if (Array.isArray(value) && value.length !== 0 && value[0] instanceof Date)
+    return true
   return false
 }
 
@@ -38,7 +44,8 @@ const valueEquals = function (a: any, b: any) {
   const aIsArray = Array.isArray(a)
   const bIsArray = Array.isArray(b)
 
-  let isEqual = (a, b)=>{ // equal if a, b date is equal or both is null or undefined
+  let isEqual = (a: { getTime: () => any } | null, b: { getTime: () => any }) => {
+    // equal if a, b date is equal or both is null or undefined
     let equal = false
     if (a && b) equal = a.getTime() === b.getTime()
     else equal = a === b && a == null
@@ -51,12 +58,18 @@ const valueEquals = function (a: any, b: any) {
   if (!aIsArray && !bIsArray) {
     return isEqual(a, b)
   }
-  return false;
-};
+  return false
+}
 
-
-export default class BasePicker extends Component {
-  state: any;
+export default class BasePicker extends React.Component {
+  state: any
+  type: string
+  clickOutsideId: any
+  isInputFocus!: boolean
+  domRoot: any
+  pickerProxy: any
+  static contextTypes: { form: any }
+  props:any
 
   static get propTypes() {
     return {
@@ -75,7 +88,7 @@ export default class BasePicker extends Component {
       value: PropTypes.oneOfType([
         PropTypes.instanceOf(Date),
         PropTypes.arrayOf(PropTypes.instanceOf(Date))
-      ]),
+      ])
     }
   }
 
@@ -83,26 +96,31 @@ export default class BasePicker extends Component {
     return {
       value: new Date(),
       // (thisReactElement)=>Unit
-      onFocus() { },
-      onBlur() { },
+      onFocus() {},
+      onBlur() {}
     }
   }
 
   constructor(props: BasePickerProps, _type: string, state: any = {}) {
     require_condition(typeof _type === 'string')
-    super(props);
+    super(props)
 
-    this.type = _type// type need to be set first
-    this.state = Object.assign({}, state, {
-      pickerVisible: false,
-    }, this.propsToState(props))
+    this.type = _type // type need to be set first
+    this.state = Object.assign(
+      {},
+      state,
+      {
+        pickerVisible: false
+      },
+      this.propsToState(props)
+    )
 
     this.clickOutsideId = 'clickOutsideId_' + idGen.next()
   }
 
   // ---: start, abstract methods
   // (state, props)=>ReactElement
-  pickerPanel(state: any, props: $Subtype<BasePickerProps>) {
+  pickerPanel(_state: any, props: any) {
     throw new Errors.MethodImplementationRequiredError(props)
   }
 
@@ -122,7 +140,8 @@ export default class BasePicker extends Component {
    * @param value: Date|Date[]|null
    * @param isKeepPannel: boolean = false
    */
-  onPicked(value: ValidDateType, isKeepPannel: boolean = false) {//only change input value on picked triggered
+  onPicked(value: ValidDateType, isKeepPannel: boolean = false) {
+    //only change input value on picked triggered
     let hasChanged = !valueEquals(this.state.value, value)
     this.setState({
       pickerVisible: isKeepPannel,
@@ -131,8 +150,8 @@ export default class BasePicker extends Component {
     })
 
     if (hasChanged) {
-      this.props.onChange(value);
-      this.context.form && this.context.form.onFieldChange();
+      this.props.onChange(value)
+      this.context.form && this.context.form.onFieldChange()
     }
   }
 
@@ -141,23 +160,21 @@ export default class BasePicker extends Component {
 
     const tdate = date
     const formatter = (
-      TYPE_VALUE_RESOLVER_MAP[this.type] ||
-      TYPE_VALUE_RESOLVER_MAP['default']
-    ).formatter;
-    const result = formatter(tdate, this.getFormat(), this.getFormatSeparator());
+      TYPE_VALUE_RESOLVER_MAP[this.type] || TYPE_VALUE_RESOLVER_MAP['default']
+    ).formatter
+    const result = formatter(tdate, this.getFormat(), this.getFormatSeparator())
 
-    return result;
+    return result
   }
 
   // (string) => Date | null
   parseDate(dateStr: string): NullableDate {
     if (!dateStr) return null
-    const type = this.type;
+    const type = this.type
     const parser = (
-      TYPE_VALUE_RESOLVER_MAP[type] ||
-      TYPE_VALUE_RESOLVER_MAP['default']
-    ).parser;
-    return parser(dateStr, this.getFormat(), this.getFormatSeparator());
+      TYPE_VALUE_RESOLVER_MAP[type] || TYPE_VALUE_RESOLVER_MAP['default']
+    ).parser
+    return parser(dateStr, this.getFormat(), this.getFormatSeparator())
   }
 
   getFormat(): string {
@@ -165,7 +182,7 @@ export default class BasePicker extends Component {
   }
 
   propsToState(props: BasePickerProps) {
-    const state = {}
+    const state:any = {}
     if (this.isDateValid(props.value)) {
       state.text = this.dateToStr(props.value)
       state.value = props.value
@@ -182,14 +199,14 @@ export default class BasePicker extends Component {
   }
 
   triggerClass(): string {
-    return this.type.includes('time') ? 'el-icon-time' : 'el-icon-date';
+    return this.type.includes('time') ? 'el-icon-time' : 'el-icon-date'
   }
 
   calcIsShowTrigger() {
     if (this.props.isShowTrigger != null) {
-      return !!this.props.isShowTrigger;
+      return !!this.props.isShowTrigger
     } else {
-      return haveTriggerType(this.type);
+      return haveTriggerType(this.type)
     }
   }
 
@@ -197,19 +214,18 @@ export default class BasePicker extends Component {
     this.isInputFocus = true
     if (haveTriggerType(this.type) && !this.state.pickerVisible) {
       this.setState({ pickerVisible: true }, () => {
-        this.props.onFocus(this);
+        this.props.onFocus(this)
       })
     }
   }
 
-
   handleBlur() {
     this.isInputFocus = false
-    this.props.onBlur(this);
+    this.props.onBlur(this)
   }
 
-  handleKeydown(evt: SyntheticKeyboardEvent<any>) {
-    const keyCode = evt.keyCode;
+  handleKeydown(evt: any) {
+    const keyCode = evt.keyCode
     // tab
     if (keyCode === 9 || keyCode === 27) {
       this.setState({ pickerVisible: false })
@@ -243,7 +259,7 @@ export default class BasePicker extends Component {
     return true
   }
 
-  handleClickOutside(evt: SyntheticEvent<any>) {
+  handleClickOutside(evt: any) {
     const { value, pickerVisible } = this.state
     if (!this.isInputFocus && !pickerVisible) {
       return
@@ -253,7 +269,7 @@ export default class BasePicker extends Component {
     if (this.isDateValid(value)) {
       this.setState({ pickerVisible: false })
       this.props.onChange(value)
-      this.context.form && this.context.form.onFieldChange();
+      this.context.form && this.context.form.onFieldChange()
     } else {
       this.setState({ pickerVisible: false, text: this.dateToStr(value) })
     }
@@ -269,20 +285,20 @@ export default class BasePicker extends Component {
     } else {
       this.setState({ text: '', value: null, pickerVisible: false })
       this.props.onChange(null)
-      this.context.form && this.context.form.onFieldChange();
+      this.context.form && this.context.form.onFieldChange()
     }
   }
 
   render() {
-    const { isReadOnly, placeholder, isDisabled, className } = this.props;
-    const { pickerVisible, value, text, isShowClose } = this.state;
+    const { isReadOnly, placeholder, isDisabled, className } = this.props
+    const { pickerVisible, value, text, isShowClose } = this.state
 
     const createIconSlot = () => {
       if (this.calcIsShowTrigger()) {
         const cls = isShowClose ? 'el-icon-close' : this.triggerClass()
         return (
           <i
-            className={this.classNames('el-input__icon', cls)}
+            className={classnames('el-input__icon', cls)}
             onClick={this.handleClickIcon.bind(this)}
             onMouseEnter={() => {
               if (isReadOnly || isDisabled) return
@@ -303,11 +319,11 @@ export default class BasePicker extends Component {
     const createPickerPanel = () => {
       if (pickerVisible) {
         /* eslint-disable */
-        let {placeholder, onFocus, onBlur, onChange, ...others} = this.props
+        let { placeholder, onFocus, onBlur, onChange, ...others } = this.props
         /* eslint-enable */
         return (
-          <MountBody ref={e => this.pickerProxy = e}>
-            {
+          <MountBody ref={(e:any) => (this.pickerProxy = e)}>
+              {
               this.pickerPanel(
                 this.state,
                 {
@@ -330,43 +346,45 @@ export default class BasePicker extends Component {
 
     return (
       <span
-        className={this.classNames('el-date-editor', className, {
+        className={classnames('el-date-editor', className, {
           'is-have-trigger': this.calcIsShowTrigger(),
           'is-active': pickerVisible,
           'is-filled': !!value
         })}
-
-        ref={v => this.domRoot = v}
+        ref={(v) => (this.domRoot = v)}
       >
-
         <EventRegister
           id={this.clickOutsideId}
           target={document}
-          eventName="click"
-          func={this.handleClickOutside.bind(this)} />
+          eventName='click'
+          func={this.handleClickOutside.bind(this)}
+        />
 
         <Input
-          className={this.classNames(`el-date-editor el-date-editor--${this.type}`)}
+          className={classnames(
+            `el-date-editor el-date-editor--${this.type}`
+          )}
           readOnly={isReadOnly}
           disabled={isDisabled}
-          type="text"
+          type='text'
           placeholder={placeholder}
           onFocus={this.handleFocus.bind(this)}
           onBlur={this.handleBlur.bind(this)}
           onKeyDown={this.handleKeydown.bind(this)}
-          onChange={value => {
+          onChange={(value: any) => {
             const iptxt = value
-            const nstate: Object = { text: iptxt }
+            const nstate: any = { text: iptxt }
 
             if (iptxt.trim() === '' || !this.isInputValid(iptxt)) {
               nstate.value = null
-            } else {//only set value on a valid date input
+            } else {
+              //only set value on a valid date input
               nstate.value = this.parseDate(iptxt)
             }
 
             this.setState(nstate)
           }}
-          ref="inputRoot"
+          ref='inputRoot'
           value={text}
           icon={createIconSlot()}
         />
@@ -375,9 +393,11 @@ export default class BasePicker extends Component {
       </span>
     )
   }
+  classNames(_arg0: string, _cls: string): string | undefined {
+    throw new Error('Method not implemented.')
+  }
 }
-
 
 BasePicker.contextTypes = {
   form: PropTypes.any
-};
+}

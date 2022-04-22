@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:27:18
- * @LastEditTime: 2022-04-21 10:44:53
+ * @LastEditTime: 2022-04-22 11:31:54
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/DatePicker.tsx
@@ -9,7 +9,7 @@
 //@flow
 import React from 'react';
 
-import { pick } from '../../libs/utils'
+import { pick } from '../../utils'
 import { SELECTION_MODES } from './utils'
 
 import BasePicker from './BasePicker'

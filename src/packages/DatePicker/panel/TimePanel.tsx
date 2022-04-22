@@ -1,38 +1,41 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:33:12
- * @LastEditTime: 2022-04-21 10:44:02
+ * @LastEditTime: 2022-04-22 15:30:09
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/panel/TimePanel.tsx
  */
 //@flow
-import React from 'react';
-
-import { PropTypes } from '../../../libs';
+import React from 'react'
 import { limitRange } from '../utils'
 import TimeSpinner from '../basic/TimeSpinner'
-import Locale from '../../locale'
-import type { TimePanelProps } from '../Types';
+import type { TimePanelProps } from '../Types'
 import { PopperBase } from './PopperBase'
 
-const mapPropsToState = (props) => {
+const PropTypes = require('prop-types')
+const classnames = require('classnames')
+
+const mapPropsToState = (props: any) => {
   const state: any = {
     format: props.format || 'HH:mm:ss',
     currentDate: props.currentDate || new Date()
-  };
+  }
   state.isShowSeconds = (state.format || '').indexOf('ss') !== -1
   return state
 }
 
 export default class TimePanel extends PopperBase {
-
+  // state: any
+  props: any
   static get propTypes() {
-    return Object.assign({},
+    return Object.assign(
+      {},
       {
         selectableRange: TimeSpinner.propTypes.selectableRange,
         onSelectRangeChange: TimeSpinner.propTypes.onSelectRangeChange
-      }, {
+      },
+      {
         pickerWidth: PropTypes.number,
         currentDate: PropTypes.instanceOf(Date),
         /*
@@ -44,8 +47,10 @@ export default class TimePanel extends PopperBase {
         onPicked: PropTypes.func.isRequired,
         // cancel btn is clicked
         //()=>()
-        onCancel: PropTypes.func.isRequired,
-      }, PopperBase.propTypes)
+        onCancel: PropTypes.func.isRequired
+      },
+      PopperBase.propTypes
+    )
   }
 
   static get defaultProps() {
@@ -65,50 +70,49 @@ export default class TimePanel extends PopperBase {
 
   // type: string,  one of [hours, minutes, seconds]
   // date: {type: number}
-  handleChange(date: { hours?: number, minutes?: number, seconds?: number }) {
-    const { currentDate } = this.state
+  handleChange(date: { hours?: number; minutes?: number; seconds?: number }) {
+    const { currentDate }:any = this.state
 
     if (date.hours !== undefined) {
-      currentDate.setHours(date.hours);
+      currentDate.setHours(date.hours)
     }
 
     if (date.minutes !== undefined) {
-      currentDate.setMinutes(date.minutes);
+      currentDate.setMinutes(date.minutes)
     }
 
     if (date.seconds !== undefined) {
-      currentDate.setSeconds(date.seconds);
+      currentDate.setSeconds(date.seconds)
     }
     this.setState({})
-    this.handleConfirm(true);
+    this.handleConfirm(true)
   }
 
-
   handleConfirm(isKeepPannelOpen: boolean = false) {
-    const { currentDate } = this.state
-    const { onPicked, selectableRange } = this.props
+    const { currentDate }:any = this.state
+    const { onPicked, selectableRange } :any= this.props
 
-    const date = new Date(limitRange(currentDate, selectableRange, 'HH:mm:ss'));
+    const date = new Date(limitRange(currentDate, selectableRange, 'HH:mm:ss'))
     onPicked(date, isKeepPannelOpen)
   }
 
   render() {
-    const { isShowSeconds, currentDate } = this.state
-    const { onSelectRangeChange, selectableRange } = this.props
+    const { isShowSeconds, currentDate } :any= this.state
+    const { onSelectRangeChange, selectableRange }:any = this.props
 
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-
-    const $t = Locale.t
+    const hours = currentDate.getHours()
+    const minutes = currentDate.getMinutes()
+    const seconds = currentDate.getSeconds()
 
     return (
-      <div
-        ref="root"
-        className="el-time-panel">
-        <div className={this.classNames('el-time-panel__content', { 'has-seconds': isShowSeconds })}>
+      <div ref='root' className='el-time-panel'>
+        <div
+          className={classnames('el-time-panel__content', {
+            'has-seconds': isShowSeconds
+          })}
+        >
           <TimeSpinner
-            ref="spinner"
+            ref='spinner'
             onChange={this.handleChange.bind(this)}
             isShowSeconds={isShowSeconds}
             hours={hours}
@@ -118,17 +122,22 @@ export default class TimePanel extends PopperBase {
             onSelectRangeChange={onSelectRangeChange}
           />
         </div>
-        <div className="el-time-panel__footer">
-          <button
-            type="button"
-            className="el-time-panel__btn cancel"
-            onClick={() => this.props.onCancel()}>{$t('el.datepicker.cancel')}</button>
-          <button
-            type="button"
-            className="el-time-panel__btn confirm"
-            onClick={() => this.handleConfirm()}>{$t('el.datepicker.confirm')}</button>
+        <div className='el-time-panel__footer'>
+          <div
+            className='el-time-panel__btn cancel'
+            onClick={() => {
+              this.props.onCancel&& this.props.onCancel()}}
+          >
+            {'取消'}
+          </div>
+          <div
+            className='el-time-panel__btn confirm'
+            onClick={() => this.handleConfirm()}
+          >
+            {'确定'}
+          </div>
         </div>
       </div>
-    );
+    )
   }
 }

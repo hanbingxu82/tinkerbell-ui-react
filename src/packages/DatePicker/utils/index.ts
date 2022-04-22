@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:32:22
- * @LastEditTime: 2022-04-21 11:49:55
+ * @LastEditTime: 2022-04-22 10:13:30
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DatePicker/utils/index.ts
@@ -98,7 +98,7 @@ export const isDate = function (
 
 export const formatDate = function (
   date: Date | null,
-  format: string | undefined
+  format?: string | undefined
 ) {
   date = toDate(date)
   if (!date) return ''

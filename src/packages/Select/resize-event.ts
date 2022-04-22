@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-13 15:54:27
- * @LastEditTime: 2022-04-14 10:04:43
+ * @LastEditTime: 2022-04-22 09:36:36
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/resize-event.tsx
@@ -218,13 +218,7 @@ export const addResizeListener = function (element: any, fn: any) {
 
 /* istanbul ignore next */
 export const removeResizeListener = function (
-  element: {
-    detachEvent: (arg0: string, arg1: any) => void
-    __resizeListeners__: any[]
-    removeEventListener: (arg0: string, arg1: (event: any) => void) => void
-    __resizeTrigger__: boolean
-    removeChild: (arg0: any) => any
-  },
+  element: any,
   fn: any
 ) {
   if (attachEvent) {
