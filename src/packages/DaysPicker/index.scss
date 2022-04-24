@@ -32,7 +32,7 @@
     .icon-calendar {
       line-height: inherit;
       vertical-align: text-bottom;
-
+      color: #bfcbd9;
       // font-size: 14px;
       // color: $color-white;
       &:hover {
@@ -125,7 +125,7 @@
       align-items: center;
       padding: 0 8px;
       color: #000;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid $border-color-base;
       height: 40px;
 
       &-item {
@@ -182,7 +182,7 @@
   }
 
   &-time {
-    border-left: 1px solid #f0f0f0;
+    border-left: 1px solid $border-color-base;
     width: 112px;
     box-sizing: border-box;
     height: 100%;
@@ -191,7 +191,7 @@
       font-weight: 500;
       line-height: 40px;
       text-align: center;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid $border-color-base;
       height: 40px;
       box-sizing: border-box;
     }
@@ -201,7 +201,7 @@
       display: flex;
 
       >div {
-        border-left: 1px solid #f0f0f0;
+        border-left: 1px solid $border-color-base;
       }
 
       >div:first-child {
@@ -215,7 +215,7 @@
     box-sizing: border-box;
     height: 44px;
     width: 100%;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid $border-color-base;
     display: flex;
     justify-content: space-between;
     align-items: center;
