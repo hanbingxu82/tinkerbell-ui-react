@@ -14,7 +14,7 @@
     background: #ffffff;
     border: 1px solid #d8dbe4;
     padding: 0 6px;
-    border-radius: 4px;
+    border-radius: $border-base-radius;
     z-index: 2021;
     position: relative;
 
@@ -163,7 +163,7 @@
           cursor: pointer;
 
           &:hover {
-            color: #007aff;
+            color: $color-primary;
           }
         }
 
@@ -222,7 +222,7 @@
     padding: 4px 12px;
 
     &-new {
-      color: #007aff;
+      color: $color-primary;
       cursor: pointer;
     }
 
@@ -235,7 +235,7 @@
       line-height: 24px;
       text-align: center;
       cursor: pointer;
-      background-color: #007aff;
+      background-color: $color-primary;
       color: #fff;
 
       &:hover {
@@ -255,7 +255,6 @@
   }
 
   &-input:hover {
-    // color: $color-primary;
-    border-color: $color-primary;
+    border-color: #8391a5;
   }
 }
