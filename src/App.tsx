@@ -1,14 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-04-22 16:45:14
+ * @LastEditTime: 2022-04-24 16:22:36
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
-
+// eslint-disable-next-line
 import React, { useEffect, useRef, useState } from 'react'
-
 import './index.css'
 import {
   Button,
@@ -32,7 +31,8 @@ import {
   InputNumber,
   MessageBox,
   Select,
-  DatePicker
+  DaysPicker
+  // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
 import { useNavigate } from 'react-router-dom'
@@ -185,10 +185,50 @@ const App = (props: any) => {
     }
   ])
   const [value1] = useState([])
-  const [value22] = useState(null)
+  const [value22, setValue22] = useState('')
   return (
     <div>
-      <DatePicker
+      <DaysPicker
+        type='dateTime'
+        defaultValue=''
+        value={value22}
+        limit
+        size="large"
+        onChange={(val: any) => {
+          setValue22(val)
+        }}
+      ></DaysPicker>
+      <DaysPicker
+        type='dateTime'
+        defaultValue=''
+        value={value22}
+        limit
+        onChange={(val: any) => {
+          setValue22(val)
+        }}
+      ></DaysPicker>
+      <DaysPicker
+      size="small"
+        type='dateTime'
+        defaultValue=''
+        value={value22}
+        limit
+        onChange={(val: any) => {
+          console.log(val,11111)
+          setValue22(val)
+        }}
+      ></DaysPicker>
+      <DaysPicker
+      size="mini"
+        type='dateTime'
+        defaultValue=''
+        value={value22}
+        limit
+        onChange={(val: any) => {
+          setValue22(val)
+        }}
+      ></DaysPicker>
+      {/* <DatePicker
         value={value22}
         placeholder='选择日期'
         onChange={(date: any) => {
@@ -196,7 +236,7 @@ const App = (props: any) => {
           // this.setState({value1: date})
         }}
         disabledDate={(time: any) => time.getTime() < Date.now() - 8.64e7}
-      />
+      /> */}
       <br />
       <Button
         type='text'
@@ -239,8 +279,8 @@ const App = (props: any) => {
       <InputNumber size='mini' defaultValue={30}></InputNumber>
       <div>
         <div>
-          <Input style={{ width: 200 }} placeholder='请输入内容' />
-          <Input style={{ width: 200 }} disabled placeholder='请输入内容' />
+          <Input placeholder='请输入内容' />
+          <Input disabled placeholder='请输入内容' />
           <Input
             style={{ width: 200 }}
             icon='icon-credit-level-fill'

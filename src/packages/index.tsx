@@ -1,12 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2022-04-22 15:53:55
+ * @LastEditTime: 2022-04-24 16:22:53
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
  */
-import * as React from 'react'
+// eslint-disable-next-line
+import React from 'react'
 import '../index.css'
 import '../styles.css'
 import '../style/global.scss'
@@ -51,13 +52,14 @@ import Input from './Input'
 import InputNumber from './InputNumber'
 import MessageBox from './MessageBox'
 import Select from './Select'
-import {
-  TimeSelect,
-  TimePicker,
-  TimeRangePicker,
-  DatePicker,
-  DateRangePicker
-} from './DatePicker'
+import DaysPicker from './DaysPicker'
+// import {
+//   TimeSelect,
+//   TimePicker,
+//   TimeRangePicker,
+//   DatePicker,
+//   DateRangePicker
+// } from './DatePicker'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './Carousel'
@@ -124,9 +126,10 @@ export {
   InputNumber,
   MessageBox,
   Select,
-  TimeSelect,
-  TimePicker,
-  TimeRangePicker,
-  DatePicker,
-  DateRangePicker
+  DaysPicker
+  // TimeSelect,
+  // TimePicker,
+  // TimeRangePicker,
+  // DatePicker,
+  // DateRangePicker
 }
