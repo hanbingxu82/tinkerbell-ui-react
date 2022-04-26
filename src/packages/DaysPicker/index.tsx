@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-24 10:11:24
- * @LastEditTime: 2022-04-24 16:23:26
+ * @LastEditTime: 2022-04-26 11:54:56
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DaysPicker/index.tsx
@@ -271,24 +271,24 @@ const DatePicker = (props: DatePickerProps) => {
               <div className='datepicker-date-list'>
                 <YearPage
                   ref={yearRef}
-                  change={yearChange.bind(this)}
+                  change={yearChange}
                   active={year}
                   visible={plate === 1}
-                  plateChange={plateChange.bind(this)}
+                  plateChange={plateChange}
                   limit={limit}
                 />
                 <MonthPage
                   ref={monthRef}
-                  change={monthChange.bind(this)}
+                  change={monthChange}
                   year={year}
                   active={month}
                   visible={plate === 2}
-                  plateChange={plateChange.bind(this)}
+                  plateChange={plateChange}
                   limit={limit}
                 />
                 <DayPage
                   monthRef={monthRef}
-                  change={dayChange.bind(this)}
+                  change={dayChange}
                   year={year}
                   month={month}
                   active={day}
@@ -314,7 +314,7 @@ const DatePicker = (props: DatePickerProps) => {
                   year={year}
                   month={month}
                   day={day}
-                  change={hourChange.bind(this)}
+                  change={hourChange}
                   limit={limit}
                 />
                 <MinutePage
@@ -323,12 +323,12 @@ const DatePicker = (props: DatePickerProps) => {
                   month={month}
                   day={day}
                   hour={hour}
-                  change={minuteChange.bind(this)}
+                  change={minuteChange}
                   limit={limit}
                 />
                 {/* <SecondPage
 							  active={second}
-							  change={secondChange.bind(this)}
+							  change={secondChange}
 						  /> */}
               </div>
             </div>
