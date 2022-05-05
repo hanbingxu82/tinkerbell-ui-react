@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-04-28 14:51:19
+ * @LastEditTime: 2022-05-05 16:13:06
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -58,6 +58,7 @@ import InputNumber from './packages/InputNumber'
 import MessageBox from './packages/MessageBox'
 import Select from './packages/Select'
 import DaysPicker from './packages/DaysPicker'
+import Cascader from './packages/Cascader'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './packages/Carousel'
@@ -124,7 +125,8 @@ export {
   InputNumber,
   MessageBox,
   Select,
-  DaysPicker
+  DaysPicker,
+  Cascader
 }
 
 

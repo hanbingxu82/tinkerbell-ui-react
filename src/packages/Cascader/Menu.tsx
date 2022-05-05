@@ -1,16 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:46:06
- * @LastEditTime: 2022-04-28 19:27:54
+ * @LastEditTime: 2022-05-05 16:33:59
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Menu.tsx
  */
-/* @flow */
-
-import React, { useState } from 'react'
-// import { Component, PropTypes, Transition, View } from '../../libs';
-import CSSMotion from 'rc-motion'
+// eslint-disable-next-line
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useImperativeHandle
+} from 'react'
+import Animate from 'rc-animate'
 
 const PropTypes = require('prop-types')
 const classnames = require('classnames')
@@ -26,45 +29,59 @@ type State = {
   popperClass: string
 }
 
-const CascaderMenu:any = React.forwardRef((props:any,ref:any)=>{
+const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
+  let [state, setState] = useState<State>({
+    inputWidth: 0,
+    options: [],
+    props: {},
+    visible: false,
+    activeValue: [],
+    value: [],
+    expandTrigger: 'click',
+    changeOnSelect: false,
+    popperClass: ''
+  })
 
-    let [state,setState] = useState( {
-        inputWidth: 0,
-        options: [],
-        props: {},
-        visible: false,
-        activeValue: [],
-        value: [],
-        expandTrigger: 'click',
-        changeOnSelect: false,
-        popperClass: ''
-      })
+  // 强制更新视图方法 start
+  const [, updateState] = useState<any>()
+  const forceUpdate = useCallback(() => updateState({}), [])
+  // 强制更新视图方法 end
 
-})
+  useImperativeHandle(ref, () => ({
+    // 暂时不用传递数据
+  }))
 
+  //  function props {
+  //     return this.context.component
+  //   }
 
+  useEffect(() => {
+    ref.current.initMenu({
+      state,
+      setState,
+      props,
+      select,
+      activeItem,
+      _activeOptions
+    })
+  }, []) // eslint-disable-line
 
+  //   componentDidUpdate(props: Object, state: State) {
+  //     if (
+  //       state.value !== this.state.value ||
+  //       state.visible !== this.state.visible
+  //     ) {
+  //       this.setState({ activeValue: this.state.value })
+  //     }
+  //   }
 
+  // 因为缓存的关系只有二者发生变化  才会触发
+  useEffect(() => {
+    // setState({ ...state, activeValue: state.value })
+  }, [state.value, state.visible])
 
-  parent() {
-    return this.context.component
-  }
-
-  componentDidMount() {
-    this.parent().initMenu(this)
-  }
-
-  componentDidUpdate(props: Object, state: State) {
-    if (
-      state.value !== this.state.value ||
-      state.visible !== this.state.visible
-    ) {
-      this.setState({ activeValue: this.state.value })
-    }
-  }
-
-  select(item: any, menuIndex: number) {
-    let { activeValue } = this.state
+  function select(item: any, menuIndex: number) {
+    let { activeValue } = state
     if (item.__IS__FLAT__OPTIONS) {
       activeValue = item.value
     } else {
@@ -75,36 +92,35 @@ const CascaderMenu:any = React.forwardRef((props:any,ref:any)=>{
       }
     }
 
-    this.forceUpdate()
-    this.parent().handlePick(activeValue)
+    forceUpdate()
+    props.handlePick(activeValue)
   }
 
-  handleMenuLeave() {}
+  //   function handleMenuLeave() {}
 
-  activeItem(item: any, menuIndex: number) {
-    const activeOptions = this.activeOptions()
+  function activeItem(item: any, menuIndex: number) {
+    const activeOptions = _activeOptions()
 
-    this.state.activeValue.splice(menuIndex, activeOptions.length, item.value)
+    state.activeValue.splice(menuIndex, activeOptions.length, item.value)
 
-    this.forceUpdate()
+    forceUpdate()
 
-    if (this.parent().props.changeOnSelect) {
-      this.parent().handlePick(this.state.activeValue, false)
+    if (props.props.changeOnSelect) {
+      props.handlePick(state.activeValue, false)
     } else {
-      this.parent().handleActiveItemChange(this.state.activeValue)
+      props.handleActiveItemChange(state.activeValue)
     }
   }
-
   /* Computed Methods */
 
-  activeOptions(): [] {
-    const activeValue = this.state.activeValue
+  function _activeOptions(): [] {
+    const activeValue = state.activeValue
     const configurableProps = ['label', 'value', 'children', 'disabled']
     const formatOptions = (options: any) => {
-      options.forEach((option) => {
+      options.forEach((option: any) => {
         if (option.__IS__FLAT__OPTIONS) return
         configurableProps.forEach((prop) => {
-          const value = option[this.parent().props.props[prop] || prop]
+          const value = option[props.props.props[prop] || prop]
           if (value) option[prop] = value
         })
         if (Array.isArray(option.children)) {
@@ -117,7 +133,7 @@ const CascaderMenu:any = React.forwardRef((props:any,ref:any)=>{
       activeOptions[level] = options
       let active = activeValue[level]
       if (active) {
-        options = options.filter((option) => option.value === active)[0]
+        options = options.filter((option: any) => option.value === active)[0]
         if (options && options.children) {
           loadActiveOptions(options.children, activeOptions)
         }
@@ -125,88 +141,88 @@ const CascaderMenu:any = React.forwardRef((props:any,ref:any)=>{
       return activeOptions
     }
 
-    formatOptions(this.state.options)
+    formatOptions(state.options)
 
-    return loadActiveOptions(this.state.options)
+    return loadActiveOptions(state.options)
   }
 
-  render() {
-    const { expandTrigger, popperClass } = this.parent().props
-    const { activeValue, visible } = this.state
-    const activeOptions = this.activeOptions()
+  const { expandTrigger, popperClass } = props.props
+  const { activeValue, visible } = state
+  const activeOptions = _activeOptions()
 
-    const menus = activeOptions.map((menu, menuIndex) => {
-      let isFlat = false
+  const menus = activeOptions.map((menu: any, menuIndex: number) => {
+    let isFlat = false
 
-      const items = menu.map((item, index) => {
-        const events = {}
+    const items = menu.map((item: any, index: number) => {
+      const events: any = {}
 
-        if (item.__IS__FLAT__OPTIONS) isFlat = true
+      if (item.__IS__FLAT__OPTIONS) isFlat = true
 
-        if (!item.disabled) {
-          if (item.children) {
-            let triggerEvent = {
-              click: 'onClick',
-              hover: 'onMouseEnter'
-            }[expandTrigger]
-            events[triggerEvent] = () => {
-              this.activeItem(item, menuIndex)
-            }
-          } else {
-            events.onClick = () => {
-              this.select(item, menuIndex)
-            }
+      if (!item.disabled) {
+        if (item.children) {
+          let triggerEvent = {
+            click: 'onClick',
+            hover: 'onMouseEnter'
+          }[expandTrigger]
+          events[triggerEvent] = () => {
+            activeItem(item, menuIndex)
+          }
+        } else {
+          events.onClick = () => {
+            select(item, menuIndex)
           }
         }
-
-        return (
-          <li
-            key={index}
-            className={this.classNames({
-              'el-cascader-menu__item': true,
-              'el-cascader-menu__item--extensible': item.children,
-              'is-active': item.value === activeValue[menuIndex],
-              'is-disabled': item.disabled
-            })}
-            {...events}
-          >
-            {item.label}
-          </li>
-        )
-      })
-
-      let menuStyle = {}
-
-      if (isFlat) {
-        menuStyle.minWidth = this.inputWidth + 'px'
       }
 
       return (
-        <ul
-          key={menuIndex}
-          className={this.classNames({
-            'el-cascader-menu': true,
-            'el-cascader-menu--flexible': isFlat
+        <li
+          key={index}
+          className={classnames({
+            'el-cascader-menu__item': true,
+            'el-cascader-menu__item--extensible': item.children,
+            'is-active': item.value === activeValue[menuIndex],
+            'is-disabled': item.disabled
           })}
-          style={menuStyle}
+          {...events}
         >
-          {items}
-        </ul>
+          {item.label}
+        </li>
       )
     })
 
+    let menuStyle: { minWidth: null | string | any } = { minWidth: null }
+
+    if (isFlat) {
+      menuStyle.minWidth = state.inputWidth + 'px'
+    }
+
     return (
-      <Transition name='el-zoom-in-top'>
-        <View show={visible}>
-          <div className={this.classNames('el-cascader-menus', popperClass)}>
-            {menus}
-          </div>
-        </View>
-      </Transition>
+      <ul
+        key={menuIndex}
+        className={classnames({
+          'el-cascader-menu': true,
+          'el-cascader-menu--flexible': isFlat
+        })}
+        style={menuStyle}
+      >
+        {items}
+      </ul>
     )
-  }
-}
+  })
+
+  return (
+    <Animate component='' transitionName='el-zoom-in-top'>
+      {visible ? (
+        <div ref={ref} className={classnames('el-cascader-menus', popperClass)}>
+          {menus}
+        </div>
+      ) : null}
+    </Animate>
+  )
+})
 
 CascaderMenu.contextTypes = {
   component: PropTypes.any
 }
+
+export default CascaderMenu

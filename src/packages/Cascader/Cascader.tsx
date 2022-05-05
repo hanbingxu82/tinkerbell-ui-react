@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-04-28 19:22:36
+ * @LastEditTime: 2022-05-05 16:36:20
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { debounce } from 'throttle-debounce'
@@ -15,7 +14,6 @@ import { useWillReceiveProps } from '../../utils/useUpdateEffect'
 import Popper from 'popper.js'
 import CascaderMenu from './Menu'
 import Input from '../Input'
-
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
@@ -47,6 +45,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
     if (before && before.then) {
       state.menu.setState({
+        ...state.menu.state,
         options: [
           {
             __IS__FLAT__OPTIONS: true,
@@ -71,13 +70,12 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   //   }
   useEffect(() => {
     inputRef.current = ReactDOM.findDOMNode(input.current)
-
     return () => {
       if (popperJS) {
         popperJS.destroy()
       }
     }
-  }, [])
+  }, []) // eslint-disable-line
   useWillReceiveProps(
     (_oldProps) => {
       setState({
@@ -86,9 +84,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
         flatOptions: flattenOptions(props.options)
       })
 
-      state.menu.setState({
-        options: props.options
-      })
+      state.menu.setState({ ...state.menu.state, options: props.options })
     },
     [props]
   )
@@ -127,17 +123,21 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       popperJS.update()
     }
   }
+  // @ts-ignore 实例
+  // eslint-disable-next-line
   function initMenu(menu: any) {
     state.menu = menu
   }
 
   function showMenu() {
     state.menu.setState({
+      ...state.menu.state,
       ...state,
       value: state.currentValue.slice(0),
       visible: true,
       options: props.options,
-      inputWidth: input.current.offsetWidth - 2
+      inputWidth: input.current.offsetWidth - 2,
+      activeValue: state.currentValue.slice(0)
     })
   }
 
@@ -145,7 +145,11 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     setState({ ...state, inputValue: '' })
 
     if (state.menu) {
-      state.menu.setState({ visible: false })
+      state.menu.setState({
+        ...state.menu.state,
+        visible: false,
+        activeValue: state.menu.state.value
+      })
     }
   }
 
@@ -179,6 +183,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
     if (!value) {
       state.menu.setState({
+        ...state.menu.state,
         //   ...state.menu.state,
         options: props.options
       })
@@ -211,6 +216,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     }
 
     state.menu.setState({
+      ...state.menu.state,
       // ...state.menu.state,
       options: filteredFlatOptions
     })
@@ -270,7 +276,8 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
     handlePick([], true)
   }
-
+  // @ts-ignore 实例
+  // eslint-disable-next-line
   function handleClickOutside() {
     if (state.menuVisible) {
       setState({ ...state, menuVisible: false })
@@ -335,7 +342,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
   return (
     <span
-        ref={ref}
+      ref={ref}
       className={classnames('el-cascader', size ? 'el-cascader--' + size : '', {
         'is-opened': menuVisible,
         'is-disabled': disabled
@@ -351,7 +358,8 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
         }}
       >
         <Input
-          ref='input'
+          //   ref='input'
+          ref={inputRef}
           readOnly={!filterable}
           placeholder={_currentLabels.length ? undefined : placeholder()}
           value={inputValue}
@@ -392,7 +400,12 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
           </span>
         ) : null}
       </span>
-      <CascaderMenu ref={menuRef} />
+      <CascaderMenu
+        props={props}
+        handlePick={handlePick}
+        handleActiveItemChange={handleActiveItemChange}
+        ref={menuRef}
+      />
     </span>
   )
 })
