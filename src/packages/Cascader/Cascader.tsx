@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-06 14:05:58
+ * @LastEditTime: 2022-05-06 16:23:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
@@ -348,6 +348,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
   const { size, disabled, filterable, clearable, showAllLevels } = props
   //   const { menuVisible, inputHover, inputValue } = state
+  console.log(currentLabels())
   const _currentLabels = currentLabels()
   console.log(state.menuVisible)
   return (

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-06 14:44:41
+ * @LastEditTime: 2022-05-06 16:29:41
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -471,7 +471,9 @@ const App = (props: any) => {
       <div className='block'>
         <span className='demonstration'>默认 click 触发子菜单</span>
         <Cascader
+          clearable
           // size='large'
+          expandTrigger="hover"
           options={option1.options}
           value={option1.selectedOptions}
           onChange={(value: any) => {
