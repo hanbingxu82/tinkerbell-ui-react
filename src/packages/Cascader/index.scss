@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-cascader {
   display: inline-block;
   position: relative
@@ -17,7 +19,7 @@
 }
 
 .tb-cascader .tb-input .tb-input__icon {
-  color: #bfcbd9;
+  color: #97a8be;
   font-size: 12px;
   transition: transform .3s;
   -ms-transform: translateY(-50%) rotate(180deg);
@@ -80,11 +82,11 @@
 
 .tb-cascader-menus {
   white-space: nowrap;
-  background: #fff;
+  background: $color-white;
   position: absolute;
   margin: 5px 0;
   z-index: 2;
-  border: 1px solid #d1dbe5;
+  border: 1px solid $border-color-base;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
@@ -94,7 +96,7 @@
   vertical-align: top;
   height: 204px;
   overflow: auto;
-  border-right: solid 1px #d1dbe5;
+  border-right: solid 1px $border-color-base;
   margin: 0;
   padding: 6px 0;
   min-width: 160px
@@ -123,31 +125,31 @@
 }
 
 .tb-cascader-menu__item.selected {
-  color: #fff;
-  background-color: #20a0ff
+  color: $color-white;
+  background-color: $color-primary
 }
 
 .tb-cascader-menu__item.selected.hover {
-  background-color: #1c8de0
+  background-color: $color-primary-active
 }
 
 .tb-cascader-menu__item.is-active {
-  color: #fff;
-  background-color: #20a0ff
+  color: $color-white;
+  background-color: $color-primary
 }
 
 .tb-cascader-menu__item.is-active:hover {
-  background-color: #1c8de0
+  background-color: $color-primary-active
 }
 
 .tb-cascader-menu__item.is-disabled {
   color: #bfcbd9;
-  background-color: #fff;
+  background-color: $color-white;
   cursor: not-allowed
 }
 
 .tb-cascader-menu__item.is-disabled:hover {
-  background-color: #fff
+  background-color: $color-white
 }
 
 .tb-cascader-menu__item__keyword {
