@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-04-20 15:38:23
+ * @LastEditTime: 2022-05-06 13:56:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -298,7 +298,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }, [selectedInit, selected, currentPlaceholder, selectedLabel])
 
   function onSelectedChange(val: any, bubble: boolean = true) {
-    console.log(reference, 98888)
     // 判断父组件是不是有 form context
     const { multiple, filterable, onChange } = props
     if (multiple) {

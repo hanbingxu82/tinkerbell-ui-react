@@ -1,0 +1,177 @@
+.tb-cascader {
+  display: inline-block;
+  position: relative
+}
+
+.tb-cascader .tb-input,
+.tb-cascader .tb-input__inner {
+  cursor: pointer
+}
+
+.tb-cascader .tb-input__icon {
+  transition: none
+}
+
+.tb-cascader .icon-arrow-down {
+  transition: transform .3s
+}
+
+.tb-cascader .tb-input .tb-input__icon {
+  color: #bfcbd9;
+  font-size: 12px;
+  transition: transform .3s;
+  -ms-transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%) rotateZ(180deg);
+  line-height: 16px;
+  top: 50%;
+  cursor: pointer
+}
+
+.tb-cascader .icon-arrow-up.is-reverse {
+  transform: translateY(-50%);
+}
+
+.tb-cascader .icon-close {
+  z-index: 2
+}
+
+.tb-cascader.is-disabled .tb-cascader__label {
+  z-index: 2;
+  color: #bbb
+}
+
+.tb-cascader__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  line-height: 36px;
+  padding: 0 25px 0 10px;
+  color: #1f2d3d;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left
+}
+
+.tb-cascader__label span {
+  color: #97a8be
+}
+
+.tb-cascader--large {
+  font-size: 16px
+}
+
+.tb-cascader--large .tb-cascader__label {
+  line-height: 40px
+}
+
+.tb-cascader--small {
+  font-size: 13px
+}
+
+.tb-cascader--small .tb-cascader__label {
+  line-height: 28px
+}
+
+.tb-cascader-menus {
+  white-space: nowrap;
+  background: #fff;
+  position: absolute;
+  margin: 5px 0;
+  z-index: 2;
+  border: 1px solid #d1dbe5;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+
+.tb-cascader-menu {
+  display: inline-block;
+  vertical-align: top;
+  height: 204px;
+  overflow: auto;
+  border-right: solid 1px #d1dbe5;
+  margin: 0;
+  padding: 6px 0;
+  min-width: 160px
+}
+
+.tb-cascader-menu:last-child {
+  border-right: 0
+}
+
+.tb-cascader-menu__item {
+  font-size: 14px;
+  padding: 8px 30px 8px 10px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #48576a;
+  height: 36px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  cursor: pointer
+}
+
+.tb-cascader-menu__item:hover {
+  background-color: #e4e8f1
+}
+
+.tb-cascader-menu__item.selected {
+  color: #fff;
+  background-color: #20a0ff
+}
+
+.tb-cascader-menu__item.selected.hover {
+  background-color: #1c8de0
+}
+
+.tb-cascader-menu__item.is-active {
+  color: #fff;
+  background-color: #20a0ff
+}
+
+.tb-cascader-menu__item.is-active:hover {
+  background-color: #1c8de0
+}
+
+.tb-cascader-menu__item.is-disabled {
+  color: #bfcbd9;
+  background-color: #fff;
+  cursor: not-allowed
+}
+
+.tb-cascader-menu__item.is-disabled:hover {
+  background-color: #fff
+}
+
+.tb-cascader-menu__item__keyword {
+  font-weight: 700
+}
+
+.tb-cascader-menu__item--extensible:after {
+  font-family: element-icons;
+  content: "\e606";
+  font-size: 12px;
+  -ms-transform: scale(.8);
+  transform: scale(.8);
+  color: #bfcbd9;
+  position: absolute;
+  right: 10px;
+  margin-top: 1px
+}
+
+.tb-cascader-menu--flexible {
+  height: auto;
+  max-height: 180px;
+  overflow: auto
+}
+
+.tb-cascader-menu--flexible .tb-cascader-menu__item {
+  overflow: visible
+}

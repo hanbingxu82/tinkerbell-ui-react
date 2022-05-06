@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:46:06
- * @LastEditTime: 2022-05-05 16:33:59
+ * @LastEditTime: 2022-05-06 13:58:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Menu.tsx
@@ -10,10 +10,9 @@
 import React, {
   useEffect,
   useState,
-  useCallback,
-  useImperativeHandle
+  useCallback
 } from 'react'
-import Animate from 'rc-animate'
+import CSSMotion from 'rc-motion'
 
 const PropTypes = require('prop-types')
 const classnames = require('classnames')
@@ -47,16 +46,9 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   const forceUpdate = useCallback(() => updateState({}), [])
   // 强制更新视图方法 end
 
-  useImperativeHandle(ref, () => ({
-    // 暂时不用传递数据
-  }))
-
-  //  function props {
-  //     return this.context.component
-  //   }
-
   useEffect(() => {
-    ref.current.initMenu({
+    console.log(123123)
+    props.initMenu({
       state,
       setState,
       props,
@@ -65,15 +57,6 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
       _activeOptions
     })
   }, []) // eslint-disable-line
-
-  //   componentDidUpdate(props: Object, state: State) {
-  //     if (
-  //       state.value !== this.state.value ||
-  //       state.visible !== this.state.visible
-  //     ) {
-  //       this.setState({ activeValue: this.state.value })
-  //     }
-  //   }
 
   // 因为缓存的关系只有二者发生变化  才会触发
   useEffect(() => {
@@ -178,8 +161,8 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
         <li
           key={index}
           className={classnames({
-            'el-cascader-menu__item': true,
-            'el-cascader-menu__item--extensible': item.children,
+            'tb-cascader-menu__item': true,
+            'tb-cascader-menu__item--extensible': item.children,
             'is-active': item.value === activeValue[menuIndex],
             'is-disabled': item.disabled
           })}
@@ -200,8 +183,8 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
       <ul
         key={menuIndex}
         className={classnames({
-          'el-cascader-menu': true,
-          'el-cascader-menu--flexible': isFlat
+          'tb-cascader-menu': true,
+          'tb-cascader-menu--flexible': isFlat
         })}
         style={menuStyle}
       >
@@ -211,13 +194,30 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   })
 
   return (
-    <Animate component='' transitionName='el-zoom-in-top'>
-      {visible ? (
-        <div ref={ref} className={classnames('el-cascader-menus', popperClass)}>
-          {menus}
-        </div>
-      ) : null}
-    </Animate>
+    <span ref={ref}>
+      <CSSMotion
+        visible={visible}
+        onEnterActive={(HTMLElement) => {
+          HTMLElement.style.display = 'block'
+          //   onEnter()
+        }}
+        removeOnLeave={false}
+        onLeaveEnd={(HTMLElement) => {
+          HTMLElement.style.display = 'none'
+          //   onAfterLeave()
+        }}
+        motionName='tb-zoom-in-top'
+      >
+        {({ className, style }) => (
+          <div
+            className={classnames('tb-cascader-menus', popperClass, className)}
+            style={{ ...style }}
+          >
+            {menus}
+          </div>
+        )}
+      </CSSMotion>
+    </span>
   )
 })
 

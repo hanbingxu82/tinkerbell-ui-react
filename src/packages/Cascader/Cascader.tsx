@@ -1,19 +1,20 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-05 16:36:20
+ * @LastEditTime: 2022-05-06 14:05:58
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import ReactDOM from 'react-dom'
 import { debounce } from 'throttle-debounce'
 import { useWillReceiveProps } from '../../utils/useUpdateEffect'
 import Popper from 'popper.js'
 import CascaderMenu from './Menu'
 import Input from '../Input'
+import './index.scss'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
@@ -25,6 +26,7 @@ type State = {
   inputValue: any
   flatOptions: []
 }
+let input: any
 
 const Cascader: any = React.forwardRef((props: any, ref: any) => {
   let popperJS: any
@@ -36,8 +38,14 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     inputValue: '',
     flatOptions: flattenOptions(props.options)
   })
+
+  // 强制更新视图方法 start
+  const [, updateState] = useState<any>()
+  const forceUpdate = useCallback(() => updateState({}), [])
+  // 强制更新视图方法 end
+
   const inputRef: any = useRef(null)
-  const input: any = useRef(null)
+  //   const input: any = useRef(null)
   const menuRef: any = useRef(null)
   const debouncedInputChange = debounce(props.debounce, () => {
     const value = state.inputValue
@@ -69,7 +77,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   //     }
   //   }
   useEffect(() => {
-    inputRef.current = ReactDOM.findDOMNode(input.current)
+    input = ReactDOM.findDOMNode(inputRef.current.Element as any)
     return () => {
       if (popperJS) {
         popperJS.destroy()
@@ -95,7 +103,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       if (popperJS) {
         popperJS.update()
       } else {
-        popperJS = new Popper(input.current, menuRef.current, {
+        popperJS = new Popper(input, menuRef.current, {
           placement: 'bottom-start',
           modifiers: {
             computeStyle: {
@@ -106,7 +114,6 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       }
     } else {
       hideMenu()
-
       if (popperJS) {
         popperJS.destroy()
       }
@@ -136,7 +143,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       value: state.currentValue.slice(0),
       visible: true,
       options: props.options,
-      inputWidth: input.current.offsetWidth - 2,
+      inputWidth: input.offsetWidth - 2,
       activeValue: state.currentValue.slice(0)
     })
   }
@@ -167,7 +174,9 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     })
 
     if (close) {
-      setState({ ...state, menuVisible: false })
+      // setState({ ...state, menuVisible: false })
+      state.menuVisible = false
+      forceUpdate()
       menuVisibleChange()
     }
 
@@ -243,7 +252,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
         index === 0
           ? node
           : [
-              <span className='el-cascader-menu__item__keyword'>
+              <span className='tb-cascader-menu__item__keyword'>
                 {keyword}
               </span>,
               node
@@ -280,7 +289,9 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   // eslint-disable-next-line
   function handleClickOutside() {
     if (state.menuVisible) {
-      setState({ ...state, menuVisible: false })
+      state.menuVisible = false
+      //   setState({ ...state, menuVisible: false })
+      forceUpdate()
       menuVisibleChange()
     }
   }
@@ -289,18 +300,17 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     if (props.disabled) return
 
     if (props.filterable) {
-      setState({
-        ...state,
-        menuVisible: true
-      })
+      state.menuVisible = true
+      forceUpdate()
       menuVisibleChange()
       return
     }
-
-    setState({
-      ...state,
-      menuVisible: !state.menuVisible
-    })
+    state.menuVisible = !state.menuVisible
+    forceUpdate()
+    // setState({
+    //   ...state,
+    //   menuVisible: !state.menuVisible
+    // })
     menuVisibleChange()
   }
 
@@ -337,14 +347,14 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   }
 
   const { size, disabled, filterable, clearable, showAllLevels } = props
-  const { menuVisible, inputHover, inputValue } = state
+  //   const { menuVisible, inputHover, inputValue } = state
   const _currentLabels = currentLabels()
-
+  console.log(state.menuVisible)
   return (
     <span
       ref={ref}
-      className={classnames('el-cascader', size ? 'el-cascader--' + size : '', {
-        'is-opened': menuVisible,
+      className={classnames('tb-cascader', size ? 'tb-cascader--' + size : '', {
+        'is-opened': state.menuVisible,
         'is-disabled': disabled
       })}
     >
@@ -362,7 +372,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
           ref={inputRef}
           readOnly={!filterable}
           placeholder={_currentLabels.length ? undefined : placeholder()}
-          value={inputValue}
+          value={state.inputValue}
           onChange={(value: any) => {
             setState({ ...state, inputValue: value })
           }}
@@ -370,23 +380,26 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
           size={size}
           disabled={disabled}
           icon={
-            clearable && inputHover && _currentLabels.length ? (
+            clearable && state.inputHover && _currentLabels.length ? (
               <i
-                className='el-input__icon el-icon-circle-close el-cascader__clearIcon'
+                className=' tb-input__icon iconfont icon-close tb-cascader__clearIcon'
                 onClick={clearValue}
               />
             ) : (
               <i
-                className={classnames('el-input__icon el-icon-caret-bottom', {
-                  'is-reverse': menuVisible
-                })}
+                className={classnames(
+                  'tb-input__icon iconfont icon-arrow-up ',
+                  {
+                    'is-reverse': state.menuVisible
+                  }
+                )}
               />
             )
           }
         />
 
         {_currentLabels.length ? (
-          <span className='el-cascader__label'>
+          <span className='tb-cascader__label'>
             {showAllLevels
               ? _currentLabels.map((label, index) => {
                   return (
@@ -402,6 +415,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       </span>
       <CascaderMenu
         props={props}
+        initMenu={initMenu}
         handlePick={handlePick}
         handleActiveItemChange={handleActiveItemChange}
         ref={menuRef}
