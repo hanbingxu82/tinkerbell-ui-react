@@ -5,6 +5,14 @@
   position: relative
 }
 
+.tb-cascader.tb-cascader--mini {
+  .tb-cascader__label {
+    line-height: 25px;
+    font-size: 12px;
+  }
+}
+
+
 .tb-cascader .tb-input,
 .tb-cascader .tb-input__inner {
   cursor: pointer
@@ -47,7 +55,7 @@
   left: 0;
   top: 0;
   height: 100%;
-  line-height: 36px;
+  line-height: 33px;
   padding: 0 25px 0 10px;
   color: #1f2d3d;
   width: 100%;
@@ -69,7 +77,7 @@
 }
 
 .tb-cascader--large .tb-cascader__label {
-  line-height: 40px
+  line-height: 37px
 }
 
 .tb-cascader--small {
@@ -157,11 +165,10 @@
 }
 
 .tb-cascader-menu__item--extensible:after {
-  font-family: element-icons;
-  content: "\e606";
+  font-family: iconfont;
+  content: "\e748";
   font-size: 12px;
-  -ms-transform: scale(.8);
-  transform: scale(.8);
+  font-weight: 800;
   color: #bfcbd9;
   position: absolute;
   right: 10px;
