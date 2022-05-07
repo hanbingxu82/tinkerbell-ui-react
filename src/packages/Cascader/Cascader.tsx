@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-07 11:46:52
+ * @LastEditTime: 2022-05-07 15:04:16
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
@@ -81,6 +81,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
    */
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible, () => {
+      console.log(123123123)
       setVisible(false)
       if (state.menu) {
         state.menu.setState({
@@ -161,6 +162,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function showMenu() {
+    setVisible(true)
     state.menu.setState({
       ...state.menu.state,
       ...state,
@@ -205,14 +207,12 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function handleInputChange(value: any) {
-    if (!visible) return
-
+    // if (!visible) return
     const flatOptions = state.flatOptions
 
     if (!value) {
       state.menu.setState({
         ...state.menu.state,
-        //   ...state.menu.state,
         options: props.options
       })
       return
@@ -242,10 +242,9 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
         }
       ]
     }
-
     state.menu.setState({
       ...state.menu.state,
-      // ...state.menu.state,
+      visible:true,
       options: filteredFlatOptions
     })
   }
@@ -265,18 +264,16 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function highlightKeyword(label: string, keyword: string): any {
-    return label
-      .split(keyword)
-      .map((node, index) =>
-        index === 0
-          ? node
-          : [
-              <span className='tb-cascader-menu__item__keyword'>
-                {keyword}
-              </span>,
-              node
-            ]
-      )
+    return label.split(keyword).map((node, index) =>
+      index === 0
+        ? node
+        : [
+            <span key={index} className='tb-cascader-menu__item__keyword'>
+              {keyword}
+            </span>,
+            node
+          ]
+    )
   }
 
   function flattenOptions(options: any, ancestor: any = []): [] {
@@ -309,7 +306,6 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   function handleClickOutside() {
     if (visible) {
       visible = false
-      //   setState({ ...state, menuVisible: false })
       forceUpdate()
       menuVisibleChange()
     }
@@ -317,7 +313,6 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
   function handleClick() {
     if (props.disabled) return
-
     if (props.filterable) {
       visible = true
       forceUpdate()
@@ -326,10 +321,6 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     }
     visible = !visible
     forceUpdate()
-    // setState({
-    //   ...state,
-    //   menuVisible: !visible
-    // })
     menuVisibleChange()
   }
 
@@ -370,7 +361,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
    * @param {*}
    * @return {*}
    */
-  console.log(ref)
+  console.log(visible, ref)
   if (rootRef && rootRef.current) ref = rootRef
   const { size, disabled, filterable, clearable, showAllLevels } = props
   //   const { menuVisible, inputHover, inputValue } = state

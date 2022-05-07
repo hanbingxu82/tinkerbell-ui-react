@@ -1,17 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:46:06
- * @LastEditTime: 2022-05-07 11:46:24
+ * @LastEditTime: 2022-05-07 15:04:59
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Menu.tsx
  */
 // eslint-disable-next-line
-import React, {
-  useEffect,
-  useState,
-  useCallback
-} from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import CSSMotion from 'rc-motion'
 
 const PropTypes = require('prop-types')
@@ -59,7 +55,7 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
 
   // 因为缓存的关系只有二者发生变化  才会触发
   // useEffect(() => {
-    // setState({ ...state, activeValue: state.value })
+  // setState({ ...state, activeValue: state.value })
   // }, [state.value, state.visible])
 
   function select(item: any, menuIndex: number) {
@@ -124,10 +120,12 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
 
     return loadActiveOptions(state.options)
   }
-
+  let activeOptions = _activeOptions()
+  // useEffect(() => {
+  //   activeOptions = _activeOptions()
+  // }, [state.options])
   const { expandTrigger, popperClass } = props.props
   // const { activeValue, visible } = state
-  const activeOptions = _activeOptions()
 
   const menus = activeOptions.map((menu: any, menuIndex: number) => {
     let isFlat = false
