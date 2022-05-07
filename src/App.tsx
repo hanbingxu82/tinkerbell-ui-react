@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-06 16:29:41
+ * @LastEditTime: 2022-05-07 12:09:21
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -193,6 +193,7 @@ const App = (props: any) => {
       {
         value: 'zhinan',
         label: '指南',
+        disabled: true,
         children: [
           {
             value: 'shejiyuanze',
@@ -458,7 +459,8 @@ const App = (props: any) => {
       }
     ],
     selectedOptions: [],
-    selectedOptions2: []
+    selectedOptions2: [],
+    selectedOptions3: ['zujian', 'data', 'tag']
   })
   function handleChange(key: any, value: any) {
     // this.setState({ [key]: value });
@@ -473,9 +475,11 @@ const App = (props: any) => {
         <Cascader
           clearable
           // size='large'
-          expandTrigger="hover"
+          // expandTrigger="hover"
           options={option1.options}
+          // showAllLevels={false}
           value={option1.selectedOptions}
+          // changeOnSelect={true}
           onChange={(value: any) => {
             handleChange('selectedOptions', value)
           }}

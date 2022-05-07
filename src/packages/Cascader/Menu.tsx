@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:46:06
- * @LastEditTime: 2022-05-06 13:58:31
+ * @LastEditTime: 2022-05-07 11:46:24
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Menu.tsx
@@ -47,7 +47,6 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   // 强制更新视图方法 end
 
   useEffect(() => {
-    console.log(123123)
     props.initMenu({
       state,
       setState,
@@ -59,9 +58,9 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   }, []) // eslint-disable-line
 
   // 因为缓存的关系只有二者发生变化  才会触发
-  useEffect(() => {
+  // useEffect(() => {
     // setState({ ...state, activeValue: state.value })
-  }, [state.value, state.visible])
+  // }, [state.value, state.visible])
 
   function select(item: any, menuIndex: number) {
     let { activeValue } = state
@@ -83,11 +82,8 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
 
   function activeItem(item: any, menuIndex: number) {
     const activeOptions = _activeOptions()
-
     state.activeValue.splice(menuIndex, activeOptions.length, item.value)
-
     forceUpdate()
-
     if (props.props.changeOnSelect) {
       props.handlePick(state.activeValue, false)
     } else {
@@ -130,7 +126,7 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   }
 
   const { expandTrigger, popperClass } = props.props
-  const { activeValue, visible } = state
+  // const { activeValue, visible } = state
   const activeOptions = _activeOptions()
 
   const menus = activeOptions.map((menu: any, menuIndex: number) => {
@@ -163,7 +159,7 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
           className={classnames({
             'tb-cascader-menu__item': true,
             'tb-cascader-menu__item--extensible': item.children,
-            'is-active': item.value === activeValue[menuIndex],
+            'is-active': item.value === state.activeValue[menuIndex],
             'is-disabled': item.disabled
           })}
           {...events}
@@ -196,7 +192,7 @@ const CascaderMenu: any = React.forwardRef((props: any, ref: any) => {
   return (
     <span ref={ref}>
       <CSSMotion
-        visible={visible}
+        visible={state.visible}
         onEnterActive={(HTMLElement) => {
           HTMLElement.style.display = 'block'
           //   onEnter()

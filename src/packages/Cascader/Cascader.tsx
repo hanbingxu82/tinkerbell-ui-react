@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-06 16:23:16
+ * @LastEditTime: 2022-05-07 11:46:52
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
@@ -14,6 +14,7 @@ import { useWillReceiveProps } from '../../utils/useUpdateEffect'
 import Popper from 'popper.js'
 import CascaderMenu from './Menu'
 import Input from '../Input'
+import { listenForOutsideClicks } from '../Select/somewhere'
 import './index.scss'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
@@ -21,7 +22,6 @@ const PropTypes = require('prop-types')
 type State = {
   currentValue: []
   menu: any
-  menuVisible: boolean
   inputHover: boolean
   inputValue: any
   flatOptions: []
@@ -33,12 +33,13 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   const [state, setState] = useState<State>({
     currentValue: props.value,
     menu: null,
-    menuVisible: false,
+    // menuVisible: false,
     inputHover: false,
     inputValue: '',
     flatOptions: flattenOptions(props.options)
   })
-
+  let [visible, setVisible] = useState(false)
+  const [listening, setListening] = useState(false)
   // 强制更新视图方法 start
   const [, updateState] = useState<any>()
   const forceUpdate = useCallback(() => updateState({}), [])
@@ -47,6 +48,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   const inputRef: any = useRef(null)
   //   const input: any = useRef(null)
   const menuRef: any = useRef(null)
+  const rootRef: any = useRef(null)
   const debouncedInputChange = debounce(props.debounce, () => {
     const value = state.inputValue
     const before = props.beforeFilter(value)
@@ -71,11 +73,25 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       handleInputChange(value)
     }
   })
-  //   function getChildContext(): Context {
-  //     return {
-  //       component: this
-  //     }
-  //   }
+
+  /**
+   * @description: 点击页面其他区域 隐藏对应的 ref 节点
+   * @param {*}
+   * @return {*}
+   */
+  useEffect(
+    listenForOutsideClicks(listening, setListening, rootRef, setVisible, () => {
+      setVisible(false)
+      if (state.menu) {
+        state.menu.setState({
+          ...state.menu.state,
+          visible: false,
+          activeValue: state.menu.state.value
+        })
+      }
+    })
+  )
+
   useEffect(() => {
     input = ReactDOM.findDOMNode(inputRef.current.Element as any)
     return () => {
@@ -92,13 +108,13 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
         flatOptions: flattenOptions(props.options)
       })
 
-      state.menu.setState({ ...state.menu.state, options: props.options })
+      //   state.menu.setState({ ...state.menu.state, options: props.options })
     },
     [props]
   )
 
   function menuVisibleChange() {
-    if (state.menuVisible) {
+    if (visible) {
       showMenu()
       if (popperJS) {
         popperJS.update()
@@ -121,6 +137,14 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
       //   delete popperJS
     }
   }
+  // 点击文档之后的回调
+  //   function isHidden() {
+  //     console.log(111111)
+  //     hideMenu()
+  //     if (popperJS) {
+  //       popperJS.destroy()
+  //     }
+  //   }
   function placeholder(): string {
     return props.placeholder || '请选择'
   }
@@ -150,7 +174,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
 
   function hideMenu() {
     setState({ ...state, inputValue: '' })
-
+    setVisible(false)
     if (state.menu) {
       state.menu.setState({
         ...state.menu.state,
@@ -168,25 +192,20 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function handlePick(value: [], close: boolean = true) {
-    setState({
-      ...state,
-      currentValue: value
-    })
-
+    state.currentValue = value
     if (close) {
       // setState({ ...state, menuVisible: false })
-      state.menuVisible = false
+      visible = false
       forceUpdate()
       menuVisibleChange()
     }
-
     if (props.onChange) {
       props.onChange(value)
     }
   }
 
   function handleInputChange(value: any) {
-    if (!state.menuVisible) return
+    if (!visible) return
 
     const flatOptions = state.flatOptions
 
@@ -288,8 +307,8 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
   // @ts-ignore 实例
   // eslint-disable-next-line
   function handleClickOutside() {
-    if (state.menuVisible) {
-      state.menuVisible = false
+    if (visible) {
+      visible = false
       //   setState({ ...state, menuVisible: false })
       forceUpdate()
       menuVisibleChange()
@@ -300,16 +319,16 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     if (props.disabled) return
 
     if (props.filterable) {
-      state.menuVisible = true
+      visible = true
       forceUpdate()
       menuVisibleChange()
       return
     }
-    state.menuVisible = !state.menuVisible
+    visible = !visible
     forceUpdate()
     // setState({
     //   ...state,
-    //   menuVisible: !state.menuVisible
+    //   menuVisible: !visible
     // })
     menuVisibleChange()
   }
@@ -346,16 +365,21 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
     return labels
   }
 
+  /**
+   * @description: 外抛指定ref
+   * @param {*}
+   * @return {*}
+   */
+  console.log(ref)
+  if (rootRef && rootRef.current) ref = rootRef
   const { size, disabled, filterable, clearable, showAllLevels } = props
   //   const { menuVisible, inputHover, inputValue } = state
-  console.log(currentLabels())
   const _currentLabels = currentLabels()
-  console.log(state.menuVisible)
   return (
     <span
-      ref={ref}
+      ref={rootRef}
       className={classnames('tb-cascader', size ? 'tb-cascader--' + size : '', {
-        'is-opened': state.menuVisible,
+        'is-opened': visible,
         'is-disabled': disabled
       })}
     >
@@ -391,7 +415,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
                 className={classnames(
                   'tb-input__icon iconfont icon-arrow-up ',
                   {
-                    'is-reverse': state.menuVisible
+                    'is-reverse': visible
                   }
                 )}
               />
