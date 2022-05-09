@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-05-05 16:13:06
+ * @LastEditTime: 2022-05-09 17:54:49
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 
-// eslint-disable-next-line 
+// eslint-disable-next-line
 import * as React from 'react'
 import './index.css'
 import './styles.css'
@@ -128,9 +128,6 @@ export {
   DaysPicker,
   Cascader
 }
-
-
-
 
 const About: React.FC<any> = () => {
   let navigate = useNavigate()
