@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-07 15:04:16
+ * @LastEditTime: 2022-05-10 16:46:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
@@ -28,7 +28,7 @@ type State = {
 }
 let input: any
 
-const Cascader: any = React.forwardRef((props: any, ref: any) => {
+const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   let popperJS: any
   const [state, setState] = useState<State>({
     currentValue: props.value,
@@ -81,7 +81,6 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
    */
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible, () => {
-      console.log(123123123)
       setVisible(false)
       if (state.menu) {
         state.menu.setState({
@@ -361,8 +360,7 @@ const Cascader: any = React.forwardRef((props: any, ref: any) => {
    * @param {*}
    * @return {*}
    */
-  console.log(visible, ref)
-  if (rootRef && rootRef.current) ref = rootRef
+  if (rootRef && rootRef.current) _ref = rootRef
   const { size, disabled, filterable, clearable, showAllLevels } = props
   //   const { menuVisible, inputHover, inputValue } = state
   const _currentLabels = currentLabels()
