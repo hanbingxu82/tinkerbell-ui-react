@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-09 18:36:20
- * @LastEditTime: 2022-05-10 18:30:36
+ * @LastEditTime: 2022-05-10 19:06:19
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Menu/SubMenu.tsx
@@ -98,10 +98,11 @@ const SubMenu: any = React.forwardRef((props: any, _ref: any) => {
       <div ref={subTitleRef} className='el-submenu__title'>
         {props.title}
         <i
-          className={classnames('el-submenu__icon-arrow', {
-            'el-icon-arrow-down': rootMenu(props).props.mode === 'vertical',
-            'el-icon-caret-bottom': rootMenu(props).props.mode === 'horizontal'
-          })}
+          className={classnames(
+            'el-submenu__icon-arrow',
+            'iconfont',
+            'icon-arrow-down'
+          )}
         ></i>
       </div>
       {rootMenu(props).props.mode === 'horizontal' ? (
