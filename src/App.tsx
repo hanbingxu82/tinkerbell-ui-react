@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-07 14:39:12
+ * @LastEditTime: 2022-05-10 18:10:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -32,7 +32,8 @@ import {
   MessageBox,
   Select,
   DaysPicker,
-  Cascader
+  Cascader,
+  Menu
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -467,9 +468,45 @@ const App = (props: any) => {
     setOption1({ ...option1, [key]: value })
     console.log(value)
   }
+  const [defaultActive,setDefaultActive] = useState('1')
+  function onSelect(val: any) {
+    console.log(val,333333333)
+    setDefaultActive(val)
+  }
   return (
     <div>
-      <Select></Select>
+      <div>
+        <Menu
+          theme='dark'
+          defaultActive={defaultActive}
+          className='el-menu-demo'
+          mode='horizontal'
+          onSelect={onSelect}
+        >
+          <Menu.Item index='1'>处理中心</Menu.Item>
+          <Menu.SubMenu index='2' title='我的工作台'>
+            <Menu.Item index='2-1'>选项1</Menu.Item>
+            <Menu.Item index='2-2'>选项2</Menu.Item>
+            <Menu.Item index='2-3'>选项3</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item index='3'>订单管理</Menu.Item>
+        </Menu>
+        <div className='line'></div>
+        {/* <Menu
+          defaultActive='1'
+          className='el-menu-demo'
+          mode='horizontal'
+          onSelect={onSelect}
+        >
+          <Menu.Item index='1'>处理中心</Menu.Item>
+          <Menu.SubMenu index='2' title='我的工作台'>
+            <Menu.Item index='2-1'>选项1</Menu.Item>
+            <Menu.Item index='2-2'>选项2</Menu.Item>
+            <Menu.Item index='2-3'>选项3</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item index='3'>订单管理</Menu.Item>
+        </Menu> */}
+      </div>
       <div className='block'>
         <span className='demonstration'>默认 click 触发子菜单</span>
         <Cascader
