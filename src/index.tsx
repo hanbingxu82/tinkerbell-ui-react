@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-05-09 17:54:49
+ * @LastEditTime: 2022-05-11 16:52:01
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -59,6 +59,11 @@ import MessageBox from './packages/MessageBox'
 import Select from './packages/Select'
 import DaysPicker from './packages/DaysPicker'
 import Cascader from './packages/Cascader'
+import Menu from './packages/Menu'
+import SubMenu from './packages/Menu/SubMenu'
+import MenuItem from './packages/Menu/MenuItem'
+import MenuItemGroup from './packages/Menu/MenuItemGroup'
+
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './packages/Carousel'
@@ -126,7 +131,11 @@ export {
   MessageBox,
   Select,
   DaysPicker,
-  Cascader
+  Cascader,
+  Menu,
+  SubMenu,
+  MenuItem,
+  MenuItemGroup
 }
 
 const About: React.FC<any> = () => {
