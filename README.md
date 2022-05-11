@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-05-07 15:24:45
+ * @LastEditTime: 2022-05-11 17:05:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -123,6 +123,8 @@ class Example extends Component {
 #### 0.4.8 完成 DaysPicker 时间选择器组件
 
 #### 0.4.9 完成 Cascader 级联选择器组件
+
+#### 0.5.0 完成 Menu、SubMenu、MenuItem、MenuItemGroup 导航菜单组件、及手风琴 Collapse 组件
 
 ## License
 
