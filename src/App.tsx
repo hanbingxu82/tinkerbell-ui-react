@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-11 16:22:41
+ * @LastEditTime: 2022-05-11 16:41:46
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -504,7 +504,7 @@ const App = (props: any) => {
               index='1'
               title={
                 <span>
-                  <i className='el-icon-message'></i>导航一
+                  <Icon name='icon-credit-level-fill' /> 导航一
                 </span>
               }
             >
@@ -517,10 +517,10 @@ const App = (props: any) => {
               </Menu.ItemGroup>
             </Menu.SubMenu>
             <Menu.Item index='2'>
-              <i className='el-icon-menu'></i>导航二
+              <Icon name='icon-all' /> 导航二
             </Menu.Item>
             <Menu.Item index='3'>
-              <i className='el-icon-setting'></i>导航三
+              <Icon name='icon-email-fill' /> 导航三
             </Menu.Item>
           </Menu>
         </div>
