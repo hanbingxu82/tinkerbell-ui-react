@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-09 18:35:46
- * @LastEditTime: 2022-05-10 18:21:28
+ * @LastEditTime: 2022-05-11 16:35:36
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Menu/MenuItemGroup.tsx
@@ -47,10 +47,10 @@ const MenuItemGroup: any = React.forwardRef((props: any, ref: any) => {
     <li
       ref={ref}
       style={props.style}
-      className={classnames('el-menu-item-group')}
+      className={classnames('tb-menu-item-group')}
     >
       <div
-        className='el-menu-item-group__title'
+        className='tb-menu-item-group__title'
         style={{
           paddingLeft: state.paddingLeft
         }}

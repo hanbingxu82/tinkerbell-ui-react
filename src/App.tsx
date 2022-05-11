@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-10 18:10:42
+ * @LastEditTime: 2022-05-11 16:22:41
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -468,15 +468,16 @@ const App = (props: any) => {
     setOption1({ ...option1, [key]: value })
     console.log(value)
   }
-  const [defaultActive,setDefaultActive] = useState('1')
+  const [defaultActive, setDefaultActive] = useState('1')
   function onSelect(val: any) {
-    console.log(val,333333333)
     setDefaultActive(val)
   }
+  function onOpen() {}
+  function onClose() {}
   return (
     <div>
       <div>
-        <Menu
+        {/* <Menu
           theme='dark'
           defaultActive={defaultActive}
           className='el-menu-demo'
@@ -490,7 +491,40 @@ const App = (props: any) => {
             <Menu.Item index='2-3'>选项3</Menu.Item>
           </Menu.SubMenu>
           <Menu.Item index='3'>订单管理</Menu.Item>
-        </Menu>
+        </Menu> */}
+        <div style={{ width: 200 }}>
+          <Menu
+            defaultActive={defaultActive}
+            className='el-menu-vertical-demo'
+            onOpen={onOpen}
+            onClose={onClose}
+            onSelect={onSelect}
+          >
+            <Menu.SubMenu
+              index='1'
+              title={
+                <span>
+                  <i className='el-icon-message'></i>导航一
+                </span>
+              }
+            >
+              <Menu.ItemGroup title='分组一'>
+                <Menu.Item index='1-1'>选项1</Menu.Item>
+                <Menu.Item index='1-2'>选项2</Menu.Item>
+              </Menu.ItemGroup>
+              <Menu.ItemGroup title='分组2'>
+                <Menu.Item index='1-3'>选项3</Menu.Item>
+              </Menu.ItemGroup>
+            </Menu.SubMenu>
+            <Menu.Item index='2'>
+              <i className='el-icon-menu'></i>导航二
+            </Menu.Item>
+            <Menu.Item index='3'>
+              <i className='el-icon-setting'></i>导航三
+            </Menu.Item>
+          </Menu>
+        </div>
+
         <div className='line'></div>
         {/* <Menu
           defaultActive='1'

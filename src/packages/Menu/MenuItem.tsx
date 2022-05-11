@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-09 18:35:23
- * @LastEditTime: 2022-05-10 18:23:38
+ * @LastEditTime: 2022-05-11 16:35:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Menu/MenuItem.tsx
@@ -25,7 +25,6 @@ const MenuItem: any = React.forwardRef((props: any, ref: any) => {
     }
   }, []) // eslint-disable-line
   function handleClick(): void {
-    console.log(rootMenu(props))
     rootMenu(props).handleSelect(props.index, indexPath(props))
   }
 
@@ -36,7 +35,7 @@ const MenuItem: any = React.forwardRef((props: any, ref: any) => {
     <li
       ref={ref}
       style={props.style}
-      className={classnames('el-menu-item', {
+      className={classnames('tb-menu-item', {
         'is-active': active(),
         'is-disabled': props.disabled
       })}

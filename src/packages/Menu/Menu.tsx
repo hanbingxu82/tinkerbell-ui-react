@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-09 18:35:12
- * @LastEditTime: 2022-05-10 18:40:13
+ * @LastEditTime: 2022-05-11 16:35:28
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Menu/Menu.tsx
@@ -110,7 +110,9 @@ const Menu: any = React.forwardRef((props: any, ref: any) => {
     let { activeIndex, menuItems, submenus } = state
     if (!menuItems[activeIndex]) return
     if (activeIndex && props.mode === 'vertical') {
-      let indexPath = menuItems[activeIndex].indexPath
+      let indexPath = menuItems[activeIndex].indexPath(
+        menuItems[activeIndex].props
+      )
       // 展开该菜单项的路径上所有子菜单
       indexPath.forEach((index: number) => {
         const submenu = submenus[index]
@@ -149,9 +151,9 @@ const Menu: any = React.forwardRef((props: any, ref: any) => {
     <ul
       ref={ref}
       style={props.style}
-      className={classnames('el-menu', {
-        'el-menu--horizontal': props.mode === 'horizontal',
-        'el-menu--dark': props.theme === 'dark'
+      className={classnames('tb-menu', {
+        'tb-menu--horizontal': props.mode === 'horizontal',
+        'tb-menu--dark': props.theme === 'dark'
       })}
     >
       {React.Children.map(props.children, (item) => {
