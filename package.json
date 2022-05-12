@@ -72,6 +72,7 @@
     "dist"
   ],
   "dependencies": {
+    "async-validator": "^4.1.1",
     "build": "^0.1.4",
     "classnames": "^2.3.1",
     "element-theme-default": "^1.4.13",
