@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:28
- * @LastEditTime: 2022-03-28 12:10:29
+ * @LastEditTime: 2022-05-16 15:56:22
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Col/index.tsx
  */
-import React, { useState, useEffect, useContext } from 'react'
-import { Context } from '../Row/index'
+// eslint-disable-next-line
+import React, { useState, useEffect } from 'react'
+// import { Context } from '../Row/index'
 import './index.scss'
 interface Iprops {
   span: number | string
@@ -23,10 +24,12 @@ interface Iprops {
 }
 
 function Col(props: any) {
-  const RowComponent = useContext(Context)
-  // 删除两个多余的传递属性 放置多个传递替换本身的 props 属性
-  delete RowComponent.children
-  delete RowComponent.item
+  // const RowComponent = useContext(Context)
+  // // 删除两个多余的传递属性 放置多个传递替换本身的 props 属性
+  // if (RowComponent) {
+  //   delete RowComponent.children
+  //   delete RowComponent.item
+  // }
   const {
     span = 0,
     offset = 0,
@@ -55,7 +58,7 @@ function Col(props: any) {
     Pmd()
     Plg()
     Pxl()
-  }, [])// eslint-disable-line
+  }, []) // eslint-disable-line
   function Pxs() {
     // 如果是数值类型
     if (
@@ -151,24 +154,29 @@ function Col(props: any) {
       setTbxl('')
     }
   }
-  const childrenItem = React.Children.map(props.children, (item) => {
-    return React.cloneElement(item, {
-      ...RowComponent,
-      item
-    })
-  })
+  // const childrenItem = React.Children.map(props.children, (item) => {
+  //   return React.cloneElement(item, {
+  //     // ...RowComponent,
+  //     item,
+  //     instanceType:'Col',
+  //     parent: {
+  //       props
+  //     }
+  //   })
+  // })
 
   return (
     <div
       className={`tb-col ${tbxs} ${tbsm} ${tbmd} ${tblg} ${tbxl} `}
       style={{
         width: `${num * Number(span)}%`,
-        padding: `0 ${RowComponent.gutter / 2}px`,
+        padding: `0 ${props.parent.props.gutter / 2}px`,
         marginLeft: `${num * Number(offset || pull) + '%'}`,
         marginRight: `${num * Number(push) + '%'}`
       }}
     >
-      {childrenItem ? childrenItem : props.children}
+      {/* {childrenItem ? childrenItem : props.children} */}
+      {props.children}
     </div>
   )
 }

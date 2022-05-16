@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-13 17:41:10
+ * @LastEditTime: 2022-05-16 15:47:50
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -10,6 +10,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './index.css'
 import {
+  Row,
+  Col,
   Button,
   Breadcrumb,
   BreadcrumbItem,
@@ -33,7 +35,12 @@ import {
   Select,
   DaysPicker,
   Cascader,
-  Menu
+  Menu,
+  Form,
+  Radio,
+  CheckBox,
+  RadioGroup,
+  CheckBoxGroup
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -234,7 +241,7 @@ const App = (props: any) => {
           }
         ]
       },
-      
+
       {
         value: 'zujian',
         label: '组件',
@@ -465,7 +472,7 @@ const App = (props: any) => {
     selectedOptions3: ['zujian', 'data', 'tag']
   })
   function handleChange(key: any, value: any) {
-    // this.setState({ [key]: value });
+    // setState({ [key]: value });
     setOption1({ ...option1, [key]: value })
     console.log(value)
   }
@@ -475,8 +482,120 @@ const App = (props: any) => {
   }
   function onOpen() {}
   function onClose() {}
+
+  const [form] = useState({
+    name: '',
+    region: '',
+    date1: null,
+    date2: null,
+    delivery: false,
+    type: [],
+    resource: '',
+    desc: ''
+  })
+  function onSubmit(e: any) {
+    e.preventDefault()
+  }
+
+  function onChange(key: any, value: any) {
+    console.log(key, value)
+    // form[key] = value;
+    // forceUpdate();
+  }
+
   return (
     <div>
+      <Form model={form} labelWidth='80' onSubmit={onSubmit}>
+        <Form.Item label='活动名称'>
+          <Input
+            value={form.name}
+            onChange={(e: any) => {
+              onChange('name', e.target.value)
+            }}
+          ></Input>
+        </Form.Item>
+        <Form.Item label='活动区域'>
+          <Select value={form.region} placeholder='请选择活动区域'>
+            <Select.Option label='区域一' value='shanghai'></Select.Option>
+            <Select.Option label='区域二' value='beijing'></Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label='活动时间'>
+          <Row>
+            <Col span='11'>
+              <Form.Item prop='date1' labelWidth='0px'>
+                <DaysPicker
+                  size='mini'
+                  type='dateTime'
+                  defaultValue=''
+                  value={value22}
+                  limit
+                  onChange={(val: any) => {
+                    setValue22(val)
+                  }}
+                ></DaysPicker>
+              </Form.Item>
+            </Col>
+            <Col className='line' span='2'>
+              -
+            </Col>
+            <Col span='11'>
+              <Form.Item prop='date2' labelWidth='0px'>
+                <DaysPicker
+                  size='mini'
+                  type='dateTime'
+                  defaultValue=''
+                  value={value22}
+                  limit
+                  onChange={(val: any) => {
+                    setValue22(val)
+                  }}
+                ></DaysPicker>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form.Item>
+        <Form.Item label='即时配送'>
+          <Switch
+            onText=''
+            offText=''
+            value={form.delivery}
+            onChange={onChange.bind(this, 'delivery')}
+          />
+        </Form.Item>
+        <Form.Item label='活动性质'>
+          <CheckBoxGroup
+            value={form.type}
+            onChange={onChange.bind(this, 'type')}
+          >
+            <CheckBox label='美食/餐厅线上活动' name='type'></CheckBox>
+            <CheckBox label='地推活动' name='type'></CheckBox>
+            <CheckBox label='线下主题活动' name='type'></CheckBox>
+            <CheckBox label='单纯品牌曝光' name='type'></CheckBox>
+          </CheckBoxGroup>
+        </Form.Item>
+        <Form.Item label='特殊资源'>
+          <RadioGroup value={form.resource}>
+            <Radio value='线上品牌商赞助'></Radio>
+            <Radio value='线下场地免费'></Radio>
+          </RadioGroup>
+        </Form.Item>
+        <Form.Item label='活动形式'>
+          <Input
+            type='textarea'
+            value={form.desc}
+            onChange={onChange.bind(this, 'desc')}
+          ></Input>
+        </Form.Item>
+        <Form.Item>
+          <Button type='primary' nativeType='submit'>
+            立即创建
+          </Button>
+          <Button>取消</Button>
+        </Form.Item>
+      </Form>
+
+      <br></br>
       <div>
         {/* <Menu
           theme='dark'
@@ -606,7 +725,7 @@ const App = (props: any) => {
         placeholder='选择日期'
         onChange={(date: any) => {
           console.debug('DatePicker1 changed: ', date)
-          // this.setState({value1: date})
+          // setState({value1: date})
         }}
         disabledDate={(time: any) => time.getTime() < Date.now() - 8.64e7}
       /> */}

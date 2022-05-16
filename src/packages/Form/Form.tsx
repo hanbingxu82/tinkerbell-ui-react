@@ -1,14 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2022-05-12 12:22:01
+ * @LastEditTime: 2022-05-16 16:01:46
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
  */
-import React, { useState } from 'react'
-// import { Component, PropTypes } from '../../libs';
 
+// eslint-disable-next-line
+import React, { useState,useCallback } from 'react'
+import Context from './Context'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
@@ -16,18 +17,25 @@ type State = {
   fields: any
 }
 
-const Form: any = React.forwardRef((props: any, ref: any) => {
-  const state: any = useState<State>({
+const Form: any = React.forwardRef((props: any, _ref: any) => {
+  const [state] = useState<State>({
     fields: []
   })
 
+  // 强制更新视图方法 start
+  const [, updateState] = useState<any>()
+  const forceUpdate = useCallback(() => updateState({}), [])
+  // 强制更新视图方法 end
+
   function addField(field: any): void {
     state.fields.push(field)
+    forceUpdate()
   }
 
   function removeField(field: any): void {
     if (field.props.prop) {
       state.fields.splice(state.fields.indexOf(field), 1)
+      forceUpdate()
     }
   }
 
@@ -35,6 +43,7 @@ const Form: any = React.forwardRef((props: any, ref: any) => {
     state.fields.forEach((field: any) => {
       field.resetField()
     })
+    forceUpdate()
   }
 
   function validate(callback: Function): void {
@@ -56,6 +65,7 @@ const Form: any = React.forwardRef((props: any, ref: any) => {
         }
       })
     })
+    forceUpdate()
   }
 
   function validateField(prop: string, cb: Function): void {
@@ -68,11 +78,12 @@ const Form: any = React.forwardRef((props: any, ref: any) => {
     }
 
     field.validate('', cb)
+    forceUpdate()
   }
 
   return (
     <form
-      ref={ref}
+      ref={_ref}
       style={props.style}
       className={classnames(
         'el-form',
@@ -83,10 +94,10 @@ const Form: any = React.forwardRef((props: any, ref: any) => {
       )}
       onSubmit={props.onSubmit}
     >
-      {React.Children.map(props, (item) => {
-        return React.cloneElement(item, {
-          item,
+      <Context.Provider
+        value={{
           componentName: 'Form',
+          instanceType: 'Form',
           parent: {
             state,
             props,
@@ -96,8 +107,26 @@ const Form: any = React.forwardRef((props: any, ref: any) => {
             validate,
             validateField
           }
-        })
-      })}
+        }}
+      >
+        {/* {React.Children.map(props.children, (item) => {
+          return React.cloneElement(item, {
+            item,
+            componentName: 'Form',
+            instanceType: 'Form',
+            parent: {
+              state,
+              props,
+              addField,
+              removeField,
+              resetFields,
+              validate,
+              validateField
+            }
+          })
+        })} */}
+        {props.children}
+      </Context.Provider>
     </form>
   )
 })

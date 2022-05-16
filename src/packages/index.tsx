@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2022-05-11 17:00:20
+ * @LastEditTime: 2022-05-16 14:19:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
@@ -58,6 +58,7 @@ import Menu from './Menu'
 import SubMenu from './Menu/SubMenu'
 import MenuItem from './Menu/MenuItem'
 import MenuItemGroup from './Menu/MenuItemGroup'
+import Form from './Form'
 // import {
 //   TimeSelect,
 //   TimePicker,
@@ -136,7 +137,8 @@ export {
   Menu,
   SubMenu,
   MenuItem,
-  MenuItemGroup
+  MenuItemGroup,
+  Form
   // TimeSelect,
   // TimePicker,
   // TimeRangePicker,

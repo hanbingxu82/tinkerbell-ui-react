@@ -1,21 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2022-05-12 12:21:17
+ * @LastEditTime: 2022-05-16 15:58:18
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
  */
-/* @flow */
-
-import React, { useEffect, useState } from 'react'
+// eslint-disable-next-line
+import React, { useEffect, useState, useContext } from 'react'
 import AsyncValidator from 'async-validator'
 import Animate from 'rc-animate'
-// import { Component, PropTypes, Transition } from '../../libs';
+import Context from './Context'
 
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
-
 type State = {
   error: string
   valid: boolean
@@ -24,6 +22,8 @@ type State = {
 let initialValue: any
 let validateDisabled: any
 const FormItem: any = React.forwardRef((props: any, ref: any) => {
+  const FormParent: any = useContext(Context)
+  console.log(FormParent)
   const state: any = useState<State>({
     error: '',
     valid: false,
@@ -38,13 +38,13 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   useEffect(() => {
     const { prop } = props
     if (prop) {
-      props.parent.addField(FormItemObj)
+      FormParent.parent.addField(FormItemObj)
       initialValue = getInitialValue()
     }
     return () => {
-      props.parent.removeField(FormItemObj)
+      FormParent.parent.removeField(FormItemObj)
     }
-  }, [])
+  }, []) // eslint-disable-line
 
   function isRequired(): boolean {
     let rules = getRules()
@@ -106,7 +106,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function getInitialValue(): string | void {
-    const value = props.parent().props.model[props.prop]
+    const value = FormParent.parent.props.model[props.prop]
 
     if (value === undefined) {
       return value
@@ -128,15 +128,15 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
 
     if (Array.isArray(value) && value.length > 0) {
       validateDisabled = true
-      props.parent.props.model[props.prop] = []
+      FormParent.parent.props.model[props.prop] = []
     } else if (value) {
       validateDisabled = true
-      props.parent.props.model[props.prop] = initialValue
+      FormParent.parent.props.model[props.prop] = initialValue
     }
   }
 
   function getRules(): Array<any> {
-    let formRules = props.parent.props.rules
+    let formRules = FormParent.parent.props.rules
     let selfRuels = props.rules
 
     formRules = formRules ? formRules[props.prop] : []
@@ -161,9 +161,9 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   function labelStyle(): { width?: number | string } {
     const ret: any = {}
 
-    if (props.parent.props.labelPosition === 'top') return ret
+    if (FormParent.parent.props.labelPosition === 'top') return ret
 
-    const labelWidth = props.labelWidth || props.parent.props.labelWidth
+    const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
 
     if (labelWidth) {
       ret.width = parseInt(labelWidth)
@@ -175,10 +175,13 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   function contentStyle(): { marginLeft?: number | string } {
     const ret: any = {}
 
-    if (props.parent.props.labelPosition === 'top' || props.parent.props.inline)
+    if (
+      FormParent.parent.props.labelPosition === 'top' ||
+      FormParent.parent.props.inline
+    )
       return ret
 
-    const labelWidth = props.labelWidth || props.parent.props.labelWidth
+    const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
 
     if (labelWidth) {
       ret.marginLeft = parseInt(labelWidth)
@@ -188,7 +191,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function fieldValue(): any {
-    const model = props.parent.props.model
+    const model = FormParent.parent.props.model
     if (!model || !props.prop) {
       return
     }
@@ -213,7 +216,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       {label && (
         <label className='el-form-item__label' style={labelStyle()}>
           {typeof label === 'string'
-            ? label + props.parent.props.labelSuffix
+            ? label + FormParent.parent.props.labelSuffix
             : label}
         </label>
       )}
