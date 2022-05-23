@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-05-06 13:56:42
+ * @LastEditTime: 2022-05-23 14:49:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -44,7 +44,6 @@ let popperJS: any
 let timeout: any
 let debouncedOnInputChange: any
 let resetInputWidth: any
-let reference: any
 let popper: any
 // let selectedInit1: any
 let skip: any
@@ -108,6 +107,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   let watchHO = useRef('')
   let watchSS = useRef('')
   /** 监听 变化current End */
+  
+  let reference:any = useRef(null)
 
   if (props.remote) {
     setVoidRemoteQuery(true)
@@ -125,7 +126,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         watchStateValue.current = 'useWillReceiveProps'
         setValue(props.value)
       }
-      setInputWidth(reference.getBoundingClientRect().width)
+      setInputWidth(reference.current.getBoundingClientRect().width)
     },
     [props]
   )
@@ -172,7 +173,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     const { multiple, filterable } = props
 
     if (!visible) {
-      reference.blur()
+      reference.current.blur()
       if (rootRef.current.querySelector('.tb-input__icon')) {
         const elements = rootRef.current.querySelector('.tb-input__icon')
 
@@ -224,7 +225,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         if (multiple) {
           inputRef.current.focus()
         } else {
-          reference.focus()
+          reference.current.focus()
         }
       }
 
@@ -421,7 +422,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   function onEnter(): void {
     popper = ReactDOM.findDOMNode(popperRef.current as any)
-    popperJS = new Popper(reference, popper, {
+    popperJS = new Popper(reference.current, popper, {
       modifiers: {
         computeStyle: {
           gpuAcceleration: false
@@ -434,7 +435,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       onCreate: () => {
         console.log('create')
         resetTransformOrigin()
-        // onEnter()
       },
       onUpdate: () => {
         console.log('onUpdate')
@@ -582,20 +582,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function _resetInputWidth() {
-    setInputWidth(reference.getBoundingClientRect().width)
+    setInputWidth(reference.current.getBoundingClientRect().width)
   }
 
   function resetInputHeight() {
-    let inputChildNodes = reference
-    // console.log(inputChildNodes)
-    // let input: any = [].filter.call(
-    //   inputChildNodes,
-    //   (item: any) => item.tagName === 'INPUT'
-    // )[0]
-    // console.log(inputChildNodes.style.height)
+    let inputChildNodes = reference.current
     inputChildNodes.style.height =
-      Math.max(tagsRef.current.clientHeight , sizeMap[props.size] || 32) +
-      'px'
+      Math.max(tagsRef.current.clientHeight, sizeMap[props.size] || 32) + 'px'
 
     if (popperJS) {
       popperJS.update()
@@ -634,20 +627,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
     if (!disabled) {
       setVisible(!visible)
-      // if (props.onVisibleChange) {
-      //   props.onVisibleChange(!visible)
-      // }
-      // onVisibleChange(!visible)
     }
   }
 
   function navigateOptions(direction: string) {
     // let { hoverIndex, options } = state
     if (!visible) {
-      // if (props.onVisibleChange) {
-      //   props.onVisibleChange(true)
-      // }
-      // onVisibleChange(true)
       return setVisible(true)
     }
 
@@ -891,7 +876,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     initComponent.current = false
-    reference = ReactDOM.findDOMNode(referenceRef.current.Element as any)
+    reference.current = ReactDOM.findDOMNode(referenceRef.current.Element as any)
     handleValueChange()
     debouncedOnInputChange = debounce(_debounce(), (e: any) => {
       onInputChange(e)
@@ -937,7 +922,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         onQueryChange(query as string)
       }
 
-      setInputWidth(reference.getBoundingClientRect().width)
+      setInputWidth(reference.current.getBoundingClientRect().width)
     },
     props,
     {
@@ -986,7 +971,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   )
   useEffect(() => {
     if (initComponent.current) return
-    console.log(popperRef)
     if (props.onVisibleChange) {
       props.onVisibleChange(visible)
     }

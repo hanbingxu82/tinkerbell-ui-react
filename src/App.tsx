@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-16 19:48:03
+ * @LastEditTime: 2022-05-23 11:49:28
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -170,30 +170,30 @@ const App = (props: any) => {
   }
   const text = <span>Title</span>
   const buttonWidth = 70
-  // const [options] = useState([
-  //   {
-  //     value: '选项1',
-  //     label: '黄金糕'
-  //   },
-  //   {
-  //     value: '选项2',
-  //     label: '双皮奶',
-  //     disabled: true
-  //   },
-  //   {
-  //     value: '选项3',
-  //     label: '蚵仔煎'
-  //   },
-  //   {
-  //     value: '选项4',
-  //     label: '龙须面'
-  //   },
-  //   {
-  //     value: '选项5',
-  //     label: '北京烤鸭'
-  //   }
-  // ])
-  // const [value1] = useState([])
+  const [options] = useState([
+    {
+      value: '选项1',
+      label: '黄金糕'
+    },
+    {
+      value: '选项2',
+      label: '双皮奶',
+      disabled: true
+    },
+    {
+      value: '选项3',
+      label: '蚵仔煎'
+    },
+    {
+      value: '选项4',
+      label: '龙须面'
+    },
+    {
+      value: '选项5',
+      label: '北京烤鸭'
+    }
+  ])
+  const [value1] = useState([])
   const [value22, setValue22] = useState('')
 
   const [option1, setOption1] = useState({
@@ -1045,7 +1045,7 @@ const App = (props: any) => {
       <br />
       <br />
       <br />
-      {/* <Select
+      <Select
         filterable
         clearable={true}
         // multiple
@@ -1063,7 +1063,7 @@ const App = (props: any) => {
             />
           )
         })}
-      </Select> */}
+      </Select>
 
       <br />
       <br />

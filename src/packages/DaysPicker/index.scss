@@ -17,7 +17,8 @@
     border-radius: $border-base-radius;
     // z-index: 2021;
     position: relative;
-
+    display: flex;
+    align-items: center;
     &-focus {
       border-color: $color-primary;
     }
