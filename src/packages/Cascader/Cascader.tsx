@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-10 16:46:50
+ * @LastEditTime: 2022-05-23 15:21:12
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
@@ -26,7 +26,6 @@ type State = {
   inputValue: any
   flatOptions: []
 }
-let input: any
 
 const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   let popperJS: any
@@ -44,7 +43,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   const [, updateState] = useState<any>()
   const forceUpdate = useCallback(() => updateState({}), [])
   // 强制更新视图方法 end
-
+  let input: any = useRef(null)
   const inputRef: any = useRef(null)
   //   const input: any = useRef(null)
   const menuRef: any = useRef(null)
@@ -93,7 +92,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   )
 
   useEffect(() => {
-    input = ReactDOM.findDOMNode(inputRef.current.Element as any)
+    input.current = ReactDOM.findDOMNode(inputRef.current.Element as any)
     return () => {
       if (popperJS) {
         popperJS.destroy()
@@ -119,7 +118,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
       if (popperJS) {
         popperJS.update()
       } else {
-        popperJS = new Popper(input, menuRef.current, {
+        popperJS = new Popper(input.current, menuRef.current, {
           placement: 'bottom-start',
           modifiers: {
             computeStyle: {
@@ -168,7 +167,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
       value: state.currentValue.slice(0),
       visible: true,
       options: props.options,
-      inputWidth: input.offsetWidth - 2,
+      inputWidth: input.current.offsetWidth - 2,
       activeValue: state.currentValue.slice(0)
     })
   }
@@ -243,7 +242,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
     }
     state.menu.setState({
       ...state.menu.state,
-      visible:true,
+      visible: true,
       options: filteredFlatOptions
     })
   }
