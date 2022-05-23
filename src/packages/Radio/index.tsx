@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-07 10:47:48
- * @LastEditTime: 2022-03-28 12:46:24
+ * @LastEditTime: 2022-05-23 16:10:35
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Radio/index.tsx
@@ -17,6 +17,7 @@ interface Iprops {
   disabled: boolean
   groupValue: any
   value: any
+  label: string
   name?: string
 }
 function Radio(props: any) {
@@ -26,6 +27,7 @@ function Radio(props: any) {
     groupValue,
     checked,
     value,
+    label,
     name
   }: Iprops = props
   function handleChange(evt: any) {
@@ -55,7 +57,7 @@ function Radio(props: any) {
             })
           ].join(' ')}
         />
-        <span>{props.children ? props.children : null}</span>
+        <span>{props.children ? props.children : label ? label : value}</span>
       </label>
     </div>
   )

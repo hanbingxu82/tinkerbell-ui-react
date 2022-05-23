@@ -1,11 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-03-28 12:12:18
+ * @LastEditTime: 2022-05-23 16:09:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
  */
+/* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import './index.scss'
 
@@ -17,6 +18,7 @@ interface Iprops {
   checkGroupValue: any
   value: string | number
   name?: string
+  label: string
   indeterminate?: any
 }
 function CheckBox(props: any) {
@@ -26,6 +28,7 @@ function CheckBox(props: any) {
     checked = false,
     value,
     name,
+    label,
     checkGroupValue = [],
     indeterminate
   }: Iprops = props
@@ -43,13 +46,13 @@ function CheckBox(props: any) {
     ) {
       setCheckBoxChecked(false)
     }
-  }, [checkGroupValue])// eslint-disable-line
+  }, [checkGroupValue]) // eslint-disable-line
   useEffect(() => {
     setCheckBoxChecked(checked)
-  }, [checked])// eslint-disable-line
+  }, [checked]) // eslint-disable-line
   useEffect(() => {
     setIsIndeterminate(!!indeterminate ? indeterminate : false)
-  }, [indeterminate])// eslint-disable-line
+  }, [indeterminate]) // eslint-disable-line
   function handleChange(evt: any) {
     setCheckBoxChecked(evt.target.checked)
     props.onChange && props.onChange(evt)
@@ -81,7 +84,7 @@ function CheckBox(props: any) {
             })
           ].join(' ')}
         />
-        <span>{props.children ? props.children : null}</span>
+        <span>{props.children ? props.children : label ? label : value}</span>
       </label>
     </div>
   )
