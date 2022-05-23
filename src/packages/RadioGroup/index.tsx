@@ -27,8 +27,9 @@ function RadioGroup(props: any) {
     size,
     optionType = 'default'
   }: Iprops = props
-  function handleChange(evt: any) {
-    props.onChange && props.onChange(evt)
+
+  function handleChange(val: any) {
+    props.onChange && props.onChange(val)
   }
   //  options 循环遍历
   const radioDom = options.map((item: any) => {
@@ -36,7 +37,7 @@ function RadioGroup(props: any) {
       return (
         <RadioButton
           key={item.value}
-          value={item.value}
+          value={item.value||''}
           groupValue={value}
           name={name}
           size={size}

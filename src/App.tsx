@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-23 11:49:28
+ * @LastEditTime: 2022-05-23 16:26:08
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -483,7 +483,7 @@ const App = (props: any) => {
   function onOpen() {}
   function onClose() {}
 
-  const [form] = useState({
+  const [form,setForm] = useState({
     name: '',
     region: '',
     date1: null,
@@ -499,8 +499,10 @@ const App = (props: any) => {
 
   function onChange(key: any, value: any) {
     console.log(key, value)
-    // form[key] = value;
-    // forceUpdate();
+    setForm({
+      ...form,
+      [key]:value
+    })
   }
 
   return (
@@ -509,8 +511,8 @@ const App = (props: any) => {
         <Form.Item label='活动名称'>
           <Input
             value={form.name}
-            onChange={(e: any) => {
-              onChange('name', e.target.value)
+            onChange={(val: any) => {
+              onChange('name', val)
             }}
           ></Input>
         </Form.Item>
@@ -560,13 +562,13 @@ const App = (props: any) => {
             onText=''
             offText=''
             value={form.delivery}
-            onChange={onChange.bind(this, 'delivery')}
+            onChange={(val:any)=>{onChange('delivery',val)}}
           />
         </Form.Item>
         <Form.Item label='活动性质'>
           <CheckBoxGroup
             value={form.type}
-            onChange={onChange.bind(this, 'type')}
+            onChange={(val:any)=>{onChange('type',val)}}
           >
             <CheckBox label='美食/餐厅线上活动' name='type'></CheckBox>
             <CheckBox label='地推活动' name='type'></CheckBox>
@@ -575,7 +577,10 @@ const App = (props: any) => {
           </CheckBoxGroup>
         </Form.Item>
         <Form.Item label='特殊资源'>
-          <RadioGroup value={form.resource}>
+          <RadioGroup value={form.resource}       onChange={(val:any)=>{
+            console.log(val)
+            onChange('resource',val)
+            }}>
             <Radio value='线上品牌商赞助'></Radio>
             <Radio value='线下场地免费'></Radio>
           </RadioGroup>
@@ -584,7 +589,7 @@ const App = (props: any) => {
           <Input
             type='textarea'
             value={form.desc}
-            onChange={onChange.bind(this, 'desc')}
+            onChange={(val:any)=>{onChange('desc',val)}}
           ></Input>
         </Form.Item>
         <Form.Item>

@@ -23,7 +23,6 @@ let initialValue: any
 let validateDisabled: any
 const FormItem: any = React.forwardRef((props: any, ref: any) => {
   const FormParent: any = useContext(Context)
-  console.log(FormParent)
   const state: any = useState<State>({
     error: '',
     valid: false,

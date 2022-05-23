@@ -25,13 +25,13 @@ function Radio(props: any) {
     type = 'default',
     disabled = false,
     groupValue,
-    checked,
+    checked = false,
     value,
     label,
     name
   }: Iprops = props
   function handleChange(evt: any) {
-    props.onChange && props.onChange(evt)
+    props.onChange && props.onChange(evt.target.value)
   }
   return (
     <div
