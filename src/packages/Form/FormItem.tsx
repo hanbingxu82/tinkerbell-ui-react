@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2022-05-16 15:58:18
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-26 18:36:14
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import AsyncValidator from 'async-validator'
 import Animate from 'rc-animate'
 import Context from './Context'
@@ -19,11 +19,11 @@ type State = {
   valid: boolean
   validating: boolean
 }
-let initialValue: any
+// let initialValue: any
 let validateDisabled: any
 const FormItem: any = React.forwardRef((props: any, ref: any) => {
   const FormParent: any = useContext(Context)
-  const state: any = useState<State>({
+  const [state]: any = useState<State>({
     error: '',
     valid: false,
     validating: false
@@ -34,14 +34,20 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
     validate,
     resetField
   }
+
+  // 强制更新视图方法 start
+  const [, updateState] = useState<any>()
+  const forceUpdate = useCallback(() => updateState({}), [])
+  // 强制更新视图方法 end
+
   useEffect(() => {
     const { prop } = props
     if (prop) {
-      FormParent.parent.addField(FormItemObj)
-      initialValue = getInitialValue()
+      FormParent.addField(FormItemObj)
+      // initialValue = getInitialValue()
     }
     return () => {
-      FormParent.parent.removeField(FormItemObj)
+      FormParent.removeField(FormItemObj)
     }
   }, []) // eslint-disable-line
 
@@ -79,8 +85,9 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function validate(trigger: string, cb?: Function): boolean | void {
-    const rules = getFilteredRule(trigger)
 
+    const rules = getFilteredRule(trigger)
+    console.log(rules)
     if (!rules || rules.length === 0) {
       if (cb instanceof Function) {
         cb()
@@ -89,32 +96,34 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       return true
     }
     state.validating = true
-    // setState({ validating: true })
+    forceUpdate()
     const descriptor = { [props.prop]: rules }
     const validator = new AsyncValidator(descriptor)
     const model = { [props.prop]: fieldValue() }
-
     validator.validate(model, { firstFields: true }, (errors) => {
       state.error = errors ? errors[0].message : ''
       state.validating = false
       state.valid = !errors
+      console.log(   state.error)
+      forceUpdate()
+      // setState({...state})
       if (cb instanceof Function) {
         cb(errors)
       }
     })
   }
 
-  function getInitialValue(): string | void {
-    const value = FormParent.parent.props.model[props.prop]
-
-    if (value === undefined) {
-      return value
-    } else {
-      return JSON.parse(JSON.stringify(value))
-    }
-  }
+  // function getInitialValue(): string | void {
+  //   const value = FormParent.parent.props.model[props.prop]
+  //   if (value === undefined) {
+  //     return value
+  //   } else {
+  //     return JSON.parse(JSON.stringify(value))
+  //   }
+  // }
 
   function resetField(): void {
+
     let { valid, error } = state
 
     valid = true
@@ -122,15 +131,16 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
 
     state.valid = valid
     state.error = error
-
+    forceUpdate()
     let value = fieldValue()
-
     if (Array.isArray(value) && value.length > 0) {
       validateDisabled = true
-      FormParent.parent.props.model[props.prop] = []
+      // value 有值不需要重置
+      // FormParent.parent.props.model[props.prop] = []
     } else if (value) {
       validateDisabled = true
-      FormParent.parent.props.model[props.prop] = initialValue
+      // value 有值不需要重置
+      // FormParent.parent.props.model[props.prop] = initialValue
     }
   }
 
@@ -194,19 +204,18 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
     if (!model || !props.prop) {
       return
     }
+    console.log(model,9999)
     const temp = props.prop.split(':')
     return temp.length > 1 ? model[temp[0]][temp[1]] : model[props.prop]
   }
-  const { error, validating } = state
   const { label, required } = props
-
   return (
     <div
       ref={ref}
       style={props.style}
       className={classnames('el-form-item', {
-        'is-error': error !== '',
-        'is-validating': validating,
+        'is-error': state.error !== '',
+        'is-validating': state.validating,
         'is-required': isRequired() || required
       })}
       onBlur={onFieldBlur}
@@ -222,8 +231,10 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       <div className='el-form-item__content' style={contentStyle()}>
         {props.children}
         {/* <Transition name="el-zoom-in-top"> */}
-        <Animate component='' transitionName='tb-alert-fade'>
-          {error ? <div className='el-form-item__error'>{error}</div> : null}
+        <Animate component='' transitionName='tb-form-error-fade'>
+          {state.error ? (
+            <div className='el-form-item__error'>{state.error}</div>
+          ) : null}
         </Animate>
         {/* </Transition> */}
       </div>

@@ -1,14 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2022-05-16 16:01:46
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-26 18:37:55
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
  */
 
 // eslint-disable-next-line
-import React, { useState,useCallback } from 'react'
+import React, {
+  useState,
+  useCallback,
+  useImperativeHandle,
+  useEffect
+} from 'react'
 import Context from './Context'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
@@ -20,6 +25,18 @@ type State = {
 const Form: any = React.forwardRef((props: any, _ref: any) => {
   const [state] = useState<State>({
     fields: []
+  })
+  const [cpValue] = useState({
+    componentName: 'Form',
+    instanceType: 'Form',
+    parent: {
+      props
+    },
+    addField,
+    removeField,
+    resetFields,
+    validate,
+    validateField
   })
 
   // 强制更新视图方法 start
@@ -49,7 +66,6 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
   function validate(callback: Function): void {
     let valid = true
     let count = 0
-
     // 如果需要验证的fields为空，调用验证时立刻返回callback
     if (state.fields.length === 0 && callback) {
       callback(true)
@@ -81,6 +97,18 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
     forceUpdate()
   }
 
+  useEffect(() => {
+    cpValue.parent.props = props
+    debugger
+  }, [props.model])
+  useImperativeHandle(_ref, () => ({
+    addField,
+    removeField,
+    resetFields,
+    validate,
+    validateField
+  }))
+
   return (
     <form
       ref={_ref}
@@ -95,19 +123,9 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
       onSubmit={props.onSubmit}
     >
       <Context.Provider
-        value={{
-          componentName: 'Form',
-          instanceType: 'Form',
-          parent: {
-            state,
-            props,
-            addField,
-            removeField,
-            resetFields,
-            validate,
-            validateField
-          }
-        }}
+        value={
+          cpValue
+        }
       >
         {/* {React.Children.map(props.children, (item) => {
           return React.cloneElement(item, {

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-05-23 14:49:31
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-26 17:20:02
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
  */
@@ -107,8 +107,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   let watchHO = useRef('')
   let watchSS = useRef('')
   /** 监听 变化current End */
-  
-  let reference:any = useRef(null)
+
+  let reference: any = useRef(null)
 
   if (props.remote) {
     setVoidRemoteQuery(true)
@@ -320,7 +320,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
             val.map((item: any) => item.props.value),
             val
           )
-        props.context && props.context.form.onFieldChange()
+        // props.context && props.context.form.onFieldChange()
       }
 
       if (filterable) {
@@ -340,8 +340,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       }
 
       if (bubble) {
-        onChange && onChange(val.props.value, val)
-        props.context && props.context.form.onFieldChange()
+        onChange && val && val.props && onChange(val.props.value, val)
+        // props.context && props.context.form.onFieldChange()
       }
     }
   }
@@ -876,7 +876,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     initComponent.current = false
-    reference.current = ReactDOM.findDOMNode(referenceRef.current.Element as any)
+    reference.current = ReactDOM.findDOMNode(
+      referenceRef.current.Element as any
+    )
     handleValueChange()
     debouncedOnInputChange = debounce(_debounce(), (e: any) => {
       onInputChange(e)

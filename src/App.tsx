@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-23 16:26:08
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-26 17:01:29
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
@@ -486,17 +486,30 @@ const App = (props: any) => {
   const [form,setForm] = useState({
     name: '',
     region: '',
-    date1: null,
-    date2: null,
+    date1: '',
+    date2: '',
     delivery: false,
     type: [],
     resource: '',
     desc: ''
   })
-  function onSubmit(e: any) {
+  const formRef:any = useRef(null)
+  function handleSubmit(e: any) {
     e.preventDefault()
+    formRef.current.validate((valid:any):any => {
+      if (valid) {
+        alert('submit!');
+      } else {
+        console.log('error submit!!');
+        return false;
+      }
+    });
   }
-
+  function handleReset(e:any) {
+    e.preventDefault();
+  
+    formRef.current.resetFields();
+  }
   function onChange(key: any, value: any) {
     console.log(key, value)
     setForm({
@@ -504,11 +517,52 @@ const App = (props: any) => {
       [key]:value
     })
   }
+ const rules= {
+    // name: [
+    //   { required: true, message: '请输入活动名称', trigger: 'blur' }
+    // ],
+    name: [
+      { required: true, message: '请填写年龄', trigger: 'blur' },
+      { validator: (_rule:any, value:any, callback:any) => {
+        console.log(value)
+        var age = parseInt(value, 10);
 
+        setTimeout(() => {
+          if (!Number.isInteger(age)) {
+            callback(new Error('请输入数字值'));
+          } else{
+            if (age < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
+          }
+        }, 1000);
+      }, trigger: 'change' }
+    ],
+    region: [
+      { required: true, message: '请选择活动区域', trigger: 'change' }
+    ],
+    date1: [
+      { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+    ],
+    date2: [
+      { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+    ],
+    type: [
+      { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+    ],
+    resource: [
+      { required: true, message: '请选择活动资源', trigger: 'change' }
+    ],
+    desc: [
+      { required: true, message: '请填写活动形式', trigger: 'blur' }
+    ]
+  }
   return (
     <div>
-      <Form model={form} labelWidth='80' onSubmit={onSubmit}>
-        <Form.Item label='活动名称'>
+      <Form rules={rules} model={form} ref={formRef} labelWidth='80' >
+        <Form.Item label='活动名称' prop="name" >
           <Input
             value={form.name}
             onChange={(val: any) => {
@@ -516,13 +570,15 @@ const App = (props: any) => {
             }}
           ></Input>
         </Form.Item>
-        <Form.Item label='活动区域'>
-          <Select value={form.region} placeholder='请选择活动区域'>
+        <Form.Item label='活动区域' prop="region">
+          <Select value={form.region}  onChange={(val: any) => {
+              onChange('region', val)
+            }} placeholder='请选择活动区域'>
             <Select.Option label='区域一' value='shanghai'></Select.Option>
             <Select.Option label='区域二' value='beijing'></Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label='活动时间'>
+        <Form.Item label='活动时间' required={true}>
           <Row>
             <Col span='11'>
               <Form.Item prop='date1' labelWidth='0px'>
@@ -530,10 +586,10 @@ const App = (props: any) => {
                   size='mini'
                   type='dateTime'
                   defaultValue=''
-                  value={value22}
+                  value={form.date1}
                   limit
                   onChange={(val: any) => {
-                    setValue22(val)
+                    onChange('date1',val)
                   }}
                 ></DaysPicker>
               </Form.Item>
@@ -547,17 +603,17 @@ const App = (props: any) => {
                   size='mini'
                   type='dateTime'
                   defaultValue=''
-                  value={value22}
+                  value={form.date2}
                   limit
                   onChange={(val: any) => {
-                    setValue22(val)
+                    onChange('date2',val)
                   }}
                 ></DaysPicker>
               </Form.Item>
             </Col>
           </Row>
         </Form.Item>
-        <Form.Item label='即时配送'>
+        <Form.Item label='即时配送' prop='delivery'>
           <Switch
             onText=''
             offText=''
@@ -565,7 +621,7 @@ const App = (props: any) => {
             onChange={(val:any)=>{onChange('delivery',val)}}
           />
         </Form.Item>
-        <Form.Item label='活动性质'>
+        <Form.Item label='活动性质' prop='type'>
           <CheckBoxGroup
             value={form.type}
             onChange={(val:any)=>{onChange('type',val)}}
@@ -576,7 +632,7 @@ const App = (props: any) => {
             <CheckBox label='单纯品牌曝光' name='type'></CheckBox>
           </CheckBoxGroup>
         </Form.Item>
-        <Form.Item label='特殊资源'>
+        <Form.Item label='特殊资源' prop='resource'>
           <RadioGroup value={form.resource}       onChange={(val:any)=>{
             console.log(val)
             onChange('resource',val)
@@ -585,7 +641,7 @@ const App = (props: any) => {
             <Radio value='线下场地免费'></Radio>
           </RadioGroup>
         </Form.Item>
-        <Form.Item label='活动形式'>
+        <Form.Item label='活动形式' prop='desc'>
           <Input
             type='textarea'
             value={form.desc}
@@ -593,10 +649,8 @@ const App = (props: any) => {
           ></Input>
         </Form.Item>
         <Form.Item>
-          <Button type='primary' nativeType='submit'>
-            立即创建
-          </Button>
-          <Button>取消</Button>
+        <Button type="primary" onClick={handleSubmit}>立即创建</Button>
+        <Button onClick={handleReset}>重置</Button>
         </Form.Item>
       </Form>
 

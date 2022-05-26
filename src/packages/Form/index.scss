@@ -96,3 +96,36 @@
   top: 100%;
   left: 0
 }
+.tb-form-error-fade-leave,
+.tb-form-error-fade-leave-active {
+  animation: tb-form-error-fade .3s
+}
+
+.tb-form-error-fade-enter,
+.tb-form-error-fade-enter-active{
+  animation: tb-form-error-in .3s
+}
+
+@keyframes tb-form-error-in {
+  0% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1
+  }
+}
+
+@keyframes tb-form-error-fade {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1
+  }
+
+  100% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0
+  }
+}

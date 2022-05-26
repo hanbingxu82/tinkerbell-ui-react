@@ -83,6 +83,12 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
 
   function selectOptionClick() {
     if (props.disabled !== true && props.props.disabled !== true) {
+      // optionRef.current = optionRef.current ? optionRef.current : {}
+      // optionRef.current.currentLabel = currentLabel
+      // optionRef.current.queryChange = queryChange
+      // optionRef.current.resetIndex = resetIndex
+      // optionRef.current.props = {}
+      // optionRef.current.props.value = props.value
       props.onOptionClick(optionRef.current)
     }
   }

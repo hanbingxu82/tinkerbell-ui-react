@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-24 10:11:24
- * @LastEditTime: 2022-05-16 16:09:16
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-24 16:48:14
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DaysPicker/index.tsx
  */
@@ -22,6 +22,12 @@ import { dayItem, monthItem } from './date/interface'
 
 let initNewParam = getNewParams('')
 const DatePicker = (props: DatePickerProps) => {
+  /**
+   * @description: 是否第一次加载组件
+   * @param {*}
+   * @return {*}
+   */
+  const initComponent = useRef(true)
   const rootRef: any = useRef(null)
   const { value, onChange, defaultValue, type = '', size = 'default' } = props
   const limit = props.limit === undefined ? false : props.limit
@@ -34,8 +40,8 @@ const DatePicker = (props: DatePickerProps) => {
   const [hour, setHour] = useState(initNewParam.hour)
   const [minute, setMinute] = useState(initNewParam.minute)
   // const [, setSecond] = useState(0)
-  // 最终值
-  const [inputValue, setInputValue] = useState(initNewParam.value)
+  // 最终值 initNewParam.value 默认值给空字符串
+  const [, setInputValue] = useState('')
   // label
   const [yearLabel, setYearLabel] = useState(initNewParam.yearLabel)
   const [, setMonthLabel] = useState(initNewParam.monthLabel)
@@ -138,9 +144,9 @@ const DatePicker = (props: DatePickerProps) => {
   }
   // change 时间拼接
   useEffect(() => {
+    if (initComponent.current) return
     let newMonth = month < 10 ? '0' + month : month
     let newDay = day < 10 ? `0${day}` : `${day}`
-    console.log(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}`)
     if (type === 'date') {
       setInputValue(`${year}-${newMonth}-${newDay}`)
       onChange(`${year}-${newMonth}-${newDay}`)
@@ -154,24 +160,21 @@ const DatePicker = (props: DatePickerProps) => {
       setInputValue(`${year}-${newMonth}-${newDay}`)
       onChange(`${year}-${newMonth}-${newDay}`)
     }
-  }, [year, month, day, hour, minute])// eslint-disable-line
+  }, [year, month, day, hour, minute]) // eslint-disable-line
 
   // 默认值设置
-  useEffect(() => {
-    setNewTime(defaultValue ? defaultValue : value)
-  }, [value])// eslint-disable-line
+  // useEffect(() => {
+    console.log(defaultValue,value)
+  //   setNewTime(defaultValue ? defaultValue : value)
+  // }, [value])// eslint-disable-line
   // 每次打开恢复默认状态
   useEffect(() => {
+    initComponent.current = false
     if (visible) {
       checkTimeOut()
       setPlate(3) // 恢复默认状态
     }
-  }, [visible])// eslint-disable-line
-  // useEffect(() => {
-  //   if (value) {
-  //     forceUpdate()
-  //   }
-  // }, [value])
+  }, [visible]) // eslint-disable-line
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible)
   )
@@ -187,12 +190,7 @@ const DatePicker = (props: DatePickerProps) => {
         }${disabled ? ' datepicker-disabled ' : ''}
 		    is-${size}`}
       >
-        <input
-          placeholder={placeholder}
-          type='text'
-          value={inputValue}
-          readOnly
-        />
+        <input placeholder={placeholder} type='text' value={value} readOnly />
         <span className='iconfont icon-calendar'></span>
       </div>
       <div
