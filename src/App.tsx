@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-30 13:21:12
+ * @LastEditTime: 2022-05-30 17:51:12
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -592,7 +592,7 @@ const App = (props: any) => {
                   type='dateTime'
                   defaultValue=''
                   value={form.date1}
-                  limit
+    
                   onChange={(val: any) => {
                     onChange('date1',val)
                   }}
@@ -609,7 +609,7 @@ const App = (props: any) => {
                   type='dateTime'
                   defaultValue=''
                   value={form.date2}
-                  limit
+            
                   onChange={(val: any) => {
                     onChange('date2',val)
                   }}

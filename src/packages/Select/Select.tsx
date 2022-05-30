@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-05-30 13:55:31
+ * @LastEditTime: 2022-05-30 14:36:29
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -145,7 +145,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
   function handleValueChange(isFirst:boolean=true) {
     const { multiple } = props
-    console.log('执行了')
     if (multiple && Array.isArray(value)) {
       setSelected(
         options.reduce((prev: any, curr: any) => {

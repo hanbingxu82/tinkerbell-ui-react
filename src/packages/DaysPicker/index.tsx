@@ -1,24 +1,25 @@
 /*
  * @Author: your name
  * @Date: 2022-04-24 10:11:24
- * @LastEditTime: 2022-05-24 16:48:14
+ * @LastEditTime: 2022-05-30 18:16:10
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DaysPicker/index.tsx
  */
 // eslint-disable-next-line
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef ,useContext} from 'react'
 import './index.scss'
-import { getNewParams, DatePickerProps } from './interface'
+import { getNewParams, DatePickerProps,getYMDHMS } from './interface'
 import { listenForOutsideClicks } from '../Select/somewhere'
 import HourPage from './time/hour'
 import MinutePage from './time/minute'
-// import SecondPage from './time/second';
+import SecondPage from './time/second';
 import DayPage from './date/day'
 import MonthPage from './date/month'
 import YearPage from './date/year'
 import { ListItem as TimeItemT } from './time/interface'
 import { dayItem, monthItem } from './date/interface'
+import { FormItemContext } from '../Form/FormItem'
 
 let initNewParam = getNewParams('')
 const DatePicker = (props: DatePickerProps) => {
@@ -39,7 +40,7 @@ const DatePicker = (props: DatePickerProps) => {
   const [day, setDay] = useState(initNewParam.day)
   const [hour, setHour] = useState(initNewParam.hour)
   const [minute, setMinute] = useState(initNewParam.minute)
-  // const [, setSecond] = useState(0)
+  const [second, setSecond] = useState(0)
   // 最终值 initNewParam.value 默认值给空字符串
   const [, setInputValue] = useState('')
   // label
@@ -48,7 +49,7 @@ const DatePicker = (props: DatePickerProps) => {
   const [, setDayLabel] = useState(initNewParam.dayLabel)
   const [hourLabel, setHourLabel] = useState(initNewParam.hourLabel)
   const [minuteLabel, setMinuteLabel] = useState(initNewParam.minuteLabel)
-  // const [, setSecondLabel] = useState('00')
+  const [secondLabel, setSecondLabel] = useState('00')
   // visible
   const [plate, setPlate] = useState(3) // 板块状态 1:年，2：月，3：日
   const [visible, setVisible] = useState(false)
@@ -61,10 +62,13 @@ const DatePicker = (props: DatePickerProps) => {
   // ref
   const monthRef = useRef()
   const yearRef = useRef()
+
+  const FormParent: any = useContext(FormItemContext)
   // 强制更新视图方法 start
   // const [, updateState] = useState<any>()
   // const forceUpdate = useCallback(() => updateState({}), [])
   // 强制更新视图方法 end
+
 
   // change 板块变化
   function plateChange(value: number) {
@@ -117,11 +121,10 @@ const DatePicker = (props: DatePickerProps) => {
     setMinuteLabel(params.label)
   }
   // change 秒
-  // function secondChange(params: TimeItemT) {
-  //   setSecond(params.value)
-  //   setSecondLabel(params.label)
-  // }
-  // console.log(secondChange)
+  function secondChange(params: TimeItemT) {
+    setSecond(params.value)
+    setSecondLabel(params.label)
+  }
   // fn 定位当前时间
   function setNewTime(time: string) {
     setYear(getNewParams(time).year)
@@ -129,11 +132,13 @@ const DatePicker = (props: DatePickerProps) => {
     setDay(getNewParams(time).day)
     setHour(getNewParams(time).hour)
     setMinute(getNewParams(time).minute)
+    setSecond(getNewParams(time).second)
     setYearLabel(getNewParams(time).yearLabel)
     setMonthLabel(getNewParams(time).monthLabel)
     setDayLabel(getNewParams(time).dayLabel)
     setHourLabel(getNewParams(time).hourLabel)
     setMinuteLabel(getNewParams(time).minuteLabel)
+    setSecondLabel(getNewParams(time).secondLabel)
   }
   // fn 定位时间是否过期需要刷新
   function checkTimeOut() {
@@ -147,20 +152,25 @@ const DatePicker = (props: DatePickerProps) => {
     if (initComponent.current) return
     let newMonth = month < 10 ? '0' + month : month
     let newDay = day < 10 ? `0${day}` : `${day}`
+    console.log(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
     if (type === 'date') {
       setInputValue(`${year}-${newMonth}-${newDay}`)
-      onChange(`${year}-${newMonth}-${newDay}`)
+      onChange && onChange(`${year}-${newMonth}-${newDay}`)
+      FormParent && FormParent.onFieldChange()
     } else if (type === 'time') {
-      setInputValue(`${hourLabel}:${minuteLabel}`)
-      onChange(`${hourLabel}:${minuteLabel}`)
+      setInputValue(`${hourLabel}:${minuteLabel}:${secondLabel}`)
+      onChange && onChange(`${hourLabel}:${minuteLabel}:${secondLabel}`)
+      FormParent && FormParent.onFieldChange()
     } else if (type === 'dateTime') {
-      setInputValue(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}`)
-      onChange(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}`)
+      setInputValue(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
+      onChange && onChange(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
+      FormParent && FormParent.onFieldChange()
     } else {
       setInputValue(`${year}-${newMonth}-${newDay}`)
-      onChange(`${year}-${newMonth}-${newDay}`)
+      onChange && onChange(`${year}-${newMonth}-${newDay}`)
+      FormParent && FormParent.onFieldChange()
     }
-  }, [year, month, day, hour, minute]) // eslint-disable-line
+  }, [year, month, day, hour, minute,second]) // eslint-disable-line
 
   // 默认值设置
   // useEffect(() => {
@@ -169,12 +179,17 @@ const DatePicker = (props: DatePickerProps) => {
   // }, [value])// eslint-disable-line
   // 每次打开恢复默认状态
   useEffect(() => {
-    initComponent.current = false
+    if (initComponent.current) return
     if (visible) {
-      checkTimeOut()
+      // checkTimeOut()
+      console.log(checkTimeOut)
       setPlate(3) // 恢复默认状态
     }
+    FormParent && FormParent.onFieldChange()
   }, [visible]) // eslint-disable-line
+  useEffect(()=>{
+    initComponent.current = false
+  },[])
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible)
   )
@@ -302,8 +317,7 @@ const DatePicker = (props: DatePickerProps) => {
           {type === 'time' || type === 'dateTime' ? (
             <div className='datepicker-time'>
               <div className='datepicker-time-head'>
-                {hourLabel}:{minuteLabel}
-                {/* :{secondLabel} */}
+                {hourLabel}:{minuteLabel}:{secondLabel}
               </div>
               {/*  */}
               <div className='datepicker-time-session'>
@@ -324,10 +338,10 @@ const DatePicker = (props: DatePickerProps) => {
                   change={minuteChange}
                   limit={limit}
                 />
-                {/* <SecondPage
+                <SecondPage
 							  active={second}
 							  change={secondChange}
-						  /> */}
+						  />
               </div>
             </div>
           ) : null}
@@ -336,7 +350,7 @@ const DatePicker = (props: DatePickerProps) => {
         <div className='datepicker-footer'>
           <span
             onClick={() => {
-              setNewTime('')
+              setNewTime(getYMDHMS(new Date()))
               setVisible(false)
             }}
             className='datepicker-footer-new'
