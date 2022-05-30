@@ -1,17 +1,24 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2022-05-30 11:59:02
+ * @LastEditTime: 2022-05-30 12:51:24
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useState, useContext, useCallback } from 'react'
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+  createContext
+} from 'react'
 import AsyncValidator from 'async-validator'
 import Animate from 'rc-animate'
 import Context from './Context'
 
+export const FormItemContext = createContext<any>(null)
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 type State = {
@@ -85,7 +92,6 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function validate(trigger: string, cb?: Function): boolean | void {
-
     const rules = getFilteredRule(trigger)
     console.log(rules)
     if (!rules || rules.length === 0) {
@@ -104,7 +110,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       state.error = errors ? errors[0].message : ''
       state.validating = false
       state.valid = !errors
-      console.log(   state.error)
+      console.log(state.error)
       forceUpdate()
       // setState({...state})
       if (cb instanceof Function) {
@@ -123,7 +129,6 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   // }
 
   function resetField(): void {
-
     let { valid, error } = state
 
     valid = true
@@ -228,7 +233,9 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
         </label>
       )}
       <div className='el-form-item__content' style={contentStyle()}>
-        {props.children}
+        <FormItemContext.Provider value={{ onFieldChange }}>
+          {props.children}
+        </FormItemContext.Provider>
         {/* <Transition name="el-zoom-in-top"> */}
         <Animate component='' transitionName='tb-form-error-fade'>
           {state.error ? (

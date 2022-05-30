@@ -1,4 +1,12 @@
-// eslint-disable
+/*
+ * @Author: 韩旭小天才 905583741@qq.com
+ * @Date: 2022-04-19 08:51:37
+ * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-05-30 13:26:56
+ * @FilePath: /tinkerbell-ui-react/src/packages/Select/Option.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+// eslint-disable-next-line
 import React, { useState, useEffect } from 'react'
 // import { Component, PropTypes, View } from '../../libs';
 
@@ -89,6 +97,7 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
       // optionRef.current.resetIndex = resetIndex
       // optionRef.current.props = {}
       // optionRef.current.props.value = props.value
+      console.log(optionRef.current)
       props.onOptionClick(optionRef.current)
     }
   }
@@ -100,11 +109,9 @@ const Option: any = React.forwardRef((props: any, _ref: any) => {
       '\\$1'
     )
     const visible = new RegExp(parsedQuery, 'i').test(currentLabel())
-    console.log(visible)
     if (!visible) {
       props.queryChange()
     }
-    console.log(visible)
     setState({ ...state, visible })
   }
   // @ts-ignore 实例

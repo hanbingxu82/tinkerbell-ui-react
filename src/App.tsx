@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-26 17:01:29
+ * @LastEditTime: 2022-05-30 13:21:12
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState,useLayoutEffect } from 'react'
 import './index.css'
 import {
   Row,
@@ -76,9 +76,12 @@ const App = (props: any) => {
   )
   const inputref = useRef(null)
   useEffect(() => {
-    console.log(inputref)
+    formRef.current.resetFields();
   }, [])
 
+  useLayoutEffect(()=>{
+    formRef.current.resetFields();
+  },[])
   function addTab() {
     const index = tabIndex + 1
 
@@ -571,11 +574,13 @@ const App = (props: any) => {
           ></Input>
         </Form.Item>
         <Form.Item label='活动区域' prop="region">
-          <Select value={form.region}  onChange={(val: any) => {
+          <Select value={form.region}        filterable
+        clearable={true} onChange={(val: any) => {
               onChange('region', val)
             }} placeholder='请选择活动区域'>
-            <Select.Option label='区域一' value='shanghai'></Select.Option>
-            <Select.Option label='区域二' value='beijing'></Select.Option>
+              
+            <Select.Option key="shanghai" label='区域一' value='shanghai'></Select.Option>
+            <Select.Option key="beijing" label='区域二' value='beijing'></Select.Option>
           </Select>
         </Form.Item>
         <Form.Item label='活动时间' required={true}>

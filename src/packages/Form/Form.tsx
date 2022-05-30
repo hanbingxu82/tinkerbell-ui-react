@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2022-05-30 12:00:10
+ * @LastEditTime: 2022-05-30 12:38:36
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
@@ -99,7 +99,7 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     cpValue.parent.props = props
-  }, [props.model])
+  }, [props.model]) // eslint-disable-line
   useImperativeHandle(_ref, () => ({
     addField,
     removeField,
@@ -126,22 +126,7 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
           cpValue
         }
       >
-        {/* {React.Children.map(props.children, (item) => {
-          return React.cloneElement(item, {
-            item,
-            componentName: 'Form',
-            instanceType: 'Form',
-            parent: {
-              state,
-              props,
-              addField,
-              removeField,
-              resetFields,
-              validate,
-              validateField
-            }
-          })
-        })} */}
+
         {props.children}
       </Context.Provider>
     </form>

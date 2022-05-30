@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-05-26 17:20:02
+ * @LastEditTime: 2022-05-30 13:55:31
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -9,7 +9,13 @@
 
 /* eslint-disable */
 
-import React, { useEffect, useRef, useCallback, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useState,
+  useContext
+} from 'react'
 import ReactDOM from 'react-dom'
 import { listenForOutsideClicks } from './somewhere'
 import { debounce } from 'throttle-debounce'
@@ -25,6 +31,7 @@ import { addResizeListener, removeResizeListener } from './resize-event'
 import Tag from '../Tag'
 import Input from '../Input'
 import './index.scss'
+import { FormItemContext } from '../Form/FormItem'
 
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
@@ -57,6 +64,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   const inputRef: any = useRef(null)
   const tagsRef: any = useRef(null)
   const [listening, setListening] = useState(false)
+
+  const FormParent: any = useContext(FormItemContext)
 
   // 强制更新视图方法 start
   const [, updateState] = useState<any>()
@@ -134,9 +143,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-  function handleValueChange() {
+  function handleValueChange(isFirst:boolean=true) {
     const { multiple } = props
-
+    console.log('执行了')
     if (multiple && Array.isArray(value)) {
       setSelected(
         options.reduce((prev: any, curr: any) => {
@@ -148,11 +157,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       const selected: any = options.filter((option: any) => {
         return option.props.value === value
       })[0]
-      if (selected) {
-        setSelected(selected.props.label || selected.props.value)
-      } else {
-        onSelectedChange(selected)
-      }
+      // console.log(value,333333)
+      // if (selected) {
+        // setSelected(selected.props.label || selected.props.value)
+      // } else {
+        onSelectedChange(selected,isFirst)
+      // }
     }
   }
 
@@ -320,6 +330,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
             val.map((item: any) => item.props.value),
             val
           )
+        FormParent && FormParent.onFieldChange()
         // props.context && props.context.form.onFieldChange()
       }
 
@@ -335,12 +346,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       setInputLength(inputLength)
       watchVQHI.current = 'onSelectedChangeVQHI'
     } else {
+      // debugger
       if (selectedInit) {
         return setSelectedInit(false)
       }
 
       if (bubble) {
         onChange && val && val.props && onChange(val.props.value, val)
+        FormParent && FormParent.onFieldChange()
         // props.context && props.context.form.onFieldChange()
       }
     }
@@ -812,7 +825,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     setFilteredOptionsCount(filteredOptionsCount - 1)
   }
   function onOptionClick(option: any) {
-    const { multiple } = props
+    const { multiple } = props    
     if (!multiple) {
       selected = option
       selectedLabel = option.currentLabel()
@@ -831,7 +844,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       } else {
         selected.push(option)
       }
-
       setSelected(selected)
     }
     setSelectedLabel(selectedLabel)
@@ -879,7 +891,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     reference.current = ReactDOM.findDOMNode(
       referenceRef.current.Element as any
     )
-    handleValueChange()
+    // 第一次触发，并不需要触发校验事件、行为
+    handleValueChange(false)
     debouncedOnInputChange = debounce(_debounce(), (e: any) => {
       onInputChange(e)
     })
@@ -897,7 +910,8 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   useEffect(() => {
     if (initComponent.current) return
     if (watchStateValue.current === 'useWillReceiveProps') {
-      handleValueChange()
+      // 并非第一次执行 就需要触发校验行为
+      handleValueChange(true)
     }
     // 重置
     watchStateValue.current = ''
