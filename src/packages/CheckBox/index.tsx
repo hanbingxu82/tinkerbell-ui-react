@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-05-23 16:09:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-30 12:06:40
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
  */
@@ -35,7 +35,6 @@ function CheckBox(props: any) {
   const [checkBoxChecked, setCheckBoxChecked] = useState(false)
   const [isIndeterminate, setIsIndeterminate] = useState(false)
   useEffect(() => {
-    console.log(props)
     //  监听 初始化判断是否为 多选组选项行为
     if (!!checkGroupValue.length && checkGroupValue.includes(value)) {
       setCheckBoxChecked(true)
@@ -55,6 +54,7 @@ function CheckBox(props: any) {
   }, [indeterminate]) // eslint-disable-line
   function handleChange(evt: any) {
     setCheckBoxChecked(evt.target.checked)
+
     props.onChange && props.onChange(evt)
   }
 
@@ -74,7 +74,7 @@ function CheckBox(props: any) {
           name={name}
           disabled={disabled}
           onChange={handleChange}
-          value={value}
+          value={value||label}
           className={[
             `checkbox-type_${type}`,
             classnames({

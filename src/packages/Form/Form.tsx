@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2022-05-26 18:37:55
+ * @LastEditTime: 2022-05-30 12:00:10
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
@@ -99,7 +99,6 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     cpValue.parent.props = props
-    debugger
   }, [props.model])
   useImperativeHandle(_ref, () => ({
     addField,
