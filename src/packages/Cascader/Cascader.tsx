@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-04-28 15:45:53
- * @LastEditTime: 2022-05-23 15:21:12
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-30 19:01:56
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback ,useContext} from 'react'
 import ReactDOM from 'react-dom'
 import { debounce } from 'throttle-debounce'
 import { useWillReceiveProps } from '../../utils/useUpdateEffect'
@@ -16,6 +16,9 @@ import CascaderMenu from './Menu'
 import Input from '../Input'
 import { listenForOutsideClicks } from '../Select/somewhere'
 import './index.scss'
+import { FormItemContext } from '../Form/FormItem'
+
+
 const classnames = require('classnames')
 const PropTypes = require('prop-types')
 
@@ -48,6 +51,8 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   //   const input: any = useRef(null)
   const menuRef: any = useRef(null)
   const rootRef: any = useRef(null)
+  const FormParent: any = useContext(FormItemContext)
+
   const debouncedInputChange = debounce(props.debounce, () => {
     const value = state.inputValue
     const before = props.beforeFilter(value)
@@ -201,6 +206,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
     }
     if (props.onChange) {
       props.onChange(value)
+      FormParent && FormParent.onFieldChange()
     }
   }
 

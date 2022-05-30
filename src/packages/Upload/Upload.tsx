@@ -1,16 +1,21 @@
 /*
  * @Author: your name
  * @Date: 2022-03-31 09:44:49
- * @LastEditTime: 2022-04-01 10:11:42
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-05-30 19:00:56
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Upload/Upload.tsx
  */
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+
+/* eslint-disable */
+
+import React, { useState, useEffect, useRef, useCallback ,useContext} from 'react'
 import Button from '../Button'
 import UploadList from './UploadList'
 import ajax from './ajax'
 import './Upload.scss'
+import { FormItemContext } from '../Form/FormItem'
+
 
 const classnames = require('classnames')
 // const PropTypes = require('prop-types')
@@ -62,6 +67,8 @@ const Upload = (props: any) => {
     defaultFileList = [],
     disabled = false
   }: Iprops = props
+
+  const FormParent: any = useContext(FormItemContext)
   // 强制更新视图方法 start
   const [, updateState] = useState<any>()
   const forceUpdate = useCallback(() => updateState({}), [])
@@ -104,6 +111,7 @@ const Upload = (props: any) => {
     uploadFiles(files)
     // 将所选择的file也就是值置空  以便重新选择
     inputRef.current && (inputRef.current.value = '')
+    FormParent && FormParent.onFieldChange()
   }
   // 当文件拖入进来的时候执行   拖入进去之后dragOver就变为了false  以便控制样式
   function onDrop(e: any) {
