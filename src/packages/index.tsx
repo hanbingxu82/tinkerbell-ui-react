@@ -59,6 +59,7 @@ import SubMenu from './Menu/SubMenu'
 import MenuItem from './Menu/MenuItem'
 import MenuItemGroup from './Menu/MenuItemGroup'
 import Form from './Form'
+import Table from './Table'
 // import {
 //   TimeSelect,
 //   TimePicker,
@@ -138,7 +139,8 @@ export {
   SubMenu,
   MenuItem,
   MenuItemGroup,
-  Form
+  Form,
+  Table
   // TimeSelect,
   // TimePicker,
   // TimeRangePicker,

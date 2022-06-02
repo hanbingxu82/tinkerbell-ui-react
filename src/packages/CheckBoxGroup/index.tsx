@@ -24,7 +24,6 @@ function CheckBoxGroup(props: any) {
       ? value.splice(value.indexOf(evt.target.value), 1)
       : value.push(evt.target.value)
     //  判断check选中状态
-    debugger
     console.log(value)
     props.onChange && props.onChange(value, evt)
   }

@@ -1,0 +1,56 @@
+.tb-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    overflow: hidden;
+    // border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    // border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    .tb-table-cell {
+      z-index: 0;
+      position: relative;
+      min-height: 31px;
+      min-width: 28px;
+      padding: 18px;
+      border-top: 1px solid #d9d9d9;
+      font-size: 13px;
+      font-family: Nunito Sans, sans-serif;
+      font-weight: 400;
+      color: #5e6684;
+    }
+    .tb-table-cell.is-header {
+      border-top: 0;
+      background-color: #fafafa;
+      font-size: 12px;
+      font-family: Nunito Sans, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .65);
+    }
+    .is-selection {
+      width: 30px;
+      position: relative;
+      z-index: 200;
+    }
+    .tb-checkbox {
+      margin-top: 5px;
+    }
+  }
+  .tb-table-cell:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    display: block;
+    width: 1px;
+    height: 27px;
+    background-color: #d9d9d9;
+    transform: translateY(-50%);
+    content: "";
+  }
+
+  .tb-table-cell:first-child::before {
+    content: none;
+  }
+}

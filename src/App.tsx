@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-05-30 17:51:12
+ * @LastEditTime: 2022-06-02 19:09:59
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useRef, useState,useLayoutEffect } from 'react'
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import './index.css'
 import {
   Row,
@@ -40,7 +40,8 @@ import {
   Radio,
   CheckBox,
   RadioGroup,
-  CheckBoxGroup
+  CheckBoxGroup,
+  Table
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -76,12 +77,12 @@ const App = (props: any) => {
   )
   const inputref = useRef(null)
   useEffect(() => {
-    formRef.current.resetFields();
+    formRef.current.resetFields()
   }, [])
 
-  useLayoutEffect(()=>{
-    formRef.current.resetFields();
-  },[])
+  useLayoutEffect(() => {
+    formRef.current.resetFields()
+  }, [])
   function addTab() {
     const index = tabIndex + 1
 
@@ -486,7 +487,7 @@ const App = (props: any) => {
   function onOpen() {}
   function onClose() {}
 
-  const [form,setForm] = useState({
+  const [form, setForm] = useState({
     name: '',
     region: '',
     date1: '',
@@ -496,56 +497,57 @@ const App = (props: any) => {
     resource: '',
     desc: ''
   })
-  const formRef:any = useRef(null)
+  const formRef: any = useRef(null)
   function handleSubmit(e: any) {
     e.preventDefault()
-    formRef.current.validate((valid:any):any => {
+    formRef.current.validate((valid: any): any => {
       if (valid) {
-        alert('submit!');
+        alert('submit!')
       } else {
-        console.log('error submit!!');
-        return false;
+        console.log('error submit!!')
+        return false
       }
-    });
+    })
   }
-  function handleReset(e:any) {
-    e.preventDefault();
-  
-    formRef.current.resetFields();
+  function handleReset(e: any) {
+    e.preventDefault()
+
+    formRef.current.resetFields()
   }
   function onChange(key: any, value: any) {
     console.log(key, value)
     setForm({
       ...form,
-      [key]:value
+      [key]: value
     })
   }
- const rules= {
+  const rules = {
     // name: [
     //   { required: true, message: '请输入活动名称', trigger: 'blur' }
     // ],
     name: [
       { required: true, message: '请填写年龄', trigger: 'blur' },
-      { validator: (_rule:any, value:any, callback:any) => {
-        console.log(value)
-        var age = parseInt(value, 10);
+      {
+        validator: (_rule: any, value: any, callback: any) => {
+          console.log(value)
+          var age = parseInt(value, 10)
 
-        setTimeout(() => {
-          if (!Number.isInteger(age)) {
-            callback(new Error('请输入数字值'));
-          } else{
-            if (age < 18) {
-              callback(new Error('必须年满18岁'));
+          setTimeout(() => {
+            if (!Number.isInteger(age)) {
+              callback(new Error('请输入数字值'))
             } else {
-              callback();
+              if (age < 18) {
+                callback(new Error('必须年满18岁'))
+              } else {
+                callback()
+              }
             }
-          }
-        }, 1000);
-      }, trigger: 'change' }
+          }, 1000)
+        },
+        trigger: 'change'
+      }
     ],
-    region: [
-      { required: true, message: '请选择活动区域', trigger: 'change' }
-    ],
+    region: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
     date1: [
       { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
     ],
@@ -553,19 +555,92 @@ const App = (props: any) => {
       { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
     ],
     type: [
-      { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+      {
+        type: 'array',
+        required: true,
+        message: '请至少选择一个活动性质',
+        trigger: 'change'
+      }
     ],
     resource: [
       { required: true, message: '请选择活动资源', trigger: 'change' }
     ],
-    desc: [
-      { required: true, message: '请填写活动形式', trigger: 'blur' }
-    ]
+    desc: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
   }
+
+  const tableCol = [
+    {
+      label: '姓名',
+      align: 'center',
+      field: 'name',
+      width: 200
+    },
+    {
+      label: '年龄',
+      align: 'center',
+      field: 'age',
+      width: 200,
+
+      sort: true
+    },
+    {
+      label: '生日',
+      align: 'center',
+      field: 'birthday',
+      width: 200
+    },
+    {
+      label: '地址',
+      align: 'center',
+      field: 'address',
+      width: 1200
+    }
+  ]
+  const tableData = [
+    {
+      name: '王小帅',
+      age: 24,
+      birthday: '1998-05-20',
+      address: '天津市南开区红旗南路1号'
+    },
+    {
+      name: '王小帅',
+      age: 25,
+      birthday: '1997-05-20',
+      address: '天津市南开区红旗南路2号'
+    },
+    {
+      name: '王小帅',
+      age: 26,
+      birthday: '1996-05-20',
+      address: '天津市南开区红旗南路3号'
+    },
+    {
+      name: '王小帅',
+      age: 27,
+      birthday: '1995-05-20',
+      address: '天津市南开区红旗南路4号'
+    },
+    {
+      name: '王小帅',
+      age: 28,
+      birthday: '1994-05-20',
+      address: '天津市南开区红旗南路5号'
+    }
+  ]
   return (
     <div>
-      <Form rules={rules} model={form} ref={formRef} labelWidth='80' >
-        <Form.Item label='活动名称' prop="name" >
+      <Table isSort selectable rows={tableData} cols={tableCol}></Table>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <Form rules={rules} model={form} ref={formRef} labelWidth='80'>
+        <Form.Item label='活动名称' prop='name'>
           <Input
             value={form.name}
             onChange={(val: any) => {
@@ -573,14 +648,26 @@ const App = (props: any) => {
             }}
           ></Input>
         </Form.Item>
-        <Form.Item label='活动区域' prop="region">
-          <Select value={form.region}        filterable
-        clearable={true} onChange={(val: any) => {
+        <Form.Item label='活动区域' prop='region'>
+          <Select
+            value={form.region}
+            filterable
+            clearable={true}
+            onChange={(val: any) => {
               onChange('region', val)
-            }} placeholder='请选择活动区域'>
-              
-            <Select.Option key="shanghai" label='区域一' value='shanghai'></Select.Option>
-            <Select.Option key="beijing" label='区域二' value='beijing'></Select.Option>
+            }}
+            placeholder='请选择活动区域'
+          >
+            <Select.Option
+              key='shanghai'
+              label='区域一'
+              value='shanghai'
+            ></Select.Option>
+            <Select.Option
+              key='beijing'
+              label='区域二'
+              value='beijing'
+            ></Select.Option>
           </Select>
         </Form.Item>
         <Form.Item label='活动时间' required={true}>
@@ -592,9 +679,8 @@ const App = (props: any) => {
                   type='dateTime'
                   defaultValue=''
                   value={form.date1}
-    
                   onChange={(val: any) => {
-                    onChange('date1',val)
+                    onChange('date1', val)
                   }}
                 ></DaysPicker>
               </Form.Item>
@@ -609,9 +695,8 @@ const App = (props: any) => {
                   type='dateTime'
                   defaultValue=''
                   value={form.date2}
-            
                   onChange={(val: any) => {
-                    onChange('date2',val)
+                    onChange('date2', val)
                   }}
                 ></DaysPicker>
               </Form.Item>
@@ -623,13 +708,17 @@ const App = (props: any) => {
             onText=''
             offText=''
             value={form.delivery}
-            onChange={(val:any)=>{onChange('delivery',val)}}
+            onChange={(val: any) => {
+              onChange('delivery', val)
+            }}
           />
         </Form.Item>
         <Form.Item label='活动性质' prop='type'>
           <CheckBoxGroup
             value={form.type}
-            onChange={(val:any)=>{onChange('type',val)}}
+            onChange={(val: any) => {
+              onChange('type', val)
+            }}
           >
             <CheckBox label='美食/餐厅线上活动' name='type'></CheckBox>
             <CheckBox label='地推活动' name='type'></CheckBox>
@@ -638,10 +727,13 @@ const App = (props: any) => {
           </CheckBoxGroup>
         </Form.Item>
         <Form.Item label='特殊资源' prop='resource'>
-          <RadioGroup value={form.resource}       onChange={(val:any)=>{
-            console.log(val)
-            onChange('resource',val)
-            }}>
+          <RadioGroup
+            value={form.resource}
+            onChange={(val: any) => {
+              console.log(val)
+              onChange('resource', val)
+            }}
+          >
             <Radio value='线上品牌商赞助'></Radio>
             <Radio value='线下场地免费'></Radio>
           </RadioGroup>
@@ -650,12 +742,16 @@ const App = (props: any) => {
           <Input
             type='textarea'
             value={form.desc}
-            onChange={(val:any)=>{onChange('desc',val)}}
+            onChange={(val: any) => {
+              onChange('desc', val)
+            }}
           ></Input>
         </Form.Item>
         <Form.Item>
-        <Button type="primary" onClick={handleSubmit}>立即创建</Button>
-        <Button onClick={handleReset}>重置</Button>
+          <Button type='primary' onClick={handleSubmit}>
+            立即创建
+          </Button>
+          <Button onClick={handleReset}>重置</Button>
         </Form.Item>
       </Form>
 
