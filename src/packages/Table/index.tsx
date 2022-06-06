@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-02 13:09:04
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-06 11:33:38
+ * @LastEditTime: 2022-06-06 12:00:23
  * @FilePath: /tinkerbell-ui-react/src/packages/Table/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -50,6 +50,7 @@ const Table: any = React.forwardRef((props: any, _ref: any) => {
     const checkedCities = e.target.checked ? tableData : []
     setIsIndeterminate(false)
     setIsSelectAllChecked(e.target.checked)
+    props.selectChange && props.selectChange([...checkedCities])
     setSelectedRows([...checkedCities])
     forceUpdate()
   }
@@ -60,6 +61,7 @@ const Table: any = React.forwardRef((props: any, _ref: any) => {
       : [...selectedRows, row]
     const checkedCount = selectedRows.length
     const citiesLength = tableData.length
+    props.selectChange && props.selectChange(selectedRows)
     setSelectedRows(selectedRows)
     setIsSelectAllChecked(checkedCount === citiesLength)
     setIsIndeterminate(checkedCount > 0 && checkedCount < citiesLength)
@@ -67,20 +69,24 @@ const Table: any = React.forwardRef((props: any, _ref: any) => {
   }
   // 排序事件
   function sortClick(item: any) {
-    console.log(item)
-    debugger
-    if (isSortType === 'aesc-' + item.field) {
+    if (isSortType === 'asce-' + item.field) {
+      // 降序
+      props.sortChange && props.sortChange(item, 'descending')
       setIsSortType('desc-' + item.field)
       tableData.sort((a: any, b: any) => {
         return a[item.field] - b[item.field]
       })
     } else if (isSortType === 'desc-' + item.field) {
+      // 无序
+      props.sortChange && props.sortChange(item, 'disorder')
       setIsSortType('')
       tableData.sort((a: any, b: any) => {
         return b[item.field] - a[item.field]
       })
     } else {
-      setIsSortType('aesc-' + item.field)
+      // 升序
+      props.sortChange && props.sortChange(item, 'ascending')
+      setIsSortType('asce-' + item.field)
       tableData = sescData.current
     }
     forceUpdate()
