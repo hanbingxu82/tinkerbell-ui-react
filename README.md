@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-05-31 17:23:39
+ * @LastEditTime: 2022-06-06 13:05:05
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -127,6 +127,8 @@ class Example extends Component {
 #### 0.5.0 完成 Menu、SubMenu、MenuItem、MenuItemGroup 导航菜单组件、及手风琴 Collapse 组件
 
 #### 0.5.1 完成 Form、FormItem 表单组件、并修复一系列表单组件Bug (校验类型、Change变更类型等)
+
+#### 0.5.2 完成 Table 表格组件
 
 ## License
 
