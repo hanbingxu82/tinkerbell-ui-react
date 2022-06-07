@@ -1,0 +1,203 @@
+
+.el-pagination {
+  white-space: nowrap;
+  padding: 2px 5px;
+  color: #48576a
+}
+
+.el-pagination button,
+.el-pagination span {
+  display: inline-block;
+  font-size: 13px;
+  min-width: 28px;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: top;
+  box-sizing: border-box
+}
+
+.el-pagination .el-select .el-input {
+  width: 110px
+}
+
+.el-pagination .el-select .el-input input {
+  padding-right: 25px;
+  border-radius: 2px;
+  height: 28px
+}
+
+.el-pagination button {
+  border: none;
+  padding: 0 6px;
+  background: 0 0
+}
+
+.el-pagination button:focus {
+  outline: 0
+}
+
+.el-pagination button:hover {
+  color: #20a0ff
+}
+
+.el-pagination button.disabled {
+  color: #e4e4e4;
+  background-color: #fff;
+  cursor: not-allowed
+}
+
+.el-pager li,
+.el-pager li.btn-quicknext:hover,
+.el-pager li.btn-quickprev:hover {
+  cursor: pointer
+}
+
+.el-pagination .btn-next,
+.el-pagination .btn-prev {
+  background: center center no-repeat #fff;
+  background-size: 16px;
+  border: 1px solid #d1dbe5;
+  cursor: pointer;
+  margin: 0;
+  color: #97a8be
+}
+
+.el-pagination .btn-next .el-icon,
+.el-pagination .btn-prev .el-icon {
+  display: block;
+  font-size: 12px
+}
+
+.el-pagination .btn-prev {
+  border-radius: 2px 0 0 2px;
+  border-right: 0
+}
+
+.el-pagination .btn-next {
+  border-radius: 0 2px 2px 0;
+  border-left: 0
+}
+
+.el-pagination--small .btn-next,
+.el-pagination--small .btn-prev,
+.el-pagination--small .el-pager li,
+.el-pagination--small .el-pager li:last-child {
+  border-color: transparent;
+  font-size: 12px;
+  line-height: 22px;
+  height: 22px;
+  min-width: 22px
+}
+
+.el-pagination--small .arrow.disabled {
+  visibility: hidden
+}
+
+.el-pagination--small .el-pager li {
+  border-radius: 2px
+}
+
+.el-pagination__sizes {
+  margin: 0 10px 0 0
+}
+
+.el-pagination__sizes .el-input .el-input__inner {
+  font-size: 13px;
+  border-color: #d1dbe5
+}
+
+.el-pagination__sizes .el-input .el-input__inner:hover {
+  border-color: #20a0ff
+}
+
+.el-pagination__jump {
+  margin-left: 10px
+}
+
+.el-pagination__total {
+  margin: 0 10px
+}
+
+.el-pagination__rightwrapper {
+  float: right
+}
+
+.el-pagination__editor {
+  border: 1px solid #d1dbe5;
+  border-radius: 2px;
+  line-height: 18px;
+  padding: 4px 2px;
+  width: 30px;
+  text-align: center;
+  margin: 0 6px;
+  box-sizing: border-box;
+  transition: border .3s;
+  -moz-appearance: textfield
+}
+
+.el-pager,
+.el-pager li {
+  vertical-align: top;
+  display: inline-block;
+  margin: 0
+}
+
+.el-pagination__editor::-webkit-inner-spin-button,
+.el-pagination__editor::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0
+}
+
+.el-pagination__editor:focus {
+  outline: 0;
+  border-color: #20a0ff
+}
+
+.el-pager {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  list-style: none;
+  font-size: 0;
+  padding: 0
+}
+
+.el-pager li {
+  padding: 0 4px;
+  border: 1px solid #d1dbe5;
+  border-right: 0;
+  background: #fff;
+  font-size: 13px;
+  min-width: 28px;
+  height: 28px;
+  line-height: 28px;
+  box-sizing: border-box;
+  text-align: center
+}
+
+.el-pager li:last-child {
+  border-right: 1px solid #d1dbe5
+}
+
+.el-pager li.btn-quicknext,
+.el-pager li.btn-quickprev {
+  line-height: 28px;
+  color: #97a8be
+}
+
+.el-pager li.active+li {
+  border-left: 0;
+  padding-left: 5px
+}
+
+.el-pager li:hover {
+  color: #20a0ff
+}
+
+.el-pager li.active {
+  border-color: #20a0ff;
+  background-color: #20a0ff;
+  color: #fff;
+  cursor: default
+}

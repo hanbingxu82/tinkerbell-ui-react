@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-06-06 13:01:30
+ * @LastEditTime: 2022-06-07 15:23:08
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -41,7 +41,8 @@ import {
   CheckBox,
   RadioGroup,
   CheckBoxGroup,
-  Table
+  Table,
+  Pagination
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -592,7 +593,7 @@ const App = (props: any) => {
       label: '地址',
       align: 'center',
       field: 'address',
-      render:(row:any)=>{
+      render: (row: any) => {
         return <Button>{row.address}</Button>
       }
     }
@@ -636,7 +637,53 @@ const App = (props: any) => {
       <br />
       <br />
       <br />
+      <Pagination layout='prev, pager, next' total={50} small={true} />
+      <div className='first'>
+        <div className='block'>
+          <span className='demonstration'>页数较少时的效果</span>
+          <Pagination layout='prev, pager, next' total={50} />
+        </div>
+        <div className='block'>
+          <span className='demonstration'>大于 7 页时的效果</span>
+          <Pagination layout='prev, pager, next' total={1000} />
+        </div>
+      </div>
       <br />
+
+      <div className='last'>
+        <div className='block'>
+          <span className='demonstration'>显示总数</span>
+          <Pagination layout='total, prev, pager, next' total={1000} />
+        </div>
+        <div className='block'>
+          <span className='demonstration'>调整每页显示条数</span>
+          <Pagination
+            layout='sizes, prev, pager, next'
+            total={1000}
+            pageSizes={[100, 200, 300, 400]}
+            pageSize={1000}
+          />
+        </div>
+        <div className='block'>
+          <span className='demonstration'>直接前往</span>
+          <Pagination
+            layout='prev, pager, next, jumper'
+            total={1000}
+            pageSize={100}
+            currentPage={5}
+          />
+        </div>
+        <div className='block'>
+          <span className='demonstration'>完整功能</span>
+          <Pagination
+            layout='total, sizes, prev, pager, next, jumper'
+            total={400}
+            pageSizes={[100, 200, 300, 400]}
+            pageSize={100}
+            currentPage={5}
+          />
+        </div>
+      </div>
       <br />
       <br />
 
