@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-05-30 14:36:29
+ * @LastEditTime: 2022-06-07 16:23:17
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -143,7 +143,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-  function handleValueChange(isFirst:boolean=true) {
+  function handleValueChange(isFirst: boolean = true) {
     const { multiple } = props
     if (multiple && Array.isArray(value)) {
       setSelected(
@@ -156,11 +156,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       const selected: any = options.filter((option: any) => {
         return option.props.value === value
       })[0]
+      console.log(options, 555555)
       // console.log(value,333333)
       // if (selected) {
-        // setSelected(selected.props.label || selected.props.value)
+      // setSelected(selected.props.label || selected.props.value)
       // } else {
-        onSelectedChange(selected,isFirst)
+      onSelectedChange(selected, isFirst)
       // }
     }
   }
@@ -237,23 +238,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           reference.current.focus()
         }
       }
-
-      // if (!dropdownUl) {
-      //   popper = ReactDOM.findDOMNode(popperRef.current as any)
-      //   let dropdownChildNodes = popper.childNodes
-      //   setDropdownUl(
-      //     [].filter.call(
-      //       dropdownChildNodes,
-      //       (item: any) => item.tagName === 'UL'
-      //     )[0]
-      //   )
-      // }
-
-      // if (!multiple && dropdownUl) {
-      //   if (bottomOverflowBeforeHidden > 0) {
-      //     dropdownUl.scrollTop += bottomOverflowBeforeHidden
-      //   }
-      // }
     }
   }
   function onValueChange(val: any) {
@@ -276,6 +260,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
           addOptionToValue(option)
         }
       })
+
       forceUpdate()
     }
 
@@ -792,11 +777,12 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onOptionCreate(option: any) {
+
     options.push(option)
     setOptionsCount(++optionsCount)
     setFilteredOptionsCount(++filteredOptionsCount)
     forceUpdate()
-    handleValueChange()
+    handleValueChange(false)
   }
 
   function onOptionDestroy(option: any) {
@@ -824,7 +810,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     setFilteredOptionsCount(filteredOptionsCount - 1)
   }
   function onOptionClick(option: any) {
-    const { multiple } = props    
+    const { multiple } = props
     if (!multiple) {
       selected = option
       selectedLabel = option.currentLabel()
@@ -884,6 +870,14 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function onMouseLeave() {
     setInputHovering(false)
   }
+
+  useEffect(() => {
+    if (initComponent.current) return
+    if (props.onVisibleChange) {
+      props.onVisibleChange(visible)
+    }
+    onVisibleChange(visible)
+  }, [visible])
 
   useEffect(() => {
     initComponent.current = false
@@ -984,13 +978,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       visible
     ]
   )
-  useEffect(() => {
-    if (initComponent.current) return
-    if (props.onVisibleChange) {
-      props.onVisibleChange(visible)
-    }
-    onVisibleChange(visible)
-  }, [visible])
+
   //  遍历dom子节点方式
   const SelectChildren = React.Children.map(props.children, (child) => {
     // to do sth
@@ -1134,10 +1122,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
             case 9:
             case 27:
               setVisible(false)
-              // if (props.onVisibleChange) {
-              //   props.onVisibleChange(false)
-              // }
-              // onVisibleChange(false)
               e.preventDefault()
               break
             case 13:
@@ -1158,6 +1142,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         }}
       />
       <CSSMotion
+      forceRender
         visible={visible && emptyText() !== false}
         onEnterActive={(HTMLElement) => {
           HTMLElement.style.display = 'block'

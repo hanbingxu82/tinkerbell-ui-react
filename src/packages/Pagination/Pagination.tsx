@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-06 17:31:04
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-07 14:07:38
+ * @LastEditTime: 2022-06-07 15:56:26
  * @FilePath: /tinkerbell-ui-react/src/packages/Pagination/Pagination.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -48,7 +48,7 @@ const Next = (props: any) => {
 
 const Sizes: any = (props: any) => {
   const { onSizeChange, internalPageSize } = props
-
+  console.log(internalPageSize,22222)
   return (
     <span className='el-pagination__sizes'>
       <Select
