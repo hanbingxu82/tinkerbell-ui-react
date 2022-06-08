@@ -1,12 +1,11 @@
-
-.el-pagination {
+.tb-pagination {
   white-space: nowrap;
   padding: 2px 5px;
   color: #48576a
 }
 
-.el-pagination button,
-.el-pagination span {
+.tb-pagination button,
+.tb-pagination span {
   display: inline-block;
   font-size: 13px;
   min-width: 28px;
@@ -16,44 +15,44 @@
   box-sizing: border-box
 }
 
-.el-pagination .el-select .el-input {
+.tb-pagination .tb-select .tb-input {
   width: 110px
 }
 
-.el-pagination .el-select .el-input input {
+.tb-pagination .tb-select .tb-input input {
   padding-right: 25px;
   border-radius: 2px;
   height: 28px
 }
 
-.el-pagination button {
+.tb-pagination button {
   border: none;
   padding: 0 6px;
   background: 0 0
 }
 
-.el-pagination button:focus {
+.tb-pagination button:focus {
   outline: 0
 }
 
-.el-pagination button:hover {
+.tb-pagination button:hover {
   color: #20a0ff
 }
 
-.el-pagination button.disabled {
+.tb-pagination button.disabled {
   color: #e4e4e4;
   background-color: #fff;
   cursor: not-allowed
 }
 
-.el-pager li,
-.el-pager li.btn-quicknext:hover,
-.el-pager li.btn-quickprev:hover {
+.tb-pager li,
+.tb-pager li.btn-quicknext:hover,
+.tb-pager li.btn-quickprev:hover {
   cursor: pointer
 }
 
-.el-pagination .btn-next,
-.el-pagination .btn-prev {
+.tb-pagination .btn-next,
+.tb-pagination .btn-prev {
   background: center center no-repeat #fff;
   background-size: 16px;
   border: 1px solid #d1dbe5;
@@ -62,26 +61,33 @@
   color: #97a8be
 }
 
-.el-pagination .btn-next .el-icon,
-.el-pagination .btn-prev .el-icon {
+.tb-pagination .btn-next .tb-icon,
+.tb-pagination .btn-prev .tb-icon {
   display: block;
   font-size: 12px
 }
 
-.el-pagination .btn-prev {
+.tb-pagination .btn-next .iconfont,
+.tb-pagination .btn-prev .iconfont {
+  font-size: 13px;
+  line-height: 28px;
+  // vertical-align: initial;
+}
+
+.tb-pagination .btn-prev {
   border-radius: 2px 0 0 2px;
   border-right: 0
 }
 
-.el-pagination .btn-next {
+.tb-pagination .btn-next {
   border-radius: 0 2px 2px 0;
   border-left: 0
 }
 
-.el-pagination--small .btn-next,
-.el-pagination--small .btn-prev,
-.el-pagination--small .el-pager li,
-.el-pagination--small .el-pager li:last-child {
+.tb-pagination--small .btn-next,
+.tb-pagination--small .btn-prev,
+.tb-pagination--small .tb-pager li,
+.tb-pagination--small .tb-pager li:last-child {
   border-color: transparent;
   font-size: 12px;
   line-height: 22px;
@@ -89,40 +95,40 @@
   min-width: 22px
 }
 
-.el-pagination--small .arrow.disabled {
+.tb-pagination--small .arrow.disabled {
   visibility: hidden
 }
 
-.el-pagination--small .el-pager li {
+.tb-pagination--small .tb-pager li {
   border-radius: 2px
 }
 
-.el-pagination__sizes {
+.tb-pagination__sizes {
   margin: 0 10px 0 0
 }
 
-.el-pagination__sizes .el-input .el-input__inner {
+.tb-pagination__sizes .tb-input .tb-input__inner {
   font-size: 13px;
   border-color: #d1dbe5
 }
 
-.el-pagination__sizes .el-input .el-input__inner:hover {
+.tb-pagination__sizes .tb-input .tb-input__inner:hover {
   border-color: #20a0ff
 }
 
-.el-pagination__jump {
+.tb-pagination__jump {
   margin-left: 10px
 }
 
-.el-pagination__total {
+.tb-pagination__total {
   margin: 0 10px
 }
 
-.el-pagination__rightwrapper {
+.tb-pagination__rightwrapper {
   float: right
 }
 
-.el-pagination__editor {
+.tb-pagination__editor {
   border: 1px solid #d1dbe5;
   border-radius: 2px;
   line-height: 18px;
@@ -135,25 +141,25 @@
   -moz-appearance: textfield
 }
 
-.el-pager,
-.el-pager li {
+.tb-pager,
+.tb-pager li {
   vertical-align: top;
   display: inline-block;
   margin: 0
 }
 
-.el-pagination__editor::-webkit-inner-spin-button,
-.el-pagination__editor::-webkit-outer-spin-button {
+.tb-pagination__editor::-webkit-inner-spin-button,
+.tb-pagination__editor::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0
 }
 
-.el-pagination__editor:focus {
+.tb-pagination__editor:focus {
   outline: 0;
   border-color: #20a0ff
 }
 
-.el-pager {
+.tb-pager {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -163,7 +169,7 @@
   padding: 0
 }
 
-.el-pager li {
+.tb-pager li {
   padding: 0 4px;
   border: 1px solid #d1dbe5;
   border-right: 0;
@@ -176,26 +182,26 @@
   text-align: center
 }
 
-.el-pager li:last-child {
+.tb-pager li:last-child {
   border-right: 1px solid #d1dbe5
 }
 
-.el-pager li.btn-quicknext,
-.el-pager li.btn-quickprev {
+.tb-pager li.btn-quicknext,
+.tb-pager li.btn-quickprev {
   line-height: 28px;
   color: #97a8be
 }
 
-.el-pager li.active+li {
+.tb-pager li.active+li {
   border-left: 0;
   padding-left: 5px
 }
 
-.el-pager li:hover {
+.tb-pager li:hover {
   color: #20a0ff
 }
 
-.el-pager li.active {
+.tb-pager li.active {
   border-color: #20a0ff;
   background-color: #20a0ff;
   color: #fff;

@@ -2,12 +2,11 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-06 17:31:04
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-07 15:56:26
+ * @LastEditTime: 2022-06-08 13:32:19
  * @FilePath: /tinkerbell-ui-react/src/packages/Pagination/Pagination.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React, { useState, useRef, useEffect } from 'react'
 import Pager from './Pager'
 import Select from '../Select'
@@ -48,9 +47,9 @@ const Next = (props: any) => {
 
 const Sizes: any = (props: any) => {
   const { onSizeChange, internalPageSize } = props
-  console.log(internalPageSize,22222)
+  console.log(internalPageSize, 22222)
   return (
-    <span className='el-pagination__sizes'>
+    <span className='tb-pagination__sizes'>
       <Select
         size='small'
         value={internalPageSize}
@@ -59,11 +58,7 @@ const Sizes: any = (props: any) => {
       >
         {props.pageSizes.map((item: any, idx: number) => {
           return (
-            <Select.Option
-              key={idx}
-              value={item}
-              label={item + ' ' + '条/页'}
-            />
+            <Select.Option key={idx} value={item} label={item + ' 条/页'} />
           )
         })}
       </Select>
@@ -73,7 +68,7 @@ const Sizes: any = (props: any) => {
 
 const Total = (props: any) => {
   return typeof props.total === 'number' ? (
-    <span className='el-pagination__total'>共 {props.total} 条</span>
+    <span className='tb-pagination__total'>共 {props.total} 条</span>
   ) : (
     <span />
   )
@@ -86,17 +81,17 @@ const Jumper = (props: any) => {
 
   function handleFocus() {}
   return (
-    <span className='el-pagination__jump'>
+    <span className='tb-pagination__jump'>
       前往
       <input
-        className='el-pagination__editor'
+        className='tb-pagination__editor'
         type='number'
         min={1}
         max={props.internalPageCount}
         defaultValue={props.internalCurrentPage}
         onBlur={handleChange}
         onKeyUp={(e: any) => {
-          if (e.keyCode == 13) {
+          if (e.keyCode === 13 || e.keyCode === '13') {
             handleChange(e)
           }
         }}
@@ -164,6 +159,7 @@ const Pagination: any = (props: any) => {
       pageCount: props.pageCount
     })
     watchITP.current = 'watchITP'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     props.currentPage,
     props.pageSizes,
@@ -183,7 +179,7 @@ const Pagination: any = (props: any) => {
       })
       watchITP.current = ''
     }
-  }, [state.internalPageSize, state.total, state.pageCount])
+  }, [state.internalPageSize, state.total, state.pageCount]) // eslint-disable-line
 
   function pre(): void {
     const oldPage = state.internalCurrentPage
@@ -293,18 +289,19 @@ const Pagination: any = (props: any) => {
       onSizeChange && onSizeChange(state.internalPageSize)
       watchPageSize.current = ''
     }
-  }, [state.internalPageSize])
+  }, [state.internalPageSize]) // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     initComponent.current = false
     setState({
       ...state,
       internalCurrentPage: currentPage ? getValidCurrentPage(currentPage) : 1
     })
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   const className = classnames({
-    'el-pagination': true,
-    'el-pagination__rightwrapper': false,
-    'el-pagination--small': props.small
+    'tb-pagination': true,
+    'tb-pagination__rightwrapper': false,
+    'tb-pagination--small': props.small
   })
 
   const children: any = []

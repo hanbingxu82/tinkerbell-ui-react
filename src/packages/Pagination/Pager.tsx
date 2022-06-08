@@ -2,12 +2,11 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-06 17:30:47
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-07 13:00:10
+ * @LastEditTime: 2022-06-07 17:08:24
  * @FilePath: /tinkerbell-ui-react/src/packages/Pagination/Pager.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React, { useState } from 'react'
 import './index.scss'
 
@@ -123,7 +122,7 @@ const Pager: any = (props: any) => {
   const { quickprevIconClass, quicknextIconClass } = state
 
   return (
-    <ul onClick={onPagerClick} className='el-pager'>
+    <ul onClick={onPagerClick} className='tb-pager'>
       {pageCount > 0 && (
         <li className={classnames('number', { active: currentPage === 1 })}>
           1
@@ -133,7 +132,7 @@ const Pager: any = (props: any) => {
       {state.showPrevMore && (
         <li
           className={classnames(
-            'el-icon more btn-quickprev iconfont',
+            'tb-icon more btn-quickprev iconfont',
             quickprevIconClass
           )}
           onMouseEnter={() => {
@@ -161,7 +160,7 @@ const Pager: any = (props: any) => {
       {state.showNextMore && (
         <li
           className={classnames(
-            'el-icon more btn-quicknext iconfont',
+            'tb-icon more btn-quicknext iconfont',
             quicknextIconClass
           )}
           onMouseEnter={() => {
