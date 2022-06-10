@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-pagination {
   white-space: nowrap;
   padding: 2px 5px;
@@ -36,7 +38,7 @@
 }
 
 .tb-pagination button:hover {
-  color: #20a0ff
+  color: $color-primary 
 }
 
 .tb-pagination button.disabled {
@@ -113,7 +115,7 @@
 }
 
 .tb-pagination__sizes .tb-input .tb-input__inner:hover {
-  border-color: #20a0ff
+  border-color: $color-primary 
 }
 
 .tb-pagination__jump {
@@ -156,7 +158,7 @@
 
 .tb-pagination__editor:focus {
   outline: 0;
-  border-color: #20a0ff
+  border-color: $color-primary 
 }
 
 .tb-pager {
@@ -198,12 +200,12 @@
 }
 
 .tb-pager li:hover {
-  color: #20a0ff
+  color: $color-primary 
 }
 
 .tb-pager li.active {
-  border-color: #20a0ff;
-  background-color: #20a0ff;
+  border-color: $color-primary ;
+  background-color: $color-primary ;
   color: #fff;
   cursor: default
 }

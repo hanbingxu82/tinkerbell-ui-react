@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:42
- * @LastEditTime: 2022-04-12 13:38:28
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 17:34:24
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/MessageBox.tsx
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React, { useEffect, useState } from 'react'
 import CSSMotion from 'rc-motion'
 import Animate from 'rc-animate'

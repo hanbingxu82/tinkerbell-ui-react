@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 10:39:48
- * @LastEditTime: 2022-04-04 10:58:52
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 17:34:14
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/TabPane/index.tsx
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React from 'react'
 const classnames = require('classnames')
 const PropTypes = require('prop-types')

@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-03-30 14:49:34
- * @LastEditTime: 2022-03-30 16:27:39
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 17:34:09
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Steps/index.tsx
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React from 'react'
 import Step from '../Step'
 import './index.scss'

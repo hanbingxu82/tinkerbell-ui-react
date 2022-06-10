@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-06-10 13:56:52
+ * @LastEditTime: 2022-06-10 16:59:14
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
@@ -65,6 +65,7 @@ import MenuItem from './packages/Menu/MenuItem'
 import MenuItemGroup from './packages/Menu/MenuItemGroup'
 import Form from './packages/Form/Form'
 import Table from './packages/Table/index'
+import Pagination from './packages/Pagination/index'
 
 // start 2022-03-01 暂时屏蔽 因打包体积过大
 import Carousel from './packages/Carousel'
@@ -138,7 +139,8 @@ export {
   MenuItem,
   MenuItemGroup,
   Form,
-  Table
+  Table,
+  Pagination
 }
 
 

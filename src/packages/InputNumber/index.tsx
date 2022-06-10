@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 09:23:23
- * @LastEditTime: 2022-04-11 14:07:51
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 17:34:19
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/InputNumber/index.tsx
  */
-/* @flow */
-
+// eslint-disable-next-line
 import React, { useEffect, useRef, useState } from 'react'
 import Input from '../Input'
 import { accAdd, accSub } from './util'
