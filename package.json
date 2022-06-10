@@ -13,6 +13,7 @@
     "build": "microbundle-crl --css-modules false --no-compress --format modern,cjs && cp -r src/packages/Icon/fontcss/* ./dist ",
     "start": "microbundle-crl --css-modules false watch --no-compress --format modern,cjs & cp -r src/packages/Icon/fontcss/* ./dist",
     "dev": "react-scripts start",
+    "build:prod": "react-scripts build",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",

@@ -1,0 +1,43 @@
+.home {
+  &-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #c5d9e8;
+    justify-content: space-between;
+    padding: 0 24px;
+
+
+    &_logo {
+      display: flex;
+      align-items: center;
+
+      &_img {
+        width: 50px;
+        height: 50px;
+      }
+
+      &_text {
+        margin-left: 24px;
+        color: #3a455b;
+        font-size: 30px;
+        font-weight: 900;
+        font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+      }
+    }
+
+    &_nav {
+      display: flex;
+      align-items: center;
+
+      .icon-search {
+        cursor: pointer;
+        margin-right: 24px;
+      }
+
+      .tb-menu {
+        background: none;
+      }
+
+    }
+  }
+}
