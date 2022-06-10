@@ -1,6 +1,6 @@
 {
   "name": "tinkerbell-ui-react",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "description": "一款简单而又优雅的开源 react 组件库",
   "author": "hanbingxu",
   "license": "MIT",
@@ -92,6 +92,7 @@
     "react-test-renderer": "^16.8.6",
     "run": "^1.4.0",
     "throttle-debounce": "^4.0.0",
+    "tinycolor2": "^1.4.2",
     "typescript": "^4.6.3"
   },
   "browserslist": {

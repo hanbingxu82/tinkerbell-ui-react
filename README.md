@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-06-06 13:05:05
+ * @LastEditTime: 2022-06-10 18:20:44
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/README.md
@@ -129,6 +129,12 @@ class Example extends Component {
 #### 0.5.1 完成 Form、FormItem 表单组件、并修复一系列表单组件Bug (校验类型、Change变更类型等)
 
 #### 0.5.2 完成 Table 表格组件
+
+#### 0.5.3 完成 Pagination 页码组件
+
+#### 0.5.4 优化node版本 sass匹配、各类组件bug问题等
+
+#### 0.5.5 解决引入依赖项报错问题
 
 ## License
 

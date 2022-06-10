@@ -1,15 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-06-10 16:59:14
+ * @LastEditTime: 2022-06-10 17:48:16
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
  */
 
-import ReactDOM from 'react-dom'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { routers } from './router/index'
+// import ReactDOM from 'react-dom'
+// import { BrowserRouter, Route, Routes } from 'react-router-dom'
+// import { routers } from './router/index'
 
 // eslint-disable-next-line
 import * as React from 'react'
@@ -144,16 +144,16 @@ export {
 }
 
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      {routers.map((item: any) => {
-        return (
-          <Route key={item.path} path={item.path} element={<item.component />}>
-          </Route>
-        )
-      })}
-    </Routes>
-  </BrowserRouter>,
-  document.getElementById('root')
-)
+// ReactDOM.render(
+//   <BrowserRouter>
+//     <Routes>
+//       {routers.map((item: any) => {
+//         return (
+//           <Route key={item.path} path={item.path} element={<item.component />}>
+//           </Route>
+//         )
+//       })}
+//     </Routes>
+//   </BrowserRouter>,
+//   document.getElementById('root')
+// )
