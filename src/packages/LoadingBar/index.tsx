@@ -1,16 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2022-03-22 11:07:33
- * @LastEditTime: 2022-03-28 12:46:32
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:35:06
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/LoadingBar/index.tsx
  */
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
-
+// 2022-06-10 修改react18+版本  react-dom.render 渲染报错问题
+import { createRoot } from 'react-dom/client'
 import './index.scss'
-var ReactDOM = require('react-dom')
+// var ReactDOM = require('react-dom')
 interface Iprops {
   type: number
 }
@@ -83,9 +84,9 @@ const div = document.createElement('div')
 // 创建一个Ref对象
 const componentInstance: any = React.createRef()
 function LoadingBarConstructor() {
-  ReactDOM.render(<LoadingBar ref={componentInstance} />, div)
+  createRoot(div).render(<LoadingBar ref={componentInstance} />)
   console.log(componentInstance)
-// 暴露出 LoadingBar 的对应方法诸如 start、end等，连带 componentInstance ref节点也暴露出去
+  // 暴露出 LoadingBar 的对应方法诸如 start、end等，连带 componentInstance ref节点也暴露出去
   return { ...LoadingBar, componentInstance }
 }
 

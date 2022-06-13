@@ -1,20 +1,21 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:28
- * @LastEditTime: 2022-03-28 16:52:24
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:47:58
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Message.tsx
  */
 import React from 'react'
-import ReactDOM from 'react-dom'
-
+// import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import Toast from './Toast'
 
 import './index.scss'
 
 const Message: any = (props: any = {}, type?: string) => {
   const div = document.createElement('div')
+  const rootDiv = createRoot(div)
   const messageBox = document.getElementsByClassName('tb-message-content')[0]
   if (messageBox) {
     messageBox.appendChild(div)
@@ -40,19 +41,20 @@ const Message: any = (props: any = {}, type?: string) => {
     Toast,
     Object.assign(props, {
       willUnmount: () => {
-        const messageBox =
-          document.getElementsByClassName('tb-message-content')[0]
-        ReactDOM.unmountComponentAtNode(div)
-        messageBox.removeChild(div)
-
-        if (props.onClose instanceof Function) {
-          props.onClose()
-        }
+        requestAnimationFrame(() => {
+          const messageBox =
+            document.getElementsByClassName('tb-message-content')[0]
+          messageBox.removeChild(div)
+          rootDiv.unmount()
+          if (props.onClose instanceof Function) {
+            props.onClose()
+          }
+        })
       }
     })
   )
-
-  ReactDOM.render(component, div)
+  rootDiv.render(component)
+  // ReactDOM.render(component, div)
 }
 
 /* eslint-disable */

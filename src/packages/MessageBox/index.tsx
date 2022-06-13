@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2022-04-11 16:04:32
- * @LastEditTime: 2022-04-12 10:36:23
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:59:48
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/MessageBox/index.tsx
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
-
+// import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import MessageBox from './MessageBox';
 
 function alert(message: any, title: any, props?: any) {
@@ -59,7 +59,7 @@ function msgbox(props: any) {
 function next(props: { lockScroll: boolean; }) {
   return new Promise((resolve, reject) => {
     const div = document.createElement('div');
-
+    const rootDiv = createRoot(div)
     document.body.appendChild(div);
 
     if (!!props.lockScroll !== false) {
@@ -69,13 +69,19 @@ function next(props: { lockScroll: boolean; }) {
     const component = React.createElement(MessageBox, Object.assign({}, props, {
       promise: { resolve, reject },
       willUnmount: () => {
-        ReactDOM.unmountComponentAtNode(div);
-        document.body.removeChild(div);
-        document.body.style.removeProperty('overflow');
+
+        // requestAnimationFrame(() => {
+          document.body.removeChild(div);
+          document.body.style.removeProperty('overflow');
+          rootDiv.unmount()
+        // })
+        // document.body.removeChild(div);
+        // document.body.style.removeProperty('overflow');
+        // rootDiv.unmount()
       }
     }));
-
-    ReactDOM.render(component, div);
+    rootDiv.render(component)
+    // ReactDOM.render(component, div);
   });
 }
 

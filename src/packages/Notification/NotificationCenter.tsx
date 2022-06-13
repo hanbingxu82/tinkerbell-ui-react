@@ -1,20 +1,21 @@
 /*
  * @Author: your name
  * @Date: 2022-03-29 09:52:58
- * @LastEditTime: 2022-03-30 14:07:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:55:47
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Notification/NotificationCenter.tsx
  */
 import React from 'react'
-import ReactDOM from 'react-dom'
-
+// import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import Notification from './Notification'
 
 // const className = '.tb-notification'
 
 export default function NotificationCenter(props: any, type?: string) {
   const div = document.createElement('div')
+  const rootDiv = createRoot(div)
   const notification = document.getElementsByClassName(
     'tb-notification-content'
   )[0]
@@ -51,9 +52,8 @@ export default function NotificationCenter(props: any, type?: string) {
           const notification = document.getElementsByClassName(
             'tb-notification-content'
           )[0]
-          ReactDOM.unmountComponentAtNode(div)
-          console.log(div)
           notification.removeChild(div)
+          rootDiv.unmount()
           if (props.onClose instanceof Function) {
             props.onClose()
           }
@@ -61,8 +61,8 @@ export default function NotificationCenter(props: any, type?: string) {
       }
     })
   )
-
-  ReactDOM.render(element, div)
+  rootDiv.render(element)
+  // ReactDOM.render(element, div)
 }
 
 /* eslint-disable */

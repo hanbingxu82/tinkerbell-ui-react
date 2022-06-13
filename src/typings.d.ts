@@ -54,6 +54,7 @@ declare module 'rc-animate'
 declare module 'lodash'
 declare module 'react-click-outside'
 declare module 'throttle-debounce'
+declare module 'react-dom/client'
 
 // declare global {
 //   namespace JSX {

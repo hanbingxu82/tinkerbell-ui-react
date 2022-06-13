@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-03-30 11:45:19
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-06-10 21:53:52
+ * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
  */
@@ -55,6 +55,7 @@ function Toast(props: any) {
   }
   return (
     <Animate
+    unmountOnExit
       component=''
       transitionName='tb-message-fade'
       onLeave={() => {

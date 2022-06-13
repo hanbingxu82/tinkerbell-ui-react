@@ -2,29 +2,29 @@
 @charset "UTF-8";
 @import '../../style/variables.scss';
 
-.v-modal-leave,
-.v-modal-leave-active {
-  animation: v-modal-out .2s ease forwards
-}
+// .v-modal-leave,
+// .v-modal-leave-active {
+//   animation: v-modal-out .2s ease forwards
+// }
 
-.v-modal-enter,
-.v-modal-enter-active {
-  animation: v-modal-in .2s ease
-}
+// .v-modal-enter,
+// .v-modal-enter-active {
+//   animation: v-modal-in .2s ease
+// }
 
 
 
-@keyframes v-modal-in {
-  0% {
-    opacity: 0
-  }
-}
+// @keyframes v-modal-in {
+//   0% {
+//     opacity: 0
+//   }
+// }
 
-@keyframes v-modal-out {
-  100% {
-    opacity: 0
-  }
-}
+// @keyframes v-modal-out {
+//   100% {
+//     opacity: 0
+//   }
+// }
 
 .v-modal {
   position: fixed;
