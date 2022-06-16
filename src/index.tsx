@@ -1,15 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-06-10 22:12:35
+ * @LastEditTime: 2022-06-15 16:52:53
  * @LastEditors: 韩旭小天才 905583741@qq.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
  */
 
-// import { BrowserRouter, Route, Routes } from 'react-router-dom'
-// import { routers } from './router/index'
-// import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { routers } from './router/index'
+import { createRoot } from 'react-dom/client'
+// import Home from './views/Home'
 
 // eslint-disable-next-line
 import * as React from 'react'
@@ -143,16 +144,27 @@ export {
   Pagination
 }
 
-
-// const container = document.getElementById('root');
-// const root = createRoot(container);
-// root.render(  <BrowserRouter>
-//       <Routes>
-//         {routers.map((item: any) => {
-//           return (
-//             <Route key={item.path} path={item.path} element={<item.component />}>
-//             </Route>
-//           )
-//         })}
-//       </Routes>
-//     </BrowserRouter>);
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Navigate to='/Guide' />} />
+      {routers.map((item: any) => {
+        return (
+          <Route key={item.path} path={item.path} element={<item.component />}>
+            {item.children.map((childItem: any) => {
+              return (
+                <Route
+                  key={childItem.path}
+                  path={childItem.path}
+                  element={<childItem.component />}
+                ></Route>
+              )
+            })}
+          </Route>
+        )
+      })}
+    </Routes>
+  </BrowserRouter>
+)

@@ -83,3 +83,6 @@ body {
     clear: both
   }
   
+  #root{
+    height: 100%;
+  }
