@@ -2,24 +2,36 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-09 19:33:36
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-16 11:04:07
+ * @LastEditTime: 2022-06-17 14:44:26
  * @FilePath: /tinkerbell-ui-react/src/views/Home/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 // eslint-disable-next-line
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Menu, Icon } from '../../packages/index'
 import { Outlet } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './index.scss'
 const logo = require('../../assets/images/logo.png')
 function Home() {
-  // 声明一个名为“count”的新状态变量
-  //   const [count, setCount] = useState(0)
-  // 类似于 componentDidMount 和 componentDidUpdate:
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [routerPath, setRouterPath] = useState(location.pathname)
+  /**
+   * @description: 是否第一次加载组件
+   * @param {*}
+   * @return {*}
+   */
+  const initComponent = useRef(true)
+  function MenuOnSelect(index: string) {
+    if (initComponent.current) return
+    setRouterPath(index)
+    navigate(index)
+  }
   useEffect(() => {
-    // 使用浏览器API更新文档标题
-    document.title = `You clicked count times`
+    initComponent.current = false
   }, [])
+
   return (
     <div className='home'>
       <div className='home-header'>
@@ -45,10 +57,10 @@ function Home() {
       </div>
       <div className='home-content'>
         <div className='home-content-nav'>
-          <Menu defaultActive='1'>
-            <Menu.SubMenu index='1' title='开发指南'>
-              <Menu.Item index='1-1'>指南</Menu.Item>
-              <Menu.Item index='1-2'>快速开始</Menu.Item>
+          <Menu defaultActive={routerPath} onSelect={MenuOnSelect}>
+            <Menu.SubMenu index='DevGuide' title='开发指南'>
+              <Menu.Item index='/Guide'>指南</Menu.Item>
+              <Menu.Item index='/Installs'>快速开始</Menu.Item>
               <Menu.Item index='1-3'>更新日志</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu index='2' title='导航一'>

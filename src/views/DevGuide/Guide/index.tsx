@@ -8,8 +8,8 @@
  */
 // eslint-disable-next-line
 import React from 'react'
-import RightSmallNav from '../../components/RightSmallNav'
-import HocMixins from '../../components/HocMixins'
+import RightSmallNav from '../../../components/RightSmallNav'
+import HocMixins from '../../../components/HocMixins'
 
 // 定义当前传递过来的数据是所有类型的数据
 const rightTitle = [
