@@ -77,6 +77,7 @@
     "build": "^0.1.4",
     "classnames": "^2.3.1",
     "element-theme-default": "^1.4.13",
+    "highlight.js": "^11.5.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.15.0",
     "prop-types": "^15.8.1",

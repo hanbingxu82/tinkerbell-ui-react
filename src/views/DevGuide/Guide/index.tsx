@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-09 19:39:45
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-16 18:01:57
+ * @LastEditTime: 2022-06-17 17:53:26
  * @FilePath: /tinkerbell-ui-react/src/views/Guide/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -53,7 +53,12 @@ function Guide() {
       </li>
       <li style="list-style: circle;margin:20px 20px">
           <p>
-          ⌨️ 部分组件代码进行重构
+          📦 部分组件代码进行重构 开箱即用的高质量 React 组件。
+          </p>
+      </li>
+      <li style="list-style: circle;margin:20px 20px">
+          <p>
+          🛡 使用 TypeScript 开发，提供完整的类型定义文件。
           </p>
       </li>
       <li style="list-style: circle;margin:20px 20px">
@@ -61,6 +66,7 @@ function Guide() {
           🗑 移除了部分冗余代码
           </p>
       </li>
+
   </ul>
   <h3 id="zui-xin-ban-ben" style="box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
       <a href="#zui-xin-ban-ben" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;最新版本

@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-09 19:33:36
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-17 14:44:26
+ * @LastEditTime: 2022-06-17 18:09:52
  * @FilePath: /tinkerbell-ui-react/src/views/Home/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,6 +11,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Menu, Icon } from '../../packages/index'
 import { Outlet } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
+
 import './index.scss'
 const logo = require('../../assets/images/logo.png')
 function Home() {
@@ -30,6 +31,7 @@ function Home() {
   }
   useEffect(() => {
     initComponent.current = false
+
   }, [])
 
   return (
@@ -60,7 +62,7 @@ function Home() {
           <Menu defaultActive={routerPath} onSelect={MenuOnSelect}>
             <Menu.SubMenu index='DevGuide' title='开发指南'>
               <Menu.Item index='/Guide'>指南</Menu.Item>
-              <Menu.Item index='/Installs'>快速开始</Menu.Item>
+              <Menu.Item index='/Installs'>安装</Menu.Item>
               <Menu.Item index='1-3'>更新日志</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu index='2' title='导航一'>

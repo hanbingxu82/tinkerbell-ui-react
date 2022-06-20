@@ -8,9 +8,25 @@
  */
 // eslint-disable-next-line
 import React, { useEffect } from 'react'
+import hljs from 'highlight.js'
+// import 'highlight.js/styles/a11y-light.css'
+import 'highlight.js/styles/base16/unikitty-light.css'
+
 const HocMixins = (OriginalComponent: any, rightTitle: any) => {
   const Component: React.FC = (props: any) => {
     useEffect(() => {
+      // 配置 highlight.js
+      hljs.configure({
+        // 忽略未经转义的 HTML 字符
+        ignoreUnescapedHTML: true
+      })
+      // 获取到内容中所有的code标签
+      const codes = document.querySelectorAll('pre code')
+      codes.forEach((el) => {
+        // 让code进行高亮
+        hljs.highlightElement(el as HTMLElement)
+      })
+
       let node: any = window.document.querySelector('.' + rightTitle[0].id)
       node.style.color = '#409eff'
       //   containers容器
@@ -42,7 +58,7 @@ const HocMixins = (OriginalComponent: any, rightTitle: any) => {
             nodetext.style.color = '#409eff'
           }
         })
-        if (containers.scrollTop === 0 ||containers.scrollTop === '0') {
+        if (containers.scrollTop === 0 || containers.scrollTop === '0') {
           let node: any = window.document.querySelector('.' + rightTitle[0].id)
           node.style.color = '#409eff'
         }

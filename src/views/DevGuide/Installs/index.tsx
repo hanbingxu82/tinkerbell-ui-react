@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-17 14:09:23
  * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-17 14:24:06
+ * @LastEditTime: 2022-06-17 18:09:28
  * @FilePath: /tinkerbell-ui-react/src/views/DevGuide/Installs/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,87 +13,71 @@ import HocMixins from '../../../components/HocMixins'
 
 // 定义当前传递过来的数据是所有类型的数据
 const rightTitle = [
-  { title: '介绍', id: 'jie-shao' },
-  { title: '概述', id: 'gai-shu' },
-  { title: '最新版本', id: 'zui-xin-ban-ben' },
-  { title: '支持环境', id: 'zhi-chi-huan-jing' },
-  { title: '相关链接', id: 'xiang-guan-lian-jie' }
+    { title: "安装", id: "an-zhuang" },
+    { title: "CDN 安装", id: "cdn-an-zhuang" },
+    { title: "NPM 安装", id: "npm-an-zhuang" },
 ]
 
 function Guide() {
   const nodeStr = `
-  <h2 id="jie-shao" className="Guide1" style="box-sizing: border-box; margin: 0px; padding: 10px 0px; font-size: 28px; font-weight: 400; color: rgb(31, 47, 61); border-bottom: 1px solid rgb(197, 217, 232); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="#jie-shao" class="header-anchor"  style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;介绍
-  </h2>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      tinkerbell-ui-react 是一款基于 React-Hook 技术实现的的前端 UI 组件库，是个人在工作中为了更好的学习和使用 React 相关技术栈而实现的。
-  </p>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      本项目的源码和文档主要参考借鉴了&nbsp;<code style="box-sizing: border-box; margin: 0px; padding: 0px 4px; background-color: rgb(249, 250, 252); border: 1px solid rgb(234, 238, 251); border-radius: 4px; line-height: 2em;">element-ui</code>和&nbsp;<code style="box-sizing: border-box; margin: 0px; padding: 0px 4px; background-color: rgb(249, 250, 252); border: 1px solid rgb(234, 238, 251); border-radius: 4px; line-height: 2em;">Ant Design</code>以及&nbsp;<code style="box-sizing: border-box; margin: 0px; padding: 0px 4px; background-color: rgb(249, 250, 252); border: 1px solid rgb(234, 238, 251); border-radius: 4px; line-height: 2em;">bin-ui</code>。分离了常用业务组件并封装，部分组件参考这三个开源库进行了简化实现。现已实现扩展了约 50 个组件可供日常开发。
-  </p>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      添加了开源协议，编写本UI库的目的也是为了学习提升，熟悉 React 相关技术栈及相关UI控件的实现和开发。
-  </p>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      组件库的更新请参考[更新日志]
-  </p>
-  <h3 id="gai-shu" style="box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="#gai-shu" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;概述
-  </h3>
-  <ul  class=" list-paddingleft-2">
-      <li style="list-style: circle;margin:20px 20px">
-          <p>
-          💪 基于 React 16.8+ Hook API
-          </p>
-      </li>
-      <li style="list-style: circle;margin:20px 20px">
-          <p>
-          🌈 最新图标基于阿里iconfont 图标精简版
-          </p>
-      </li>
-      <li style="list-style: circle;margin:20px 20px">
-          <p>
-          ⌨️ 部分组件代码进行重构
-          </p>
-      </li>
-      <li style="list-style: circle;margin:20px 20px">
-          <p>
-          🗑 移除了部分冗余代码
-          </p>
-      </li>
-  </ul>
-  <h3 id="zui-xin-ban-ben" style="box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="#zui-xin-ban-ben" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;最新版本
-  </h3>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="https://www.npmjs.com/package/tinkerbell-ui" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">
-     <img alt="npm" src="https://img.shields.io/npm/v/tinkerbell-ui-react" style="box-sizing: border-box; border: 0px;"/>
-      </a>
-  </p>
-  <h3 id="zhi-chi-huan-jing" style="box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
-  <a href="#zhi-chi-huan-jing" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;支持环境
+  <h2
+  id="an-zhuang"
+  style='box-sizing: border-box; margin: 0px; padding: 10px 0px; font-size: 28px; font-weight: 400; color: rgb(31, 47, 61); border-bottom: 1px solid rgb(197, 217, 232); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  <a href="#an-zhuang" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;安装
+</h2>
+<h3
+  id="cdn-an-zhuang"
+  style='box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  <a href="#cdn-an-zhuang" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;CDN 安装
 </h3>
-<ul  class=" list-paddingleft-2">
-<li style="list-style: circle;margin:20px 20px">
-    <p>
-    暂不支持IE所有版本，建议使用 谷歌Chrome 浏览器
-    </p>
-</li>
-
-</ul>
-  <h3 id="xiang-guan-lian-jie" style="box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="#xiang-guan-lian-jie" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;相关链接
-  </h3>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="https://element.eleme.cn/" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">element-ui</a>
-  </p>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="https://ant-design.gitee.io/index-cn" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">Ant Design</a>
-  </p>
-  <p style="box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">
-      <a href="https://wangbin3162.gitee.io/bin-ui/" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">bin-ui</a>
-  </p>
+<p
+  style='box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  通过<a href="https://unpkg.com/tinkerbell-ui-react/" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">unpkg.com/tinkerbell-ui</a>&nbsp;可以看到 tinkerbell-ui-react 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 和 css 文件即可开始使用：
+</p>
   `
+  const nodeStr1 = `
+<p
+  style='box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  <code style="box-sizing: border-box; margin: 0px; padding: 0px 4px; background-color: rgb(249, 250, 252); border: 1px solid rgb(234, 238, 251); border-radius: 4px; line-height: 2em;">@0.5.6</code>&nbsp;表示版本号，我们建议锁定版本号来保证代码的稳定性
+</p>
+<h3
+  id="npm-an-zhuang"
+  style='box-sizing: border-box; margin: 36px 0px 20px; padding: 0px; font-size: 22px; font-weight: 400; color: rgb(31, 47, 61); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  <a href="#npm-an-zhuang" class="header-anchor" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">¶</a>&nbsp;npm 安装
+</h3>
+<p
+  style='box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+  推荐使用npm安装，它能更好地和<a href="https://webpack.js.org/" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">webpack</a>打包工具配合使用。而且可以更好的和 es6配合使用。并且支持按需引入
+</p>
+
+  `
+  const nodeStr2 = `
+<p
+style='box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; padding: 0px; color: rgba(0, 0, 0, 0.85); font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);'
+>
+如果您了解node.js、npm安装，并希望配合webpack使用，请阅读下一节：<a href="#/Components/QuickStart" style="box-sizing: border-box; color: rgb(16, 137, 255); text-decoration-line: none;">快速上手</a>。
+</p>
+<p>
+<br />
+</p>
+  `
+  const html1 = `&lt!-- import Vue.js --&gt
+&ltscript src="https://unpkg.com/react/umd/react.production.min.js"&gt&lt/script&gt
+&lt!-- import stylesheet --&gt
+&ltlink rel="stylesheet" href="https://unpkg.com/tinkerbell-ui-reacr@0.5.6/dist/index.css"&gt
+&lt!-- import tinkerbell-ui --&gt
+&ltscript src="https://unpkg.com/tinkerbell-ui-react@0.5.6/dist/index.js"&gt&lt/script&gt
+`
+  const html2 = `npm i tinkerbell-ui-react -S
+# or 
+yarn add tinkerbell-ui-react
+`
   /**
    * @description: 点击右侧区域跳转至对应的html区域
    * @param {id:string} id:id节点地址
@@ -106,6 +90,14 @@ function Guide() {
   return (
     <div className='Guide'>
       <div dangerouslySetInnerHTML={{ __html: nodeStr }}></div>
+      <pre>
+        <code dangerouslySetInnerHTML={{ __html: html1 }}></code>
+      </pre>
+      <div dangerouslySetInnerHTML={{ __html: nodeStr1 }}></div>
+      <pre>
+        <code dangerouslySetInnerHTML={{ __html: html2 }}></code>
+      </pre>
+      <div dangerouslySetInnerHTML={{ __html: nodeStr2 }}></div>
       <RightSmallNav rightTitle={rightTitle} goMeowPoint={goMeowPoint} />
     </div>
   )
