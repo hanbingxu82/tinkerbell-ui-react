@@ -2,7 +2,7 @@
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-06-09 19:33:36
  * @LastEditors: 韩旭小天才
- * @LastEditTime: 2022-06-27 17:19:23
+ * @LastEditTime: 2022-06-28 11:04:41
  * @FilePath: /tinkerbell-ui-react/src/views/Home/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -64,6 +64,7 @@ function Home() {
               <Menu.Item index='/Guide'>指南</Menu.Item>
               <Menu.Item index='/Installs'>安装</Menu.Item>
               <Menu.Item index='/QuickStart'>快速开始</Menu.Item>
+              <Menu.Item index='/UpdateLog'>更新日志</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu index='2' title='导航一'>
               <Menu.ItemGroup title='分组一'>
