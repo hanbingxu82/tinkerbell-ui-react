@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:02
- * @LastEditTime: 2022-05-16 15:52:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-08 18:21:15
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Row/index.tsx
  */
@@ -10,7 +10,7 @@
 import React, { useEffect, useState,  } from 'react'
 import './index.scss'
 interface Iprops {
-  justify: string
+  justify: string // 水平排列方式
   align: string
   gutter: number
 }
