@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:02
- * @LastEditTime: 2022-07-08 18:21:15
+ * @LastEditTime: 2022-07-12 13:57:35
  * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Row/index.tsx
@@ -11,8 +11,8 @@ import React, { useEffect, useState,  } from 'react'
 import './index.scss'
 interface Iprops {
   justify: string // 水平排列方式
-  align: string
-  gutter: number
+  align: string // 垂直排列方式
+  gutter: number // 栅格间隔
 }
 // export const Context = createContext<any>(null)
 function Row(props: any) {
@@ -24,6 +24,7 @@ function Row(props: any) {
     pjustify()
     palign()
   }, [])
+  // 判断
   function pjustify() {
     if (justify == 'start') {
       setTbjustify({
@@ -49,6 +50,7 @@ function Row(props: any) {
       setTbjustify({})
     }
   }
+  // 判断布局
   function palign() {
     if (align == 'top') {
       setTbalign({

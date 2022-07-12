@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-21 08:48:28
- * @LastEditTime: 2022-05-16 15:56:22
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-12 14:03:13
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Col/index.tsx
  */
@@ -11,16 +11,15 @@ import React, { useState, useEffect } from 'react'
 // import { Context } from '../Row/index'
 import './index.scss'
 interface Iprops {
-  span: number | string
-  type: number | string
-  push: number | string
-  offset: number | string
-  pull: number | string
-  xs: number | object
-  sm: number | object
-  md: number | object
-  lg: number | object
-  xl: number | object
+  span: number | string // 栅格占据的列数
+  push: number | string // 栅格向右移动格数
+  offset: number | string // 栅格左侧的间隔格数
+  pull: number | string // 栅格向左移动格数
+  xs: number | object // <768px 响应式栅格数或者栅格属性对象
+  sm: number | object // ≥768px 响应式栅格数或者栅格属性对象
+  md: number | object // ≥992 响应式栅格数或者栅格属性对象
+  lg: number | object // ≥1200 响应式栅格数或者栅格属性对象
+  xl: number | object // ≥1920px 响应式栅格数或者栅格属性对象 
 }
 
 function Col(props: any) {
@@ -30,6 +29,8 @@ function Col(props: any) {
   //   delete RowComponent.children
   //   delete RowComponent.item
   // }
+
+  // 全部设置默认初始值
   const {
     span = 0,
     offset = 0,
@@ -50,7 +51,7 @@ function Col(props: any) {
   const [tblg, setTblg] = useState('')
   const [tbxl, setTbxl] = useState('')
 
-  // 声明一个名为“count”的新状态变量
+  // 初始化
   useEffect(() => {
     setNum(4.1666)
     Pxs()
