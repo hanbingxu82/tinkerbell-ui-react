@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-06-10 22:10:40
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-07-12 14:48:45
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
@@ -10,6 +10,7 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import './index.css'
 import {
+  Link,
   Row,
   Col,
   Button,
@@ -632,6 +633,9 @@ const App = (props: any) => {
   ]
   return (
     <div>
+      <Link icon="iconfont icon-credit-level-fill" type="primary">编辑</Link>
+
+      
       <Table isSort selectable rows={tableData} cols={tableCol}></Table>
 
       <br />

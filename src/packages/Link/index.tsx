@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-23 10:02:12
- * @LastEditTime: 2022-03-28 12:46:20
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-12 14:56:51
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Link/index.tsx
  */
@@ -10,12 +10,12 @@
 import React, { useState, useEffect } from 'react'
 import './index.scss'
 interface Iprops {
-  type: string
-  href: string
-  target: string
-  disabled: boolean
-  underline: true
-  icon: string
+  type: string // 类型 primary / success / warning / danger / info
+  href: string // 原生 href 属性
+  target: string // a标签 原生target属性
+  disabled: boolean // 是否禁用状态
+  underline: true // 是否下划线
+  icon: string // 图标类名
 }
 function Link(props: any) {
   const [tbType, setTbType] = useState('')
