@@ -12,15 +12,15 @@ import './index.scss'
 
 const classnames = require('classnames')
 interface Iprops {
-  type: string
-  checked: boolean
-  disabled: boolean
-  groupValue: any
-  label:string,
-  value: any
-  name?: string
-  size: string
-  buttonStyle: string
+  type: string   // type类型 判断颜色
+  checked: boolean  // 选中状态
+  disabled: boolean  // 禁用状态
+  groupValue: any // groupValue 值是否与value值相等 逻辑上来说可传可不传 当时只是为了做判断用的  因为 value 也同样可以给与初始值
+  label:string,  // 初始 lable 文本
+  value: any // value初始值
+  name?: string // 原生 name 属性
+  size: string // 按钮大小
+  buttonStyle: string // style样式
 }
 function RadioButton(props: any) {
   const {

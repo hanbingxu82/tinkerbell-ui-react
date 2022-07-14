@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-07 10:47:48
- * @LastEditTime: 2022-05-23 16:10:35
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-13 16:58:46
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Radio/index.tsx
  */
@@ -12,13 +12,13 @@ import './index.scss'
 
 const classnames = require('classnames')
 interface Iprops {
-  type: string
-  checked: boolean
-  disabled: boolean
-  groupValue: any
-  value: any
-  label: string
-  name?: string
+  type: string // type类型 判断颜色
+  checked: boolean // 是否选中
+  disabled: boolean // 禁用项
+  groupValue: any // groupValue 值是否与value值相等 逻辑上来说可传可不传 当时只是为了做判断用的  因为 value 也同样可以给与初始值
+  value: any // value初始值
+  label: string // 初始 lable 文本
+  name?: string // 原生 name 属性
 }
 function Radio(props: any) {
   const {

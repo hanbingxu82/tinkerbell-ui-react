@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-08 11:34:31
- * @LastEditTime: 2022-05-24 14:23:06
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-07-14 10:14:26
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/RadioGroup/index.tsx
  */
@@ -12,13 +12,13 @@ import React from 'react'
 import Radio from '../Radio/index'
 import RadioButton from '../RadioButton/index'
 interface Iprops {
-  name?: string
-  buttonStyle: string
-  disabled: boolean
-  options: any
-  optionType: string
-  size: string
-  value: any
+  name?: string // 统一原生name值
+  buttonStyle: string // 如果是button类型 统一的buttonStyle
+  disabled: boolean // 统一禁用
+  options: any // js编程式组件
+  optionType: string // js编程式类型
+  size: string // 大小
+  value: any // value值
 }
 function RadioGroup(props: any) {
   const {
