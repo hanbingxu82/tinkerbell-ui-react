@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-11 14:29:00
- * @LastEditTime: 2022-05-30 12:38:51
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-07-25 13:46:43
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBoxGroup/index.tsx
  */
@@ -10,11 +10,10 @@
 import React from 'react'
 import CheckBox from '../CheckBox/index'
 interface Iprops {
-  name?: string
-  disabled: boolean
-  options: any
-  optionType: string
-  value: any
+  name?: string // 原生 name 属性
+  disabled: boolean // 是否统一禁用
+  options: any // js编程式组件列表
+  value: any // 绑定 value 值
 }
 function CheckBoxGroup(props: any) {
   const { name, value = [], options = [] }: Iprops = props

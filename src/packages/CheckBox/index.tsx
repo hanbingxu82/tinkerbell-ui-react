@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-06-06 11:33:09
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-07-25 13:50:51
+ * @LastEditors: 韩旭小天才
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
  */
@@ -12,14 +12,14 @@ import './index.scss'
 
 const classnames = require('classnames')
 interface Iprops {
-  type: string
-  checked: boolean
-  disabled: boolean
-  checkGroupValue: any
-  value: string | number
-  name?: string
-  label: string
-  indeterminate?: any
+  type: string // 样式类型
+  checked: boolean // 是否选中
+  disabled: boolean // 是否禁用
+  checkGroupValue: any // 父 group 的 value 值
+  value: string | number // 单独 value 值
+  name?: string // 原生 name 属性
+  label: string // label 名称
+  indeterminate?: any // 是否为统一全选控制按钮组件
 }
 function CheckBox(props: any) {
   const {
