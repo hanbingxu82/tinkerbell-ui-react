@@ -10,6 +10,8 @@
     "node": ">=10"
   },
   "scripts": {
+    "dumi": "cross-env APP_ROOT=dumi dumi dev",
+    "dumi-build": "cross-env APP_ROOT=dumi dumi build",
     "build": "microbundle-crl --css-modules false --no-compress --format modern,cjs && cp -r src/packages/Icon/fontcss/* ./dist ",
     "start": "microbundle-crl --css-modules false watch --no-compress --format modern,cjs & cp -r src/packages/Icon/fontcss/* ./dist",
     "dev": "react-scripts start",
@@ -43,7 +45,8 @@
     "@typescript-eslint/parser": "^5.20.0",
     "@xkit/popover": "^0.1.20",
     "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
+    "dumi": "^1.1.48",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
@@ -73,6 +76,7 @@
     "dist"
   ],
   "dependencies": {
+    "@umijs/plugin-sass": "^1.1.1",
     "async-validator": "^4.1.1",
     "build": "^0.1.4",
     "classnames": "^2.3.1",
