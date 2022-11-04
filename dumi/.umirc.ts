@@ -26,10 +26,11 @@ export default defineConfig({
   publicPath: `/${repo}/`,
   navs: [
     null,
-    {
-      title: 'GitHub',
-      path: 'https://github.com/umijs/dumi-template',
-    },
+    // {
+    //   title: '组件',
+    //   path: 'components',
+    //   // 可通过如下形式嵌套二级导航菜单，目前暂不支持更多层级嵌套：
+    // },
   ],
   // more config: https://d.umijs.org/config
 });

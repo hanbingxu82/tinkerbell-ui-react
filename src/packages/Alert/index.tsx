@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-24 14:24:29
- * @LastEditTime: 2022-04-07 10:37:10
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-04 17:45:10
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Alert/index.tsx
  */
@@ -32,7 +32,8 @@ function Alert(props: any) {
     closeText,
     closable = true,
     description,
-    icon = ''
+    icon = '',
+    ...restprop
   }: Iprops = props
 
   const [visible, setVisible] = useState(true)
@@ -40,9 +41,9 @@ function Alert(props: any) {
   const [typeClass, setTypeClass] = useState('')
   const [isBoldTitle, setIsBoldTitle] = useState('')
   const [isBigIcon, setIsBigIcon] = useState('')
-  function close(event: any) {
+  function onClose(event: any) {
     setVisible(false)
-    props.close && props.close(event)
+    props.onClose && props.onClose(event)
   }
   // 类似于 componentDidMount 和 componentDidUpdate:
   useEffect(() => {
@@ -72,6 +73,7 @@ function Alert(props: any) {
     <Animate component='' transitionName='tb-alert-fade'>
       {visible ? (
         <div
+          {...restprop}
           className={[
             'tb-alert',
             typeClass,
@@ -97,7 +99,7 @@ function Alert(props: any) {
                   'tb-alert__closebtn',
                   closeText ? 'is-customed' : `iconfont icon-close`
                 ].join(' ')}
-                onClick={close}
+                onClick={onClose}
               >
                 {closeText}
               </i>

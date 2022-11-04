@@ -1,4 +1,6 @@
 ---
+group:
+  title: 组件
 nav:
   title: Components
   path: /components
@@ -126,41 +128,41 @@ import React from 'react'
 
 const App: React.FC = () => (
   <>
-  <div class="margin-6-0" >
+  <div className="margin-6-0" >
     <Button disabled>Default</Button>
     <Button dashed disabled>Dashed</Button>
     <Button background disabled>Background</Button>
     <Button loading disabled>Loading</Button>
   </div>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button type="primary" disabled>Primary</Button>
     <Button type="success" disabled>Success</Button>
     <Button type="info" disabled>Info</Button>
     <Button type="warning" disabled>Warning</Button>
     <Button type="danger" disabled>Danger</Button>
   </div>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button type="primary" plain disabled>Primary</Button>
     <Button type="success" plain disabled>Success</Button>
     <Button type="info" plain disabled>Info</Button>
     <Button type="warning" plain disabled>Warning</Button>
     <Button type="danger" plain disabled>Danger</Button>
   </div>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button type="primary" round disabled>Primary</Button>
     <Button type="success" round disabled>Success</Button>
     <Button type="info" round disabled>Info</Button>
     <Button type="warning" round disabled>Warning</Button>
     <Button type="danger" round disabled>Danger</Button>
   </div>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button type="primary" dashed disabled>Primary</Button>
     <Button type="success" dashed disabled>Success</Button>
     <Button type="info" dashed disabled>Info</Button>
     <Button type="warning" dashed disabled>Warning</Button>
     <Button type="danger" dashed disabled>Danger</Button>
   </div>
-  <div class="margin-6-0" >
+  <div className="margin-6-0" >
     <Button type="primary" transparent  disabled>Primary</Button>
     <Button type="success" transparent  disabled>Success</Button>
     <Button type="info" transparent  disabled>Info</Button>
@@ -219,13 +221,13 @@ import React from 'react'
 
 const App: React.FC = () => (
   <>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button size="large">Large</Button>
     <Button>Default</Button>
     <Button size="small">Small</Button>
     <Button size="mini">Mini</Button>
   </div>
-  <div class="margin-6-0">
+  <div className="margin-6-0">
     <Button size="large" round>Large</Button>
     <Button round>Default</Button>
     <Button size="small" round>Small</Button>
@@ -298,6 +300,7 @@ const App: React.FC = () => {
 
 export default App;
 ```
+
 ### Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
@@ -311,11 +314,9 @@ export default App;
 | loading | 是否加载中状态 | boolean | — | false |
 | disabled | 是否禁用状态 | boolean | — | false |
 | icon | 图标类名 | string | — | — |
-| text-color | 文字按钮颜色，默认禁用文字颜色增加亮度区分 | string | primary / success / warning / danger / info / text / 自定义色值 | — |
-| icon-style | 图标样式,可设置图标大小，字体对其等，可依托 text-color 设置颜色，也可以自定义 | Object | — | — |
+| textColor | 文字按钮颜色，默认禁用文字颜色增加亮度区分 | string | primary / success / warning / danger / info / text / 自定义色值 | — |
+| iconStyle | 图标样式, 可设置图标大小，字体对其等，可依托 text-color 设置颜色，也可以自定义 | Object | — | — |
 | autofocus | 是否默认聚焦 | boolean | — | false |
 | native-type | 原生 type 属性 | string | button / submit / reset | button |
-
-
 
 More skills for writing demo: https://d.umijs.org/guide/demo-principle
