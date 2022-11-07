@@ -145,3 +145,21 @@ const App: React.FC = () => (
 
 export default App
 ```
+
+### Props
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- | --- | --- | --- | --- |
+| title | 标题，必选参数。也可通过默认 slot 传入 | — | — | — |
+| type | 主题 | string | primary / success / warning / danger / info  | success |
+| description | 辅助性文字 | string | — | — |
+| closable | 是否可关闭 | boolean | — | true |
+| center | 文字是否居中 | boolean | — | true |
+| closeText | 关闭按钮自定义文本 | 	string | — | — |
+| showIcon | 是否显示图标 | boolean | — | false |
+
+### Events
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- | --- | --- | --- | --- |
+| onClose | 关闭alert时触发的事件 | — | — | — |
