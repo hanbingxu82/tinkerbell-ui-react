@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-13 14:52:54
- * @LastEditTime: 2022-06-15 16:52:53
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-11-14 14:50:01
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/index.tsx
  */
@@ -23,6 +23,10 @@ import Row from './packages/Row'
 import Col from './packages/Col'
 import Link from './packages/Link'
 import Container from './packages/Container'
+import Aside from './packages/Aside'
+import Header from './packages/Header'
+import Main from './packages/Main'
+import Footer from './packages/Footer'
 import Radio from './packages/Radio'
 import RadioGroup from './packages/RadioGroup'
 import RadioButton from './packages/RadioButton'
@@ -91,6 +95,10 @@ export {
   Col,
   Link,
   Container,
+  Aside,
+  Header,
+  Footer,
+  Main,
   Radio,
   RadioGroup,
   RadioButton,

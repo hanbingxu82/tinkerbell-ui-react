@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2022-10-26 17:01:08
+ * @LastEditTime: 2022-11-14 14:53:16
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
@@ -17,6 +17,10 @@ import Row from './Row'
 import Col from './Col'
 import Link from './Link'
 import Container from './Container'
+import Aside from './Aside'
+import Header from './Header'
+import Main from './Main'
+import Footer from './Footer'
 import Radio from './Radio'
 import RadioGroup from './RadioGroup'
 import RadioButton from './RadioButton'
@@ -92,6 +96,10 @@ export {
   Col,
   Link,
   Container,
+  Aside,
+  Header,
+  Footer,
+  Main,
   Radio,
   RadioGroup,
   RadioButton,
@@ -149,4 +157,3 @@ export {
   // DatePicker,
   // DateRangePicker
 }
-

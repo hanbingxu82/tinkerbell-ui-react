@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-12-23 15:58:16
- * @LastEditTime: 2022-06-10 17:34:59
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2022-11-14 15:17:07
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Container/index.tsx
  */
@@ -17,13 +17,14 @@ function Container(props: any) {
   const [isHF, setIsHF] = useState(direction)
   // 类似于 componentDidMount 和 componentDidUpdate:
   useEffect(() => {
-    // // 如果插槽中有header  或者  footer说明是横向的
-    props.children.forEach((element: { type: string }) => {
-      if (/Header|Footer/.test(element.type)) {
-        setIsHF('vertical')
-      }
-    })
-  }, [])// eslint-disable-line
+    //  如果插槽中有header  或者  footer说明是横向的
+    Array.isArray(props.children) &&
+      props.children.forEach((element: { type: any }) => {
+        if (/Header|Footer/.test(element.type.name)) {
+          setIsHF('vertical')
+        }
+      })
+  }, []) // eslint-disable-line
   return (
     <div
       {...props}

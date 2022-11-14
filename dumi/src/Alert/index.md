@@ -146,7 +146,7 @@ const App: React.FC = () => (
 export default App
 ```
 
-### Props
+### Alert Props
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -158,7 +158,7 @@ export default App
 | closeText | 关闭按钮自定义文本 | 	string | — | — |
 | showIcon | 是否显示图标 | boolean | — | false |
 
-### Events
+### Alert Events
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
