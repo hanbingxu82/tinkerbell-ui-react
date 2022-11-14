@@ -4,3 +4,4 @@ export { default as Divider } from './Divider';
 export { default as Alert } from './Alert';
 export { default as Row } from './Row';
 export { default as Col } from './Col';
+export { default as Link } from './Link';
