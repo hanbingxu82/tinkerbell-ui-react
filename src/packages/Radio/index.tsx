@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-07 10:47:48
- * @LastEditTime: 2022-07-13 16:58:46
- * @LastEditors: 韩旭小天才
+ * @LastEditTime: 2022-12-09 14:52:36
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Radio/index.tsx
  */
@@ -31,7 +31,7 @@ function Radio(props: any) {
     name
   }: Iprops = props
   function handleChange(evt: any) {
-    props.onChange && props.onChange(evt.target.value)
+    props.onChange && props.onChange(evt)
   }
   return (
     <div

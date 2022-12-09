@@ -12,3 +12,6 @@ export { default as Footer } from './Footer';
 export { default as Header } from './Header';
 export { default as Aside } from './Aside';
 export { default as Container } from './Container';
+export { default as Radio } from './Radio';
+export { default as RadioGroup } from './RadioGroup';
+export { default as RadioButton } from './RadioButton';

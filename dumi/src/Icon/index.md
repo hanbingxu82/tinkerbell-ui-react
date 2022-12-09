@@ -1,6 +1,7 @@
 ---
 group:
   title: 基础
+  order: 1
 nav:
   title: Components
   path: /components

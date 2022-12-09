@@ -1,6 +1,7 @@
 ---
 group:
   title: 通知
+  order: 3
 nav:
   title: Components
   path: /components

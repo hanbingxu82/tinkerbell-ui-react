@@ -75,7 +75,7 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
     content: "";
     width: 75%;
     height: 75%;
-    border: 1px solid typeFunction($t);
+    border: 1px solid $border-color-base;
     display: inline-block;
     border-radius: 50%;
     vertical-align: middle;
@@ -83,7 +83,7 @@ $type:('success', 'primary', 'danger', 'warning', 'info', 'default');
   }
 
   .radio-type_#{$t}.is-disabled:before {
-    border-color: typeDisabledFunction($t);
+    border-color: $btn-disable-color;
     cursor: not-allowed;
   }
 
