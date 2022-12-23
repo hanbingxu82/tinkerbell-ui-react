@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-07-25 13:50:51
- * @LastEditors: 韩旭小天才
+ * @LastEditTime: 2022-12-09 18:00:32
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
  */
@@ -20,20 +20,21 @@ interface Iprops {
   name?: string // 原生 name 属性
   label: string // label 名称
   indeterminate?: any // 是否为统一全选控制按钮组件
+  componentName: string
 }
 function CheckBox(props: any) {
   const {
     type = 'default',
     disabled = false,
-    checked = false,
     value,
     name,
     label,
     checkGroupValue = [],
     indeterminate
   }: Iprops = props
-  const [checkBoxChecked, setCheckBoxChecked] = useState(checked || false)
+  const [checkBoxChecked, setCheckBoxChecked] = useState(props.checked || false)
   const [isIndeterminate, setIsIndeterminate] = useState(false)
+  // 每次变更重置 checkGroupValue 数组地址
   useEffect(() => {
     //  监听 初始化判断是否为 多选组选项行为
     if (!!checkGroupValue.length && checkGroupValue.includes(value)) {
@@ -46,16 +47,15 @@ function CheckBox(props: any) {
       setCheckBoxChecked(false)
     }
   }, [props.checkGroupValue]) // eslint-disable-line
-  useEffect(() => {
-    setCheckBoxChecked(checked)
-  }, [props.checked]) // eslint-disable-line
 
-  useEffect(() => {
-    console.log(checkBoxChecked, 3333)
-  }, [checkBoxChecked]) // eslint-disable-line
+  // useEffect(() => {
+  //   setCheckBoxChecked(props.checked)
+  // }, [props.checked]) // eslint-disable-line
+
   useEffect(() => {
     setIsIndeterminate(!!indeterminate ? indeterminate : false)
   }, [indeterminate]) // eslint-disable-line
+
   function handleChange(evt: any) {
     setCheckBoxChecked(evt.target.checked)
     props.onChange && props.onChange(evt)
@@ -73,7 +73,9 @@ function CheckBox(props: any) {
       <label>
         <input
           type='checkbox'
-          checked={checkBoxChecked}
+          checked={
+            props.componentName === 'checkboxGroup' ? checkBoxChecked : props.checked
+          }
           name={name}
           disabled={disabled}
           onChange={handleChange}
