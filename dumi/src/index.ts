@@ -17,3 +17,5 @@ export { default as RadioGroup } from './RadioGroup';
 export { default as RadioButton } from './RadioButton';
 export { default as CheckBox } from './CheckBox';
 export { default as CheckBoxGroup } from './CheckBoxGroup';
+export { default as Input } from './Input';
+export { default as Select } from './Select';
