@@ -1,5 +1,8 @@
 import './style/index.scss'
 import './Icon/index.scss'
+import '../../src/index.css'
+import '../../src/styles.css'
+import '../../src/style/global.scss'
 export { default as Button } from './Button';
 export { default as Divider } from './Divider';
 export { default as Alert } from './Alert';

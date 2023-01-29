@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 11:26:55
- * @LastEditTime: 2022-04-19 17:19:06
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-01-29 16:19:53
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/utils/useUpdateEffect.ts
  */
@@ -42,6 +42,7 @@ const useWillReceiveProps = (effect: (arg0: any) => any, oldProps: any) => {
     } else {
       return effect(oldP) //当deps第二次变化时，执行effect函数
     }
+    console.log(1234)
   }, oldProps)
 }
 export { useUpdateEffect, useWillReceiveProps }
