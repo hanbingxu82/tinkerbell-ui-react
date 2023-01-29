@@ -150,7 +150,7 @@ const App: React.FC = () => (
       <Input
         placeholder='请输入内容'
         prepend={
-          <Select value='' style={{ width: 120 }}>
+          <Select style={{ width: 120 }}>
             {['餐厅名', '订单号', '用户电话'].map((item, index) => (
               <Select.Option key={index} label={item} value={index} />
             ))}
@@ -169,7 +169,7 @@ const App: React.FC = () => (
 export default App
 ```
 
-### Radio props
+### Input props
 
 | 参数        | 说明                                                                                           | 类型           | 可选值                           | 默认值 |
 | ----------- | ---------------------------------------------------------------------------------------------- | -------------- | -------------------------------- | ------ |

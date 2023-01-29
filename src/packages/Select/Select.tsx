@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2022-06-07 16:23:17
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-01-29 09:55:43
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
  */
@@ -122,9 +122,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   if (props.remote) {
     setVoidRemoteQuery(true)
   }
-  useEffect(
-    listenForOutsideClicks(listening, setListening, rootRef, setVisible)
-  )
+  useEffect(listenForOutsideClicks(listening, setListening, rootRef, setVisible),[])
   useWillReceiveProps(
     (oldProps) => {
       if (props.placeholder != oldProps.placeholder) {
@@ -777,7 +775,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function onOptionCreate(option: any) {
-
     options.push(option)
     setOptionsCount(++optionsCount)
     setFilteredOptionsCount(++filteredOptionsCount)
@@ -892,7 +889,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     resetInputWidth = _resetInputWidth
     addResizeListener(rootRef.current, resetInputWidth)
     return () => {
-      removeResizeListener(rootRef.current, resetInputWidth)
+      rootRef.current && removeResizeListener(rootRef.current, resetInputWidth)
     }
   }, [])
   /**
@@ -1142,7 +1139,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         }}
       />
       <CSSMotion
-      forceRender
+        forceRender
         visible={visible && emptyText() !== false}
         onEnterActive={(HTMLElement) => {
           HTMLElement.style.display = 'block'
