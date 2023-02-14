@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 11:26:55
- * @LastEditTime: 2023-01-29 16:19:53
+ * @LastEditTime: 2023-02-14 18:12:55
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/utils/useUpdateEffect.ts
@@ -32,17 +32,11 @@ const useUpdateEffect = (
     deps ? deps : []
   )
 }
-
-const useWillReceiveProps = (effect: (arg0: any) => any, oldProps: any) => {
-  const flag = useRef(true)
-  let oldP = { ...oldProps }
+const useWillReceiveProps = (effect: (arg0: any) => any, props: any, isFirst: Boolean, oldP: any) => {
   useEffect(() => {
-    if (flag.current) {
-      flag.current = false //当deps第一次变化时，不执行effect函数，而将flag.current置为false
-    } else {
-      return effect(oldP) //当deps第二次变化时，执行effect函数
+    if (isFirst) {
+      effect(oldP) //当deps第二次变化时，执行effect函数
     }
-    console.log(1234)
-  }, oldProps)
+  }, Object.keys(props).map(item => 'props.' + item))
 }
 export { useUpdateEffect, useWillReceiveProps }

@@ -42,7 +42,7 @@ const options = [
   }
 ]
 
-const [value, setValue] = useState('')
+const [value, setValue] = useState('选项3')
 
 const App: React.FC = () => (
   <Select

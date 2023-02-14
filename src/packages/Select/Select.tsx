@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-01-29 16:32:21
+ * @LastEditTime: 2023-02-14 18:23:22
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -98,12 +98,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     props.multiple ? true : false
   )
   let [selected, setSelected] = useState<any>(props.multiple ? [] : null)
-  let [value, setValue] = useState<any>(null)
+  let [value, setValue] = useState<any>(props.value)
   let [valueChangeBySelected, setValueChangeBySelected] =
     useState<boolean>(false)
   let [voidRemoteQuery, setVoidRemoteQuery] = useState<boolean>(false)
   let [query, setQuery] = useState<string>('')
   let [dropdownUl] = useState<any>(null)
+  let [oldP, setOldP] = useState<any>({})
 
   /** 监听 变化current Start*/
   let watchStateValue = useRef('')
@@ -128,17 +129,22 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   )
   useWillReceiveProps(
     (oldProps) => {
+
       if (props.placeholder != oldProps.placeholder) {
         setCurrentPlaceholder(props.placeholder)
       }
-      console.log(props.value, oldProps.value)
       if (props.value != oldProps.value) {
         watchStateValue.current = 'useWillReceiveProps'
         setValue(props.value)
       }
-      setInputWidth(reference.current.getBoundingClientRect().width)
+      reference.current &&
+        setInputWidth(reference.current.getBoundingClientRect().width)
+
+      setOldP({ ...props })
     },
-    [props]
+    props,
+    initComponent.current,
+    oldP
   )
 
   function _debounce(): number {
@@ -880,7 +886,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }, [visible])
 
   useEffect(() => {
-    setValue(props.value)
     initComponent.current = false
     reference.current = ReactDOM.findDOMNode(
       referenceRef.current.Element as any
