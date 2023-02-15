@@ -48,7 +48,7 @@ const App: React.FC = () => (
   <Select
     value={value}
     onChange={(val) => {
-      setValue(val)
+      console.log(val)
     }}
     placeholder='请选择'
   >

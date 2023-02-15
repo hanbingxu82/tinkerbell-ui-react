@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-02-14 18:23:22
+ * @LastEditTime: 2023-02-15 17:31:31
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -98,7 +98,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     props.multiple ? true : false
   )
   let [selected, setSelected] = useState<any>(props.multiple ? [] : null)
-  let [value, setValue] = useState<any>(props.value)
+  let [value, setValue] = useState<any>(null)
   let [valueChangeBySelected, setValueChangeBySelected] =
     useState<boolean>(false)
   let [voidRemoteQuery, setVoidRemoteQuery] = useState<boolean>(false)
@@ -116,6 +116,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   let watchFilteredOptionsCount = useRef('')
   let watchHO = useRef('')
   let watchSS = useRef('')
+  let watchUseEffectInit = useRef('')
   /** 监听 变化current End */
 
   let reference: any = useRef(null)
@@ -129,7 +130,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   )
   useWillReceiveProps(
     (oldProps) => {
-
       if (props.placeholder != oldProps.placeholder) {
         setCurrentPlaceholder(props.placeholder)
       }
@@ -150,7 +150,10 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   function _debounce(): number {
     return props.remote ? 300 : 0
   }
-  function handleValueChange(isFirst: boolean = true) {
+  function handleValueChange(
+    isFirst: boolean = true,
+    transmitValue: any = value
+  ) {
     const { multiple } = props
     if (multiple && Array.isArray(value)) {
       setSelected(
@@ -161,15 +164,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       watchSelected.current = 'handleValueChangeSelected'
     } else {
       const selected: any = options.filter((option: any) => {
-        return option.props.value === value
+        return option.props.value === transmitValue
       })[0]
-      // console.log(options, 555555)
-      // console.log(value,333333)
-      // if (selected) {
-      // setSelected(selected.props.label || selected.props.value)
-      // } else {
       onSelectedChange(selected, isFirst)
-      // }
     }
   }
 
@@ -337,7 +334,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       setInputLength(inputLength)
       watchVQHI.current = 'onSelectedChangeVQHI'
     } else {
-      // debugger
       if (selectedInit) {
         return setSelectedInit(false)
       }
@@ -363,6 +359,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
     watchCurrentPlaceholder.current = ''
   }, [currentPlaceholder])
+
   useEffect(() => {
     if (initComponent.current) return
     if (watchVQHI.current === 'onSelectedChangeVQHI') {
@@ -850,11 +847,9 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     if (watchSS.current === 'onOptionClickSS') {
       if (!props.multiple) {
         onSelectedChange(selected)
-        // onValueChange(value)
       } else {
         onSelectedChange(selected)
       }
-      setVisible(visible)
     }
     watchSS.current = ''
   }, [selected, selectedLabel])
@@ -884,19 +879,24 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     }
     onVisibleChange(visible)
   }, [visible])
-
+  /**
+   * @description: 初始化函数
+   * @return {*}
+   */
   useEffect(() => {
     initComponent.current = false
     reference.current = ReactDOM.findDOMNode(
       referenceRef.current.Element as any
     )
+
     // 第一次触发，并不需要触发校验事件、行为
-    handleValueChange(false)
+    handleValueChange(false, props.value)
     debouncedOnInputChange = debounce(_debounce(), (e: any) => {
       onInputChange(e)
     })
     resetInputWidth = _resetInputWidth
     addResizeListener(rootRef.current, resetInputWidth)
+    watchUseEffectInit.current = ''
     return () => {
       rootRef.current && removeResizeListener(rootRef.current, resetInputWidth)
     }
@@ -907,7 +907,6 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @return {*}
    */
   useEffect(() => {
-    if (initComponent.current) return
     if (watchStateValue.current === 'useWillReceiveProps') {
       // 并非第一次执行 就需要触发校验行为
       handleValueChange(true)
@@ -1011,7 +1010,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
         selectedLabel,
         selectedInit,
         selected,
-        value,
+        value: props.value,
         valueChangeBySelected,
         voidRemoteQuery,
         query
