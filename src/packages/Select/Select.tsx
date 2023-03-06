@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-02-15 17:31:31
+ * @LastEditTime: 2023-03-06 10:11:45
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -56,7 +56,7 @@ let popper: any
 let skip: any
 let deleteTagTag: any
 
-const Select: any = React.forwardRef((props: any, _ref: any) => {
+const Select: any = React.memo((props: any) => {
   const onQueryChangeQuery = useRef('')
   const rootRef: any = useRef(null)
   const referenceRef: any = useRef(null)
@@ -152,13 +152,13 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
   }
   function handleValueChange(
     isFirst: boolean = true,
-    transmitValue: any = value
+    transmitValue: any = props.value
   ) {
     const { multiple } = props
-    if (multiple && Array.isArray(value)) {
+    if (multiple && Array.isArray(props.value)) {
       setSelected(
         options.reduce((prev: any, curr: any) => {
-          return value.indexOf(curr.props.value) > -1 ? prev.concat(curr) : prev
+          return props.value.indexOf(curr.props.value) > -1 ? prev.concat(curr) : prev
         }, [])
       )
       watchSelected.current = 'handleValueChangeSelected'
@@ -818,7 +818,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
       selected = option
       selectedLabel = option.currentLabel()
       setSelected(selected)
-      setVisible(false)
+      // setVisible(false)
     } else {
       let optionIndex = -1
       selected = selected.slice(0)
@@ -884,6 +884,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
    * @return {*}
    */
   useEffect(() => {
+    console.log('我有更新了')
     initComponent.current = false
     reference.current = ReactDOM.findDOMNode(
       referenceRef.current.Element as any
@@ -898,6 +899,7 @@ const Select: any = React.forwardRef((props: any, _ref: any) => {
     addResizeListener(rootRef.current, resetInputWidth)
     watchUseEffectInit.current = ''
     return () => {
+      console.log(123)
       rootRef.current && removeResizeListener(rootRef.current, resetInputWidth)
     }
   }, [])
