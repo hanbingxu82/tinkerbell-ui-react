@@ -1,13 +1,19 @@
 /*
  * @Author: 韩旭小天才 905583741@qq.com
  * @Date: 2022-04-28 15:45:53
- * @LastEditors: 韩旭小天才 905583741@qq.com
- * @LastEditTime: 2022-06-10 17:34:37
+ * @LastEditors: hanbingxu
+ * @LastEditTime: 2023-03-08 17:54:35
  * @FilePath: /tinkerbell-ui-react/src/packages/Cascader/Cascader.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 // eslint-disable-next-line
-import React, { useEffect, useRef, useState, useCallback ,useContext} from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useContext
+} from 'react'
 import ReactDOM from 'react-dom'
 import { debounce } from 'throttle-debounce'
 import { useWillReceiveProps } from '../../utils/useUpdateEffect'
@@ -110,8 +116,6 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
         currentValue: props.value,
         flatOptions: flattenOptions(props.options)
       })
-
-      //   state.menu.setState({ ...state.menu.state, options: props.options })
     },
     [props]
   )
@@ -189,6 +193,7 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function handleActiveItemChange(value: []) {
+    console.log(123)
     updatePopper()
     if (props.activeItemChange) {
       props.activeItemChange(value)
@@ -197,6 +202,10 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
 
   function handlePick(value: [], close: boolean = true) {
     state.currentValue = value
+    // 新增更新视图项
+    if (props.changeOnSelect) {
+      forceUpdate()
+    }
     if (close) {
       // setState({ ...state, menuVisible: false })
       visible = false
@@ -281,7 +290,6 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
 
   function flattenOptions(options: any, ancestor: any = []): [] {
     let flatOptions: any = []
-
     options.forEach((option: any) => {
       const optionsStack = ancestor.concat(option)
       if (!option[childrenKey()]) {
@@ -295,7 +303,6 @@ const Cascader: any = React.forwardRef((props: any, _ref: any) => {
         )
       }
     })
-
     return flatOptions
   }
 
