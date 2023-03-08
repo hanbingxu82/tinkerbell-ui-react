@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-15 16:10:33
- * @LastEditTime: 2023-02-15 11:14:13
+ * @LastEditTime: 2023-03-08 13:31:39
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/somewhere.ts
@@ -24,7 +24,6 @@ export function listenForOutsideClicks(
       if (hideMenu) {
         hideMenu()
       } else {
-        console.log(123123)
         setVisible(false)
       }
     }

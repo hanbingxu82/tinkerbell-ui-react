@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-03-06 10:11:45
+ * @LastEditTime: 2023-03-08 13:30:13
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -621,7 +621,6 @@ const Select: any = React.memo((props: any) => {
   function toggleMenu() {
     const { filterable, disabled } = props
     // const { query } = state
-
     if (filterable && query === '' && visible) {
       return
     }
@@ -899,7 +898,6 @@ const Select: any = React.memo((props: any) => {
     addResizeListener(rootRef.current, resetInputWidth)
     watchUseEffectInit.current = ''
     return () => {
-      console.log(123)
       rootRef.current && removeResizeListener(rootRef.current, resetInputWidth)
     }
   }, [])
