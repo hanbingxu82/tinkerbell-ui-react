@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-26 11:14:09
- * @LastEditTime: 2022-03-28 12:42:57
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-10 10:04:15
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Switch/index.tsx
  */
@@ -68,7 +68,8 @@ function Switch(props: any) {
       height: `${height}px`,
       // 判断是不是禁用如果是禁用的话即使是选中状态也要设置成 不选中的背景
       background:
-        value && !disabled ? checkedBg : disabled ? '#93939393' : uncheckedBg
+        value && !disabled ? checkedBg : disabled ? '#93939393' : uncheckedBg,
+      cursor: disabled ? 'no-drop' : 'pointer'
     }
     setBgStyle(styles)
   }, [width, height, value, disabled, checkedBg, uncheckedBg])
