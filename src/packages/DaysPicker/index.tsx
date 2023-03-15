@@ -1,19 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2022-04-24 10:11:24
- * @LastEditTime: 2022-05-30 18:16:10
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-15 15:31:58
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DaysPicker/index.tsx
  */
 // eslint-disable-next-line
-import React, { useState, useEffect, useRef ,useContext} from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import './index.scss'
-import { getNewParams, DatePickerProps,getYMDHMS } from './interface'
+import { getNewParams, DatePickerProps, getYMDHMS } from './interface'
 import { listenForOutsideClicks } from '../Select/somewhere'
 import HourPage from './time/hour'
 import MinutePage from './time/minute'
-import SecondPage from './time/second';
+import SecondPage from './time/second'
 import DayPage from './date/day'
 import MonthPage from './date/month'
 import YearPage from './date/year'
@@ -30,7 +30,7 @@ const DatePicker = (props: DatePickerProps) => {
    */
   const initComponent = useRef(true)
   const rootRef: any = useRef(null)
-  const { value, onChange, defaultValue, type = '', size = 'default' } = props
+  const { onChange, defaultValue, type = '', size = 'default' } = props
   const limit = props.limit === undefined ? false : props.limit
   const placeholder = props.placeholder || '请选择日期'
   const disabled = props.disabled === undefined ? false : props.disabled
@@ -42,7 +42,7 @@ const DatePicker = (props: DatePickerProps) => {
   const [minute, setMinute] = useState(initNewParam.minute)
   const [second, setSecond] = useState(0)
   // 最终值 initNewParam.value 默认值给空字符串
-  const [, setInputValue] = useState('')
+  const [value, setInputValue] = useState(props.value)
   // label
   const [yearLabel, setYearLabel] = useState(initNewParam.yearLabel)
   const [, setMonthLabel] = useState(initNewParam.monthLabel)
@@ -68,7 +68,6 @@ const DatePicker = (props: DatePickerProps) => {
   // const [, updateState] = useState<any>()
   // const forceUpdate = useCallback(() => updateState({}), [])
   // 强制更新视图方法 end
-
 
   // change 板块变化
   function plateChange(value: number) {
@@ -152,7 +151,9 @@ const DatePicker = (props: DatePickerProps) => {
     if (initComponent.current) return
     let newMonth = month < 10 ? '0' + month : month
     let newDay = day < 10 ? `0${day}` : `${day}`
-    console.log(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
+    console.log(
+      `${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`
+    )
     if (type === 'date') {
       setInputValue(`${year}-${newMonth}-${newDay}`)
       onChange && onChange(`${year}-${newMonth}-${newDay}`)
@@ -162,21 +163,25 @@ const DatePicker = (props: DatePickerProps) => {
       onChange && onChange(`${hourLabel}:${minuteLabel}:${secondLabel}`)
       FormParent && FormParent.onFieldChange()
     } else if (type === 'dateTime') {
-      setInputValue(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
-      onChange && onChange(`${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`)
+      setInputValue(
+        `${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`
+      )
+      onChange &&
+        onChange(
+          `${year}-${newMonth}-${newDay} ${hourLabel}:${minuteLabel}:${secondLabel}`
+        )
       FormParent && FormParent.onFieldChange()
     } else {
       setInputValue(`${year}-${newMonth}-${newDay}`)
       onChange && onChange(`${year}-${newMonth}-${newDay}`)
       FormParent && FormParent.onFieldChange()
     }
-  }, [year, month, day, hour, minute,second]) // eslint-disable-line
+  }, [year, month, day, hour, minute, second]) // eslint-disable-line
 
   // 默认值设置
   // useEffect(() => {
-    console.log(defaultValue,value)
   //   setNewTime(defaultValue ? defaultValue : value)
-  // }, [value])// eslint-disable-line
+  // }, [value]) // eslint-disable-line
   // 每次打开恢复默认状态
   useEffect(() => {
     if (initComponent.current) return
@@ -187,9 +192,9 @@ const DatePicker = (props: DatePickerProps) => {
     }
     FormParent && FormParent.onFieldChange()
   }, [visible]) // eslint-disable-line
-  useEffect(()=>{
+  useEffect(() => {
     initComponent.current = false
-  },[])
+  }, [])
   useEffect(
     listenForOutsideClicks(listening, setListening, rootRef, setVisible)
   )
@@ -338,10 +343,7 @@ const DatePicker = (props: DatePickerProps) => {
                   change={minuteChange}
                   limit={limit}
                 />
-                <SecondPage
-							  active={second}
-							  change={secondChange}
-						  />
+                <SecondPage active={second} change={secondChange} />
               </div>
             </div>
           ) : null}

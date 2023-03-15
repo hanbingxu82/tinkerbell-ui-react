@@ -25,3 +25,4 @@ export { default as Select } from './Select';
 export { default as InputNumber } from './InputNumber';
 export { default as Cascader } from './Cascader';
 export { default as Switch } from './Switch';
+export { default as DatePicker } from './DatePicker';

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2022-07-13 16:59:22
- * @LastEditors: 韩旭小天才
+ * @LastEditTime: 2023-03-10 10:50:46
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
  */
@@ -918,7 +918,6 @@ const App = (props: any) => {
         value={value22}
         limit
         onChange={(val: any) => {
-          console.log(val, 11111)
           setValue22(val)
         }}
       ></DaysPicker>
