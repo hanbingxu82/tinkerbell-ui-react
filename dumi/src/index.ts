@@ -28,3 +28,4 @@ export { default as Switch } from './Switch';
 export { default as DatePicker } from './DatePicker';
 export { default as Upload } from './Upload';
 export { default as Message } from './Message';
+export { default as Rate } from './Rate';

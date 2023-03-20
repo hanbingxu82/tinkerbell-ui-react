@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-16 16:47:04
- * @LastEditTime: 2022-06-10 17:35:37
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-20 16:39:07
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Rate/index.tsx
  */
@@ -84,11 +84,11 @@ function Rate(props: any) {
     if (initComponent.current) return
     setRate(convertValue(value))
     setOver(convertValue(value))
-  }, [value])// eslint-disable-line
+  }, [value]) // eslint-disable-line
   useEffect(() => {
     activecolor &&
       tb_rate.current.style.setProperty('--activeColor', activecolor)
-  }, [activecolor])// eslint-disable-line
+  }, [activecolor]) // eslint-disable-line
 
   useEffect(() => {
     initComponent.current = false
@@ -104,7 +104,7 @@ function Rate(props: any) {
       setRate(convertValue(value))
       setOver(convertValue(value))
     }
-  }, [])// eslint-disable-line
+  }, []) // eslint-disable-line
   const arr = []
   for (let index = 1; index <= length; index++) {
     arr.push(index)
@@ -125,6 +125,7 @@ function Rate(props: any) {
           <button
             type='button'
             key={n}
+            disabled={disabled}
             className={[
               classnames({
                 tb_rate__star: true,
