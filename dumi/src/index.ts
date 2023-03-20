@@ -26,3 +26,5 @@ export { default as InputNumber } from './InputNumber';
 export { default as Cascader } from './Cascader';
 export { default as Switch } from './Switch';
 export { default as DatePicker } from './DatePicker';
+export { default as Upload } from './Upload';
+export { default as Message } from './Message';

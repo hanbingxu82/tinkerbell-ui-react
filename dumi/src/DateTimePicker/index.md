@@ -7,7 +7,7 @@ nav:
   path: /components
 ---
 
-# Time Picker 时间选择器
+# DateTime Picker 时间选择器
 
 在同一个选择器里选择时间
 
@@ -26,7 +26,7 @@ const App: React.FC = () => (
     <DatePicker
       size='mini'
       placeholder='请选择时间'
-      type='time'
+      type='dateTime'
       value={date}
     ></DatePicker>
   </>
@@ -35,7 +35,7 @@ const App: React.FC = () => (
 export default App
 ```
 
-### Time Picker Props
+### DateTime Picker Props
 
 | 参数         | 说明             | 类型    | 可选值                         | 默认值  |
 | ------------ | ---------------- | ------- | ------------------------------ | ------- |
