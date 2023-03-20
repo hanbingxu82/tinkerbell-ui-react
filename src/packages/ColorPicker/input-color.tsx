@@ -14,7 +14,7 @@ import ColorPicker from './color-picker'
 import { parseColor } from './utils'
 
 function InputColor({
-  initialValue,
+  initialValue = '#5e72e4',
   onChange,
   placement,
   disabled,
@@ -24,7 +24,7 @@ function InputColor({
 
   useEffect(() => {
     changeColor(parseColor(initialValue))
-  }, [initialValue])// eslint-disable-line 
+  }, [initialValue]) // eslint-disable-line
 
   function changeColor(color: any) {
     if (onChange) {
@@ -71,7 +71,8 @@ function InputColor({
 
 InputColor.defaultProps = {
   placement: 'bottom',
-  disabled: false
+  disabled: false,
+  initialValue: '#5e72e4'
 }
 
 export default InputColor

@@ -281,9 +281,6 @@ const ColorPicker = ({ color, onChange, disabled }: any) => {
   )
 }
 
-ColorPicker.defaultProps = {
-  initialValue: '#5e72e4',
-  disabled: false
-}
+
 
 export default ColorPicker
