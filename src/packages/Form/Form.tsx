@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2023-03-23 10:22:35
+ * @LastEditTime: 2023-03-23 15:59:55
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
@@ -32,14 +32,14 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
     parent: {
       props
     },
-    getValue,
+    getPosition,
     addField,
     removeField,
     resetFields,
     validate,
     validateField
   })
-
+  cpValue.parent.props = props
   // 强制更新视图方法 start
   const [, updateState] = useState<any>()
   const forceUpdate = useCallback(() => updateState({}), [])
@@ -49,8 +49,8 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
     state.fields.push(field)
     forceUpdate()
   }
-  function getValue() {
-    return props.model
+  function getPosition(setValue: Function) {
+    setValue(props.value)
   }
   function removeField(field: any): void {
     if (field.props.prop) {
@@ -102,7 +102,6 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   useEffect(() => {
-    cpValue.parent.props = props
     setCpValue(cpValue)
   }, [props.model, props.labelPosition]) // eslint-disable-line
   useImperativeHandle(_ref, () => ({

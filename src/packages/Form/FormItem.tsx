@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2023-03-23 10:22:40
+ * @LastEditTime: 2023-03-23 16:00:31
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
@@ -32,6 +32,8 @@ type State = {
 let validateDisabled: any
 const FormItem: any = React.forwardRef((props: any, ref: any) => {
   const FormParent: any = useContext(Context)
+  const [lStyle, setLabelStyle] = useState({})
+  const [cStyle, setContentStyle] = useState({})
   const [state]: any = useState<State>({
     error: '',
     errorMsg: '',
@@ -175,36 +177,40 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       .map((rule) => Object.assign({}, rule))
   }
 
-  function labelStyle(): { width?: number | string } {
+  function labelStyle() {
+    console.log(FormParent.parent.props.labelPosition)
     const ret: any = {}
-
-    if (FormParent.parent.props.labelPosition === 'top') return ret
-
-    const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
-
-    if (labelWidth) {
-      ret.width = parseInt(labelWidth)
+    if (FormParent.parent.props.labelPosition === 'top') {
+    } else {
+      const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
+      if (labelWidth) {
+        ret.width = parseInt(labelWidth)
+      }
     }
 
-    return ret
+    setLabelStyle(ret)
   }
-
-  function contentStyle(): { marginLeft?: number | string } {
+  function contentStyle() {
     const ret: any = {}
     if (
       FormParent.parent.props.labelPosition === 'top' ||
       FormParent.parent.props.inline
-    )
-      return ret
-    const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
-
-    if (labelWidth) {
-      ret.marginLeft = parseInt(labelWidth)
+    ) {
+    } else {
+      const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
+      if (labelWidth) {
+        ret.marginLeft = parseInt(labelWidth)
+      }
     }
-
-    return ret
+    setContentStyle(ret)
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      labelStyle()
+      contentStyle()
+    }, 100)
+  }, [FormParent.parent.props.labelPosition]) // eslint-disable-line
   function fieldValue(): any {
     const model = FormParent.parent.props.model
     if (!model || !props.prop) {
@@ -229,13 +235,13 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       }}
     >
       {label && (
-        <label className='el-form-item__label' style={labelStyle()}>
+        <label className='el-form-item__label' style={lStyle}>
           {typeof label === 'string'
             ? label + FormParent.parent.props.labelSuffix
             : label}
         </label>
       )}
-      <div className='el-form-item__content' style={contentStyle()}>
+      <div className='el-form-item__content' style={cStyle}>
         <FormItemContext.Provider value={{ onFieldChange }}>
           {props.children}
         </FormItemContext.Provider>
