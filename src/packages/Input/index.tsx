@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-08 09:00:21
- * @LastEditTime: 2022-04-24 16:22:47
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-21 17:29:11
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Input/index.tsx
  */
@@ -12,8 +12,10 @@ import React, {
   useRef,
   useState,
   SyntheticEvent,
-  useImperativeHandle
+  useImperativeHandle,
+  useContext
 } from 'react'
+import { FormItemContext } from '../Form/FormItem'
 import calcTextareaHeight from './calcTextareaHeight'
 import './index.scss'
 
@@ -23,6 +25,7 @@ const PropTypes = require('prop-types')
 type textareaStyle = { resize: string; height?: string }
 
 const Input: any = React.forwardRef((props: any, ref: any) => {
+  const FormParent: any = useContext(FormItemContext)
   const [textareaStyle, setTextareaStyle] = useState<textareaStyle>({
     resize: props.resize
   })
@@ -72,6 +75,7 @@ const Input: any = React.forwardRef((props: any, ref: any) => {
     if (onChange) {
       onChange(e.target.value)
     }
+    FormParent && FormParent.onFieldChange()
     resizeTextarea()
   }
 

@@ -30,3 +30,4 @@ export { default as Upload } from './Upload';
 export { default as Message } from './Message';
 export { default as Rate } from './Rate';
 export { default as ColorPicker } from './ColorPicker';
+export { default as Form } from './Form';

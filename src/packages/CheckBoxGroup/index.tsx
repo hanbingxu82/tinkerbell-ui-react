@@ -7,7 +7,8 @@
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBoxGroup/index.tsx
  */
 // eslint-disable-next-line
-import React from 'react'
+import React, { useContext } from 'react'
+import { FormItemContext } from '../Form/FormItem'
 import CheckBox from '../CheckBox/index'
 interface Iprops {
   name?: string // 原生 name 属性
@@ -17,6 +18,7 @@ interface Iprops {
 }
 function CheckBoxGroup(props: any) {
   const { name, value = [], options = [] }: Iprops = props
+  const FormParent: any = useContext(FormItemContext)
   function handleChange(evt: any) {
     //  有就删除 没有就新增
     value.indexOf(evt.target.value) > -1
@@ -24,6 +26,7 @@ function CheckBoxGroup(props: any) {
       : value.push(evt.target.value)
     //  判断check选中状态
     props.onChange && props.onChange(value, evt)
+    FormParent && FormParent.onFieldChange()
   }
   //  options 循环遍历
   const checkboxDom = options.map((item: any) => {
@@ -35,7 +38,7 @@ function CheckBoxGroup(props: any) {
         name={name}
         disabled={item.disabled ? item.disabled : props.disabled ? true : false}
         onChange={handleChange}
-        componentName ='checkboxGroup'
+        componentName='checkboxGroup'
         isGroup={true}
       >
         {item.label}

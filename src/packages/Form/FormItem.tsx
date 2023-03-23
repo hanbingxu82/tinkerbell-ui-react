@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2022-05-30 12:51:24
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-23 10:22:40
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
  */
@@ -15,7 +15,8 @@ import React, {
   createContext
 } from 'react'
 import AsyncValidator from 'async-validator'
-import Animate from 'rc-animate'
+// import Animate from 'rc-animate'
+import CSSMotion from 'rc-motion'
 import Context from './Context'
 
 export const FormItemContext = createContext<any>(null)
@@ -23,6 +24,7 @@ const classnames = require('classnames')
 const PropTypes = require('prop-types')
 type State = {
   error: string
+  errorMsg: string
   valid: boolean
   validating: boolean
 }
@@ -32,6 +34,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   const FormParent: any = useContext(Context)
   const [state]: any = useState<State>({
     error: '',
+    errorMsg: '',
     valid: false,
     validating: false
   })
@@ -77,7 +80,9 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function onFieldBlur(): void {
-    validate('blur')
+    setTimeout(() => {
+      validate('blur')
+    }, 100)
   }
 
   function onFieldChange(): void {
@@ -85,15 +90,13 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       validateDisabled = false
       return
     }
-
     setTimeout(() => {
       validate('change')
-    })
+    }, 100)
   }
 
   function validate(trigger: string, cb?: Function): boolean | void {
     const rules = getFilteredRule(trigger)
-    console.log(rules)
     if (!rules || rules.length === 0) {
       if (cb instanceof Function) {
         cb()
@@ -107,12 +110,12 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
     const validator = new AsyncValidator(descriptor)
     const model = { [props.prop]: fieldValue() }
     validator.validate(model, { firstFields: true }, (errors) => {
+      console.log(errors)
       state.error = errors ? errors[0].message : ''
+      state.errorMsg = errors ? errors[0].message : state.errorMsg
       state.validating = false
       state.valid = !errors
-      console.log(state.error)
       forceUpdate()
-      // setState({...state})
       if (cb instanceof Function) {
         cb(errors)
       }
@@ -133,7 +136,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
 
     valid = true
     error = ''
-
+    state.errorMsg = ''
     state.valid = valid
     state.error = error
     forceUpdate()
@@ -188,13 +191,11 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
 
   function contentStyle(): { marginLeft?: number | string } {
     const ret: any = {}
-
     if (
       FormParent.parent.props.labelPosition === 'top' ||
       FormParent.parent.props.inline
     )
       return ret
-
     const labelWidth = props.labelWidth || FormParent.parent.props.labelWidth
 
     if (labelWidth) {
@@ -222,8 +223,10 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
         'is-validating': state.validating,
         'is-required': isRequired() || required
       })}
-      onBlur={onFieldBlur}
-      onChange={onFieldChange}
+      onBlur={() => {
+        onFieldBlur()
+        onFieldChange()
+      }}
     >
       {label && (
         <label className='el-form-item__label' style={labelStyle()}>
@@ -236,13 +239,27 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
         <FormItemContext.Provider value={{ onFieldChange }}>
           {props.children}
         </FormItemContext.Provider>
-        {/* <Transition name="el-zoom-in-top"> */}
-        <Animate component='' transitionName='tb-form-error-fade'>
-          {state.error ? (
-            <div className='el-form-item__error'>{state.error}</div>
-          ) : null}
-        </Animate>
-        {/* </Transition> */}
+        <CSSMotion
+          forceRender
+          visible={state.error}
+          onEnterActive={(HTMLElement) => {
+            HTMLElement.style.display = 'block'
+          }}
+          removeOnLeave={false}
+          onLeaveEnd={(HTMLElement) => {
+            HTMLElement.style.display = 'none'
+          }}
+          motionName='tb-form-error-fade'
+        >
+          {({ className, style }) => (
+            <div
+              className={classnames('el-form-item__error', className)}
+              style={{ ...style }}
+            >
+              {state.errorMsg}
+            </div>
+          )}
+        </CSSMotion>
       </div>
     </div>
   )

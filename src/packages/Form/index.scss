@@ -71,7 +71,7 @@
   font-size: 14px;
   color: #48576a;
   line-height: 1;
-  padding: 11px 12px 11px 0;
+  padding: 11px 0 11px 0;
   box-sizing: border-box
 }
 
@@ -96,13 +96,14 @@
   top: 100%;
   left: 0
 }
+
 .tb-form-error-fade-leave,
 .tb-form-error-fade-leave-active {
   animation: tb-form-error-fade .3s
 }
 
 .tb-form-error-fade-enter,
-.tb-form-error-fade-enter-active{
+.tb-form-error-fade-enter-active {
   animation: tb-form-error-in .3s
 }
 

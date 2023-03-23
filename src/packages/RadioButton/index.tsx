@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-02-08 17:02:44
- * @LastEditTime: 2022-05-23 16:10:05
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-03-21 11:24:41
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/RadioButton/index.tsx
  */
@@ -12,11 +12,11 @@ import './index.scss'
 
 const classnames = require('classnames')
 interface Iprops {
-  type: string   // type类型 判断颜色
-  checked: boolean  // 选中状态
-  disabled: boolean  // 禁用状态
+  type: string // type类型 判断颜色
+  checked: boolean // 选中状态
+  disabled: boolean // 禁用状态
   groupValue: any // groupValue 值是否与value值相等 逻辑上来说可传可不传 当时只是为了做判断用的  因为 value 也同样可以给与初始值
-  label:string,  // 初始 lable 文本
+  label: string // 初始 lable 文本
   value: any // value初始值
   name?: string // 原生 name 属性
   size: string // 按钮大小
@@ -35,7 +35,7 @@ function RadioButton(props: any) {
     buttonStyle = 'outline'
   }: Iprops = props
   function handleChange(evt: any) {
-    props.onChange && props.onChange(evt)
+    props.onChange && props.onChange(evt.target.value)
   }
   return (
     <div

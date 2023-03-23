@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:44
- * @LastEditTime: 2022-05-30 12:38:36
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-23 10:22:35
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/Form.tsx
  */
@@ -26,12 +26,13 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
   const [state] = useState<State>({
     fields: []
   })
-  const [cpValue] = useState({
+  const [cpValue, setCpValue] = useState({
     componentName: 'Form',
     instanceType: 'Form',
     parent: {
       props
     },
+    getValue,
     addField,
     removeField,
     resetFields,
@@ -48,7 +49,9 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
     state.fields.push(field)
     forceUpdate()
   }
-
+  function getValue() {
+    return props.model
+  }
   function removeField(field: any): void {
     if (field.props.prop) {
       state.fields.splice(state.fields.indexOf(field), 1)
@@ -64,6 +67,7 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
   }
 
   function validate(callback: Function): void {
+    console.log('ceshi')
     let valid = true
     let count = 0
     // 如果需要验证的fields为空，调用验证时立刻返回callback
@@ -99,7 +103,8 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
 
   useEffect(() => {
     cpValue.parent.props = props
-  }, [props.model]) // eslint-disable-line
+    setCpValue(cpValue)
+  }, [props.model, props.labelPosition]) // eslint-disable-line
   useImperativeHandle(_ref, () => ({
     addField,
     removeField,
@@ -121,14 +126,7 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
       )}
       onSubmit={props.onSubmit}
     >
-      <Context.Provider
-        value={
-          cpValue
-        }
-      >
-
-        {props.children}
-      </Context.Provider>
+      <Context.Provider value={cpValue}>{props.children}</Context.Provider>
     </form>
   )
 })

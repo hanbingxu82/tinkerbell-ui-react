@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-03-08 13:30:13
+ * @LastEditTime: 2023-03-21 18:21:11
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -133,7 +133,7 @@ const Select: any = React.memo((props: any) => {
       if (props.placeholder != oldProps.placeholder) {
         setCurrentPlaceholder(props.placeholder)
       }
-      if (props.value != oldProps.value) {
+      if (oldProps.value !== undefined && props.value != oldProps.value) {
         watchStateValue.current = 'useWillReceiveProps'
         setValue(props.value)
       }
@@ -151,14 +151,17 @@ const Select: any = React.memo((props: any) => {
     return props.remote ? 300 : 0
   }
   function handleValueChange(
-    isFirst: boolean = true,
+    isFirst: boolean = false,
     transmitValue: any = props.value
   ) {
+    console.log(isFirst, 33333)
     const { multiple } = props
     if (multiple && Array.isArray(props.value)) {
       setSelected(
         options.reduce((prev: any, curr: any) => {
-          return props.value.indexOf(curr.props.value) > -1 ? prev.concat(curr) : prev
+          return props.value.indexOf(curr.props.value) > -1
+            ? prev.concat(curr)
+            : prev
         }, [])
       )
       watchSelected.current = 'handleValueChangeSelected'
@@ -318,7 +321,9 @@ const Select: any = React.memo((props: any) => {
             val.map((item: any) => item.props.value),
             val
           )
+
         FormParent && FormParent.onFieldChange()
+        console.log('我执行了')
         // props.context && props.context.form.onFieldChange()
       }
 
@@ -727,10 +732,12 @@ const Select: any = React.memo((props: any) => {
       watchSelectedDel.current = 'deleteTagSelected'
       if (props.onChange) {
         props.onChange('')
+        FormParent && FormParent.onFieldChange()
       }
 
       if (props.onClear) {
         props.onClear()
+        FormParent && FormParent.onFieldChange()
       }
     }
   }
@@ -817,7 +824,7 @@ const Select: any = React.memo((props: any) => {
       selected = option
       selectedLabel = option.currentLabel()
       setSelected(selected)
-      // setVisible(false)
+      setVisible(false)
     } else {
       let optionIndex = -1
       selected = selected.slice(0)

@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2022-02-09 16:32:40
- * @LastEditTime: 2022-12-09 18:00:32
+ * @LastEditTime: 2023-03-21 18:26:25
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/CheckBox/index.tsx
  */
 // eslint-disable-next-line
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { FormItemContext } from '../Form/FormItem'
 import './index.scss'
 
 const classnames = require('classnames')
@@ -23,6 +24,7 @@ interface Iprops {
   componentName: string
 }
 function CheckBox(props: any) {
+  const FormParent: any = useContext(FormItemContext)
   const {
     type = 'default',
     disabled = false,
@@ -59,6 +61,7 @@ function CheckBox(props: any) {
   function handleChange(evt: any) {
     setCheckBoxChecked(evt.target.checked)
     props.onChange && props.onChange(evt)
+    FormParent && FormParent.onFieldChange()
   }
 
   return (
@@ -74,7 +77,9 @@ function CheckBox(props: any) {
         <input
           type='checkbox'
           checked={
-            props.componentName === 'checkboxGroup' ? checkBoxChecked : props.checked
+            props.componentName === 'checkboxGroup'
+              ? checkBoxChecked
+              : props.checked
           }
           name={name}
           disabled={disabled}
