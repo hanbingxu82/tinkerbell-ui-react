@@ -32,3 +32,4 @@ export { default as Rate } from './Rate';
 export { default as ColorPicker } from './ColorPicker';
 export { default as Form } from './Form';
 export { default as Table } from './Table';
+export { default as Tag } from './Tag';
