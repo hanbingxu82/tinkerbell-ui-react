@@ -177,4 +177,4 @@ export default App
 | lg | ≥1200px 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | - | - |
 | xl | ≥1920px 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | - | - |
 
-More skills for writing demo: https://d.umijs.org/guide/demo-principle
+

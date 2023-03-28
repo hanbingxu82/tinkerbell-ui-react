@@ -99,4 +99,4 @@ export default App
 | beforeRate | 评分变更之前         | index、图表对应索引 |
 | aftereRate | 评分变更之后         | index、图表对应索引 |
 
-More skills for writing demo: https://d.umijs.org/guide/demo-principle
+

@@ -41,4 +41,4 @@ export default App
 | size         | 大小             | string  | large / default / small / mini | default |
 | type         | 类型             | string  | date / time / dateTime         | date    |
 
-More skills for writing demo: https://d.umijs.org/guide/demo-principle
+

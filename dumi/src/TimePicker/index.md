@@ -45,5 +45,3 @@ export default App
 | limit        | 是否限制过期时间 | boolean | -                              | false   |
 | size         | 大小             | string  | large / default / small / mini | default |
 | type         | 类型             | string  | date / time / dateTime         | date    |
-
-More skills for writing demo: https://d.umijs.org/guide/demo-principle

@@ -57,5 +57,3 @@ export default App
 | ---- | ---- | ---- | ------ | ------ |
 | initialValue | 初始化颜色 | string | - | #5e72e4 |
 | disabled | 是否禁用状态 | boolean | - | false |
-
-More skills for writing demo: https://d.umijs.org/guide/demo-principle

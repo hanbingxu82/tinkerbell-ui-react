@@ -33,3 +33,4 @@ export { default as ColorPicker } from './ColorPicker';
 export { default as Form } from './Form';
 export { default as Table } from './Table';
 export { default as Tag } from './Tag';
+export { default as Progress } from './Progress';

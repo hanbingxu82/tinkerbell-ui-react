@@ -320,4 +320,3 @@ export default App;
 | autofocus | 是否默认聚焦 | boolean | — | false |
 | native-type | 原生 type 属性 | string | button / submit / reset | button |
 
-More skills for writing demo: https://d.umijs.org/guide/demo-principle
