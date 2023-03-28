@@ -17,6 +17,7 @@
   text-align: center;
   white-space: nowrap;
   border: 1px solid #fff;
+  box-sizing: border-box;
   line-height: $base-line-height;
 
   &.is-dot {
@@ -63,10 +64,14 @@
 
 
 .zoom-in-center-active {
+  position: relative;
+  top: -5px;
   animation: hide-item 1s ease-in forwards;
 }
 
 .zoom-in-center-enter-from {
+  position: relative;
+  top: -5px;
   animation: show-item 1s ease-in forwards;
 }
 
