@@ -34,3 +34,4 @@ export { default as Form } from './Form';
 export { default as Table } from './Table';
 export { default as Tag } from './Tag';
 export { default as Progress } from './Progress';
+export { default as Pagination } from './Pagination';
