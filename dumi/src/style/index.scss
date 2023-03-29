@@ -179,8 +179,27 @@
 
 .demo-badge {
   display: flex;
+
   .item {
     margin-top: 10px;
     margin-right: 40px;
   }
+}
+
+.demo-avatar {
+  .title {
+    display: block;
+    text-align: center;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  [flex="box:mean"] {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 }
