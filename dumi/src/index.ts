@@ -37,3 +37,4 @@ export { default as Progress } from './Progress';
 export { default as Pagination } from './Pagination';
 export { default as Badge } from './Badge';
 export { default as Avatar } from './Avatar';
+export { default as Showmore } from './Showmore';

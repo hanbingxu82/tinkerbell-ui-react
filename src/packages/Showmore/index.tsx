@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-03 10:40:28
- * @LastEditTime: 2022-06-10 17:35:08
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-29 11:23:24
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Showmore/index.tsx
  */
@@ -39,17 +39,17 @@ function Showmore(props: any) {
   useEffect(() => {
     // 使用浏览器API更新文档标题
     document.title = `You clicked count times`
-  }, [])// eslint-disable-line
+  }, []) // eslint-disable-line
   return (
     <span className='tb__show-more'>
       <span>{filterText(text, tbTextLen)}</span>
       {tbTextLen !== -1 && tbTextLen < text.length ? (
-        <a href="/#" className='tb__show' onClick={showMore}>
+        <a href='javascript:void(0);' className='tb__show' onClick={showMore}>
           {showText}
         </a>
       ) : null}
       {tbTextLen !== -1 && tbTextLen === text.length && allowFold ? (
-        <a href="/#" className='tb__hidden' onClick={showMore}>
+        <a href='javascript:void(0);' className='tb__hidden' onClick={showMore}>
           {hiddenText}
         </a>
       ) : null}
