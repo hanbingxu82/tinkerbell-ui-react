@@ -9,6 +9,7 @@
     box-sizing: border-box;
     border-radius: var(--border-radius-small);
     position: relative;
+    color: $color-text-primary;
     // left: 50%;
     // top: 20px;
     // transform: translateX(-50%);
@@ -18,30 +19,50 @@
     overflow: hidden;
 
     &__primary {
-      color: $color-primary;
-      background-color: $color-primary-light5;
+
+      // color: $color-primary;
+      // background-color: $color-primary-light5;
+      .tb-message__img {
+        color: $color-primary;
+      }
     }
 
     &__success {
-      color: $color-success;
-      background-color: $color-success-light5;
+
+      // color: $color-success;
+      // background-color: $color-success-light5;
+      .tb-message__img {
+        color: $color-success;
+      }
     }
 
     &__info {
-      color: $color-info;
-      background-color: $color-info-light5;
+
+      // color: $color-info;
+      // background-color: $color-info-light5;
+      .tb-message__img {
+        color: $color-info;
+      }
 
     }
 
     &__warning {
-      color: $color-warning;
-      background-color: $color-warning-light5;
+
+      // color: $color-warning;
+      // background-color: $color-warning-light5;
+      .tb-message__img {
+        color: $color-warning;
+      }
 
     }
 
     &__error {
-      color: $color-danger;
-      background-color: $color-danger-light5;
+
+      // color: $color-danger;
+      // background-color: $color-danger-light5;
+      .tb-message__img {
+        color: $color-danger;
+      }
 
     }
 
@@ -50,7 +71,7 @@
     }
 
     &__group {
-      margin-left: 38px;
+      margin-left: 26px;
       position: relative;
       height: 20px;
       line-height: 20px;
@@ -116,6 +137,7 @@
   top: 24px;
   transform: translate(-50%);
   z-index: 2000;
+
   >div {
     text-align: center;
 
