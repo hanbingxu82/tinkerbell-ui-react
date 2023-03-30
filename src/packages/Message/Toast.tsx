@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 09:17:44
- * @LastEditTime: 2022-06-10 21:53:52
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-03-30 15:06:09
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Message/Toast.tsx
  */
@@ -53,9 +53,31 @@ function Toast(props: any) {
   function stopTimer() {
     clearTimeout(timeout.current)
   }
+  if (props.render) {
+    return (
+      <Animate
+        unmountOnExit
+        component=''
+        transitionName='tb-message-fade'
+        onLeave={() => {
+          props.willUnmount()
+        }}
+      >
+        {visible ? (
+          <div
+            className={classnames('tb-message', customClass, typeClass)}
+            onMouseEnter={stopTimer}
+            onMouseLeave={startTimer}
+          >
+            {props.render()}
+          </div>
+        ) : null}
+      </Animate>
+    )
+  }
   return (
     <Animate
-    unmountOnExit
+      unmountOnExit
       component=''
       transitionName='tb-message-fade'
       onLeave={() => {
@@ -83,10 +105,6 @@ function Toast(props: any) {
             )}
             <p>{props.message}</p>
             {props.showClose && (
-              // <div
-              //   className='tb-message__closeBtn tb-icon-close'
-              //   onClick={onClose}
-              // ></div>
               <i
                 className={['tb-message__closeBtn', `iconfont icon-close`].join(
                   ' '
