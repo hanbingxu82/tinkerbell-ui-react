@@ -158,7 +158,7 @@ export default App
 单独引入 MessageBox:
 
 ```javascript
-import { MessageBox } from 'element-react'
+import { MessageBox } from 'tinkerbell-ui-react'
 ```
 
 对应于上述四个全局方法的调用方法依次为： MessageBox.alert, MessageBox.confirm, MessageBox.prompt 和 MessageBox.msgbox。
