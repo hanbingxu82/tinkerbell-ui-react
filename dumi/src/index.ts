@@ -40,3 +40,4 @@ export { default as Showmore } from './Showmore';
 export { default as LoadingBar } from './LoadingBar';
 export { default as Message } from './Message';
 export { default as MessageBox } from './MessageBox';
+export { default as Notification } from './Notification';
