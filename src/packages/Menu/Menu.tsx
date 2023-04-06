@@ -151,7 +151,7 @@ const Menu: any = React.forwardRef((props: any, ref: any) => {
     <ul
       ref={ref}
       style={props.style}
-      className={classnames('tb-menu', {
+      className={classnames('tb-menu', `${props.className}`, {
         'tb-menu--horizontal': props.mode === 'horizontal',
         'tb-menu--dark': props.theme === 'dark'
       })}

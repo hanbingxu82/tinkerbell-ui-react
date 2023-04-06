@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-05-10 14:26:24
- * @LastEditTime: 2022-05-10 15:31:57
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-04-06 10:50:09
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Menu/Collapse.tsx
  */
-// eslint-disable-next-line 
+// eslint-disable-next-line
 import React, { useEffect, useRef } from 'react'
 const ANIMATION_DURATION = 300
 
@@ -20,28 +20,28 @@ const CollapseTransition: any = (props: Props) => {
   let leaveTimer: any
   let enterTimer: any
   useEffect(() => {
-    beforeEnter()
+    selfRef.current && beforeEnter()
     if (props.isShow) {
-      enter()
+      selfRef.current && enter()
     }
     return () => {
-      beforeLeave()
-      leave()
+      selfRef.current && beforeLeave()
+      selfRef.current && leave()
     }
-  }, [])// eslint-disable-line 
+  }, []) // eslint-disable-line
   useEffect(() => {
     triggerChange(props.isShow)
-  }, [props.isShow])// eslint-disable-line 
+  }, [props.isShow]) // eslint-disable-line
 
   function triggerChange(isShow: boolean): void {
     clearTimeout(enterTimer)
     clearTimeout(leaveTimer)
     if (isShow) {
-      beforeEnter()
-      enter()
+      selfRef.current && beforeEnter()
+      selfRef.current && enter()
     } else {
-      beforeLeave()
-      leave()
+      selfRef.current && beforeLeave()
+      selfRef.current && leave()
     }
   }
 
