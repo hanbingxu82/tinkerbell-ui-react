@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 10:38:23
- * @LastEditTime: 2022-06-10 17:33:47
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-04-06 15:21:07
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tabs/index.tsx
  */
@@ -32,7 +32,7 @@ type Props = {
 }
 
 type State = {
-  children: Array<any>
+  // children: Array<any>
   currentName: any
   barStyle: Object
   navStyle: any
@@ -49,7 +49,7 @@ const Tabs: any = (props: Props) => {
   let navScrollRef = useRef<any>(null)
   let navRef = useRef<any>(null)
   const [state, setState] = useState<State>({
-    children: React.Children.toArray(children),
+    // children: React.Children.toArray(props.children),
     currentName: value || activeName || children[0].props.name,
     barStyle: {},
     navStyle: {
@@ -61,10 +61,11 @@ const Tabs: any = (props: Props) => {
     scrollablePrev: '',
     scrollableNext: ''
   })
+
   useEffect(() => {
     calcBarStyle(true)
     update()
-  }, [])//eslint-disable-line
+  }, []) //eslint-disable-line
 
   /**
    * @description: 组件将要更新数据时触发的函数
@@ -81,41 +82,37 @@ const Tabs: any = (props: Props) => {
     state
   )
 
-  useWillReceiveProps(
-    (oldProps) => {
-      if (oldProps.activeName !== props.activeName) {
-        setState({
-          ...state,
-          currentName: props.activeName
-        })
-      }
+  useWillReceiveProps((oldProps) => {
+    if (oldProps.activeName !== props.activeName) {
+      setState({
+        ...state,
+        currentName: props.activeName
+      })
+    }
 
-      if (oldProps.value !== props.value) {
-        setState({
-          ...state,
-          currentName: props.value
-        })
-      }
-
-      if (oldProps.children !== props.children) {
-        setState({
-          ...state,
-          children: React.Children.toArray(props.children)
-        })
-      }
-    },
-    [props]
-  )
+    if (oldProps.value !== props.value) {
+      setState({
+        ...state,
+        currentName: props.value
+      })
+    }
+    // if (oldProps.children !== props.children) {
+    //   setState({
+    //     ...state,
+    //     children: React.Children.toArray(props.children)
+    //   })
+    // }
+  }, props)
   // 两个监听回调
   useEffect(() => {
     calcBarStyle()
     scrollToActiveTab()
-  }, [state.currentName])// eslint-disable-line
+  }, [state.currentName]) // eslint-disable-line
 
   useEffect(() => {
     update()
     calcBarStyle()
-  }, [state.children])// eslint-disable-line
+  }, [props.children]) // eslint-disable-line
 
   function handleTabAdd(): void {
     const { onTabAdd, onTabEdit } = props
@@ -133,9 +130,12 @@ const Tabs: any = (props: Props) => {
 
     e.stopPropagation()
     let newCurrentName = null
-    if (state.children[index].props.name === state.currentName) {
-      const nextChild = state.children[index + 1]
-      const prevChild = state.children[index - 1]
+    if (
+      React.Children.toArray(props.children)[index].props.name ===
+      state.currentName
+    ) {
+      const nextChild = React.Children.toArray(props.children)[index + 1]
+      const prevChild = React.Children.toArray(props.children)[index - 1]
       newCurrentName = nextChild
         ? nextChild.props.name
         : prevChild
@@ -148,10 +148,9 @@ const Tabs: any = (props: Props) => {
       // })
     }
 
-    state.children.splice(index, 1)
+    React.Children.toArray(props.children).splice(index, 1)
     setState({
       ...state,
-      children: state.children,
       currentName: newCurrentName ? newCurrentName : state.currentName
     })
     setTimeout(() => {
@@ -182,7 +181,9 @@ const Tabs: any = (props: Props) => {
     let offset = 0
     let tabWidth = 0
     let children =
-      state.children instanceof Array ? state.children : [state.children]
+      React.Children.toArray(props.children) instanceof Array
+        ? React.Children.toArray(props.children)
+        : [React.Children.toArray(props.children)]
 
     children.every((item, index) => {
       let $el = tabs.current[index]
@@ -342,7 +343,6 @@ const Tabs: any = (props: Props) => {
         </span>
       ]
     : null
-
   return (
     <div className={tabsCls}>
       <div className='tb-tabs__header'>
@@ -355,34 +355,37 @@ const Tabs: any = (props: Props) => {
           {scrollBtn}
           <div className='tb-tabs__nav-scroll' ref={navScrollRef}>
             <div className='tb-tabs__nav' ref={navRef} style={navStyle}>
-              {React.Children.map(state.children, (item, index) => {
-                const { name, label, disabled } = item.props
-                const tabCls = classnames({
-                  'tb-tabs__item': true,
-                  'is-active': name === state.currentName,
-                  'is-disabled': disabled,
-                  'is-closable': closable || item.props.closable
-                })
+              {React.Children.map(
+                React.Children.toArray(props.children),
+                (item, index) => {
+                  const { name, label, disabled } = item.props
+                  const tabCls = classnames({
+                    'tb-tabs__item': true,
+                    'is-active': name === state.currentName,
+                    'is-disabled': disabled,
+                    'is-closable': closable || item.props.closable
+                  })
 
-                return (
-                  <div
-                    key={`tb-tabs__item-${index}`}
-                    ref={(tab) => tab && tabs.current.push(tab)}
-                    // name={name}
-                    className={tabCls}
-                    onClick={(e) => handleTabClick(item, e)}
-                  >
-                    {label}
+                  return (
+                    <div
+                      key={`tb-tabs__item-${index}`}
+                      ref={(tab) => tab && tabs.current.push(tab)}
+                      // name={name}
+                      className={tabCls}
+                      onClick={(e) => handleTabClick(item, e)}
+                    >
+                      {label}
 
-                    {editable || closable || item.props.closable ? (
-                      <i
-                        className='iconfont icon-close'
-                        onClick={(e) => handleTabRemove(item, index, e)}
-                      />
-                    ) : null}
-                  </div>
-                )
-              })}
+                      {editable || closable || item.props.closable ? (
+                        <i
+                          className='iconfont icon-close'
+                          onClick={(e) => handleTabRemove(item, index, e)}
+                        />
+                      ) : null}
+                    </div>
+                  )
+                }
+              )}
 
               {!type ? (
                 <div className='tb-tabs__active-bar' style={barStyle} />
@@ -392,7 +395,7 @@ const Tabs: any = (props: Props) => {
         </div>
       </div>
       <div className='tb-tabs__content'>
-        {React.Children.map(state.children, (item) => {
+        {React.Children.map(React.Children.toArray(props.children), (item) => {
           const { name } = item.props
 
           // let transitionName = '';
