@@ -1,12 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2022-04-01 10:38:23
- * @LastEditTime: 2023-04-06 15:21:07
+ * @LastEditTime: 2023-04-06 15:26:15
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tabs/index.tsx
  */
-// eslint-disable-next-line
+// eslint-disable
 import React, { useState, useEffect, SyntheticEvent, useRef } from 'react'
 import {
   useUpdateEffect,
@@ -49,7 +49,7 @@ const Tabs: any = (props: Props) => {
   let navScrollRef = useRef<any>(null)
   let navRef = useRef<any>(null)
   const [state, setState] = useState<State>({
-    // children: React.Children.toArray(props.children),
+    // children: (React.Children as any).toArray(props.children),
     currentName: value || activeName || children[0].props.name,
     barStyle: {},
     navStyle: {
@@ -99,7 +99,7 @@ const Tabs: any = (props: Props) => {
     // if (oldProps.children !== props.children) {
     //   setState({
     //     ...state,
-    //     children: React.Children.toArray(props.children)
+    //     children: (React.Children as any).toArray(props.children)
     //   })
     // }
   }, props)
@@ -131,11 +131,15 @@ const Tabs: any = (props: Props) => {
     e.stopPropagation()
     let newCurrentName = null
     if (
-      React.Children.toArray(props.children)[index].props.name ===
+      (React.Children as any).toArray(props.children)[index].props.name ===
       state.currentName
     ) {
-      const nextChild = React.Children.toArray(props.children)[index + 1]
-      const prevChild = React.Children.toArray(props.children)[index - 1]
+      const nextChild = (React.Children as any).toArray(props.children)[
+        index + 1
+      ]
+      const prevChild = (React.Children as any).toArray(props.children)[
+        index - 1
+      ]
       newCurrentName = nextChild
         ? nextChild.props.name
         : prevChild
@@ -148,7 +152,7 @@ const Tabs: any = (props: Props) => {
       // })
     }
 
-    React.Children.toArray(props.children).splice(index, 1)
+    ;(React.Children as any).toArray(props.children).splice(index, 1)
     setState({
       ...state,
       currentName: newCurrentName ? newCurrentName : state.currentName
@@ -181,11 +185,11 @@ const Tabs: any = (props: Props) => {
     let offset = 0
     let tabWidth = 0
     let children =
-      React.Children.toArray(props.children) instanceof Array
-        ? React.Children.toArray(props.children)
-        : [React.Children.toArray(props.children)]
+      (React.Children as any).toArray(props.children) instanceof Array
+        ? (React.Children as any).toArray(props.children)
+        : [(React.Children as any).toArray(props.children)]
 
-    children.every((item, index) => {
+    children.every((item: any, index: number) => {
       let $el = tabs.current[index]
 
       if (item.props.name !== state.currentName) {
@@ -355,9 +359,9 @@ const Tabs: any = (props: Props) => {
           {scrollBtn}
           <div className='tb-tabs__nav-scroll' ref={navScrollRef}>
             <div className='tb-tabs__nav' ref={navRef} style={navStyle}>
-              {React.Children.map(
-                React.Children.toArray(props.children),
-                (item, index) => {
+              {(React.Children as any).map(
+                (React.Children as any).toArray(props.children),
+                (item: any, index: number) => {
                   const { name, label, disabled } = item.props
                   const tabCls = classnames({
                     'tb-tabs__item': true,
@@ -395,17 +399,20 @@ const Tabs: any = (props: Props) => {
         </div>
       </div>
       <div className='tb-tabs__content'>
-        {React.Children.map(React.Children.toArray(props.children), (item) => {
-          const { name } = item.props
+        {(React.Children as any).map(
+          (React.Children as any).toArray(props.children),
+          (item: any) => {
+            const { name } = item.props
 
-          // let transitionName = '';
-          //
-          // if (name === currentName) {
-          //   transitionName = 'slideInRight';
-          // }
+            // let transitionName = '';
+            //
+            // if (name === currentName) {
+            //   transitionName = 'slideInRight';
+            // }
 
-          return name === state.currentName ? item : null
-        })}
+            return name === state.currentName ? item : null
+          }
+        )}
       </div>
     </div>
   )
