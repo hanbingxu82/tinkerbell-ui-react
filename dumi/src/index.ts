@@ -45,3 +45,5 @@ export { default as Menu } from './Menu';
 export { default as Tabs } from './Tabs';
 export { default as Breadcrumb } from './Breadcrumb';
 export { default as PageHeader } from './PageHeader';
+export { default as Steps } from './Steps';
+export { default as Step } from './Step';
