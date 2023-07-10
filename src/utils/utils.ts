@@ -7,7 +7,7 @@
  * @FilePath: /tinkerbell-ui-react/src/utils/utils.ts
  */
 export const cleanScrollBar = () => {
-  document.querySelectorAll('.el-table__body-wrapper').forEach((el: any) => {
+  document.querySelectorAll('.tb-table__body-wrapper').forEach((el: any) => {
     setTimeout(() => {
       el.style.overflow = 'hidden'
       setTimeout(() => (el.style.overflow = 'auto'))

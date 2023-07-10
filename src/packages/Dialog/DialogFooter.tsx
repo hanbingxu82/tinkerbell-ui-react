@@ -10,7 +10,7 @@
 import React from 'react'
 function DialogFooter(props: any) {
   return (
-    <div style={props.style} className={'el-dialog__footer'}>
+    <div style={props.style} className={'tb-dialog__footer'}>
       {props.children}
     </div>
   )

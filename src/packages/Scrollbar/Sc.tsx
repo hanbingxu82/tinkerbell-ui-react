@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 16:52:15
- * @LastEditTime: 2022-04-22 15:13:06
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-10 17:39:40
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Scrollbar/Scrollbar.tsx
  */
@@ -135,7 +135,7 @@ export default class Scrollbar extends React.Component<any, any> {
     const view = React.createElement(
       viewComponent,
       {
-        className: this.classNames('el-scrollbar__view', viewClass),
+        className: this.classNames('tb-scrollbar__view', viewClass),
         style: viewStyle,
         ref: 'resize'
       },
@@ -153,8 +153,8 @@ export default class Scrollbar extends React.Component<any, any> {
           onScroll={this.handleScroll.bind(this)}
           className={classnames(
             wrapClass,
-            'el-scrollbar__wrap',
-            gutter ? '' : 'el-scrollbar__wrap--hidden-default'
+            'tb-scrollbar__wrap',
+            gutter ? '' : 'tb-scrollbar__wrap--hidden-default'
           )}
         >
           {view}
@@ -182,7 +182,7 @@ export default class Scrollbar extends React.Component<any, any> {
           {...others}
           key={0}
           ref='wrap'
-          className={this.classNames(wrapClass, 'el-scrollbar__wrap')}
+          className={this.classNames(wrapClass, 'tb-scrollbar__wrap')}
           style={style}
         >
           {view}
@@ -192,7 +192,7 @@ export default class Scrollbar extends React.Component<any, any> {
 
     return React.createElement(
       'div',
-      { className: this.classNames('el-scrollbar', className) },
+      { className: this.classNames('tb-scrollbar', className) },
       nodes
     )
   }

@@ -94,12 +94,12 @@ export default class Bar extends React.Component {
     return (
       <div
         ref={(root) => (this.rootRef = root)}
-        className={classnames('el-scrollbar__bar', `is-${this.bar.key}`)}
+        className={classnames('tb-scrollbar__bar', `is-${this.bar.key}`)}
         onMouseDown={this.clickTrackHandler}
       >
         <div
           ref={(thumb) => (this.thumbRef = thumb)}
-          className='el-scrollbar__thumb'
+          className='tb-scrollbar__thumb'
           onMouseDown={this.clickThumbHandler}
           style={renderThumbStyle({ size, move, bar: this.bar })}
         ></div>

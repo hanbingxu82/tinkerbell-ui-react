@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-06 16:48:09
- * @LastEditTime: 2022-06-06 11:32:58
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-07-10 17:37:28
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Dialog/dialog.tsx
  */
@@ -123,7 +123,7 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
           <div
             ref={wrap}
             style={{ zIndex: 1013 }}
-            className={classnames('el-dialog__wrapper')}
+            className={classnames('tb-dialog__wrapper')}
             onClick={(e) => handleWrapperClick(e)}
             onKeyDown={(e) => onKeyDown(e)}
           >
@@ -131,20 +131,20 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
               // ref='dialog'
               style={size === 'full' ? {} : { top: top }}
               className={classnames(
-                'el-dialog',
-                `el-dialog--${size}`,
+                'tb-dialog',
+                `tb-dialog--${size}`,
                 customClass
               )}
             >
-              <div className='el-dialog__header'>
-                <span className='el-dialog__title'>{title}</span>
+              <div className='tb-dialog__header'>
+                <span className='tb-dialog__title'>{title}</span>
                 {showClose && (
                   <button
                     type='button'
-                    className='el-dialog__headerbtn'
+                    className='tb-dialog__headerbtn'
                     onClick={(e) => close(e)}
                   >
-                    <i className='el-dialog__close el-icon el-icon-close' />
+                    <i className='tb-dialog__close tb-icon tb-icon-close' />
                   </button>
                 )}
               </div>
@@ -168,7 +168,7 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
           <div
             ref={wrap}
             style={{ zIndex: 1013, ...style }}
-            className={classnames('el-dialog__wrapper', className)}
+            className={classnames('tb-dialog__wrapper', className)}
             onClick={(e) => handleWrapperClick(e)}
             onKeyDown={(e) => onKeyDown(e)}
           >
@@ -176,20 +176,20 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
               // ref='dialog'
               style={size === 'full' ? {} : { top: top }}
               className={classnames(
-                'el-dialog',
-                `el-dialog--${size}`,
+                'tb-dialog',
+                `tb-dialog--${size}`,
                 customClass
               )}
             >
-              <div className='el-dialog__header'>
-                <span className='el-dialog__title'>{title}</span>
+              <div className='tb-dialog__header'>
+                <span className='tb-dialog__title'>{title}</span>
                 {showClose && (
                   <button
                     type='button'
-                    className='el-dialog__headerbtn'
+                    className='tb-dialog__headerbtn'
                     onClick={(e) => close(e)}
                   >
-                    <i className='el-dialog__close el-icon el-icon-close' />
+                    <i className='tb-dialog__close tb-icon tb-icon-close' />
                   </button>
                 )}
               </div>

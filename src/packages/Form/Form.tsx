@@ -117,10 +117,10 @@ const Form: any = React.forwardRef((props: any, _ref: any) => {
       ref={_ref}
       style={props.style}
       className={classnames(
-        'el-form',
-        props.labelPosition && `el-form--label-${props.labelPosition}`,
+        'tb-form',
+        props.labelPosition && `tb-form--label-${props.labelPosition}`,
         {
-          'el-form--inline': props.inline
+          'tb-form--inline': props.inline
         }
       )}
       onSubmit={props.onSubmit}

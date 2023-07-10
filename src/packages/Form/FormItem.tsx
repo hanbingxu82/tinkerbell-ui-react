@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2023-03-23 16:00:31
+ * @LastEditTime: 2023-07-10 17:36:25
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
@@ -224,7 +224,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
     <div
       ref={ref}
       style={props.style}
-      className={classnames('el-form-item', {
+      className={classnames('tb-form-item', {
         'is-error': state.error !== '',
         'is-validating': state.validating,
         'is-required': isRequired() || required
@@ -235,13 +235,13 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
       }}
     >
       {label && (
-        <label className='el-form-item__label' style={lStyle}>
+        <label className='tb-form-item__label' style={lStyle}>
           {typeof label === 'string'
             ? label + FormParent.parent.props.labelSuffix
             : label}
         </label>
       )}
-      <div className='el-form-item__content' style={cStyle}>
+      <div className='tb-form-item__content' style={cStyle}>
         <FormItemContext.Provider value={{ onFieldChange }}>
           {props.children}
         </FormItemContext.Provider>
@@ -259,7 +259,7 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
         >
           {({ className, style }) => (
             <div
-              className={classnames('el-form-item__error', className)}
+              className={classnames('tb-form-item__error', className)}
               style={{ ...style }}
             >
               {state.errorMsg}

@@ -10,7 +10,7 @@
 import React from 'react'
 function DialogBody(props: any) {
   return (
-    <div style={props.style} className={'el-dialog__body'}>
+    <div style={props.style} className={'tb-dialog__body'}>
       {props.children}
     </div>
   )

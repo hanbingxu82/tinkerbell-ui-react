@@ -12,7 +12,7 @@ export default function getScrollBarWidth() {
   if (scrollBarWidth !== undefined) return scrollBarWidth;
 
   const outer:any = document.createElement('div');
-  outer.className = 'el-scrollbar__wrap';
+  outer.className = 'tb-scrollbar__wrap';
   outer.style.visibility = 'hidden';
   outer.style.width = '100px';
   outer.style.position = 'absolute';
