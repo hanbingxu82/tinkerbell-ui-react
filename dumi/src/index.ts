@@ -50,3 +50,4 @@ export { default as Step } from './Step';
 export { default as Dialog } from './Dialog';
 export { default as Popover } from './Popover';
 export { default as Tooltip } from './Tooltip';
+export { default as Card } from './Card';

@@ -267,7 +267,7 @@ export default App
 | mouseLeaveDelay | 鼠标离开时隐藏的延迟时间。单位：s。    | Number  | —                                                                                                         | 0.1    |
 | overlayStyle    | 叠加节点的附加样式                     | Object  | —                                                                                                         | {}     |
 
-### Popover Events
+### Popover events
 
 | 事件名称        | 说明           | 回调参数 |
 | --------------- | -------------- | -------- |
