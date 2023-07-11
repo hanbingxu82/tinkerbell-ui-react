@@ -48,3 +48,5 @@ export { default as PageHeader } from './PageHeader';
 export { default as Steps } from './Steps';
 export { default as Step } from './Step';
 export { default as Dialog } from './Dialog';
+export { default as Popover } from './Popover';
+export { default as Tooltip } from './Tooltip';

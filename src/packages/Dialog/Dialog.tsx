@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-06 16:48:09
- * @LastEditTime: 2023-07-10 17:44:24
+ * @LastEditTime: 2023-07-11 11:00:56
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Dialog/dialog.tsx
@@ -110,6 +110,7 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
     title,
     size,
     top,
+    width,
     modal,
     customClass,
     showClose,
@@ -174,7 +175,7 @@ const Dialog: any = React.forwardRef((props: any, wrap: any) => {
           >
             <div
               // ref='dialog'
-              style={size === 'full' ? {} : { top: top }}
+              style={size === 'full' ? {} : { top: top, width: width }}
               className={classnames(
                 'tb-dialog',
                 `tb-dialog--${size}`,
@@ -232,6 +233,8 @@ Dialog.propTypes = {
   size: PropTypes.string,
   // top 值（仅在 size 不为 full 时有效）
   top: PropTypes.string,
+  // 宽度
+  width: PropTypes.string,
   // 控制遮罩层展示
   modal: PropTypes.bool,
   // Dialog 的自定义类名

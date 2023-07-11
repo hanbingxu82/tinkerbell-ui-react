@@ -242,3 +242,30 @@
     min-height: 500px;
   }
 }
+
+.demo-Popover .box {
+  width: 400px;
+
+  .tb-button+.tb-button {
+    margin-left: 0px;
+  }
+}
+
+.demo-Popover .box .top {
+  text-align: center;
+}
+
+.demo-Popover .box .left {
+  float: left;
+  width: 60px;
+}
+
+.demo-Popover .box .right {
+  float: right;
+  width: 60px;
+}
+
+.demo-Popover .box .bottom {
+  clear: both;
+  text-align: center;
+}

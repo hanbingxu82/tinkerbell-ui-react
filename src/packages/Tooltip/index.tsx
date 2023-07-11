@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-02 10:21:44
- * @LastEditTime: 2022-04-06 14:08:15
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-11 14:12:37
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Tooltip/index.tsx
  */
@@ -17,10 +17,16 @@ interface Iprops {
   color: string
   title: any
   overlay: any
-  prefixCls:string
+  prefixCls: string
 }
-const Tooltip = React.forwardRef((props: any,_ref) => {
-  const { type, title, overlay, color ,prefixCls="tb-tooltip"}: Iprops = props
+const Tooltip = React.forwardRef((props: any, _ref) => {
+  const {
+    type,
+    title,
+    overlay,
+    color,
+    prefixCls = 'tb-tooltip'
+  }: Iprops = props
   const [tColor, setTColor] = useState<any>('default')
   const [visible, setVisible] = useMergedState(false, {
     value: props.visible,
@@ -72,7 +78,7 @@ const Tooltip = React.forwardRef((props: any,_ref) => {
       trigger={props.trigger}
       align={props.align}
       defaultVisible={props.defaultVisible}
-      overlayClassName={prefixCls+'-color_' + tColor}
+      overlayClassName={prefixCls + '-color_' + tColor}
       visible={tempVisible}
       onVisibleChange={onVisibleChange}
     >

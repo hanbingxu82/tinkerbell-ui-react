@@ -16,18 +16,14 @@ nav:
 Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 ```tsx
-import { Dialog, Button } from 'tinkerbell-ui-react'
+import { Dialog, Button, Input } from 'tinkerbell-ui-react'
 import React, { useState } from 'react'
 
 const App: React.FC = () => {
   const [value, setValue] = useState(false)
   return (
     <div className='demo-Dialog'>
-      <Button
-        style={{ marginLeft: 20 }}
-        // type='text'
-        onClick={() => setValue(true)}
-      >
+      <Button style={{ marginLeft: 20 }} onClick={() => setValue(true)}>
         点击打开 Dialog
       </Button>
       <Dialog
@@ -39,8 +35,8 @@ const App: React.FC = () => {
         lockScroll={false}
       >
         <Dialog.Body>
-          <span>这是一段信息</span>
-          <input type='text' />
+          <p>这是一段信息：</p>
+          <Input type='text' />
         </Dialog.Body>
         <Dialog.Footer className='dialog-footer'>
           <Button onClick={() => setValue(false)}>取消</Button>
@@ -56,22 +52,95 @@ const App: React.FC = () => {
 export default App
 ```
 
-## 含状态步骤条
+## 嵌套表格弹窗
 
-每一步骤显示出该步骤的状态。
+嵌套表格的弹窗。
 
 ```tsx
-import { Steps } from 'tinkerbell-ui-react'
-import React from 'react'
+import { Dialog, Button, Table } from 'tinkerbell-ui-react'
+import React, { useState } from 'react'
 
 const App: React.FC = () => {
+  const [value, setValue] = useState(false)
+  const table = {
+    columns: [
+      {
+        label: '姓名',
+        align: 'center',
+        field: 'name'
+      },
+      {
+        label: '年龄',
+        align: 'center',
+        field: 'age'
+      },
+      {
+        label: '生日',
+        align: 'center',
+        field: 'birthday'
+      },
+      {
+        label: '地址',
+        align: 'center',
+        field: 'address'
+      }
+    ],
+    data: [
+      {
+        name: '王小帅',
+        age: 24,
+        birthday: '1998-05-20',
+        address: '天津市南开区红旗南路1号'
+      },
+      {
+        name: '王小帅',
+        age: 25,
+        birthday: '1997-05-20',
+        address: '天津市南开区红旗南路2号'
+      },
+      {
+        name: '王小帅',
+        age: 26,
+        birthday: '1996-05-20',
+        address: '天津市南开区红旗南路3号'
+      },
+      {
+        name: '王小帅',
+        age: 27,
+        birthday: '1995-05-20',
+        address: '天津市南开区红旗南路4号'
+      },
+      {
+        name: '王小帅',
+        age: 28,
+        birthday: '1994-05-20',
+        address: '天津市南开区红旗南路5号'
+      }
+    ]
+  }
   return (
-    <div className='demo-Steps'>
-      <Steps space={100} active={1} finishStatus='success'>
-        <Steps.Step title='已完成'></Steps.Step>
-        <Steps.Step title='进行中'></Steps.Step>
-        <Steps.Step title='步骤 3'></Steps.Step>
-      </Steps>
+    <div className='demo-Dialog'>
+      <Button style={{ marginLeft: 20 }} onClick={() => setValue(true)}>
+        打开嵌套表格的 Dialog
+      </Button>
+      <Dialog
+        destroyOnClose
+        title='提示'
+        size='small'
+        visible={value}
+        onCancel={() => setValue(false)}
+        lockScroll={false}
+      >
+        <Dialog.Body>
+          {value && <Table rows={table.data} cols={table.columns}></Table>}
+        </Dialog.Body>
+        <Dialog.Footer className='dialog-footer'>
+          <Button onClick={() => setValue(false)}>取消</Button>
+          <Button type='primary' onClick={() => setValue(false)}>
+            确定
+          </Button>
+        </Dialog.Footer>
+      </Dialog>
     </div>
   )
 }
@@ -79,31 +148,58 @@ const App: React.FC = () => {
 export default App
 ```
 
-## 有描述的步骤条
+## 嵌套表单弹窗
 
-每个步骤有其对应的步骤状态描述。
+嵌套表单的弹窗。
 
 ```tsx
-import { Steps } from 'tinkerbell-ui-react'
-import React from 'react'
+import { Dialog, Button, Input, Form, Select } from 'tinkerbell-ui-react'
+import React, { useState } from 'react'
 
 const App: React.FC = () => {
+  const [value, setValue] = useState(false)
+  const form = {
+    name: '',
+    region: ''
+  }
   return (
-    <div className='demo-Steps'>
-      <Steps space={200} active={1}>
-        <Steps.Step
-          title='步骤 1'
-          description='这是一段很长很长很长的描述性文字'
-        ></Steps.Step>
-        <Steps.Step
-          title='步骤 2'
-          description='这是一段很长很长很长的描述性文字'
-        ></Steps.Step>
-        <Steps.Step
-          title='步骤 3'
-          description='这是一段很长很长很长的描述性文字'
-        ></Steps.Step>
-      </Steps>
+    <div className='demo-Dialog'>
+      <Button style={{ marginLeft: 20 }} onClick={() => setValue(true)}>
+        打开嵌套表单的 Dialog
+      </Button>
+      <Dialog
+        destroyOnClose
+        title='提示'
+        width={'50%'}
+        visible={value}
+        onCancel={() => setValue(false)}
+        lockScroll={false}
+      >
+        <Dialog.Body>
+          {value && (
+            <Form model={form}>
+              <Form.Item label='活动名称：' labelWidth='120'>
+                <Input value={form.name}></Input>
+              </Form.Item>
+              <Form.Item label='活动区域：' labelWidth='120'>
+                <Select value={form.region} placeholder='请选择活动区域'>
+                  <Select.Option
+                    label='区域一'
+                    value='shanghai'
+                  ></Select.Option>
+                  <Select.Option label='区域二' value='beijing'></Select.Option>
+                </Select>
+              </Form.Item>
+            </Form>
+          )}
+        </Dialog.Body>
+        <Dialog.Footer className='dialog-footer'>
+          <Button onClick={() => setValue(false)}>取消</Button>
+          <Button type='primary' onClick={() => setValue(false)}>
+            确定
+          </Button>
+        </Dialog.Footer>
+      </Dialog>
     </div>
   )
 }
@@ -111,66 +207,23 @@ const App: React.FC = () => {
 export default App
 ```
 
-## 带图标的步骤条
+### Dialog props
 
-步骤条内可以启用各种自定义的图标。
+| 参数               | 说明                                                 | 类型    | 可选值                | 默认值 |
+| ------------------ | ---------------------------------------------------- | ------- | --------------------- | ------ |
+| title              | Dialog 的标题                                        | string  | —                     | —      |
+| width              | Dialog 的宽度                                        | string  | —                     | —      |
+| size               | Dialog 的大小                                        | string  | tiny/small/large/full | small  |
+| top                | Dialog CSS 中的 top 值（仅在 size 不为 full 时有效） | string  | —                     | 15%    |
+| modal              | 是否需要遮罩层                                       | boolean | —                     | true   |
+| lockScroll         | 是否在 Dialog 出现时将 body 滚动锁定                 | boolean | —                     | true   |
+| customClass        | Dialog 的自定义类名                                  | string  | —                     | —      |
+| closeOnClickModal  | 是否可以通过点击 modal 关闭 Dialog                   | boolean | —                     | true   |
+| closeOnPressEscape | 是否可以通过按下 ESC 关闭 Dialog                     | boolean | —                     | true   |
 
-```tsx
-import { Steps } from 'tinkerbell-ui-react'
-import React from 'react'
+### Dialog events
 
-const App: React.FC = () => {
-  return (
-    <div className='demo-Steps'>
-      <Steps space={200} active={1}>
-        <Steps.Step title='步骤 1' icon='icon-Daytimemode-fill'></Steps.Step>
-        <Steps.Step title='步骤 2' icon='icon-messagecenter'></Steps.Step>
-        <Steps.Step title='步骤 3' icon='icon-packaging'></Steps.Step>
-      </Steps>
-    </div>
-  )
-}
-
-export default App
-```
-
-## 竖式步骤条
-
-竖直方向的步骤条。
-
-```tsx
-import { Steps } from 'tinkerbell-ui-react'
-import React from 'react'
-
-const App: React.FC = () => {
-  return (
-    <div className='demo-Steps'>
-      <Steps space={100} direction='vertical' active={1}>
-        <Steps.Step title='步骤 1'></Steps.Step>
-        <Steps.Step title='步骤 2'></Steps.Step>
-        <Steps.Step title='步骤 3'></Steps.Step>
-      </Steps>
-    </div>
-  )
-}
-
-export default App
-```
-
-### Steps Props
-
-| 参数          | 说明                                 | 类型   | 可选值                            | 默认值     |
-| ------------- | ------------------------------------ | ------ | --------------------------------- | ---------- |
-| space         | 每个 step 的间距，不填写将自适应间距 | Number | —                                 | —          |
-| direction     | 显示方向                             | String | vertical/horizontal               | horizontal |
-| active        | 设置当前激活步骤                     | Number | —                                 | 0          |
-| processStatus | 设置当前步骤的状态                   | String | wait/process/finish/error/success | process    |
-| finishStatus  | 设置结束步骤的状态                   | String | wait/process/finish/error/success | finish     |
-
-### Step Props
-
-| 参数        | 说明       | 类型                | 可选值 | 默认值 |
-| ----------- | ---------- | ------------------- | ------ | ------ |
-| title       | 标题       | string              | —      | —      |
-| description | 描述性文字 | String/ReactElement | —      | —      |
-| icon        | 图标       | icon-class          | string | —      |
+| 事件名称 | 说明              | 回调参数 |
+| -------- | ----------------- | -------- |
+| onClose  | Dialog 关闭的回调 | —        |
+| onOpen   | Dialog 打开的回调 | —        |
