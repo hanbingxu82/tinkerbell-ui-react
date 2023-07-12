@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-02-08 11:34:31
- * @LastEditTime: 2023-03-21 11:24:46
+ * @LastEditTime: 2023-07-12 17:19:40
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/RadioGroup/index.tsx
@@ -39,7 +39,7 @@ function RadioGroup(props: any) {
       return (
         <RadioButton
           key={item.value}
-          value={item.value||''}
+          value={item.value || ''}
           groupValue={value}
           name={name}
           size={size}
@@ -79,7 +79,9 @@ function RadioGroup(props: any) {
   })
 
   return (
-    <div className='tb-radio-group'>{radioItems ? radioItems : radioDom}</div>
+    <div style={props.style} className='tb-radio-group'>
+      {radioItems ? radioItems : radioDom}
+    </div>
   )
 }
 export default RadioGroup
