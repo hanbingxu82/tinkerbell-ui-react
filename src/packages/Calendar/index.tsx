@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 13:59:38
- * @LastEditTime: 2022-03-28 17:04:36
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-12 18:19:03
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Calendar/index.tsx
  */
@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 import Icon from '../Icon'
 import './index.scss'
 
-const Main = (props: any) => {
+const Calendar = (props: any) => {
   //每月多少天
   let MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   const WEEK_NAMES = ['日', '一', '二', '三', '四', '五', '六']
@@ -122,14 +122,15 @@ const Main = (props: any) => {
           {number}
         </div>
         <div className='desc'>
-          {props.dateCellRender({
-            sj: `${year + currentDate.getFullYear()}-${formatNumber(
-              month
-            )}-${formatDayNumber(number)}`,
-            y: year + currentDate.getFullYear(),
-            m: month,
-            d: number
-          })}
+          {props.dateCellRender &&
+            props.dateCellRender({
+              sj: `${year + currentDate.getFullYear()}-${formatNumber(
+                month
+              )}-${formatDayNumber(number)}`,
+              y: year + currentDate.getFullYear(),
+              m: month,
+              d: number
+            })}
         </div>
       </div>
     )
@@ -247,4 +248,4 @@ const Main = (props: any) => {
     </React.Fragment>
   )
 }
-export default Main
+export default Calendar
