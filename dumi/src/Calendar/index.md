@@ -13,13 +13,12 @@ nav:
 
 ## 基础用法
 
-包含标题，内容和操作。
+当数据是日期或按照日期划分时，例如日程、课表、价格日历等，农历等。
 
 ```tsx
 import { Calendar, Badge } from 'tinkerbell-ui-react'
 import React from 'react'
 function getListData(value) {
-  console.log(value.d)
   let listData
   switch (value.d) {
     case 8:
@@ -74,9 +73,15 @@ const App: React.FC = () => {
 export default App
 ```
 
-### Card props
+### Calendar props
 
-| 参数      | 说明                                           | 类型   | 可选值 | 默认值              |
-| --------- | ---------------------------------------------- | ------ | ------ | ------------------- |
-| header    | 设置 header，也可以通过 `slot#header` 传入 DOM | string | —      | —                   |
-| bodyStyle | 设置 body 的样式                               | object | —      | { padding: '20px' } |
+| 参数           | 说明                                           | 类型                              | 可选值 | 默认值 |
+| -------------- | ---------------------------------------------- | --------------------------------- | ------ | ------ |
+| dateCellRender | 自定义渲染日期单元格，返回内容会被追加到单元格 | function(date: moment): ReactNode | —      | —      |
+| defaultValue   | 当前选中的时间                                 | moment                            | —      | -      |
+
+### Calendar events
+
+| 事件名  | 说明     | 返回值 |
+| ------- | -------- | ------ |
+| onClick | 点击事件 | 时间   |

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-01 13:59:38
- * @LastEditTime: 2023-07-12 18:19:03
+ * @LastEditTime: 2023-07-13 15:28:45
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Calendar/index.tsx
@@ -137,7 +137,7 @@ const Calendar = (props: any) => {
   }
   // 日期格式化函数 yyyy-mm-dd
   function getNowFormatDate() {
-    var date = new Date()
+    var date = props.defaultValue ? new Date(props.defaultValue) : new Date()
     var seperator1 = '-'
     var year = date.getFullYear()
     var month: any = date.getMonth() + 1
