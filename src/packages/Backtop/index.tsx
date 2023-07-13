@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-07 14:45:16
- * @LastEditTime: 2022-06-10 17:35:24
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-07-13 17:55:15
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Backtop/index.tsx
  */
@@ -35,7 +35,6 @@ function Backtop(props: any) {
   useEffect(() => {
     if (target) {
       document.querySelector(target).addEventListener('scroll', tbScrollEvent)
-      console.log(document.querySelector(target))
     } else {
       // 滚动事件监听  addEventListener用此标签防止onScroll清除其他的事件
       window.addEventListener('scroll', tbScrollEvent)
@@ -50,7 +49,7 @@ function Backtop(props: any) {
         window.removeEventListener('scroll', tbScrollEvent)
       }
     }
-  }, [])// eslint-disable-line
+  }, []) // eslint-disable-line
 
   function tbScrollEvent() {
     // 被卷曲的高度是否大于我们设置的值
@@ -126,15 +125,15 @@ function Backtop(props: any) {
           'fade-enter-from': !tbIsVisible
         })}
       >
-        { !text && (
+        {!text && (
           <Button
-            icon='icon-arrow-up'
+            icon='icon-rising'
             onClick={() => {
               tbGoToTop(duration)
             }}
           ></Button>
         )}
-        { text && (
+        {text && (
           <Button
             onClick={() => {
               tbGoToTop(duration)

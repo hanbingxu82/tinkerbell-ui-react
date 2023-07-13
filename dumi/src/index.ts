@@ -53,3 +53,4 @@ export { default as Tooltip } from './Tooltip';
 export { default as Card } from './Card';
 export { default as Carousel } from './Carousel';
 export { default as Calendar } from './Calendar';
+export { default as Backtop } from './Backtop';
