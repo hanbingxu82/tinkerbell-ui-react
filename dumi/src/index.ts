@@ -54,3 +54,4 @@ export { default as Card } from './Card';
 export { default as Carousel } from './Carousel';
 export { default as Calendar } from './Calendar';
 export { default as Backtop } from './Backtop';
+export { default as Affix } from './Affix';

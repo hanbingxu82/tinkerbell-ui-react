@@ -1,0 +1,11 @@
+@import '../../style/variables.scss';
+
+.tb-affix {
+  position: fixed;
+  z-index: 100;
+}
+
+.tb-affix-abs {
+  position: absolute;
+  z-index: 100;
+}
