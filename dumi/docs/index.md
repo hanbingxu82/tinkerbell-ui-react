@@ -1,57 +1,21 @@
 ---
-title: dumi - A doc tool can assist you to develop libraries & write docs.
+title: Tinkerbell - 助力设计开发者「更灵活」地搭建出「更美」的产品，让用户「快乐工作」～
 order: 10
 hero:
-  title: dumi
-  desc: 📖 A doc tool can assist you to develop libraries & write docs.
+  title: Tinkerbell
+  desc: 📖 助力设计开发者「更灵活」地搭建出「更美」的产品，让用户「快乐工作」～
   actions:
-    - text: Getting Started
+    - text: 开始使用
       link: /components/button
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
-    title: Out of the box
-    desc: Elegant default configrations and convention routing assist developers to get started as simple as possible, that focus all attentions on developing libraries & writting docs
+    title: 团队介绍
+    desc: Thinkerbell小组致力于深入研究软件通用技术，通过技术手段提升研发效率、进行质量保障，提升软件服务能力。
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/d1ee0c6f-5aed-4a45-a507-339a4bfe076c/k7bjsocq_w144_h144.png
-    title: For developing libraries
-    desc: Rich Markdown extensions are not limited to rendering component demos, making component documents not only easy to write and manage, but also beautiful and easy to use
+    title: 研发模式
+    desc: 打破既有瀑布式研发模式，强调模式划分与设计，进行组件、模块的匹配，划分核心与非核心组件从而选择性研发。
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/b8570f4d-c1b1-45eb-a1da-abff53159967/kj9t990h_w144_h144.png
-    title: Theme system
-    desc: Progressive custom theme capabilities, ranging from expanding your own Markdown tags to customizing complete theme packages, are up to you
-  - icon: https://gw.alipayobjects.com/zos/bmw-prod/b3e102cd-5dad-4046-a02a-be33241d1cc7/kj9t8oji_w144_h144.png
-    title: API automatically generated
-    desc: Component API can be automatically generated based on TypeScript type definitions, and components will always be『the same in appearance』
-  - icon: https://gw.alipayobjects.com/zos/bmw-prod/3863e74a-7870-4874-b1e1-00a8cdf47684/kj9t7ww3_w144_h144.png
-    title: Mobile component library development
-    desc: Install the theme package to quickly enable mobile component R&D capabilities, built-in mobile HD rendering solution
-  - icon: https://gw.alipayobjects.com/zos/bmw-prod/f093e060-726e-471c-a53e-e988ed3f560c/kj9t9sk7_w144_h144.png
-    title: Asset dataization capabilities
-    desc: One-line command digitizes component assets, and standardized asset data can be connected with downstream productivity tools
-footer: Open-source MIT Licensed | Copyright © 2019-present<br />Powered by self
+    title: 技术培训
+    desc: 针对性提供Thinkerbell架构系统化技术培训， 逐步形成WEB软件技术路线，提高行业竞争力，打造共享经济和集体利益。
+footer: Open-source MIT Licensed | © Tinkerbell<br />备案号：冀ICP备2021015986号-1
 ---
-
-## Getting Started
-
-Create first doc in manual way
-
-```bash
-// Create dir for libraries
-$ mkdir library && cd library
-
-// Install dumi
-$ npm i dumi
-
-// Create docs
-$ mkdir docs && echo '# Hello dumi!' > docs/index.md
-
-// Preview docs
-$ npx dumi dev
-```
-
-## Feedback
-
-Please visit [GitHub](https://github.com/umijs/dumi) or join the discuss group
-
-<div>
-  <img data-type="dingtalk" src="https://gw.alipayobjects.com/zos/bmw-prod/ec249703-be12-416c-8f33-297e47d9439c/kjy5ls84_w1004_h1346.png" width="300" />
-  <img data-type="wechat" src="https://gw.alipayobjects.com/zos/bmw-prod/c18bc2a5-719a-48ca-b225-c79ef88bfb43/k7m10ymd_w1004_h1346.jpeg" width="300" />
-</div>
