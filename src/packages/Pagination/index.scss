@@ -3,7 +3,7 @@
 .tb-pagination {
   white-space: nowrap;
   padding: 2px 5px;
-  color: #48576a
+  color: $color-text-primary
 }
 
 .tb-pagination button,
@@ -42,8 +42,8 @@
 }
 
 .tb-pagination button.disabled {
-  color: #e4e4e4;
-  background-color: #fff;
+  color: $btn-disable-color ;
+  background-color: $color-white;
   cursor: not-allowed
 }
 
@@ -55,12 +55,12 @@
 
 .tb-pagination .btn-next,
 .tb-pagination .btn-prev {
-  background: center center no-repeat #fff;
+  background: center center no-repeat $color-white;
   background-size: 16px;
-  border: 1px solid #d1dbe5;
+  border: 1px solid $border-color-base;
   cursor: pointer;
   margin: 0;
-  color: #97a8be
+  color: $color-text-primary
 }
 
 .tb-pagination .btn-next .tb-icon,
@@ -111,7 +111,7 @@
 
 .tb-pagination__sizes .tb-input .tb-input__inner {
   font-size: 13px;
-  border-color: #d1dbe5
+  border-color: $border-color-base
 }
 
 .tb-pagination__sizes .tb-input .tb-input__inner:hover {
@@ -131,7 +131,7 @@
 }
 
 .tb-pagination__editor {
-  border: 1px solid #d1dbe5;
+  border: 1px solid $border-color-base;
   border-radius: 2px;
   line-height: 18px;
   padding: 4px 2px;
@@ -173,9 +173,9 @@
 
 .tb-pager li {
   padding: 0 4px;
-  border: 1px solid #d1dbe5;
+  border: 1px solid $border-color-base;
   border-right: 0;
-  background: #fff;
+  background: $color-white;
   font-size: 13px;
   min-width: 28px;
   height: 28px;
@@ -185,13 +185,13 @@
 }
 
 .tb-pager li:last-child {
-  border-right: 1px solid #d1dbe5
+  border-right: 1px solid $border-color-base
 }
 
 .tb-pager li.btn-quicknext,
 .tb-pager li.btn-quickprev {
   line-height: 28px;
-  color: #97a8be
+  color: $color-text-primary
 }
 
 .tb-pager li.active+li {
@@ -206,6 +206,6 @@
 .tb-pager li.active {
   border-color: $color-primary ;
   background-color: $color-primary ;
-  color: #fff;
+  color: $color-white;
   cursor: default
 }

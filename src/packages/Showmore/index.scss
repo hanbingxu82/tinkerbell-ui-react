@@ -1,14 +1,16 @@
 @import '../../style/variables.scss';
 
 .tb__show-more {
-    font-size: 14px;
-    color: #000;
-  }
-  .tb__show {
-    color: $color-primary;
-    cursor: pointer;
-  }
-  .tb__hidden {
-    color: $color-primary;
-    cursor: pointer;
-  }
+  font-size: 14px;
+  color: $color-black;
+}
+
+.tb__show {
+  color: $color-primary;
+  cursor: pointer;
+}
+
+.tb__hidden {
+  color: $color-primary;
+  cursor: pointer;
+}

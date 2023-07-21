@@ -14,7 +14,7 @@
     right: 0;
     top: 0;
     text-align: center;
-    color:$border-color-base;
+    color: $border-color-base;
     transition: all .3s
   }
 
@@ -59,19 +59,19 @@
 }
 
 .tb-input.is-disabled .tb-input__inner::-webkit-input-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-input.is-disabled .tb-input__inner::-moz-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-input.is-disabled .tb-input__inner:-ms-input-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-input.is-disabled .tb-input__inner::placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-input.is-active .tb-input__inner {
@@ -83,7 +83,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: $border-base-radius;
   border: 1px solid$border-color-base;
   color: #1f2d3d;
@@ -234,19 +234,19 @@
 }
 
 .tb-textarea.is-disabled .tb-textarea__inner::-webkit-input-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-textarea.is-disabled .tb-textarea__inner::-moz-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-textarea.is-disabled .tb-textarea__inner:-ms-input-placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-textarea.is-disabled .tb-textarea__inner::placeholder {
-  color:$btn-disable-color
+  color: $btn-disable-color
 }
 
 .tb-textarea__inner {
@@ -257,7 +257,7 @@
   width: 100%;
   font-size: 14px;
   color: #1f2d3d;
-  background-color: #fff;
+  background-color: $color-white;
   border: 1px solid $border-color-base;
   border-radius: $border-base-radius;
   transition: border-color .2s cubic-bezier(.645, .045, .355, 1)

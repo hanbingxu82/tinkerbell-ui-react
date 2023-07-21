@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-form--inline .tb-form-item,
 .tb-form--inline .tb-form-item__content {
   display: inline-block;
@@ -55,12 +57,12 @@
 
 .tb-form-item.is-error .tb-input__inner,
 .tb-form-item.is-error .tb-textarea__inner {
-  border-color: #ff4949
+  border-color: $color-danger
 }
 
 .tb-form-item.is-required .tb-form-item__label:before {
   content: '*';
-  color: #ff4949;
+  color: $color-danger;
   margin-right: 4px
 }
 
@@ -69,7 +71,7 @@
   vertical-align: middle;
   float: left;
   font-size: 14px;
-  color: #48576a;
+  color: $color-text-primary;
   line-height: 1;
   padding: 11px 0 11px 0;
   box-sizing: border-box
@@ -88,7 +90,7 @@
 }
 
 .tb-form-item__error {
-  color: #ff4949;
+  color: $color-danger;
   font-size: 12px;
   line-height: 1;
   padding-top: 4px;

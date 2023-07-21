@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import '../../style/variables.scss';
 
 .v-modal-enter {
   animation: v-modal-in .2s ease
@@ -27,7 +28,7 @@
   width: 100%;
   height: 100%;
   opacity: .5;
-  background: #000
+  background: $color-black;
 }
 
 .tb-dialog {
@@ -35,9 +36,9 @@
   left: 50%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  background: #fff;
+  background: $color-white;
   border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  box-shadow: 0 1px 3px $color-text-secondary;
   box-sizing: border-box;
   margin-bottom: 50px
 }
@@ -97,24 +98,24 @@
 }
 
 .tb-dialog__headerbtn .tb-dialog__close {
-  color: #bfcbd9
+  color: $placeholder-color;
 }
 
 .tb-dialog__headerbtn:focus .tb-dialog__close,
 .tb-dialog__headerbtn:hover .tb-dialog__close {
-  color: #20a0ff
+  color: $color-primary;
 }
 
 .tb-dialog__title {
   line-height: 1;
   font-size: 16px;
   font-weight: 700;
-  color: #1f2d3d
+  color: $color-text-primary;
 }
 
 .tb-dialog__body {
   padding: 30px 20px;
-  color: #48576a;
+  color: $color-text-default;
   font-size: 14px
 }
 

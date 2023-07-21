@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #606266;
+  color: $color-text-primary;
   font-size: 14px;
   margin-right: 8px;
   margin-bottom: 8px;
@@ -47,7 +47,7 @@
       }
 
       &-active {
-        background: #fff;
+        background: $color-white;
         height: inherit;
         border-radius: 10px;
         opacity: 0;

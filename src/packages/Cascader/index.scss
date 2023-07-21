@@ -121,7 +121,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #48576a;
+  color: $color-text-default;
   height: 36px;
   line-height: 1.5;
   box-sizing: border-box;
@@ -151,7 +151,7 @@
 }
 
 .tb-cascader-menu__item.is-disabled {
-  color: #bfcbd9;
+  color: $color-text-disabled;
   background-color: $color-white;
   cursor: not-allowed
 }
@@ -169,7 +169,7 @@
   content: "\e748";
   font-size: 12px;
   font-weight: 800;
-  color: #bfcbd9;
+  color: $color-text-disabled;
   position: absolute;
   right: 10px;
   margin-top: 1px

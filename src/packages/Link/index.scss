@@ -18,7 +18,7 @@
 }
 
 .tb-link {
-  color: #606266;
+  color: $color-text-primary;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -32,7 +32,7 @@
   font-size: 14px;
   font-weight: 500;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: #606266;
+  -webkit-tap-highlight-color: $color-text-primary;
 }
 
 .tb-link:focus,

@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import '../../style/variables.scss';
 
 .tb-menu,
 .tb-menu li {
@@ -122,7 +123,7 @@
 .tb-menu--horizontal>.tb-menu-item:hover,
 .tb-menu--horizontal>.tb-submenu.is-active .tb-submenu__title,
 .tb-menu--horizontal>.tb-submenu:hover .tb-submenu__title {
-  border-bottom: 5px solid #20a0ff
+  border-bottom: 5px solid $color-primary
 }
 
 .tb-menu--horizontal.tb-menu--dark .tb-menu-item:hover,
@@ -143,7 +144,7 @@
 
 .tb-menu--horizontal.tb-menu--dark .tb-submenu .tb-menu-item.is-active,
 .tb-menu-item.is-active {
-  color: #20a0ff
+  color: $color-primary
 }
 
 .tb-menu--collapse {
@@ -240,7 +241,7 @@
 }
 
 .tb-submenu.is-active .tb-submenu__title {
-  border-bottom-color: #20a0ff
+  border-bottom-color: $color-primary
 }
 
 .tb-submenu__title {

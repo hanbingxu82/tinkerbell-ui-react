@@ -11,7 +11,7 @@
   .icon-wrap {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #eaeefb;
+    border: 1px solid $border-color-base;
     border-radius: 4px;
     width: 970px;
 
@@ -22,8 +22,8 @@
       line-height: 45px;
       font-size: 12px;
       text-align: center;
-      border-right: 1px solid #eee;
-      border-bottom: 1px solid #eee;
+      border-right: 1px solid $border-color-base;
+      border-bottom: 1px solid $border-color-base;
       margin-right: -1px;
       margin-bottom: -1px;
 
@@ -35,11 +35,9 @@
       &:hover {
         .iconfont {
           font-size: 26px;
-          color: #0d85ff;
+          color: $color-primary;
         }
       }
     }
   }
 }
-
-

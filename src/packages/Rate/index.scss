@@ -1,12 +1,11 @@
 @import '../../style/variables.scss';
 
 .tb_rate {
-  --activeColor: #efc20f;
   cursor: default;
 }
 
 .tb_rate__star.hover {
-  color: var(--activeColor);
+  color: $color-warning;
 }
 
 .tb_rate .icon {
@@ -38,11 +37,11 @@
 }
 
 .tb_rate__star.hover {
-  color: var(--activeColor);
+  color: $color-warning;
 }
 
 .tb_rate__star.filled {
-  color: var(--activeColor);
+  color: $color-warning;
 }
 
 .tb_rate__star:hover,
@@ -61,10 +60,10 @@
     color: #f37a77;
   }
   .tb_rate.has-error .tb_rate__star.hover {
-    color: #efc20f;
+    color: $color-warning;
   }
   .tb_rate.has-error .tb_rate__star.filled {
-    color: #efc20f;
+    color: $color-warning;
   } */
 .tb_rate__star[disabled] {
   opacity: 0.8;
@@ -72,11 +71,11 @@
 
 .tb_rate__star.hover[disabled],
 .tb_rate__star.filled[disabled] {
-  color: var(--activeColor);
+  color: $color-warning;
   opacity: 0.6;
 }
 
 .Rate__view.disabled .count,
 .Rate__view.disabled .desc {
-  color: #ccc;
+  color: rgb(245, 245, 245);
 }

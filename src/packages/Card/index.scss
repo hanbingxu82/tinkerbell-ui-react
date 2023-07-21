@@ -5,7 +5,7 @@
   border: $border-width solid $border-table-color;
   background-color: $color-white;
   overflow: hidden;
-  color: #303133;
+  color: $color-text-default;
   transition: 0.3s;
 }
 
@@ -22,5 +22,5 @@
 .tb-card.is-always-shadow,
 .tb-card.is-hover-shadow:focus,
 .tb-card.is-hover-shadow:hover {
-  box-shadow: 0 2px 12px 0 rgba($color: #000000, $alpha: .1);
+  box-shadow: 0 2px 12px 0 rgba($color: $color-text-primary, $alpha: .1);
 }

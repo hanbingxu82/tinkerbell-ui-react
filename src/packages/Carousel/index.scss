@@ -179,7 +179,7 @@
       button {
         border: 0;
         cursor: pointer;
-        background: #fff;
+        background: $color-white;
         opacity: 0.3;
         display: block;
         width: $header-font-size;
@@ -198,7 +198,7 @@
       }
 
       &.slick-active button {
-        background: #fff;
+        background: $color-white;
         opacity: 1;
         width: $mini-height;
 

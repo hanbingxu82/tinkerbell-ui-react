@@ -1,7 +1,7 @@
 @import '../../style/variables.scss';
 
 .tb-calendar {
-  background-color: #ffffff;
+  background-color: $color-white;
 
   .tb-icon {
     cursor: pointer;
@@ -51,7 +51,7 @@
       color: #303030;
 
       .day {
-        border-top: 2px solid #f0f0f0;
+        border-top: 2px solid $border-color-light;
         font-size: 32px;
         font-weight: 500;
 

@@ -11,14 +11,15 @@
     width: 100%;
     height: 30px;
     opacity: 1;
-    background: #ffffff;
-    border: 1px solid #d8dbe4;
+    background: $color-white;
+    border: 1px solid $border-color-base;
     padding: 0 6px;
     border-radius: $border-base-radius;
     // z-index: 2021;
     position: relative;
     display: flex;
     align-items: center;
+
     &-focus {
       border-color: $color-primary;
     }
@@ -33,7 +34,8 @@
     .icon-calendar {
       line-height: inherit;
       vertical-align: text-bottom;
-      color: #bfcbd9;
+      color: $color-text-placeholder;
+
       // font-size: 14px;
       // color: $color-white;
       &:hover {
@@ -85,7 +87,7 @@
       color: $border-color-base;
 
       &:hover {
-        color: #8391a5;
+        color: $color-button-hover;
       }
     }
   }
@@ -100,7 +102,7 @@
     height: 312px;
     overflow: hidden;
     vertical-align: top;
-    background: #fff;
+    background: $color-white;
     border-radius: 2px;
     box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
       0 9px 28px 8px #0000000d;
@@ -125,13 +127,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 8px;
-      color: #000;
+      color: $color-text-primary;
       border-bottom: 1px solid $border-color-base;
       height: 40px;
 
       &-item {
         width: 44px;
-        color: rgba(0, 0, 0, 0.25);
+        color: $color-text-disabled;
 
         .icondoubleright,
         .iconfontright {
@@ -146,7 +148,7 @@
           font-size: 12px;
 
           &:hover {
-            color: #000;
+            color: $color-text-primary;
           }
         }
 
@@ -237,7 +239,7 @@
       text-align: center;
       cursor: pointer;
       background-color: $color-primary;
-      color: #fff;
+      color: $color-white;
 
       &:hover {
         opacity: 0.6;
@@ -256,6 +258,6 @@
   }
 
   &-input:hover {
-    border-color: #8391a5;
+    border-color: $placeholder-color;
   }
 }

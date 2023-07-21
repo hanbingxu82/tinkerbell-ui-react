@@ -3,8 +3,8 @@
 
 .tb-tag {
   display: inline-block;
-  border: 1px solid #e8eaec;
-  color: #515a6e;
+  border: 1px solid $border-color-base;
+  color: $color-text-default;
   background: #f7f7f7;
   font-size: 12px;
   vertical-align: middle;
@@ -38,18 +38,18 @@
   &.is-checkable:not(.is-checked) {
     background: transparent !important;
     border-color: transparent !important;
-    color: #515a6e !important;
+    color: $color-text-primary !important;
   }
 
   &.is-dark {
     line-height: $default-height - 2px;
-    color: #fff !important;
+    color: $color-white !important;
     border-color: transparent !important;
 
     &.is-checkable:not(.is-checked) {
       background: transparent !important;
       border-color: transparent !important;
-      color: #515a6e;
+      color: $color-text-primary;
     }
   }
 

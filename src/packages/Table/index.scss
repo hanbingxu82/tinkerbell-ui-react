@@ -1,43 +1,51 @@
+@import '../../style/variables.scss';
+
 .tb-table {
   overflow-x: auto;
+
   table {
     width: 100%;
     overflow: hidden;
-    // border: 1px solid #d9d9d9;
+    // border: 1px solid $border-color-base;
     border-radius: 5px;
     // border-spacing: 0;
     border-collapse: collapse;
     table-layout: fixed;
+
     .tb-table-cell {
       z-index: 0;
       position: relative;
       min-height: 31px;
       min-width: 28px;
       padding: 18px;
-      border-top: 1px solid #d9d9d9;
+      border-top: 1px solid $border-color-base;
       font-size: 13px;
       font-family: Nunito Sans, sans-serif;
       font-weight: 400;
-      color: #5e6684;
+      color: $color-text-primary;
     }
+
     .tb-table-cell.is-header {
       border-top: 0;
-      background-color: #fafafa;
+      background-color: $color-bg-fa;
       font-size: 12px;
       font-family: Nunito Sans, sans-serif;
       font-weight: 700;
       text-transform: uppercase;
-      color: rgba(0, 0, 0, .65);
+      color: $color-text-default;
     }
+
     .is-selection {
       width: 30px;
       position: relative;
       z-index: 200;
     }
+
     .tb-checkbox {
       margin-top: 5px;
     }
   }
+
   .tb-table-cell:before {
     position: absolute;
     left: 0;
@@ -45,7 +53,7 @@
     display: block;
     width: 1px;
     height: 27px;
-    background-color: #d9d9d9;
+    background-color: $border-color-base;
     transform: translateY(-50%);
     content: "";
   }

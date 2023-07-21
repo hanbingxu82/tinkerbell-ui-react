@@ -95,8 +95,8 @@
 }
 
 .tb-step__head.is-success {
-  color:$color-success;
-  border-color:$color-success
+  color: $color-success;
+  border-color: $color-success
 }
 
 .tb-step__head.is-process,
@@ -112,31 +112,31 @@
 }
 
 .tb-step__head.is-text.is-finish {
-  color: #fff;
+  color: $color-white;
   background-color: $color-primary;
   border-color: $color-primary
 }
 
 .tb-step__head.is-text.is-error {
-  color: #fff;
+  color: $color-white;
   background-color: $color-danger;
   border-color: $color-danger
 }
 
 .tb-step__head.is-text.is-success {
-  color: #fff;
-  background-color:$color-success;
-  border-color:$color-success
+  color: $color-white;
+  background-color: $color-success;
+  border-color: $color-success
 }
 
 .tb-step__head.is-text.is-wait {
   color: #bfcbd9;
-  background-color: #fff;
+  background-color: $color-white;
   border-color: #bfcbd9
 }
 
 .tb-step__head.is-text.is-process {
-  color: #fff;
+  color: $color-white;
   background-color: #bfcbd9;
   border-color: #bfcbd9
 }
@@ -165,7 +165,7 @@
 
 .tb-step__title.is-success {
   font-weight: 700;
-  color:$color-success
+  color: $color-success
 }
 
 .tb-step__title.is-wait {
@@ -193,7 +193,7 @@
 }
 
 .tb-step__description.is-success {
-  color:$color-success
+  color: $color-success
 }
 
 .tb-step__description.is-wait {

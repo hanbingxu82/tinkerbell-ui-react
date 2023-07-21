@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .tb-avatar--circle {
   border-radius: 50%;
 }
@@ -11,8 +13,8 @@
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
-  color: #fff;
-  background: #c0c4cc;
+  color: $color-white;
+  background: $placeholder-color;
   width: 40px;
   height: 40px;
   line-height: 40px;
