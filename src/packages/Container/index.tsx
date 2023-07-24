@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-12-23 15:58:16
- * @LastEditTime: 2022-11-14 15:17:07
+ * @LastEditTime: 2023-07-24 16:11:12
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Container/index.tsx
@@ -19,8 +19,12 @@ function Container(props: any) {
   useEffect(() => {
     //  如果插槽中有header  或者  footer说明是横向的
     Array.isArray(props.children) &&
-      props.children.forEach((element: { type: any }) => {
-        if (/Header|Footer/.test(element.type.name)) {
+      props.children.forEach((element: { type: any; props: any }) => {
+        console.log(/Header|Footer/.test(element.type.name), element, 88888)
+        if (
+          /Header|Footer/.test(element.type.name) ||
+          /Header|Footer/.test(element.props.children)
+        ) {
           setIsHF('vertical')
         }
       })

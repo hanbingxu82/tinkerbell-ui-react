@@ -63,7 +63,6 @@ export default App
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | ---- | ---- | ------ | ------ |
-
 | text | 文本 slot 内容 如果不传递默认展示图标 | string | — | - |
 | target | 触发滚动的对象 如果没有默认就是 html 文档 | string | — | - |
 | visibleY | 滚动高度达到此参数值才出现 | number | — | 200 |
