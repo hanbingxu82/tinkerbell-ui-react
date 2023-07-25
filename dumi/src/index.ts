@@ -55,3 +55,4 @@ export { default as Carousel } from './Carousel';
 export { default as Calendar } from './Calendar';
 export { default as Backtop } from './Backtop';
 export { default as Affix } from './Affix';
+export { default as Loading } from './Loading';

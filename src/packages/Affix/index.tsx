@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2022-03-24 14:24:29
- * @LastEditTime: 2023-07-14 15:25:48
+ * @LastEditTime: 2023-07-24 17:33:18
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Alert/index.tsx
  */
 /* eslint-disable */
-import React, { useState, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { on, off } from '../../utils/utils'
 import { debounce } from 'throttle-debounce'
 import './index.scss'

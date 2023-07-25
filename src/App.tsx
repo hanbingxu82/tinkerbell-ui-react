@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2023-03-10 10:50:46
+ * @LastEditTime: 2023-07-25 10:24:30
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -43,7 +43,8 @@ import {
   RadioGroup,
   CheckBoxGroup,
   Table,
-  Pagination
+  Pagination,
+  Loading
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -58,6 +59,7 @@ const App = (props: any) => {
   const [loadingStatus, setLoadingStatus] = useState(false)
   const [value, setValue] = useState(false)
   const [active, setActive] = useState(0)
+  const [loading1, setLoading1] = useState(true)
   const [tabs, setTabs] = useState([
     {
       title: 'Tab 1',
@@ -633,9 +635,37 @@ const App = (props: any) => {
   ]
   return (
     <div>
-      <Link icon="iconfont icon-credit-level-fill" type="primary">编辑</Link>
+      <div className='demo-loading'>
+        <Loading></Loading>
+      </div>
+      <div className='demo-loading'>
+        <div>我是后面的段落我是后面的段落我是后面的段落我是后面的段落</div>
+        <Loading fix></Loading>
+      </div>
 
-      
+      <div className='demo-loading'>
+        <Loading fix>加载中</Loading>
+      </div>
+      <div className='demo-loading'>
+        <Loading fix showText='loading'></Loading>
+      </div>
+      <div className='demo-loading'>
+        <Loading fix showText='loading' showIcon></Loading>
+      </div>
+      <div className='demo-loading'>
+        <div>我是后面的段落我是后面的段落我是后面的段落我是后面的段落</div>
+        {loading1 && <Loading fix></Loading>}
+      </div>
+      <div>
+        <Button onClick={() => setLoading1(true)}>加载</Button>
+        <Button type='danger' onClick={() => setLoading1(false)}>
+          停止
+        </Button>
+      </div>
+      <Link icon='iconfont icon-credit-level-fill' type='primary'>
+        编辑
+      </Link>
+
       <Table isSort selectable rows={tableData} cols={tableCol}></Table>
 
       <br />
