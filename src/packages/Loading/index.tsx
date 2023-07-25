@@ -1,13 +1,21 @@
+/*
+ * @Description: Loading加载组件
+ * @Version: 1.0
+ * @Author: hanbingxu
+ * @Date: 2023-07-24 17:37:47
+ * @LastEditTime: 2023-07-25 13:36:46
+ * @LastEditors: hanbingxu
+ */
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import './index.scss'
 const classnames = require('classnames')
 const prefixCls = 'tb-loading'
 interface Iprops {
-  showIcon: boolean
-  showText: string
-  fix: boolean
-  size: string
+  showIcon: boolean // 显示加载图标
+  showText: string // 显示加载的文字
+  fix: boolean // 是否固定于父级中心
+  size: string // 文字显示的大小
 }
 function Loading(props: any) {
   const [classes, setClasses] = useState('')

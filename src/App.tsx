@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2023-07-25 10:24:30
+ * @LastEditTime: 2023-07-25 15:14:41
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -44,7 +44,8 @@ import {
   CheckBoxGroup,
   Table,
   Pagination,
-  Loading
+  Loading,
+  CountTo
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -52,6 +53,11 @@ import { useNavigate } from 'react-router-dom'
 const App = (props: any) => {
   const navigate = useNavigate()
   const c = React.useRef<any>(null)
+  const countTo = React.useRef<any>(null)
+  const countTo1 = React.useRef<any>(null)
+  const countTo2 = React.useRef<any>(null)
+  const countTo3 = React.useRef<any>(null)
+  const countTo4 = React.useRef<any>(null)
   const to = (path: string) => {
     navigate(path, { replace: true })
   }
@@ -635,6 +641,95 @@ const App = (props: any) => {
   ]
   return (
     <div>
+      <Button
+        type='primary'
+        onClick={() => {
+          countTo1.current.restart()
+          countTo2.current.restart()
+          countTo3.current.restart()
+          countTo4.current.restart()
+        }}
+      >
+        restart
+      </Button>
+      <div className='mt-15'>
+        <div
+          style={{
+            fontSize: 18,
+            color: '#1089ff',
+            width: 120,
+            marginRight: 16
+          }}
+        >
+          <CountTo
+            startVal={0}
+            endVal={2023}
+            duration={3000}
+            ref={countTo1}
+          ></CountTo>
+        </div>
+        <div
+          style={{
+            fontSize: 18,
+            color: '#1089ff',
+            width: 120,
+            marginRight: 16
+          }}
+        >
+          <CountTo
+            startVal={0}
+            endVal={2023}
+            duration={3000}
+            decimals='2'
+            ref={countTo2}
+          ></CountTo>
+        </div>
+        <div
+          style={{
+            fontSize: 18,
+            color: '#1089ff',
+            width: 120,
+            marginRight: 16
+          }}
+        >
+          <CountTo
+            startVal={0}
+            endVal={2023}
+            duration={3000}
+            separator=''
+            ref={countTo3}
+          ></CountTo>
+        </div>
+        <div
+          style={{
+            fontSize: 18,
+            color: '#1089ff',
+            width: 120,
+            marginRight: 16
+          }}
+        >
+          <CountTo
+            startVal={0}
+            endVal={2023}
+            duration={3000}
+            prefix='$'
+            suffix='美金'
+            ref={countTo4}
+          ></CountTo>
+        </div>
+      </div>
+
+      <Button
+        type='primary'
+        onClick={() => {
+          countTo.current.restart()
+        }}
+      >
+        restart
+      </Button>
+      <div className='mt-15'>
+        <CountTo startVal={0} endVal={2023} ref={countTo}></CountTo>
+      </div>
       <div className='demo-loading'>
         <Loading></Loading>
       </div>
