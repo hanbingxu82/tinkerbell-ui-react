@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 14:04:21
- * @LastEditTime: 2023-07-25 14:36:12
+ * @LastEditTime: 2023-07-25 17:15:33
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/index.tsx
@@ -68,6 +68,7 @@ import Pagination from './Pagination'
 import Affix from './Affix'
 import Loading from './Loading'
 import CountTo from './CountTo'
+import Split from './Split'
 // import {
 //   TimeSelect,
 //   TimePicker,
@@ -156,7 +157,8 @@ export {
   Pagination,
   Affix,
   Loading,
-  CountTo
+  CountTo,
+  Split
   // TimeSelect,
   // TimePicker,
   // TimeRangePicker,

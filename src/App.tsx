@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2023-07-25 15:14:41
+ * @LastEditTime: 2023-07-26 09:53:48
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -45,7 +45,8 @@ import {
   Table,
   Pagination,
   Loading,
-  CountTo
+  CountTo,
+  Split
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -641,6 +642,57 @@ const App = (props: any) => {
   ]
   return (
     <div>
+      <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
+        <Split
+          defaultWrapStyle={['20%', '80%']}
+          left={<div className='left-container'>左侧容器</div>}
+          right={
+            <Split
+              split='horizontal'
+              defaultNumber={50}
+              defaultWrapStyle={['50%', '50%']}
+              left={<div className='left-container'>上边容器</div>}
+              right={<div className='right-container'>下面容器</div>}
+            ></Split>
+          }
+        ></Split>
+      </div>
+      <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
+        <Split
+          hideLine
+          left={<div className='left-container'>左侧容器</div>}
+          right={<div className='right-container'>右侧容器</div>}
+        ></Split>
+      </div>
+      {/* <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
+        <Split
+          left={<div className='left-container'>左侧容器</div>}
+          right={
+            <Split
+              split='horizontal'
+              defaultNumber={100}
+              left={<div className='left-container'>上边容器</div>}
+              right={<div className='right-container'>下面容器</div>}
+            ></Split>
+          }
+        ></Split>
+      </div> */}
+      {/* <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
+        <Split
+          split='horizontal'
+          defaultNumber={100}
+          left={<div className='left-container'>上边容器</div>}
+          right={<div className='right-container'>下面容器</div>}
+        ></Split>
+      </div>
+
+      <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
+        <Split
+          left={<div className='left-container'>左侧容器</div>}
+          right={<div className='right-container'>右侧容器</div>}
+        ></Split>
+      </div> */}
+
       <Button
         type='primary'
         onClick={() => {

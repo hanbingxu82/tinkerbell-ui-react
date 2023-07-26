@@ -3,7 +3,7 @@
  * @Version: 1.0
  * @Author: hanbingxu
  * @Date: 2023-07-25 13:36:22
- * @LastEditTime: 2023-07-25 16:07:22
+ * @LastEditTime: 2023-07-25 18:01:20
  * @LastEditors: hanbingxu
  */
 /* eslint-disable */
@@ -53,7 +53,6 @@ const CountTo: any = React.forwardRef((props: any, _ref: any) => {
   })
   const getCountDown = useRef<any>(null)
   function formatNumber(num: Number | String) {
-    console.log(decimals, 666)
     num = Number(num).toFixed(decimals)
     num += ''
     const x = num.split('.')

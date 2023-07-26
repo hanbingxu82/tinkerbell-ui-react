@@ -1,0 +1,84 @@
+@import '../../style/variables.scss';
+
+.clear-fix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.tb-splitter-container {
+  height: 100%;
+  position: relative;
+
+  &.hide-line {
+    .tb-splitter-pane-resizer {
+      background-color: transparent;
+
+      &:hover {
+        background-color: $border-color-base;
+      }
+    }
+  }
+
+  &.is-active {
+    cursor: col-resize;
+    user-select: none;
+
+    .tb-splitter-pane-resizer {
+      background-color: $border-color-base;
+    }
+  }
+}
+
+.tb-splitter-pane.vertical.splitter-left {
+  position: absolute;
+  left: 0;
+  height: 100%;
+}
+
+.tb-splitter-pane.vertical.splitter-right {
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+
+.tb-splitter-pane.horizontal.splitter-left {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.tb-splitter-pane.horizontal.splitter-right {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.tb-splitter-pane-resizer {
+  box-sizing: border-box;
+  background-color: $border-color-base;
+  position: absolute;
+  z-index: 1;
+  background-clip: padding-box;
+}
+
+.tb-splitter-pane-resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: n-resize;
+  width: 100%;
+}
+
+.tb-splitter-pane-resizer.vertical {
+  width: 11px;
+  height: 100%;
+  margin-left: -5px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: e-resize;
+}

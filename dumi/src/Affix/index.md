@@ -32,9 +32,9 @@ const App: React.FC = () => {
 export default App
 ```
 
-## 基础用法
+## 固定位置
 
-原生滚动相对于 window 窗口固定，也可以自定义 node-el 进行配置
+可以设置固定距离底部的位置
 
 ```tsx
 import { Affix, Tag, Message } from 'tinkerbell-ui-react'

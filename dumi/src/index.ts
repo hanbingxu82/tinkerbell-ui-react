@@ -57,3 +57,4 @@ export { default as Backtop } from './Backtop';
 export { default as Affix } from './Affix';
 export { default as Loading } from './Loading';
 export { default as CountTo } from './CountTo';
+export { default as Split } from './Split';
