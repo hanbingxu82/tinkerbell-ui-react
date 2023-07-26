@@ -2,7 +2,7 @@
  * @Description:
  * @Author: 刘强
  * @Date: 2021-12-22 16:11:50
- * @LastEditTime: 2023-07-26 11:04:06
+ * @LastEditTime: 2023-07-26 11:29:27
  * @LastEditors: hanbingxu
  */
 export interface DatePickerProps {
@@ -12,8 +12,8 @@ export interface DatePickerProps {
 	onChange: Function;
 	defaultValue?: string;
 	limit?: boolean;
-	type?:string;
-	size?:string
+	type?: string;
+	size?: string
 }
 
 // type 默认值
@@ -23,14 +23,14 @@ type defaultParam = {
 	day: number;
 	hour: number;
 	minute: number;
-	second:number;
+	second: number;
 	//
 	yearLabel: string;
 	monthLabel: string;
 	dayLabel: string;
 	hourLabel: string;
 	minuteLabel: string;
-	secondLabel:string;
+	secondLabel: string;
 	value: string;
 	timeStamp: number;
 };
@@ -52,33 +52,33 @@ export function getNewParams(time: string) {
 		day: day,
 		hour: hour,
 		minute: minute,
-		second:second,
+		second: second,
 		//
 		yearLabel: year.toString(),
 		monthLabel: month < 10 ? `0${month}` : month.toString(),
 		dayLabel: day < 10 ? `0${day}` : day.toString(),
 		hourLabel: hour < 10 ? `0${hour}` : hour.toString(),
 		minuteLabel: minute < 10 ? `0${minute}` : minute.toString(),
-		secondLabel:second < 10 ? `0${second}` : second.toString(),
+		secondLabel: second < 10 ? `0${second}` : second.toString(),
 		value: `${year}-${month}-${day} ${hour}:${minute}`,
 		timeStamp: newDate.getTime(),
 	};
 	return defaultParam;
 }
-export function getYMDHMS (timestamp:any) {
+export function getYMDHMS(timestamp: any) {
 
-　　let time: any  = new Date(timestamp)
-　　let year: number|string  = time.getFullYear()
-　　let month: number|string  = time.getMonth() + 1
-　　let date: number|string  = time.getDate()
-　　let hours: number|string  = time.getHours()
-　　let minute: number|string  = time.getMinutes()
-　　let second: number|string  = time.getSeconds()
+	let time: any = new Date(timestamp)
+	let year: number | string = time.getFullYear()
+	let month: number | string = time.getMonth() + 1
+	let date: number | string = time.getDate()
+	let hours: number | string = time.getHours()
+	let minute: number | string = time.getMinutes()
+	let second: number | string = time.getSeconds()
 
-　　if (month < 10) { month = '0' + month }
-　　if (date < 10) { date = '0' + date }
-　　if (hours < 10) { hours = '0' + hours }
-　　if (minute < 10) { minute = '0' + minute }
-　　if (second < 10) { second = '0' + second }
-　　return year + '-' + month + '-' + date + ' ' + hours + ':' + minute + ':' + second
+	if (month < 10) { month = '0' + month }
+	if (date < 10) { date = '0' + date }
+	if (hours < 10) { hours = '0' + hours }
+	if (minute < 10) { minute = '0' + minute }
+	if (second < 10) { second = '0' + second }
+	return year + '-' + month + '-' + date + ' ' + hours + ':' + minute + ':' + second
 }
