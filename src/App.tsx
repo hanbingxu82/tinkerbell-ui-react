@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-28 11:17:51
- * @LastEditTime: 2023-07-26 09:53:48
+ * @LastEditTime: 2023-07-26 17:04:01
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/App.tsx
@@ -46,7 +46,10 @@ import {
   Pagination,
   Loading,
   CountTo,
-  Split
+  Split,
+  Skeleton,
+  SkeletonItem,
+  Card
   // DatePicker
 } from './packages'
 // import 'tinkerbell-ui-react/dist/index.css'
@@ -62,6 +65,7 @@ const App = (props: any) => {
   const to = (path: string) => {
     navigate(path, { replace: true })
   }
+  const [loading, setLoading] = useState<any>(false)
   const [file, setFile] = useState<any>(null)
   const [loadingStatus, setLoadingStatus] = useState(false)
   const [value, setValue] = useState(false)
@@ -642,6 +646,66 @@ const App = (props: any) => {
   ]
   return (
     <div>
+      <div>
+        <Switch
+          onChange={(val: any) => {
+            setLoading(val)
+          }}
+          value={loading}
+        />
+      </div>
+      <Skeleton
+        animation
+        loading={loading}
+        style={{ width: 240 }}
+        template={
+          <>
+            <SkeletonItem variant='image' style={{ width: 240, height: 240 }} />
+            <div style={{ padding: 14 }}>
+              <SkeletonItem variant='p' style={{ width: '50%' }} />
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <SkeletonItem variant='text' style={{ marginRight: 16 }} />
+                <SkeletonItem variant='text' style={{ width: '30%' }} />
+              </div>
+            </div>
+          </>
+        }
+      >
+        <div style={{ width: 300 }}>
+          <Card bodyStyle={{ padding: 0 }}>
+            <img
+              src='https://elemefe.github.io/element-react/50e4091cc60a.png'
+              className='image'
+            />
+            <div style={{ padding: 14 }}>
+              <span>好吃的汉堡</span>
+              <div className='bottom clearfix'>
+                <div className='time'>{new Date().getTime()}</div>
+                <Button type='text' className='button'>
+                  操作按钮
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </Skeleton>
+      {/* <div>
+        <Skeleton></Skeleton>
+      </div>
+
+      <div>
+        <Skeleton rows={5}></Skeleton>
+      </div>
+
+      <div>
+        <Skeleton animation></Skeleton>
+      </div> */}
       <div style={{ width: '100%', height: 300, border: '1px solid #ddd' }}>
         <Split
           defaultWrapStyle={['20%', '80%']}
