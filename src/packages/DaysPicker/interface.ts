@@ -2,8 +2,8 @@
  * @Description:
  * @Author: 刘强
  * @Date: 2021-12-22 16:11:50
- * @LastEditTime: 2022-05-30 17:56:51
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-07-26 11:04:06
+ * @LastEditors: hanbingxu
  */
 export interface DatePickerProps {
 	placeholder?: string;
@@ -40,7 +40,6 @@ export function getNewParams(time: string) {
 	//兼容ios,ios浏览器中格式为2016/05/31 08:00
 	time = time.replace(/\-/g, "/");// eslint-disable-line
 	let newDate = time !== '' ? new Date(time) : new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 00:00:00`);
-	console.log(newDate,44444)
 	const year: number = newDate.getFullYear();
 	let month: number = newDate.getMonth() + 1;
 	let day: number = newDate.getDate();

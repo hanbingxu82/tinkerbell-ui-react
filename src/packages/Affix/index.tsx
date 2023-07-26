@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-03-24 14:24:29
- * @LastEditTime: 2023-07-24 17:33:18
+ * @LastEditTime: 2023-07-26 11:14:20
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Alert/index.tsx
@@ -60,7 +60,6 @@ function Alert(props: any) {
     on(domEl, 'scroll', scrollEvent)
     on(window, 'resize', scrollEvent)
     setTimeout(() => {
-      console.log(domEl)
       handleScroll()
     }, 1000)
     return () => {
@@ -69,36 +68,38 @@ function Alert(props: any) {
     }
   }, [])
   function handleScroll() {
-    const scrollTop =
-      (domEl as any).pageYOffset || (domEl as Element).scrollTop || 0
-    const oTop = el.current.offsetTop
-    const oLeft = el.current.offsetLeft
-    if (oTop - offsetTop < scrollTop && !affix.current) {
-      affix.current = true
-      setSlotStyle({
-        width: point.current.clientWidth + 'px',
-        height: point.current.clientHeight + 'px'
-      })
-      setSlot(true)
-      setStyles({
-        top: `${offsetTop}px`,
-        left: `${oLeft}px`,
-        width: `${el.current.offsetWidth}px`,
-        zIndex: zIndex
-      })
-      if (scroll) {
-        setaffixClass('tb-affix-abs')
-      } else {
-        setaffixClass('tb-affix')
+    if (el.current) {
+      const scrollTop =
+        (domEl as any).pageYOffset || (domEl as Element).scrollTop || 0
+      const oTop = el.current.offsetTop
+      const oLeft = el.current.offsetLeft
+      if (oTop - offsetTop < scrollTop && !affix.current) {
+        affix.current = true
+        setSlotStyle({
+          width: point.current.clientWidth + 'px',
+          height: point.current.clientHeight + 'px'
+        })
+        setSlot(true)
+        setStyles({
+          top: `${offsetTop}px`,
+          left: `${oLeft}px`,
+          width: `${el.current.offsetWidth}px`,
+          zIndex: zIndex
+        })
+        if (scroll) {
+          setaffixClass('tb-affix-abs')
+        } else {
+          setaffixClass('tb-affix')
+        }
+        props.onChange && props.onChange(true)
+      } else if (oTop - offsetTop > scrollTop && affix.current) {
+        affix.current = false
+        setStyles({})
+        setSlot(false)
+        setStyles({})
+        setaffixClass('')
+        props.onChange && props.onChange(false)
       }
-      props.onChange && props.onChange(true)
-    } else if (oTop - offsetTop > scrollTop && affix.current) {
-      affix.current = false
-      setStyles({})
-      setSlot(false)
-      setStyles({})
-      setaffixClass('')
-      props.onChange && props.onChange(false)
     }
   }
   return (

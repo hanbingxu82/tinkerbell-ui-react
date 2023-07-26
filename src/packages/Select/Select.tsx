@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-12 15:37:35
- * @LastEditTime: 2023-03-27 10:48:16
+ * @LastEditTime: 2023-07-26 11:05:00
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Select/Select.tsx
@@ -154,7 +154,6 @@ const Select: any = React.memo((props: any) => {
     isFirst: boolean = false,
     transmitValue: any = props.value
   ) {
-    console.log(isFirst, 33333)
     const { multiple } = props
     if (multiple && Array.isArray(props.value)) {
       setSelected(
@@ -890,7 +889,6 @@ const Select: any = React.memo((props: any) => {
    * @return {*}
    */
   useEffect(() => {
-    console.log('我有更新了')
     initComponent.current = false
     reference.current = ReactDOM.findDOMNode(
       referenceRef.current.Element as any

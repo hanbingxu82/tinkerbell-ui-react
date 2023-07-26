@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-24 10:11:24
- * @LastEditTime: 2022-05-30 17:49:28
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-07-26 11:04:40
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/DaysPicker/time/hour.tsx
  */
@@ -54,7 +54,6 @@ const HourPage = (props: hourProps) => {
     if (checkList.length < 1 && newList.length > 0) {
       activeChange(newList[0])
     }
-    console.log(newList)
     setList(newList)
   }, [year, month, day, active]) // eslint-disable-line
 

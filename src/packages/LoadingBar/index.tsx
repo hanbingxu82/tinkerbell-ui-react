@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-03-22 11:07:33
- * @LastEditTime: 2022-06-10 21:35:06
- * @LastEditors: 韩旭小天才 905583741@qq.com
+ * @LastEditTime: 2023-07-26 11:03:37
+ * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/LoadingBar/index.tsx
  */
@@ -44,7 +44,6 @@ const LoadingBar: any = React.forwardRef((props: any, ref: any) => {
         setIsError
       }
     }
-    console.log(showSpinner)
   }, [speed, easing, percentNum, totalProgress, showSpinner, isError])
   return (
     <div ref={ref} className='tb__loading-bar'>
@@ -85,7 +84,6 @@ const div = document.createElement('div')
 const componentInstance: any = React.createRef()
 function LoadingBarConstructor() {
   createRoot(div).render(<LoadingBar ref={componentInstance} />)
-  console.log(componentInstance)
   // 暴露出 LoadingBar 的对应方法诸如 start、end等，连带 componentInstance ref节点也暴露出去
   return { ...LoadingBar, componentInstance }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-05-11 20:07:52
- * @LastEditTime: 2023-07-10 17:36:25
+ * @LastEditTime: 2023-07-26 11:05:16
  * @LastEditors: hanbingxu
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /tinkerbell-ui-react/src/packages/Form/FormItem.tsx
@@ -178,7 +178,6 @@ const FormItem: any = React.forwardRef((props: any, ref: any) => {
   }
 
   function labelStyle() {
-    console.log(FormParent.parent.props.labelPosition)
     const ret: any = {}
     if (FormParent.parent.props.labelPosition === 'top') {
     } else {

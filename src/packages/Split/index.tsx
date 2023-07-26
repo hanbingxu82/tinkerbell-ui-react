@@ -3,7 +3,7 @@
  * @Version: 1.0
  * @Author: hanbingxu
  * @Date: 2023-07-25 13:36:22
- * @LastEditTime: 2023-07-25 18:09:59
+ * @LastEditTime: 2023-07-26 11:03:16
  * @LastEditors: hanbingxu
  */
 /* eslint-disable */
@@ -116,7 +116,6 @@ const CountTo: any = React.forwardRef((props: any, _ref: any) => {
   }, [defaultWrapStyle, state])
 
   useEffect(() => {
-    console.log('执行')
     const style = defaultWrapStyle
     const px = `${state.pixel}px`
     if (style && style.length > 0) {
